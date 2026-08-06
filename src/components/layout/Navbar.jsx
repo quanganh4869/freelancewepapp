@@ -17,37 +17,37 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
   ];
 
   return (
-    <header className={`sticky top-0 z-40 backdrop-blur-md transition-colors duration-200 border-b ${
-      isDark ? 'bg-studio-950/90 border-white/10 text-slate-100' : 'bg-white/90 border-slate-200 text-slate-900'
-    }`}>
+    <header className={`sticky top-0 z-40 transition-colors duration-200 border-b ${
+      isDark ? 'bg-studio-950/95 border-slate-800/80 text-slate-100' : 'bg-white/95 border-slate-200 text-slate-900'
+    } backdrop-blur-md`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           
-          {/* Brand Logo - QUANG ANH STUDIO */}
-          <a href="#" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded-xl bg-brand-primary text-white flex items-center justify-center font-mono font-bold text-sm shadow-sm transition-transform group-hover:scale-105">
+          {/* Authentic Brand Identity - QUANG ANH STUDIO */}
+          <a href="#" className="flex items-center gap-3 group">
+            <div className="w-9 h-9 rounded-lg bg-brand-primary text-white flex items-center justify-center font-mono font-bold text-sm shadow-sm transition-transform group-hover:scale-105">
               <span>QA</span>
             </div>
             <div className="flex flex-col leading-none">
-              <span className="font-extrabold text-base tracking-tight font-sans">
-                QUANG ANH <span className="text-brand-primary font-mono text-[11px] font-bold tracking-widest ml-1">STUDIO</span>
+              <span className="font-extrabold text-base tracking-tight font-sans text-slate-900 dark:text-white">
+                QUANG ANH <span className="text-brand-primary font-mono text-[11px] font-bold tracking-widest ml-1 uppercase">STUDIO</span>
               </span>
-              <span className={`text-[10px] font-mono tracking-wider uppercase mt-0.5 ${
+              <span className={`text-[10px] font-mono tracking-wider uppercase mt-1 ${
                 isDark ? 'text-slate-400' : 'text-slate-500'
               }`}>
-                Web App Engineering
+                Web App Architect
               </span>
             </div>
           </a>
 
-          {/* Center Nav Links */}
+          {/* Center Editorial Links */}
           <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
               <a
                 key={item.id}
                 href={item.href}
-                className={`text-sm font-semibold transition-colors hover:text-brand-primary ${
-                  isDark ? 'text-slate-300' : 'text-slate-600'
+                className={`text-xs font-mono font-bold uppercase tracking-wider transition-colors hover:text-brand-primary ${
+                  isDark ? 'text-slate-300' : 'text-slate-700'
                 }`}
               >
                 {item.label}
@@ -56,20 +56,20 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
           </nav>
 
           {/* Right Action Controls */}
-          <div className="hidden md:flex items-center gap-4 text-xs font-medium">
+          <div className="hidden md:flex items-center gap-3 text-xs font-medium">
             
             {/* Language Switcher */}
             <button
               onClick={toggleLanguage}
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border font-mono font-semibold transition-colors ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border font-mono font-semibold transition-colors ${
                 isDark
                   ? 'bg-studio-900 border-slate-800 text-slate-300 hover:border-slate-700'
                   : 'bg-slate-100 border-slate-200 text-slate-700 hover:border-slate-300'
               }`}
-              title="Toggle Language (VI / EN)"
+              title="Switch Language"
             >
               <Globe size={13} className="text-brand-primary" />
-              <span>{language === 'vi' ? 'VI' : 'EN'}</span>
+              <span>{language === 'vi' ? 'TIẾNG VIỆT' : 'ENGLISH'}</span>
             </button>
 
             {/* Dark/Light Theme Switcher */}
@@ -80,7 +80,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
                   ? 'bg-studio-900 border-slate-800 text-amber-400 hover:border-slate-700'
                   : 'bg-slate-100 border-slate-200 text-slate-700 hover:border-slate-300'
               }`}
-              title="Toggle Theme"
+              title="Toggle Theme Mode"
             >
               {isDark ? <Sun size={15} /> : <Moon size={15} />}
             </button>
@@ -88,7 +88,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
             {activeRole === 'GUEST' ? (
               <button
                 onClick={onOpenAuthModal}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors font-medium border ${
+                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg transition-colors font-medium border ${
                   isDark ? 'border-slate-800 text-slate-300 hover:text-white hover:border-slate-700' : 'border-slate-200 text-slate-700 hover:text-slate-900 hover:border-slate-300'
                 }`}
               >
@@ -129,7 +129,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
           </div>
 
           {/* Mobile Hamburger Toggle */}
-          <div className="flex md:hidden items-center gap-3">
+          <div className="flex md:hidden items-center gap-2">
             <button
               onClick={toggleTheme}
               className="p-2 rounded-lg border border-slate-700 text-slate-300"
@@ -147,7 +147,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div className={`md:hidden border-b px-4 py-6 space-y-4 font-sans ${
           isDark ? 'bg-studio-900 border-slate-800' : 'bg-white border-slate-200'
@@ -158,7 +158,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
                 key={item.id}
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`text-sm font-medium transition-colors py-1 ${
+                className={`text-sm font-semibold transition-colors py-1 ${
                   isDark ? 'text-slate-200 hover:text-brand-primary' : 'text-slate-800 hover:text-brand-primary'
                 }`}
               >
