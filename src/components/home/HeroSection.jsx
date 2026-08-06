@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { useTheme } from '../../context/ThemeContext';
-import { ArrowRight, CheckCircle2, Cpu, Terminal, ShieldCheck, Database, Layers } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Cpu, Terminal, ShieldCheck, Database, Layers, Smartphone, LayoutDashboard, Lock, Server } from 'lucide-react';
 
 export const HeroSection = ({ onOpenRequestModal }) => {
   const { language, t } = useLanguage();
@@ -19,22 +19,20 @@ export const HeroSection = ({ onOpenRequestModal }) => {
             {/* Technical Eyebrow */}
             <div className="studio-badge">
               <span className="w-2 h-2 rounded-full bg-brand-primary"></span>
-              <span>NEXUS STUDIO / DIGITAL PRODUCT ENGINEERING</span>
+              <span>NEXUS STUDIO • THIẾT KẾ WEB APP CHO DOANH NGHIỆP</span>
             </div>
 
             {/* Headline H1 */}
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.08] text-slate-900 dark:text-white">
               {language === 'en' ? (
                 <>
-                  We build <br className="hidden sm:inline" />
-                  <span className="text-brand-primary font-extrabold">production-ready</span> <br className="hidden sm:inline" />
-                  Web Applications.
+                  Turn your business ideas into <br className="hidden sm:inline" />
+                  <span className="text-brand-primary font-extrabold">working Web Apps.</span>
                 </>
               ) : (
                 <>
-                  Chúng tôi xây dựng <br className="hidden sm:inline" />
-                  những <span className="text-brand-primary font-extrabold">Web App</span> <br className="hidden sm:inline" />
-                  được tạo để vận hành.
+                  Biến ý tưởng kinh doanh thành <br className="hidden sm:inline" />
+                  <span className="text-brand-primary font-extrabold">Web App chạy thực tế.</span>
                 </>
               )}
             </h1>
@@ -43,8 +41,8 @@ export const HeroSection = ({ onOpenRequestModal }) => {
             <div className="studio-callout max-w-2xl">
               <p className="text-base sm:text-lg font-medium leading-relaxed text-slate-700 dark:text-slate-200">
                 {language === 'en'
-                  ? 'Nexus Studio is a digital product engineering firm. We design and build enterprise Web Apps, SaaS platforms, and operational software built for scale, speed, and security.'
-                  : 'Nexus Studio là đối tác kỹ thuật số chuyên sâu. Chúng tôi thiết kế & lập trình Web App doanh nghiệp, nền tảng SaaS và công cụ vận hành tối ưu hiệu năng, quy mô và bảo mật.'}
+                  ? 'We help you build fast, easy-to-use web applications and software that streamline your business and boost sales.'
+                  : 'Chúng tôi giúp bạn xây dựng ứng dụng web, phần mềm quản lý và hệ thống bán hàng dễ sử dụng, tốc độ nhanh, vận hành ổn định và bảo mật cao.'}
               </p>
             </div>
 
@@ -52,19 +50,19 @@ export const HeroSection = ({ onOpenRequestModal }) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-semibold text-slate-700 dark:text-slate-300">
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 size={16} className="text-brand-primary shrink-0" />
-                <span>Custom Architecture 100% (No Templates)</span>
+                <span>Code tự viết 100% (Không dùng mẫu sẵn)</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 size={16} className="text-brand-primary shrink-0" />
-                <span>Enterprise Security & SOC2 Compliant</span>
+                <span>Bảo mật dữ liệu & vận hành an toàn</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 size={16} className="text-brand-primary shrink-0" />
-                <span>99.9% Uptime SLA Guarantee</span>
+                <span>Cam kết hỗ trợ kỹ thuật chu đáo 24/7</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 size={16} className="text-brand-primary shrink-0" />
-                <span>Fast MVP Delivery in 3–8 Weeks</span>
+                <span>Bàn giao nhanh chỉ từ 3–6 tuần</span>
               </div>
             </div>
 
@@ -74,7 +72,7 @@ export const HeroSection = ({ onOpenRequestModal }) => {
                 onClick={() => onOpenRequestModal()}
                 className="btn-primary py-3.5 px-6 text-sm"
               >
-                <span>{t('startProject')}</span>
+                <span>{t('btnStart')}</span>
                 <ArrowRight size={16} />
               </button>
 
@@ -89,7 +87,7 @@ export const HeroSection = ({ onOpenRequestModal }) => {
 
           </div>
 
-          {/* Right Column: Engineering System Architecture Visual */}
+          {/* Right Column: Simple Client-Friendly System Preview */}
           <div className="lg:col-span-5">
             <div className={`studio-card p-6 sm:p-8 space-y-5 rounded-2xl relative overflow-hidden border ${
               isDark ? 'bg-studio-900 border-slate-800' : 'bg-white border-slate-200 shadow-md'
@@ -99,82 +97,68 @@ export const HeroSection = ({ onOpenRequestModal }) => {
               <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
                 <div className="flex items-center gap-2 font-mono text-xs font-bold tracking-wider">
                   <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-                  <span className="text-slate-600 dark:text-slate-400 uppercase">SYSTEM ARCHITECTURE</span>
+                  <span className="text-slate-600 dark:text-slate-400 uppercase">MÔ HÌNH PHẦN MỀM CHUẨN ĐẸP</span>
                 </div>
                 <span className="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary font-semibold">
-                  v2.4 SPEC
+                  HỆ THỐNG MẪU
                 </span>
               </div>
 
-              {/* Layer 01: Experience */}
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 space-y-1.5 font-mono text-xs">
+              {/* Layer 01: Giao diện */}
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 space-y-1.5 font-sans text-xs">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Layers size={14} className="text-brand-primary" />
-                    <span className="font-bold text-slate-900 dark:text-white">01 — EXPERIENCE LAYER</span>
+                    <Smartphone size={15} className="text-brand-primary" />
+                    <span className="font-bold text-slate-900 dark:text-white">01 — GIAO DIỆN NGƯỜI DÙNG DỄ THAO TÁC</span>
                   </div>
-                  <span className="text-[10px] text-slate-500 font-sans">SSR / Edge</span>
                 </div>
-                <p className="text-[11px] text-slate-600 dark:text-slate-400 font-sans">
-                  React 18 • Next.js • Tailwind CSS Design Tokens
+                <p className="text-[11px] text-slate-600 dark:text-slate-400">
+                  Đẹp mắt trên Điện thoại, Máy tính bảng & Máy tính bàn. Tải trang dưới 1 giây.
                 </p>
               </div>
 
-              {/* Layer Connector Arrow */}
-              <div className="flex justify-center -my-2 text-slate-400 font-mono text-xs">
-                ↓ API Interface
-              </div>
-
-              {/* Layer 02: Application Logic */}
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 space-y-1.5 font-mono text-xs">
+              {/* Layer 02: Xử lý nghiệp vụ */}
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 space-y-1.5 font-sans text-xs">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Terminal size={14} className="text-amber-500" />
-                    <span className="font-bold text-slate-900 dark:text-white">02 — APPLICATION LOGIC</span>
+                    <LayoutDashboard size={15} className="text-amber-500" />
+                    <span className="font-bold text-slate-900 dark:text-white">02 — QUẢN LÝ BÁN HÀNG & DỮ LIỆU</span>
                   </div>
-                  <span className="text-[10px] text-slate-500 font-sans">REST & WebSockets</span>
                 </div>
-                <p className="text-[11px] text-slate-600 dark:text-slate-400 font-sans">
-                  Node.js • Modular Microservices • JWT / OAuth2 Auth
+                <p className="text-[11px] text-slate-600 dark:text-slate-400">
+                  Tự động hóa đơn hàng, phân quyền nhân viên và thông báo đơn mới tức thì.
                 </p>
               </div>
 
-              {/* Layer Connector Arrow */}
-              <div className="flex justify-center -my-2 text-slate-400 font-mono text-xs">
-                ↓ Database Connection Pool
-              </div>
-
-              {/* Layer 03: Data & Storage */}
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 space-y-1.5 font-mono text-xs">
+              {/* Layer 03: Lưu trữ dữ liệu */}
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 space-y-1.5 font-sans text-xs">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Database size={14} className="text-emerald-500" />
-                    <span className="font-bold text-slate-900 dark:text-white">03 — DATA PERSISTENCE</span>
+                    <Database size={15} className="text-emerald-500" />
+                    <span className="font-bold text-slate-900 dark:text-white">03 — LƯU TRỮ AN TOÀN & BẢO MẬT</span>
                   </div>
-                  <span className="text-[10px] text-slate-500 font-sans">Redis Cache Layer</span>
                 </div>
-                <p className="text-[11px] text-slate-600 dark:text-slate-400 font-sans">
-                  PostgreSQL • Encrypted Storage • Automated Backups
+                <p className="text-[11px] text-slate-600 dark:text-slate-400">
+                  Lưu trữ dữ liệu mã hóa, sao lưu tự động hàng ngày không lo mất dữ liệu.
                 </p>
               </div>
 
-              {/* Layer 04: Infrastructure & Security */}
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 space-y-1.5 font-mono text-xs">
+              {/* Layer 04: Máy chủ & Vận hành */}
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 space-y-1.5 font-sans text-xs">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <ShieldCheck size={14} className="text-brand-primary" />
-                    <span className="font-bold text-slate-900 dark:text-white">04 — INFRASTRUCTURE</span>
+                    <Server size={15} className="text-brand-primary" />
+                    <span className="font-bold text-slate-900 dark:text-white">04 — MÁY CHỦ CHẠY LIÊN TỤC 24/7</span>
                   </div>
-                  <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">99.9% Uptime SLA</span>
                 </div>
-                <p className="text-[11px] text-slate-600 dark:text-slate-400 font-sans">
-                  AWS Docker Container • CDN Edge • SOC2 Compliance
+                <p className="text-[11px] text-slate-600 dark:text-slate-400">
+                  Hệ thống điện toán mây giúp ứng dụng chạy mượt mà, chịu tải hàng ngàn người dùng cùng lúc.
                 </p>
               </div>
 
               {/* Metadata Footer Line */}
               <div className="pt-2 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-[11px] font-mono text-slate-500">
-                <span>Standard: ISO 27001</span>
+                <span>Tiêu chuẩn: An toàn & Bảo mật</span>
                 <span className="text-brand-primary font-bold">NEXUS LABS</span>
               </div>
 

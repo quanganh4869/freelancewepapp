@@ -1,86 +1,90 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
+import { useTheme } from '../../context/ThemeContext';
 import { Search, Compass, Palette, Code, CheckSquare, Rocket, Shield, ArrowRight } from 'lucide-react';
 
 export const ProcessSection = ({ onOpenRequestModal }) => {
   const { language, t } = useLanguage();
+  const { isDark } = useTheme();
   const [activeStep, setActiveStep] = useState(0);
 
   const steps = [
     {
       num: '01',
-      title: 'DISCOVER',
-      titleVi: '01 DISCOVER • Khám Phá & Nghiên Cứu',
-      titleEn: '01 DISCOVER • Discovery & Research',
+      title: 'TƯ VẤN',
+      titleVi: '01 TƯ VẤN • Lắng Nghe & Lập Kế Hoạch',
+      titleEn: '01 CONSULTING • Discovery & Planning',
       icon: Search,
       details: language === 'en'
-        ? 'We conduct discovery workshops to clarify business goals, define MVP feature scope, analyze competitors, and choose optimal technical architecture.'
-        : 'Chúng tôi tổ chức workshop discovery để làm rõ bài toán kinh doanh, định hình các tính năng cốt lõi (MVP scope), phân tích đối thủ cạnh tranh và xác định kiến trúc kỹ thuật tối ưu nhất.'
+        ? 'We listen to your business challenges, clarify core requirements, and create a clear roadmap.'
+        : 'Chúng tôi lắng nghe nhu cầu và bài toán kinh doanh của bạn, tư vấn giải pháp tối ưu nhất và lập kế hoạch triển khai rõ ràng từng bước.'
     },
     {
       num: '02',
-      title: 'ARCHITECT',
-      titleVi: '02 ARCHITECT • Lập Kế Hoạch & Kiến Trúc',
-      titleEn: '02 ARCHITECT • Planning & Architecture',
+      title: 'LẬP SƠ ĐỒ',
+      titleVi: '02 QUY TRÌNH • Sơ Đồ & Cấu Trúc Phần Mềm',
+      titleEn: '02 ARCHITECT • Workflow & System Architecture',
       icon: Compass,
       details: language === 'en'
-        ? 'Establishing ERD data schemas, selecting Tech Stack, defining API endpoints, and organizing sprint roadmaps.'
-        : 'Thiết lập sơ đồ thực thể dữ liệu (ERD), lựa chọn Tech Stack, xác định các API Endpoints và chia nhỏ tiến độ thành từng Sprint 2 tuần minh bạch.'
+        ? 'Organizing database structures, system workflows, and breaking down features into clear stages.'
+        : 'Thống nhất sơ đồ quy trình công việc, cách thức quản lý dữ liệu và chia nhỏ tiến độ bàn giao minh bạch để bạn dễ theo dõi.'
     },
     {
       num: '03',
-      title: 'DESIGN',
-      titleVi: '03 DESIGN • Thiết Kế UI/UX & Prototype',
-      titleEn: '03 DESIGN • UI/UX & Prototyping',
+      title: 'THIẾT KẾ',
+      titleVi: '03 DESIGN • Thiết Kế Giao Diện Đẹp Mắt',
+      titleEn: '03 DESIGN • Beautiful UI/UX Prototyping',
       icon: Palette,
       details: language === 'en'
-        ? 'Crafting modern, consistent Design Systems in Figma. Validating interactive user experience before writing production code.'
-        : 'Đảm bảo giao diện hiện đại, nhất quán theo thẩm mỹ Digital Product Studio. Thử nghiệm trải nghiệm người dùng thực tế trước khi viết bất kỳ dòng code nào.'
+        ? 'Crafting clean, attractive user interfaces. You can view and test the interactive design preview before coding begins.'
+        : 'Vẽ giao diện phần mềm hiện đại, sang trọng và dễ sử dụng. Bạn được duyệt mẫu thiết kế tương tác thực tế trước khi tiến hành viết code.'
     },
     {
       num: '04',
-      title: 'BUILD',
-      titleVi: '04 BUILD • Lập Trình Frontend & Backend',
-      titleEn: '04 BUILD • Full-stack Engineering',
+      title: 'LẬP TRÌNH',
+      titleVi: '04 BUILD • Lập Trình Code Tự Viết 100%',
+      titleEn: '04 BUILD • Software Engineering',
       icon: Code,
       details: language === 'en'
-        ? 'Engineering smooth React/Next.js frontend with robust Node.js/PostgreSQL backend under strict CI/CD pipelines.'
-        : 'Lập trình Frontend mượt mà với React/Next.js kết hợp Backend chắc chắn Node.js/PostgreSQL. Đảm bảo mã nguồn được quản lý chặt chẽ qua Git & CI/CD.'
+        ? 'Writing high-quality custom code for front-end interface and back-end database system.'
+        : 'Lập trình viên viết code chuẩn tay 100%, không dùng mẫu dựng sẵn. Đảm bảo ứng dụng chạy mượt mà, tốc độ cực nhanh và bảo mật an toàn.'
     },
     {
       num: '05',
-      title: 'TEST',
-      titleVi: '05 TEST • Kiểm Thử & Tối Ưu',
-      titleEn: '05 TEST • Testing & QA Optimization',
+      title: 'KIỂM THỬ',
+      titleVi: '05 TEST • Kiểm Tra Chất Lượng Kỹ Càng',
+      titleEn: '05 TEST • Quality Testing & Verification',
       icon: CheckSquare,
       details: language === 'en'
-        ? 'Executing unit tests, E2E tests, OWASP security audits, and Core Web Vitals optimization.'
-        : 'Thực hiện Unit Test, End-to-End Test, kiểm tra lỗ hổng bảo mật chuẩn OWASP và đo đạc chỉ số Core Web Vitals tối đa hóa tốc độ tải trang.'
+        ? 'Testing all features thoroughly on phones, tablets, and computers to ensure zero bugs.'
+        : 'Chạy thử nghiệm toàn bộ tính năng trên Điện thoại, Máy tính bảng và Máy tính để bàn. Kiểm tra độ ổn định và xử lý triệt để mọi lỗi nhỏ.'
     },
     {
       num: '06',
-      title: 'DEPLOY',
-      titleVi: '06 DEPLOY • Triển Khai Production',
-      titleEn: '06 DEPLOY • Production Deployment',
+      title: 'BÀN GIAO',
+      titleVi: '06 DEPLOY • Đưa Phần Mềm Vào Vận Hành',
+      titleEn: '06 DEPLOY • Launch & Training',
       icon: Rocket,
       details: language === 'en'
-        ? 'Configuring domain, SSL, server monitoring, and launching production code seamlessly.'
-        : 'Cấu hình Domain, SSL Certificate, Server Monitoring và tiến hành Launch sản phẩm chính thức mà không làm gián đoạn vận hành của bạn.'
+        ? 'Deploying to your domain name and guiding your team on how to use the admin control panel.'
+        : 'Đưa ứng dụng chạy chính thức trên tên miền của bạn, chuyển giao toàn bộ mã nguồn và hướng dẫn nhân viên thao tác quản trị dễ dàng.'
     },
     {
       num: '07',
-      title: 'MAINTAIN',
-      titleVi: '07 MAINTAIN • Bảo Trì & Đồng Hành SLA',
-      titleEn: '07 MAINTAIN • SLA Maintenance & Support',
+      title: 'BẢO HÀNH',
+      titleVi: '07 MAINTAIN • Bảo Hành & Hỗ Trợ 24/7',
+      titleEn: '07 MAINTAIN • 24/7 Support & Maintenance',
       icon: Shield,
       details: language === 'en'
-        ? 'Monitoring 24/7 uptime metrics, applying security patches, and scaling feature upgrades.'
-        : 'Theo dõi chỉ số hệ thống 24/7, cập nhật các bản vá bảo mật và hỗ trợ nâng cấp thêm tính năng khi lượng người dùng doanh nghiệp tăng trưởng.'
+        ? 'Providing continuous technical support, regular data backups, and quick troubleshooting.'
+        : 'Túc trực hỗ trợ kỹ thuật 24/7, sao lưu dữ liệu tự động hàng ngày và sẵn sàng nâng cấp thêm tính năng mới khi công ty bạn mở rộng.'
     }
   ];
 
   return (
-    <section id="process" className="py-24 bg-studio-950 border-b border-white/10 font-sans">
+    <section id="process" className={`py-24 border-b font-sans ${
+      isDark ? 'bg-studio-950 border-white/10 text-white' : 'bg-slate-50 border-slate-200 text-slate-900'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -88,10 +92,10 @@ export const ProcessSection = ({ onOpenRequestModal }) => {
           <div className="studio-badge">
             <span>{t('processTag')}</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">
             {t('processTitle')}
           </h2>
-          <p className="text-slate-400 text-sm leading-relaxed">
+          <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
             {t('processDesc')}
           </p>
         </div>
@@ -105,10 +109,10 @@ export const ProcessSection = ({ onOpenRequestModal }) => {
               <button
                 key={step.num}
                 onClick={() => setActiveStep(idx)}
-                className={`p-4 rounded-lg text-left border transition-all ${
+                className={`p-4 rounded-xl text-left border transition-all ${
                   isActive
-                    ? 'bg-brand-primary text-white border-brand-primary font-bold'
-                    : 'studio-card text-slate-400 hover:text-slate-200'
+                    ? 'bg-brand-primary text-white border-brand-primary font-bold shadow-sm'
+                    : 'bg-white dark:bg-studio-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-300'
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
@@ -124,12 +128,12 @@ export const ProcessSection = ({ onOpenRequestModal }) => {
         </div>
 
         {/* Active Stage Detail Panel */}
-        <div className="studio-card p-8 rounded-xl flex flex-col md:flex-row items-center justify-between gap-8 border-brand-primary/30">
+        <div className="studio-card p-8 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-8 border-brand-primary/30 shadow-md">
           <div className="space-y-4 max-w-2xl">
-            <h3 className="text-xl sm:text-2xl font-bold">
+            <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
               {language === 'en' ? steps[activeStep].titleEn : steps[activeStep].titleVi}
             </h3>
-            <p className="text-slate-400 text-sm leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
               {steps[activeStep].details}
             </p>
           </div>

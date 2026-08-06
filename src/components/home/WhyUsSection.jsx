@@ -11,44 +11,38 @@ export const WhyUsSection = () => {
     {
       num: '01',
       icon: Code,
-      title: 'CUSTOM ENGINEERING',
-      titleVi: '01 CUSTOM ENGINEERING • Không Template',
-      desc: 'Nói KHÔNG với template dựng sẵn hoặc CMS cồng kềnh. Mỗi dòng code Web App đều được viết tay chính xác theo logic kinh doanh của bạn.'
+      titleVi: '01 CODE TỰ VIẾT • Không Dùng Mẫu Sẵn',
+      desc: 'Nói KHÔNG với các giao diện mẫu dựng sẵn cồng kềnh. Phần mềm của bạn được thiết kế và viết code riêng 100% phù hợp chính xác theo nhu cầu.'
     },
     {
       num: '02',
       icon: Cpu,
-      title: 'BUSINESS-FIRST ARCHITECTURE',
-      titleVi: '02 BUSINESS-FIRST • Công Nghệ Tối Ưu',
-      desc: 'Sử dụng React 18, Next.js, Node.js, PostgreSQL và Docker. Đảm bảo tốc độ tải dưới 1 giây, bảo mật cao và tương thích chuẩn OpenAPI.'
+      titleVi: '02 TỐC ĐỘ NHANH • Chạy Ổn Định 24/7',
+      desc: 'Áp dụng công nghệ lập trình hiện đại nhất giúp trang web mở siêu nhanh dưới 1 giây, chịu tải tốt và không lo gián đoạn công việc.'
     },
     {
       num: '03',
       icon: Sparkles,
-      title: 'EDITORIAL UI/UX DESIGN',
-      titleVi: '03 EDITORIAL UI/UX • Chuẩn Studio',
-      desc: 'Giao diện sang trọng, đẳng cấp chuẩn Editorial Digital Product Studio. Tập trung tối đa hóa tỷ lệ chuyển đổi và trải nghiệm thao tác người dùng.'
+      titleVi: '03 GIAO DIỆN ĐẸP • Dễ Dùng Cho Nhân Viên',
+      desc: 'Giao diện thiết kế sang trọng, sắp xếp khoa học giúp nhân viên và khách hàng thao tác dễ dàng mà không cần tốn thời gian đào tạo phức tạp.'
     },
     {
       num: '04',
       icon: ShieldCheck,
-      title: 'SCALABLE BY DESIGN',
-      titleVi: '04 SCALABLE BY DESIGN • Sẵn Sàng Mở Rộng',
-      desc: 'Hệ thống thiết kế theo mô hình Microservices/Modular, giúp bạn dễ dàng nâng cấp thêm tính năng mà không phải đập đi xây lại.'
+      titleVi: '04 DỄ NÂNG CẤP • Sẵn Sàng Mở Rộng',
+      desc: 'Phần mềm được xây dựng với cấu trúc mở, giúp bạn dễ dàng bổ sung thêm tính năng mới bất cứ khi nào doanh nghiệp phát triển mở rộng.'
     },
     {
       num: '05',
       icon: MessageSquare,
-      title: 'TRANSPARENT WORKFLOW',
-      titleVi: '05 TRANSPARENT WORKFLOW • Minh Bạch 24/7',
-      desc: 'Báo cáo tiến độ theo tuần qua Slack & Jira. Bạn được cập nhật liên tục từng Sprint và thử nghiệm tính năng ngay khi hoàn tất.'
+      titleVi: '05 MINH BẠCH • Báo Cáo Tiến Độ Tuần',
+      desc: 'Bạn luôn được cập nhật tiến độ công việc hàng tuần, dùng thử các tính năng ngay khi vừa hoàn thành và chủ động đóng góp ý kiến.'
     },
     {
       num: '06',
       icon: Headphones,
-      title: 'LONG-TERM PARTNERSHIP',
-      titleVi: '06 LONG-TERM PARTNERSHIP • Bảo Trì Dài Hạn',
-      desc: 'Cam kết Uptime 99.9%. Đội ngũ kỹ thuật túc trực xử lý sự cố tức thì và bảo hành hệ thống lâu dài sau khi triển khai.'
+      titleVi: '06 ĐỒNG HÀNH • Bảo Hành Hỗ Trợ 24/7',
+      desc: 'Chúng tôi cam kết đồng hành lâu dài cùng doanh nghiệp bạn. Đội ngũ kỹ thuật túc trực xử lý nhanh chóng mọi thắc mắc 24/7.'
     }
   ];
 

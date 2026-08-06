@@ -11,30 +11,30 @@ export const AboutSection = () => {
     {
       num: '01',
       icon: Code,
-      title: 'Custom Architecture Only',
-      titleVi: 'Kiến Trúc Tùy Chỉnh 100%',
-      desc: 'Chúng tôi không sử dụng template có sẵn. Mọi dòng code và kiến trúc CSDL đều được thiết kế từ đầu tối ưu cho riêng bài toán kinh doanh của bạn.'
+      title: 'Code Tự Viết Tùy Chỉnh 100%',
+      titleVi: 'Code Tự Viết Tùy Chỉnh 100%',
+      desc: 'Chúng tôi không sử dụng các giao diện mẫu có sẵn chất lượng kém. Mọi dòng code đều được lập trình riêng tối ưu đúng theo nhu cầu quản lý của bạn.'
     },
     {
       num: '02',
       icon: Cpu,
-      title: 'Performance & Scale',
-      titleVi: 'Hiệu Năng & Khả Năng Mở Rộng',
-      desc: 'Áp dụng Server-Side Rendering (SSR), Caching 3 lớp (Redis/CDN), và REST/GraphQL API chuẩn hóa để chịu tải hàng trăm nghìn truy cập cùng lúc.'
+      title: 'Tốc Độ Nhanh & Dễ Mở Rộng',
+      titleVi: 'Tốc Độ Nhanh & Dễ Mở Rộng',
+      desc: 'Áp dụng các công nghệ ứng dụng web hiện đại giúp trang web tải cực nhanh dưới 1 giây, hoạt động mượt mà và dễ dàng thêm tính năng mới về sau.'
     },
     {
       num: '03',
       icon: ShieldCheck,
-      title: 'Security & Enterprise Standards',
-      titleVi: 'Bảo Mật Chuẩn Enterprise',
-      desc: 'Tuân thủ các tiêu chuẩn mã hóa dữ liệu nghiêm ngặt (ISO 27001, OWASP Top 10), bảo vệ dữ liệu người dùng và phòng chống tấn công mạng.'
+      title: 'Bảo Mật & An Toàn Dữ Liệu',
+      titleVi: 'Bảo Mật & An Toàn Dữ Liệu',
+      desc: 'Tuân thủ các tiêu chuẩn bảo mật dữ liệu nghiêm ngặt, tự động sao lưu định kỳ giúp bảo vệ thông tin khách hàng và tài sản của doanh nghiệp.'
     },
     {
       num: '04',
       icon: Users,
-      title: 'Transparent Communication',
-      titleVi: 'Giao Tiếp Minh Bạch & Đồng Hành',
-      desc: 'Báo cáo tiến độ Sprint hàng tuần qua Slack/Jira, cấp quyền truy cập Staging environment theo thời gian thực và hỗ trợ kỹ thuật SLA 24/7 sau bàn giao.'
+      title: 'Hỗ Trợ Chu Đáo & Đồng Hành',
+      titleVi: 'Hỗ Trợ Chu Đáo & Đồng Hành',
+      desc: 'Báo cáo tiến độ rõ ràng hàng tuần, hướng dẫn sử dụng tận tình cho nhân viên và luôn sẵn sàng hỗ trợ kỹ thuật nhanh chóng sau khi bàn giao.'
     }
   ];
 
@@ -52,18 +52,18 @@ export const AboutSection = () => {
           <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight text-slate-900 dark:text-white">
             {language === 'en' ? (
               <>
-                "We don't just build interfaces. <br />
-                We build systems that businesses can depend on."
+                "We don't just build websites. <br />
+                We build tools that help your business grow."
               </>
             ) : (
               <>
-                "Chúng tôi không chỉ dựng giao diện. <br />
-                Chúng tôi xây dựng phần mềm để doanh nghiệp vận hành lâu dài."
+                "Chúng tôi không chỉ làm website đẹp, <br />
+                chúng tôi tạo ra công cụ giúp doanh nghiệp của bạn phát triển."
               </>
             )}
           </h2>
           <p className="text-slate-600 dark:text-slate-400 text-base leading-relaxed max-w-2xl">
-            Nexus Studio là đối tác kỹ thuật số đồng hành cùng các Doanh nghiệp & SaaS Startup. Chúng tôi kết hợp tư duy kiến trúc hệ thống quy chuẩn với quy trình phát triển minh bạch.
+            Nexus Studio là đối tác đồng hành cùng các Doanh nghiệp & Cửa hàng kinh doanh. Chúng tôi tập trung tạo ra phần mềm thực sự hữu ích, dễ sử dụng và đem lại giá trị thực tế.
           </p>
         </div>
 
@@ -84,7 +84,6 @@ export const AboutSection = () => {
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">{item.titleVi}</h3>
-                  <p className="text-xs font-mono text-brand-primary font-bold">{item.title}</p>
                 </div>
                 <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                   {item.desc}
@@ -99,17 +98,17 @@ export const AboutSection = () => {
           <div className="space-y-2 max-w-xl">
             <h3 className="text-lg font-bold text-slate-900 dark:text-white">{t('aboutSlaTitle')}</h3>
             <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              Tất cả dự án bàn giao đều đi kèm tài liệu mô tả kiến trúc API, bộ test tự động và cam kết hỗ trợ bảo hành nâng cấp dài hạn theo hợp đồng SLA.
+              Tất cả phần mềm khi bàn giao đều được bàn giao đầy đủ mã nguồn (Full Source Code), tài liệu hướng dẫn và cam kết bảo hành hỗ trợ dài hạn theo hợp đồng.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-3 text-xs font-mono">
             <div className="p-3.5 rounded-xl bg-white dark:bg-studio-950 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 flex items-center gap-2 font-bold shadow-sm">
               <CheckCircle2 size={15} className="text-brand-primary" />
-              <span>Full Source Code Transfer</span>
+              <span>Bàn Giao Trọn Bộ Mã Nguồn</span>
             </div>
             <div className="p-3.5 rounded-xl bg-white dark:bg-studio-950 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 flex items-center gap-2 font-bold shadow-sm">
               <CheckCircle2 size={15} className="text-brand-primary" />
-              <span>SOC2 & OWASP Ready</span>
+              <span>Bảo Hành & Hỗ Trợ 24/7</span>
             </div>
           </div>
         </div>
