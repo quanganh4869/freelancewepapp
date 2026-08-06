@@ -10,6 +10,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
     { label: 'Dịch vụ', href: '#services', id: 'services' },
     { label: 'Quy trình', href: '#process', id: 'process' },
     { label: 'Dự án', href: '#portfolio', id: 'portfolio' },
+    { label: 'Về chúng tôi', href: '#about', id: 'about' },
     { label: 'Ưu thế', href: '#why-us', id: 'why-us' },
   ];
 

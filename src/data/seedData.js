@@ -259,3 +259,57 @@ export const DEMO_USERS = {
     company: 'Nexus Web App Studio'
   }
 };
+
+export const INITIAL_USERS = [
+  {
+    id: 'USR-101',
+    name: 'Marcus Vance',
+    email: 'marcus@vancetech.io',
+    company: 'Vance Tech Corp',
+    role: 'USER',
+    joinedAt: '2026-07-01T08:00:00Z',
+    requestsCount: 1,
+    status: 'Active'
+  },
+  {
+    id: 'USR-102',
+    name: 'Dr. Linh Nguyen',
+    email: 'linh.nguyen@medicare.vn',
+    company: 'MediCare Vietnam',
+    role: 'USER',
+    joinedAt: '2026-07-12T10:30:00Z',
+    requestsCount: 1,
+    status: 'Active'
+  },
+  {
+    id: 'USR-103',
+    name: 'Trần Hoàng',
+    email: 'hoang.tran@autoparts.vn',
+    company: 'AutoParts Vietnam Group',
+    role: 'USER',
+    joinedAt: '2026-08-01T14:20:00Z',
+    requestsCount: 1,
+    status: 'Active'
+  },
+  {
+    id: 'USR-104',
+    name: 'Sarah Chen',
+    email: 'sarah@eduskills.studio',
+    company: 'EduSkills Studio',
+    role: 'USER',
+    joinedAt: '2026-05-20T09:00:00Z',
+    requestsCount: 1,
+    status: 'Active'
+  },
+  {
+    id: 'USR-001',
+    name: 'Quang Anh (Admin)',
+    email: 'quanganhqb04@gmail.com',
+    company: 'Nexus Web App Studio',
+    role: 'ADMIN',
+    joinedAt: '2026-01-01T00:00:00Z',
+    requestsCount: 0,
+    status: 'Active'
+  }
+];
+

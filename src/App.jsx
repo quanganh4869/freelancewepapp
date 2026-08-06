@@ -12,6 +12,7 @@ import { HeroSection } from './components/home/HeroSection';
 import { ServicesSection } from './components/home/ServicesSection';
 import { ProcessSection } from './components/home/ProcessSection';
 import { PortfolioSection } from './components/home/PortfolioSection';
+import { AboutSection } from './components/home/AboutSection';
 import { WhyUsSection } from './components/home/WhyUsSection';
 import { CallToAction } from './components/home/CallToAction';
 
@@ -84,6 +85,7 @@ const MainAppContent = () => {
             <ServicesSection onSelectService={(service) => handleOpenRequestModal(service)} />
             <ProcessSection onOpenRequestModal={() => handleOpenRequestModal()} />
             <PortfolioSection onOpenRequestModal={() => handleOpenRequestModal()} />
+            <AboutSection />
             <WhyUsSection />
             <CallToAction onOpenRequestModal={() => handleOpenRequestModal()} />
           </>
