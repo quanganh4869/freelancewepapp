@@ -1,0 +1,528 @@
+import React, { useState } from 'react';
+import { useRequests } from '../../context/RequestContext';
+import { useAuth } from '../../context/AuthContext';
+import { X, ArrowRight, ArrowLeft, CheckCircle2, AlertCircle, Loader2, Sparkles, Building, Mail, Phone, User, Globe, Code, DollarSign, Clock, FileText } from 'lucide-react';
+
+export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) => {
+  const { submitProjectRequest } = useRequests();
+  const { currentUser, isUser } = useAuth();
+
+  const [step, setStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(null);
+
+  // Form State
+  const [formData, setFormData] = useState({
+    // Step 1: Basic Info
+    clientName: currentUser?.name || '',
+    clientEmail: currentUser?.email || '',
+    clientPhone: '',
+    clientCompany: currentUser?.company || '',
+
+    // Step 2: Project Info
+    projectName: initialService ? `Dự án ${initialService}` : '',
+    projectType: 'Business Web App', // Default
+    projectDescription: '',
+    mainFeatures: '',
+    targetUsers: '',
+
+    // Step 3: Budget & Timeline & Tech
+    budget: '$3,000 – $5,000',
+    timeline: '1–2 months',
+    referenceWebsites: '',
+    preferredTechnologies: '',
+    additionalNotes: ''
+  });
+
+  // Validation Errors
+  const [errors, setErrors] = useState({});
+
+  if (!isOpen) return null;
+
+  const handleInputChange = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+    if (errors[field]) {
+      setErrors(prev => ({ ...prev, [field]: null }));
+    }
+  };
+
+  // Step Validation Logic
+  const validateStep = (currentStep) => {
+    const newErrors = {};
+
+    if (currentStep === 1) {
+      if (!formData.clientName.trim()) newErrors.clientName = 'Vui lòng nhập Họ & Tên của bạn.';
+      if (!formData.clientEmail.trim()) {
+        newErrors.clientEmail = 'Vui lòng nhập Email liên hệ.';
+      } else if (!/\S+@\S+\.\S+/.test(formData.clientEmail)) {
+        newErrors.clientEmail = 'Email không hợp lệ.';
+      }
+    }
+
+    if (currentStep === 2) {
+      if (!formData.projectName.trim()) newErrors.projectName = 'Vui lòng nhập Tên dự án.';
+      if (!formData.projectDescription.trim() || formData.projectDescription.length < 20) {
+        newErrors.projectDescription = 'Mô tả dự án cần ít nhất 20 ký tự.';
+      }
+      if (!formData.mainFeatures.trim()) newErrors.mainFeatures = 'Hãy nêu các tính năng chính cần có.';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleNext = () => {
+    if (validateStep(step)) {
+      setStep(prev => prev + 1);
+    }
+  };
+
+  const handleBack = () => {
+    setStep(prev => prev - 1);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateStep(step)) return;
+
+    setIsSubmitting(true);
+    // Simulate server network delay
+    setTimeout(() => {
+      const createdRequest = submitProjectRequest(formData);
+      setIsSubmitting(false);
+      setSubmitSuccess(createdRequest);
+    }, 1200);
+  };
+
+  const handleResetAndClose = () => {
+    setStep(1);
+    setSubmitSuccess(null);
+    onClose();
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn overflow-y-auto">
+      <div
+        className="bg-studio-900 border border-white/10 rounded-2xl max-w-2xl w-full my-8 shadow-2xl relative text-slate-200 overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header Bar */}
+        <div className="bg-studio-950 px-6 py-4 border-b border-white/10 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center text-brand-primary">
+              <Sparkles size={18} />
+            </div>
+            <div>
+              <h3 className="text-base font-bold text-white">Start Your Project</h3>
+              <p className="text-xs text-slate-400 font-mono">Gửi yêu cầu thiết kế & lập trình Web App</p>
+            </div>
+          </div>
+
+          <button
+            onClick={handleResetAndClose}
+            className="w-8 h-8 rounded-full bg-studio-900 hover:bg-studio-800 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white transition-colors"
+          >
+            <X size={16} />
+          </button>
+        </div>
+
+        {/* Success View */}
+        {submitSuccess ? (
+          <div className="p-8 text-center space-y-6">
+            <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mx-auto shadow-glow-emerald">
+              <CheckCircle2 size={36} />
+            </div>
+
+            <div className="space-y-2 max-w-md mx-auto">
+              <h3 className="text-2xl font-extrabold text-white">Gửi Yêu Cầu Thành Công!</h3>
+              <p className="text-slate-300 text-sm leading-relaxed">
+                Mã yêu cầu của bạn là <span className="font-mono font-bold text-brand-primary px-2 py-0.5 rounded bg-brand-primary/10 border border-brand-primary/20">{submitSuccess.id}</span>. Đội ngũ Nexus Studio sẽ xem xét và phản hồi trong vòng 24h.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-xl bg-studio-950 border border-white/5 text-xs text-slate-400 space-y-1 font-mono text-left max-w-md mx-auto">
+              <div className="flex justify-between"><span>Dự án:</span> <span className="text-white">{submitSuccess.projectName}</span></div>
+              <div className="flex justify-between"><span>Loại:</span> <span className="text-slate-200">{submitSuccess.projectType}</span></div>
+              <div className="flex justify-between"><span>Trạng thái:</span> <span className="text-amber-400 font-bold">Pending (Đang Chờ Duyệt)</span></div>
+            </div>
+
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <button
+                onClick={handleResetAndClose}
+                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-brand-primary text-white font-semibold text-xs shadow-glow-primary hover:bg-brand-hover transition-all"
+              >
+                Hoàn tất & Đóng
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div>
+            {/* Step Progress Indicator Bar */}
+            <div className="bg-studio-950/60 px-6 py-3 border-b border-white/5 flex items-center justify-between text-xs font-mono">
+              <div className={`flex items-center gap-2 ${step >= 1 ? 'text-brand-primary font-bold' : 'text-slate-500'}`}>
+                <span className="w-5 h-5 rounded-full bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center text-[10px]">1</span>
+                <span className="hidden sm:inline">Thông tin</span>
+              </div>
+              <div className="text-slate-700">→</div>
+              <div className={`flex items-center gap-2 ${step >= 2 ? 'text-brand-primary font-bold' : 'text-slate-500'}`}>
+                <span className="w-5 h-5 rounded-full bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center text-[10px]">2</span>
+                <span className="hidden sm:inline">Chi tiết dự án</span>
+              </div>
+              <div className="text-slate-700">→</div>
+              <div className={`flex items-center gap-2 ${step >= 3 ? 'text-brand-primary font-bold' : 'text-slate-500'}`}>
+                <span className="w-5 h-5 rounded-full bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center text-[10px]">3</span>
+                <span className="hidden sm:inline">Ngân sách</span>
+              </div>
+              <div className="text-slate-700">→</div>
+              <div className={`flex items-center gap-2 ${step >= 4 ? 'text-brand-primary font-bold' : 'text-slate-500'}`}>
+                <span className="w-5 h-5 rounded-full bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center text-[10px]">4</span>
+                <span className="hidden sm:inline">Xác nhận</span>
+              </div>
+            </div>
+
+            {/* Form Steps Body */}
+            <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-6">
+
+              {/* STEP 1: Basic Information */}
+              {step === 1 && (
+                <div className="space-y-4 animate-fadeIn">
+                  <div className="border-b border-white/5 pb-3">
+                    <h4 className="text-base font-bold text-white">1. Thông tin cá nhân & Doanh nghiệp</h4>
+                    <p className="text-xs text-slate-400">Cho chúng tôi biết thông tin liên hệ của bạn.</p>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-mono text-slate-300 mb-1">
+                        Họ và Tên <span className="text-rose-400">*</span>
+                      </label>
+                      <div className="relative">
+                        <User size={15} className="absolute left-3 top-3 text-slate-500" />
+                        <input
+                          type="text"
+                          value={formData.clientName}
+                          onChange={(e) => handleInputChange('clientName', e.target.value)}
+                          placeholder="Nguyễn Văn A"
+                          className="w-full bg-studio-950 border border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors"
+                        />
+                      </div>
+                      {errors.clientName && <p className="text-[11px] text-rose-400 mt-1">{errors.clientName}</p>}
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-mono text-slate-300 mb-1">
+                        Email liên hệ <span className="text-rose-400">*</span>
+                      </label>
+                      <div className="relative">
+                        <Mail size={15} className="absolute left-3 top-3 text-slate-500" />
+                        <input
+                          type="email"
+                          value={formData.clientEmail}
+                          onChange={(e) => handleInputChange('clientEmail', e.target.value)}
+                          placeholder="name@company.com"
+                          className="w-full bg-studio-950 border border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors"
+                        />
+                      </div>
+                      {errors.clientEmail && <p className="text-[11px] text-rose-400 mt-1">{errors.clientEmail}</p>}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-mono text-slate-300 mb-1">
+                        Số điện thoại <span className="text-slate-500 text-[10px]">(Tùy chọn)</span>
+                      </label>
+                      <div className="relative">
+                        <Phone size={15} className="absolute left-3 top-3 text-slate-500" />
+                        <input
+                          type="text"
+                          value={formData.clientPhone}
+                          onChange={(e) => handleInputChange('clientPhone', e.target.value)}
+                          placeholder="+84 901 234 567"
+                          className="w-full bg-studio-950 border border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-mono text-slate-300 mb-1">
+                        Công ty / Tổ chức <span className="text-slate-500 text-[10px]">(Tùy chọn)</span>
+                      </label>
+                      <div className="relative">
+                        <Building size={15} className="absolute left-3 top-3 text-slate-500" />
+                        <input
+                          type="text"
+                          value={formData.clientCompany}
+                          onChange={(e) => handleInputChange('clientCompany', e.target.value)}
+                          placeholder="Công ty TNHH Tech Corp"
+                          className="w-full bg-studio-950 border border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* STEP 2: Project Specifications */}
+              {step === 2 && (
+                <div className="space-y-4 animate-fadeIn">
+                  <div className="border-b border-white/5 pb-3">
+                    <h4 className="text-base font-bold text-white">2. Thông tin dự án Web App</h4>
+                    <p className="text-xs text-slate-400">Mô tả tổng quan về Web App bạn muốn xây dựng.</p>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-mono text-slate-300 mb-1">
+                        Tên dự án <span className="text-rose-400">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.projectName}
+                        onChange={(e) => handleInputChange('projectName', e.target.value)}
+                        placeholder="VD: Nền tảng SaaS OmniDesk"
+                        className="w-full bg-studio-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors"
+                      />
+                      {errors.projectName && <p className="text-[11px] text-rose-400 mt-1">{errors.projectName}</p>}
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-mono text-slate-300 mb-1">
+                        Loại dự án (Project Type) <span className="text-rose-400">*</span>
+                      </label>
+                      <select
+                        value={formData.projectType}
+                        onChange={(e) => handleInputChange('projectType', e.target.value)}
+                        className="w-full bg-studio-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-brand-primary transition-colors"
+                      >
+                        <option value="Business Web App">Business Web App (Ứng dụng doanh nghiệp)</option>
+                        <option value="SaaS">SaaS Platform (Phần mềm dịch vụ)</option>
+                        <option value="E-commerce">E-commerce Web App (Thương mại điện tử)</option>
+                        <option value="Dashboard">Dashboard & Admin System</option>
+                        <option value="Internal Tool">Internal Tool (Công cụ nội bộ)</option>
+                        <option value="Other">Khác (Other)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-mono text-slate-300 mb-1">
+                      Mô tả bài toán & Mục tiêu dự án <span className="text-rose-400">*</span>
+                    </label>
+                    <textarea
+                      rows={3}
+                      value={formData.projectDescription}
+                      onChange={(e) => handleInputChange('projectDescription', e.target.value)}
+                      placeholder="Mô tả ngắn về ý tưởng, vấn đề bạn đang muốn giải quyết và mục tiêu sản phẩm..."
+                      className="w-full bg-studio-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors resize-none"
+                    />
+                    {errors.projectDescription && <p className="text-[11px] text-rose-400 mt-1">{errors.projectDescription}</p>}
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-mono text-slate-300 mb-1">
+                        Các tính năng chính (Main Features) <span className="text-rose-400">*</span>
+                      </label>
+                      <textarea
+                        rows={2}
+                        value={formData.mainFeatures}
+                        onChange={(e) => handleInputChange('mainFeatures', e.target.value)}
+                        placeholder="VD: Đăng nhập/Đăng ký, Phân quyền Role, WebSockets Chat, Payment Gateway..."
+                        className="w-full bg-studio-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors resize-none"
+                      />
+                      {errors.mainFeatures && <p className="text-[11px] text-rose-400 mt-1">{errors.mainFeatures}</p>}
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-mono text-slate-300 mb-1">
+                        Đối tượng sử dụng (Target Users)
+                      </label>
+                      <textarea
+                        rows={2}
+                        value={formData.targetUsers}
+                        onChange={(e) => handleInputChange('targetUsers', e.target.value)}
+                        placeholder="VD: Đội ngũ nhân viên kinh doanh, Khách hàng B2B, Bác sĩ..."
+                        className="w-full bg-studio-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors resize-none"
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* STEP 3: Budget & Timeline */}
+              {step === 3 && (
+                <div className="space-y-5 animate-fadeIn">
+                  <div className="border-b border-white/5 pb-3">
+                    <h4 className="text-base font-bold text-white">3. Ngân sách, Thời gian & Công nghệ</h4>
+                    <p className="text-xs text-slate-400">Ước tính mức ngân sách dự kiến và kỳ hạn bàn giao.</p>
+                  </div>
+
+                  {/* Budget Options Tiers */}
+                  <div>
+                    <label className="block text-xs font-mono text-slate-300 mb-2">
+                      Mức ngân sách dự kiến (Estimated Budget)
+                    </label>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                      {['Under $1,000', '$1,000 – $3,000', '$3,000 – $5,000', '$5,000 – $10,000', '$10,000+'].map((b) => (
+                        <button
+                          key={b}
+                          type="button"
+                          onClick={() => handleInputChange('budget', b)}
+                          className={`p-2.5 rounded-xl border text-xs font-mono transition-all text-center ${
+                            formData.budget === b
+                              ? 'bg-brand-primary/20 border-brand-primary text-white font-bold'
+                              : 'bg-studio-950 border-slate-800 text-slate-400 hover:text-white'
+                          }`}
+                        >
+                          {b}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Timeline Selection */}
+                  <div>
+                    <label className="block text-xs font-mono text-slate-300 mb-2">
+                      Thời gian dự kiến bàn giao (Timeline)
+                    </label>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                      {['ASAP', '1–2 months', '2–3 months', '3–6 months', 'Flexible'].map((t) => (
+                        <button
+                          key={t}
+                          type="button"
+                          onClick={() => handleInputChange('timeline', t)}
+                          className={`p-2.5 rounded-xl border text-xs font-mono transition-all text-center ${
+                            formData.timeline === t
+                              ? 'bg-brand-primary/20 border-brand-primary text-white font-bold'
+                              : 'bg-studio-950 border-slate-800 text-slate-400 hover:text-white'
+                          }`}
+                        >
+                          {t}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-mono text-slate-300 mb-1">
+                        Website tham khảo (Reference Links)
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.referenceWebsites}
+                        onChange={(e) => handleInputChange('referenceWebsites', e.target.value)}
+                        placeholder="https://example.com, https://app.com"
+                        className="w-full bg-studio-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-mono text-slate-300 mb-1">
+                        Công nghệ mong muốn (Preferred Tech)
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.preferredTechnologies}
+                        onChange={(e) => handleInputChange('preferredTechnologies', e.target.value)}
+                        placeholder="React, Node.js, PostgreSQL..."
+                        className="w-full bg-studio-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors"
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* STEP 4: Review & Submit */}
+              {step === 4 && (
+                <div className="space-y-4 animate-fadeIn">
+                  <div className="border-b border-white/5 pb-3">
+                    <h4 className="text-base font-bold text-white">4. Kiểm tra lại thông tin yêu cầu</h4>
+                    <p className="text-xs text-slate-400">Vui lòng rà soát lại thông tin trước khi gửi tới Nexus Studio.</p>
+                  </div>
+
+                  <div className="p-4 rounded-xl bg-studio-950 border border-white/5 space-y-3 text-xs text-slate-300">
+                    <div className="grid grid-cols-2 gap-2 border-b border-slate-800 pb-2">
+                      <div><span className="text-slate-500 font-mono">Khách hàng:</span> <p className="font-bold text-white">{formData.clientName}</p></div>
+                      <div><span className="text-slate-500 font-mono">Email:</span> <p className="text-white">{formData.clientEmail}</p></div>
+                      <div><span className="text-slate-500 font-mono">Công ty:</span> <p className="text-white">{formData.clientCompany || 'N/A'}</p></div>
+                      <div><span className="text-slate-500 font-mono">SĐT:</span> <p className="text-white">{formData.clientPhone || 'N/A'}</p></div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <span className="text-slate-500 font-mono">Tên & Loại dự án:</span>
+                      <p className="font-bold text-brand-primary">{formData.projectName} ({formData.projectType})</p>
+                    </div>
+
+                    <div className="space-y-1">
+                      <span className="text-slate-500 font-mono">Mô tả bài toán:</span>
+                      <p className="text-slate-300 italic">{formData.projectDescription}</p>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2 border-t border-slate-800 pt-2">
+                      <div><span className="text-slate-500 font-mono">Ngân sách dự kiến:</span> <p className="font-bold text-emerald-400 font-mono">{formData.budget}</p></div>
+                      <div><span className="text-slate-500 font-mono">Kỳ hạn mong muốn:</span> <p className="font-bold text-white font-mono">{formData.timeline}</p></div>
+                    </div>
+                  </div>
+
+                  <div className="p-3 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-xs text-indigo-300 flex items-start gap-2">
+                    <Sparkles size={16} className="shrink-0 mt-0.5" />
+                    <span>Sau khi gửi, thông tin dự án sẽ lập tức hiển thị trong danh sách theo dõi của Admin & User Portal để bạn tiện theo dõi.</span>
+                  </div>
+                </div>
+              )}
+
+              {/* Modal Buttons Footer */}
+              <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+                {step > 1 ? (
+                  <button
+                    type="button"
+                    onClick={handleBack}
+                    disabled={isSubmitting}
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-studio-950 border border-slate-800 text-xs font-semibold text-slate-300 hover:bg-studio-800 transition-all"
+                  >
+                    <ArrowLeft size={14} /> Quay lại
+                  </button>
+                ) : (
+                  <div></div>
+                )}
+
+                {step < 4 ? (
+                  <button
+                    type="button"
+                    onClick={handleNext}
+                    className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-brand-primary hover:bg-brand-hover text-white text-xs font-semibold shadow-glow-primary transition-all ml-auto"
+                  >
+                    <span>Tiếp tục</span>
+                    <ArrowRight size={14} />
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="flex items-center gap-2 px-7 py-3 rounded-xl bg-brand-primary hover:bg-brand-hover text-white text-xs font-bold shadow-glow-primary transition-all ml-auto disabled:opacity-50"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 size={16} className="animate-spin" />
+                        <span>Đang gửi yêu cầu...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Send Project Request</span>
+                        <ArrowRight size={16} />
+                      </>
+                    )}
+                  </button>
+                )}
+              </div>
+
+            </form>
+          </div>
+        )}
+
+      </div>
+    </div>
+  );
+};
