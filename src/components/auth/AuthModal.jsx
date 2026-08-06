@@ -243,27 +243,6 @@ export const AuthModal = ({ isOpen, onClose, defaultMode = 'LOGIN' }) => {
           </button>
         </form>
 
-        {/* Quick Fill Preset Shortcuts (Only in LOGIN mode) */}
-        {authMode === 'LOGIN' && (
-          <div className="mt-6 pt-4 border-t border-white/5 space-y-2">
-            <p className="text-[11px] font-mono text-slate-400 text-center uppercase">Thử nghiệm nhanh tài khoản Demo:</p>
-            <div className="grid grid-cols-2 gap-2 text-xs">
-              <button
-                onClick={handleQuickClientLogin}
-                className="p-2 rounded-xl bg-studio-950 border border-slate-800 text-slate-300 hover:border-slate-600 text-[11px] font-mono"
-              >
-                👤 Client Account
-              </button>
-              <button
-                onClick={handleQuickAdminLogin}
-                className="p-2 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 hover:bg-amber-500/20 text-[11px] font-mono"
-              >
-                ⚡ Admin (quanganhqb04)
-              </button>
-            </div>
-          </div>
-        )}
-
       </div>
     </div>
   );

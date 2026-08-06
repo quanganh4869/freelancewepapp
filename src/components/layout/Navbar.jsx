@@ -15,7 +15,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
   ];
 
   return (
-    <header className="sticky top-9 z-40 bg-studio-950/80 backdrop-blur-xl border-b border-white/5 transition-all">
+    <header className="sticky top-0 z-40 bg-studio-950/80 backdrop-blur-xl border-b border-white/5 transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           

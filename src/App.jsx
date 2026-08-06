@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { AuthProvider, useAuth, ADMIN_EMAIL } from './context/AuthContext';
 import { RequestProvider } from './context/RequestContext';
 import { ErrorBoundary } from './components/layout/ErrorBoundary';
-import { RoleSwitcherBar } from './components/layout/RoleSwitcherBar';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { Shield, Lock } from 'lucide-react';
@@ -45,9 +44,6 @@ const MainAppContent = () => {
   return (
     <div className="min-h-screen bg-studio-950 text-slate-200 flex flex-col font-sans selection:bg-brand-primary selection:text-white">
       
-      {/* Top Demo Role Switcher Bar */}
-      <RoleSwitcherBar />
-
       {/* Main Navbar */}
       <Navbar
         onOpenRequestModal={() => handleOpenRequestModal()}
