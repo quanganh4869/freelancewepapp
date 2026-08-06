@@ -3,130 +3,142 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    font-family: 'Manrope', 'Plus Jakarta Sans', sans-serif;
+  }
   body {
-    background-color: #080D1A;
-    color: #E2E8F0;
-    font-family: 'Plus Jakarta Sans', 'Work Sans', sans-serif;
+    background-color: #080B12;
+    color: #F5F7FA;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Light Theme Styles */
+  html.light body {
+    background-color: #F5F6F3;
+    color: #111318;
   }
 }
 
 /* Custom Scrollbars */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #080D1A;
+  background: #080B12;
+}
+html.light ::-webkit-scrollbar-track {
+  background: #F5F6F3;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1E293B;
-  border-radius: 4px;
+  background: #242B38;
+  border-radius: 3px;
+}
+html.light ::-webkit-scrollbar-thumb {
+  background: #CBD2DC;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #E63A27;
+  background: #2848D8;
 }
 
-/* Mona Media Style Visual Tokens */
-.mona-red-gradient {
-  background: linear-gradient(135deg, #E63A27 0%, #B91C1C 100%);
-}
-
-.mona-navy-gradient {
-  background: linear-gradient(135deg, #0C2271 0%, #081442 100%);
-}
-
-.mona-badge {
+/* Engineering Swiss Design Tokens */
+.studio-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.35rem 0.85rem;
-  border-radius: 9999px;
-  background-color: rgba(230, 58, 39, 0.1);
-  border: 1px solid rgba(230, 58, 39, 0.3);
-  color: #FF6B5B;
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  background-color: rgba(40, 72, 216, 0.08);
+  border: 1px solid rgba(40, 72, 216, 0.2);
+  color: #2848D8;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.75rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
+html.dark .studio-badge {
+  background-color: rgba(40, 72, 216, 0.12);
+  border-color: rgba(75, 104, 255, 0.3);
+  color: #4B68FF;
+}
 
-.mona-btn-primary {
-  background: #E63A27;
+.btn-primary {
+  background: #2848D8;
   color: #FFFFFF;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 0.875rem;
-  padding: 0.85rem 1.75rem;
-  border-radius: 0.75rem;
-  box-shadow: 0 10px 25px -5px rgba(230, 58, 39, 0.4);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid transparent;
+}
+.btn-primary:hover {
+  background: #1D3BB3;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #111318;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #DDE0E5;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+html.dark .btn-secondary {
+  color: #F5F7FA;
+  border-color: #242B38;
+}
+.btn-secondary:hover {
+  border-color: #2848D8;
+  color: #2848D8;
+  transform: translateY(-1px);
+}
+
+.studio-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+}
+html.dark .studio-card {
+  background: #0B1020;
+  border-color: #242B38;
+}
+.studio-card:hover {
+  border-color: #2848D8;
 }
 
-.mona-btn-primary:hover {
-  background: #C92C1B;
-  transform: translateY(-2px);
-  box-shadow: 0 15px 30px -5px rgba(230, 58, 39, 0.5);
-}
-
-.mona-btn-secondary {
-  background: #0C2271;
-  color: #FFFFFF;
-  font-weight: 700;
-  font-size: 0.875rem;
-  padding: 0.85rem 1.75rem;
-  border-radius: 0.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.25s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.mona-btn-secondary:hover {
-  background: #122B85;
-  border-color: rgba(230, 58, 39, 0.4);
-  transform: translateY(-2px);
-}
-
-.mona-card {
-  background: rgba(13, 20, 36, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1.25rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-}
-
-.mona-card:hover {
-  border-color: rgba(230, 58, 39, 0.4);
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px -15px rgba(230, 58, 39, 0.25);
-}
-
-.mona-callout {
-  border-left: 6px solid #E63A27;
-  background: rgba(230, 58, 39, 0.05);
-  border-radius: 0 1rem 1rem 0;
+.studio-callout {
+  border-left: 4px solid #2848D8;
+  background: rgba(40, 72, 216, 0.04);
+  border-radius: 0 8px 8px 0;
   padding: 1.25rem 1.5rem;
 }
+html.dark .studio-callout {
+  background: rgba(40, 72, 216, 0.08);
+}
 
-/* Background Grids */
-.grid-bg {
-  background-size: 36px 36px;
+/* Subtle Technical Grid Lines */
+.grid-bg-engineering {
+  background-size: 40px 40px;
   background-image: 
-    linear-gradient(to right, rgba(230, 58, 39, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(230, 58, 39, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
 }
-
-@keyframes pulse-slow {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.95); }
-}
-
-.animate-pulse-slow {
-  animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+html.dark .grid-bg-engineering {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
 }

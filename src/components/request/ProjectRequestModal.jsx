@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRequests } from '../../context/RequestContext';
 import { useAuth } from '../../context/AuthContext';
-import { X, ArrowRight, ArrowLeft, CheckCircle2, AlertCircle, Loader2, Sparkles, Building, Mail, Phone, User, Globe, Code, DollarSign, Clock, FileText } from 'lucide-react';
+import { X, ArrowRight, ArrowLeft, CheckCircle2, Loader2, Sparkles, Building, Mail, Phone, User } from 'lucide-react';
 
 export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) => {
   const { submitProjectRequest } = useRequests();
@@ -13,28 +13,23 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
 
   // Form State
   const [formData, setFormData] = useState({
-    // Step 1: Basic Info
     clientName: currentUser?.name || '',
     clientEmail: currentUser?.email || '',
     clientPhone: '',
     clientCompany: currentUser?.company || '',
 
-    // Step 2: Project Info
     projectName: initialService ? `Dự án ${initialService}` : 'Phát triển Web App tùy chỉnh',
-    projectType: 'Business Web App', // Default
+    projectType: 'Business Web App',
     projectDescription: initialService ? `Yêu cầu tư vấn & báo giá chi tiết cho dịch vụ: ${initialService}` : '',
     mainFeatures: 'Đăng nhập/Đăng ký, Phân quyền Role, WebSockets, Payment Gateway',
     targetUsers: 'Khách hàng doanh nghiệp & Nhân viên nội bộ',
 
-    // Step 3: Budget & Timeline & Tech
     budget: '$3,000 – $5,000',
     timeline: '1–2 months',
-    referenceWebsites: '',
     preferredTechnologies: 'React 18, Node.js, PostgreSQL, Redis',
     additionalNotes: ''
   });
 
-  // Validation Errors
   const [errors, setErrors] = useState({});
 
   if (!isOpen) return null;
@@ -46,7 +41,6 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
     }
   };
 
-  // Step Validation Logic
   const validateStep = (currentStep) => {
     const newErrors = {};
 
@@ -99,55 +93,55 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn overflow-y-auto font-sans">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn overflow-y-auto font-sans">
       <div
-        className="bg-studio-900 border border-white/10 rounded-2xl max-w-2xl w-full my-8 shadow-2xl relative text-slate-200 overflow-hidden"
+        className="bg-studio-900 border border-slate-800 rounded-xl max-w-2xl w-full my-8 shadow-2xl relative text-slate-100 overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header Bar */}
-        <div className="bg-studio-950 px-6 py-4 border-b border-white/10 flex items-center justify-between">
+        <div className="bg-studio-950 px-6 py-4 border-b border-slate-800 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center text-brand-primary shadow-glow-primary">
-              <Sparkles size={18} />
+            <div className="w-8 h-8 rounded-lg bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center text-brand-primary">
+              <Sparkles size={16} />
             </div>
             <div>
-              <h3 className="text-base font-bold text-white">Start Your Web App Project</h3>
+              <h3 className="text-sm font-bold text-white">Start Your Web App Project</h3>
               <p className="text-xs text-slate-400 font-mono">Nexus Digital Product Studio • Báo giá trong 24h</p>
             </div>
           </div>
 
           <button
             onClick={handleResetAndClose}
-            className="w-8 h-8 rounded-full bg-studio-900 hover:bg-studio-800 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white transition-colors"
+            className="w-7 h-7 rounded-md bg-studio-950 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white transition-colors"
           >
-            <X size={16} />
+            <X size={15} />
           </button>
         </div>
 
         {/* Success View */}
         {submitSuccess ? (
           <div className="p-8 text-center space-y-6">
-            <div className="w-16 h-16 rounded-full bg-brand-primary/10 border border-brand-primary/30 text-brand-primary flex items-center justify-center mx-auto shadow-glow-primary">
-              <CheckCircle2 size={36} />
+            <div className="w-14 h-14 rounded-full bg-brand-primary/10 border border-brand-primary/30 text-brand-primary flex items-center justify-center mx-auto">
+              <CheckCircle2 size={32} />
             </div>
 
             <div className="space-y-2 max-w-md mx-auto">
-              <h3 className="text-2xl font-extrabold text-white">Gửi Yêu Cầu Thành Công!</h3>
-              <p className="text-slate-300 text-sm leading-relaxed">
+              <h3 className="text-xl font-extrabold text-white">Gửi Yêu Cầu Thành Công!</h3>
+              <p className="text-slate-300 text-xs leading-relaxed">
                 Mã yêu cầu của bạn là <span className="font-mono font-bold text-brand-primary px-2 py-0.5 rounded bg-brand-primary/10 border border-brand-primary/20">{submitSuccess.id}</span>. Đội ngũ Nexus Studio sẽ xem xét và phản hồi trong vòng 24h.
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-studio-950 border border-white/5 text-xs text-slate-400 space-y-1 font-mono text-left max-w-md mx-auto">
+            <div className="p-4 rounded-lg bg-studio-950 border border-slate-800 text-xs text-slate-400 space-y-1 font-mono text-left max-w-md mx-auto">
               <div className="flex justify-between"><span>Dự án:</span> <span className="text-white font-bold">{submitSuccess.projectName}</span></div>
               <div className="flex justify-between"><span>Loại hình:</span> <span className="text-slate-200">{submitSuccess.projectType}</span></div>
               <div className="flex justify-between"><span>Trạng thái:</span> <span className="text-amber-400 font-bold">Pending (Đang Chờ Duyệt)</span></div>
             </div>
 
-            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <div className="pt-2 flex items-center justify-center">
               <button
                 onClick={handleResetAndClose}
-                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-brand-primary text-white font-bold text-xs shadow-glow-primary hover:bg-brand-hover transition-all"
+                className="btn-primary py-2.5 px-6 text-xs font-semibold"
               >
                 Hoàn tất & Đóng
               </button>
@@ -156,24 +150,24 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
         ) : (
           <div>
             {/* Step Progress Indicator Bar */}
-            <div className="bg-studio-950/60 px-6 py-3 border-b border-white/5 flex items-center justify-between text-xs font-mono">
+            <div className="bg-studio-950 px-6 py-3 border-b border-slate-800 flex items-center justify-between text-xs font-mono">
               <div className={`flex items-center gap-2 ${step >= 1 ? 'text-brand-primary font-bold' : 'text-slate-500'}`}>
-                <span className="w-5 h-5 rounded-full bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center text-[10px]">1</span>
+                <span className="w-5 h-5 rounded bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center text-[10px]">1</span>
                 <span className="hidden sm:inline">Thông tin liên hệ</span>
               </div>
               <div className="text-slate-700">→</div>
               <div className={`flex items-center gap-2 ${step >= 2 ? 'text-brand-primary font-bold' : 'text-slate-500'}`}>
-                <span className="w-5 h-5 rounded-full bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center text-[10px]">2</span>
+                <span className="w-5 h-5 rounded bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center text-[10px]">2</span>
                 <span className="hidden sm:inline">Chi tiết Web App</span>
               </div>
               <div className="text-slate-700">→</div>
               <div className={`flex items-center gap-2 ${step >= 3 ? 'text-brand-primary font-bold' : 'text-slate-500'}`}>
-                <span className="w-5 h-5 rounded-full bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center text-[10px]">3</span>
+                <span className="w-5 h-5 rounded bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center text-[10px]">3</span>
                 <span className="hidden sm:inline">Ngân sách & Công nghệ</span>
               </div>
               <div className="text-slate-700">→</div>
               <div className={`flex items-center gap-2 ${step >= 4 ? 'text-brand-primary font-bold' : 'text-slate-500'}`}>
-                <span className="w-5 h-5 rounded-full bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center text-[10px]">4</span>
+                <span className="w-5 h-5 rounded bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center text-[10px]">4</span>
                 <span className="hidden sm:inline">Xác nhận</span>
               </div>
             </div>
@@ -181,11 +175,11 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
             {/* Form Steps Body */}
             <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-6">
 
-              {/* STEP 1: Basic Information */}
+              {/* STEP 1 */}
               {step === 1 && (
                 <div className="space-y-4 animate-fadeIn">
-                  <div className="border-b border-white/5 pb-3">
-                    <h4 className="text-base font-bold text-white">1. Thông tin cá nhân & Doanh nghiệp</h4>
+                  <div className="border-b border-slate-800 pb-3">
+                    <h4 className="text-sm font-bold text-white">1. Thông tin cá nhân & Doanh nghiệp</h4>
                     <p className="text-xs text-slate-400">Cho chúng tôi biết thông tin để KTS/Kỹ sư liên hệ tư vấn.</p>
                   </div>
 
@@ -201,7 +195,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                           value={formData.clientName}
                           onChange={(e) => handleInputChange('clientName', e.target.value)}
                           placeholder="Nguyễn Văn A"
-                          className="w-full bg-studio-950 border border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors"
+                          className="w-full bg-studio-950 border border-slate-800 rounded-lg pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors"
                         />
                       </div>
                       {errors.clientName && <p className="text-[11px] text-rose-400 mt-1">{errors.clientName}</p>}
@@ -218,7 +212,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                           value={formData.clientEmail}
                           onChange={(e) => handleInputChange('clientEmail', e.target.value)}
                           placeholder="name@company.com"
-                          className="w-full bg-studio-950 border border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors"
+                          className="w-full bg-studio-950 border border-slate-800 rounded-lg pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors"
                         />
                       </div>
                       {errors.clientEmail && <p className="text-[11px] text-rose-400 mt-1">{errors.clientEmail}</p>}
@@ -237,7 +231,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                           value={formData.clientPhone}
                           onChange={(e) => handleInputChange('clientPhone', e.target.value)}
                           placeholder="+84 908 123 456"
-                          className="w-full bg-studio-950 border border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors"
+                          className="w-full bg-studio-950 border border-slate-800 rounded-lg pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors"
                         />
                       </div>
                     </div>
@@ -253,7 +247,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                           value={formData.clientCompany}
                           onChange={(e) => handleInputChange('clientCompany', e.target.value)}
                           placeholder="Công ty TNHH Tech Asia"
-                          className="w-full bg-studio-950 border border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors"
+                          className="w-full bg-studio-950 border border-slate-800 rounded-lg pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors"
                         />
                       </div>
                     </div>
@@ -261,11 +255,11 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                 </div>
               )}
 
-              {/* STEP 2: Project Specifications */}
+              {/* STEP 2 */}
               {step === 2 && (
                 <div className="space-y-4 animate-fadeIn">
-                  <div className="border-b border-white/5 pb-3">
-                    <h4 className="text-base font-bold text-white">2. Thông tin dự án Web App</h4>
+                  <div className="border-b border-slate-800 pb-3">
+                    <h4 className="text-sm font-bold text-white">2. Thông tin dự án Web App</h4>
                     <p className="text-xs text-slate-400">Mô tả tổng quan bài toán và mục tiêu phần mềm.</p>
                   </div>
 
@@ -279,7 +273,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                         value={formData.projectName}
                         onChange={(e) => handleInputChange('projectName', e.target.value)}
                         placeholder="VD: Nền tảng SaaS OmniDesk B2B"
-                        className="w-full bg-studio-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors"
+                        className="w-full bg-studio-950 border border-slate-800 rounded-lg px-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors"
                       />
                       {errors.projectName && <p className="text-[11px] text-rose-400 mt-1">{errors.projectName}</p>}
                     </div>
@@ -291,7 +285,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                       <select
                         value={formData.projectType}
                         onChange={(e) => handleInputChange('projectType', e.target.value)}
-                        className="w-full bg-studio-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-brand-primary transition-colors font-semibold"
+                        className="w-full bg-studio-950 border border-slate-800 rounded-lg px-3 py-2.5 text-xs text-white focus:outline-none focus:border-brand-primary transition-colors font-semibold"
                       >
                         <option value="Business Web App">Business Web App (Ứng dụng doanh nghiệp)</option>
                         <option value="SaaS">SaaS Platform (Phần mềm dịch vụ)</option>
@@ -312,7 +306,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                       value={formData.projectDescription}
                       onChange={(e) => handleInputChange('projectDescription', e.target.value)}
                       placeholder="Mô tả ý tưởng, đối tượng người dùng và mục tiêu bạn muốn ứng dụng Web App đạt được..."
-                      className="w-full bg-studio-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors resize-none"
+                      className="w-full bg-studio-950 border border-slate-800 rounded-lg px-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors resize-none"
                     />
                     {errors.projectDescription && <p className="text-[11px] text-rose-400 mt-1">{errors.projectDescription}</p>}
                   </div>
@@ -327,7 +321,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                         value={formData.mainFeatures}
                         onChange={(e) => handleInputChange('mainFeatures', e.target.value)}
                         placeholder="VD: Phân quyền Role, WebSockets Chat, Cổng thanh toán..."
-                        className="w-full bg-studio-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors resize-none"
+                        className="w-full bg-studio-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors resize-none"
                       />
                     </div>
 
@@ -340,22 +334,21 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                         value={formData.targetUsers}
                         onChange={(e) => handleInputChange('targetUsers', e.target.value)}
                         placeholder="VD: Đội ngũ nhân viên kinh doanh, Khách hàng B2B..."
-                        className="w-full bg-studio-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors resize-none"
+                        className="w-full bg-studio-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors resize-none"
                       />
                     </div>
                   </div>
                 </div>
               )}
 
-              {/* STEP 3: Budget & Timeline */}
+              {/* STEP 3 */}
               {step === 3 && (
                 <div className="space-y-5 animate-fadeIn">
-                  <div className="border-b border-white/5 pb-3">
-                    <h4 className="text-base font-bold text-white">3. Ngân sách, Thời gian & Công nghệ</h4>
+                  <div className="border-b border-slate-800 pb-3">
+                    <h4 className="text-sm font-bold text-white">3. Ngân sách, Thời gian & Công nghệ</h4>
                     <p className="text-xs text-slate-400">Ước tính khoảng ngân sách đầu tư và kỳ hạn bàn giao dự kiến.</p>
                   </div>
 
-                  {/* Budget Options Tiers */}
                   <div>
                     <label className="block text-xs font-mono text-slate-300 mb-2">
                       Mức ngân sách dự kiến (Estimated Budget)
@@ -366,7 +359,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                           key={b}
                           type="button"
                           onClick={() => handleInputChange('budget', b)}
-                          className={`p-2.5 rounded-xl border text-xs font-mono transition-all text-center ${
+                          className={`p-2.5 rounded-lg border text-xs font-mono transition-all text-center ${
                             formData.budget === b
                               ? 'bg-brand-primary/20 border-brand-primary text-white font-bold'
                               : 'bg-studio-950 border-slate-800 text-slate-400 hover:text-white'
@@ -378,7 +371,6 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                     </div>
                   </div>
 
-                  {/* Timeline Selection */}
                   <div>
                     <label className="block text-xs font-mono text-slate-300 mb-2">
                       Thời gian dự kiến bàn giao (Timeline)
@@ -389,7 +381,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                           key={t}
                           type="button"
                           onClick={() => handleInputChange('timeline', t)}
-                          className={`p-2.5 rounded-xl border text-xs font-mono transition-all text-center ${
+                          className={`p-2.5 rounded-lg border text-xs font-mono transition-all text-center ${
                             formData.timeline === t
                               ? 'bg-brand-primary/20 border-brand-primary text-white font-bold'
                               : 'bg-studio-950 border-slate-800 text-slate-400 hover:text-white'
@@ -410,21 +402,21 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                       value={formData.preferredTechnologies}
                       onChange={(e) => handleInputChange('preferredTechnologies', e.target.value)}
                       placeholder="React, Next.js, Node.js, PostgreSQL..."
-                      className="w-full bg-studio-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors font-mono"
+                      className="w-full bg-studio-950 border border-slate-800 rounded-lg px-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors font-mono"
                     />
                   </div>
                 </div>
               )}
 
-              {/* STEP 4: Review & Submit */}
+              {/* STEP 4 */}
               {step === 4 && (
                 <div className="space-y-4 animate-fadeIn">
-                  <div className="border-b border-white/5 pb-3">
-                    <h4 className="text-base font-bold text-white">4. Xác nhận thông tin hồ sơ</h4>
+                  <div className="border-b border-slate-800 pb-3">
+                    <h4 className="text-sm font-bold text-white">4. Xác nhận thông tin hồ sơ</h4>
                     <p className="text-xs text-slate-400">Rà soát lại yêu cầu trước khi gửi cho Nexus Studio.</p>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-studio-950 border border-white/5 space-y-3 text-xs text-slate-300">
+                  <div className="p-4 rounded-lg bg-studio-950 border border-slate-800 space-y-3 text-xs text-slate-300 font-sans">
                     <div className="grid grid-cols-2 gap-2 border-b border-slate-800 pb-2">
                       <div><span className="text-slate-500 font-mono">Khách hàng:</span> <p className="font-bold text-white">{formData.clientName}</p></div>
                       <div><span className="text-slate-500 font-mono">Email:</span> <p className="text-white">{formData.clientEmail}</p></div>
@@ -448,7 +440,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                     </div>
                   </div>
 
-                  <div className="p-3 rounded-xl bg-brand-primary/10 border border-brand-primary/20 text-xs text-slate-300 flex items-start gap-2">
+                  <div className="p-3 rounded-lg bg-brand-primary/10 border border-brand-primary/20 text-xs text-slate-300 flex items-start gap-2">
                     <Sparkles size={16} className="text-brand-primary shrink-0 mt-0.5" />
                     <span>Sau khi gửi, thông tin dự án của bạn sẽ lập tức hiển thị trong danh sách theo dõi của Admin & Client Portal.</span>
                   </div>
@@ -456,13 +448,13 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
               )}
 
               {/* Modal Buttons Footer */}
-              <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+              <div className="pt-4 border-t border-slate-800 flex items-center justify-between">
                 {step > 1 ? (
                   <button
                     type="button"
                     onClick={handleBack}
                     disabled={isSubmitting}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-studio-950 border border-slate-800 text-xs font-semibold text-slate-300 hover:bg-studio-800 transition-all"
+                    className="btn-secondary py-2 px-4 text-xs font-semibold"
                   >
                     <ArrowLeft size={14} /> Quay lại
                   </button>
@@ -474,7 +466,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                   <button
                     type="button"
                     onClick={handleNext}
-                    className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-brand-primary hover:bg-brand-hover text-white text-xs font-bold shadow-glow-primary transition-all ml-auto"
+                    className="btn-primary py-2 px-5 text-xs font-semibold ml-auto"
                   >
                     <span>Tiếp tục</span>
                     <ArrowRight size={14} />
@@ -483,17 +475,17 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="flex items-center gap-2 px-7 py-3 rounded-xl bg-brand-primary hover:bg-brand-hover text-white text-xs font-bold shadow-glow-primary transition-all ml-auto disabled:opacity-50"
+                    className="btn-primary py-2.5 px-6 text-xs font-semibold ml-auto disabled:opacity-50"
                   >
                     {isSubmitting ? (
                       <>
-                        <Loader2 size={16} className="animate-spin" />
+                        <Loader2 size={15} className="animate-spin" />
                         <span>Đang gửi yêu cầu...</span>
                       </>
                     ) : (
                       <>
                         <span>Gửi Yêu Cầu Báo Giá</span>
-                        <ArrowRight size={16} />
+                        <ArrowRight size={15} />
                       </>
                     )}
                   </button>

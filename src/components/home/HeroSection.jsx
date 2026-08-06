@@ -1,80 +1,84 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
-import { ArrowRight, CheckCircle2, Terminal, Code2, Cpu, PhoneCall } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Cpu, Terminal, ShieldCheck, Database, Layers } from 'lucide-react';
 
 export const HeroSection = ({ onOpenRequestModal }) => {
-  const { t } = useLanguage();
-  const [activeTab, setActiveTab] = useState('architecture');
+  const { language, t } = useLanguage();
 
   return (
-    <section className="relative overflow-hidden pt-12 pb-20 md:pt-16 md:pb-28 bg-grid-pattern border-b border-white/5 font-sans">
-      
-      {/* Mona Red & Navy Glow Ambient Background */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[450px] bg-brand-primary/15 blur-[150px] pointer-events-none rounded-full" />
-      <div className="absolute top-10 right-10 w-[400px] h-[400px] bg-brand-navy/35 blur-[120px] pointer-events-none rounded-full" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section className="relative pt-16 pb-20 md:pt-24 md:pb-32 grid-bg-engineering border-b border-white/10 font-sans">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
-          {/* Left Column: Headline & Content */}
-          <div className="lg:col-span-7 space-y-6 text-left">
+          {/* Left Column: Eyebrow, H1 Headline & Editorial Copy */}
+          <div className="lg:col-span-7 space-y-8 text-left">
             
-            {/* Mona Style Badge */}
-            <div className="mona-badge">
-              <span className="w-2.5 h-2.5 rounded-full bg-brand-primary animate-pulse"></span>
-              <span>{t('heroStatus')}</span>
-              <span className="text-slate-600">|</span>
-              <span className="text-white">{t('heroBooking')}</span>
+            {/* Technical Eyebrow */}
+            <div className="studio-badge">
+              <span className="w-2 h-2 rounded-full bg-brand-primary"></span>
+              <span>NEXUS STUDIO / DIGITAL PRODUCT ENGINEERING</span>
             </div>
 
-            {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.15]">
-              {t('heroTitlePart1')} <br className="hidden sm:inline" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary via-rose-400 to-amber-400">
-                {t('heroTitlePart2')}
-              </span>
+            {/* Headline H1 */}
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.02]">
+              {language === 'en' ? (
+                <>
+                  We build <br className="hidden sm:inline" />
+                  <span className="text-brand-primary">production-ready</span> <br className="hidden sm:inline" />
+                  Web Applications.
+                </>
+              ) : (
+                <>
+                  Chúng tôi xây dựng <br className="hidden sm:inline" />
+                  những <span className="text-brand-primary">Web App</span> <br className="hidden sm:inline" />
+                  được tạo để vận hành.
+                </>
+              )}
             </h1>
 
-            {/* Sub-headline Callout Box */}
-            <div className="mona-callout">
-              <p className="text-base sm:text-lg text-slate-200 font-medium leading-relaxed">
-                {t('heroSubtitle')} <strong className="text-white font-bold">{t('heroSubHighlight')}</strong>
+            {/* Callout Box */}
+            <div className="studio-callout max-w-2xl">
+              <p className="text-base sm:text-lg font-medium leading-relaxed opacity-90">
+                {language === 'en'
+                  ? 'Nexus Studio is a digital product engineering firm. We design and build enterprise Web Apps, SaaS platforms, and operational software built for scale, speed, and security.'
+                  : 'Nexus Studio là đối tác kỹ thuật số chuyên sâu. Chúng tôi thiết kế & lập trình Web App doanh nghiệp, nền tảng SaaS và công cụ vận hành tối ưu hiệu năng, quy mô và bảo mật.'}
               </p>
             </div>
 
-            {/* Feature Highlights Checklist */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs text-slate-300 font-medium">
+            {/* Feature Checklist */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-semibold">
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 size={16} className="text-brand-primary shrink-0" />
-                <span>{t('heroCheck1')}</span>
+                <span>Custom Architecture 100% (No Templates)</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 size={16} className="text-brand-primary shrink-0" />
-                <span>{t('heroCheck2')}</span>
+                <span>Enterprise Security & SOC2 Compliant</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 size={16} className="text-brand-primary shrink-0" />
-                <span>{t('heroCheck3')}</span>
+                <span>99.9% Uptime SLA Guarantee</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 size={16} className="text-brand-primary shrink-0" />
-                <span>{t('heroCheck4')}</span>
+                <span>Fast MVP Delivery in 3–8 Weeks</span>
               </div>
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
               <button
                 onClick={() => onOpenRequestModal()}
-                className="mona-btn-primary"
+                className="btn-primary py-3.5 px-6 text-sm"
               >
-                <span>{t('btnStart')}</span>
-                <ArrowRight size={18} />
+                <span>{t('startProject')}</span>
+                <ArrowRight size={16} />
               </button>
 
               <a
                 href="#cost-estimator"
-                className="mona-btn-secondary"
+                className="btn-secondary py-3.5 px-6 text-sm"
               >
                 <Cpu size={16} className="text-brand-primary" />
                 <span>{t('btnCalc')}</span>
@@ -83,153 +87,98 @@ export const HeroSection = ({ onOpenRequestModal }) => {
 
           </div>
 
-          {/* Right Column: Web App Interactive Architectural Preview Frame */}
-          <div className="lg:col-span-5 relative">
-            <div className="mona-card rounded-2xl border border-brand-primary/30 shadow-2xl overflow-hidden backdrop-blur-xl">
+          {/* Right Column: Engineering System Architecture Visual */}
+          <div className="lg:col-span-5">
+            <div className="studio-card p-6 sm:p-8 space-y-6 shadow-subtle-card relative overflow-hidden border border-slate-700/40">
               
-              {/* Window Header Bar */}
-              <div className="bg-studio-950 px-4 py-3 border-b border-white/10 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-rose-500/80"></div>
-                  <div className="w-3 h-3 rounded-full bg-amber-500/80"></div>
-                  <div className="w-3 h-3 rounded-full bg-emerald-500/80"></div>
-                  <span className="ml-2 font-mono text-xs text-slate-400">nexus-architecture-v2.config</span>
+              {/* Architecture Panel Header */}
+              <div className="flex items-center justify-between pb-4 border-b border-slate-800">
+                <div className="flex items-center gap-2 font-mono text-xs font-bold tracking-wider">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                  <span className="text-slate-400 uppercase">SYSTEM ARCHITECTURE</span>
                 </div>
-                <div className="flex items-center gap-1 font-mono text-[11px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
-                  <span>BUILD OK</span>
-                </div>
+                <span className="font-mono text-[11px] px-2 py-0.5 rounded bg-brand-primary/10 border border-brand-primary/20 text-brand-primary font-semibold">
+                  v2.4 SPEC
+                </span>
               </div>
 
-              {/* Window Navigation Tabs */}
-              <div className="flex border-b border-white/10 bg-studio-950/50">
-                <button
-                  onClick={() => setActiveTab('architecture')}
-                  className={`px-4 py-2.5 text-xs font-mono font-bold flex items-center gap-2 transition-colors border-b-2 ${
-                    activeTab === 'architecture'
-                      ? 'border-brand-primary text-white bg-studio-900'
-                      : 'border-transparent text-slate-400 hover:text-slate-200'
-                  }`}
-                >
-                  <Cpu size={14} /> System Spec
-                </button>
-                <button
-                  onClick={() => setActiveTab('api')}
-                  className={`px-4 py-2.5 text-xs font-mono font-bold flex items-center gap-2 transition-colors border-b-2 ${
-                    activeTab === 'api'
-                      ? 'border-brand-primary text-white bg-studio-900'
-                      : 'border-transparent text-slate-400 hover:text-slate-200'
-                  }`}
-                >
-                  <Terminal size={14} /> API Payload
-                </button>
-                <button
-                  onClick={() => setActiveTab('preview')}
-                  className={`px-4 py-2.5 text-xs font-mono font-bold flex items-center gap-2 transition-colors border-b-2 ${
-                    activeTab === 'preview'
-                      ? 'border-brand-primary text-white bg-studio-900'
-                      : 'border-transparent text-slate-400 hover:text-slate-200'
-                  }`}
-                >
-                  <Code2 size={14} /> Live UI Widget
-                </button>
+              {/* Layer 01: Experience */}
+              <div className="p-4 rounded-lg bg-studio-950/80 border border-slate-800 space-y-2 font-mono text-xs">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Layers size={14} className="text-brand-primary" />
+                    <span className="font-bold text-white">01 — EXPERIENCE LAYER</span>
+                  </div>
+                  <span className="text-[10px] text-slate-400">SSR / Edge</span>
+                </div>
+                <p className="text-[11px] text-slate-400 font-sans">
+                  React 18 • Next.js • Tailwind CSS Design Tokens
+                </p>
               </div>
 
-              {/* Window Content Body */}
-              <div className="p-5 font-mono text-xs space-y-4">
-                {activeTab === 'architecture' && (
-                  <div className="space-y-3">
-                    <div className="p-3 rounded-lg bg-studio-950 border border-white/5 space-y-2">
-                      <div className="flex items-center justify-between text-slate-300">
-                        <span className="text-brand-primary font-bold">⚡ Frontend Core:</span>
-                        <span className="text-slate-400">React 18 / Next.js SSR</span>
-                      </div>
-                      <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
-                        <div className="bg-brand-primary h-full w-full"></div>
-                      </div>
-                    </div>
+              {/* Layer Connector Arrow */}
+              <div className="flex justify-center -my-2 text-slate-600 font-mono text-xs">
+                ↓ API Interface
+              </div>
 
-                    <div className="p-3 rounded-lg bg-studio-950 border border-white/5 space-y-2">
-                      <div className="flex items-center justify-between text-slate-300">
-                        <span className="text-amber-400 font-bold">🛡️ Backend Architecture:</span>
-                        <span className="text-slate-400">Node.js / REST & WebSockets</span>
-                      </div>
-                      <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
-                        <div className="bg-amber-400 h-full w-[95%]"></div>
-                      </div>
-                    </div>
-
-                    <div className="p-3 rounded-lg bg-studio-950 border border-white/5 space-y-2">
-                      <div className="flex items-center justify-between text-slate-300">
-                        <span className="text-emerald-400 font-bold">🗄️ Database & Cache:</span>
-                        <span className="text-slate-400">PostgreSQL + Redis Caching</span>
-                      </div>
-                      <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
-                        <div className="bg-emerald-400 h-full w-[98%]"></div>
-                      </div>
-                    </div>
+              {/* Layer 02: Application Logic */}
+              <div className="p-4 rounded-lg bg-studio-950/80 border border-slate-800 space-y-2 font-mono text-xs">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Terminal size={14} className="text-amber-400" />
+                    <span className="font-bold text-white">02 — APPLICATION LOGIC</span>
                   </div>
-                )}
-
-                {activeTab === 'api' && (
-                  <pre className="p-3 rounded-lg bg-studio-950 border border-white/5 text-slate-300 overflow-x-auto text-[11px] leading-relaxed">
-{`// POST /api/v1/projects/start
-{
-  "status": 201,
-  "client": "Marcus Vance",
-  "project": "OmniDesk B2B SaaS",
-  "estimatedDelivery": "8 Weeks",
-  "securityAudit": "PASSED (SOC2 Ready)",
-  "techStack": ["React", "Node", "PostgreSQL"],
-  "slaSupport": true
-}`}
-                  </pre>
-                )}
-
-                {activeTab === 'preview' && (
-                  <div className="p-4 rounded-lg bg-studio-950 border border-white/5 space-y-3 font-sans">
-                    <div className="flex items-center justify-between text-xs pb-2 border-b border-slate-800">
-                      <span className="font-bold text-white">Live App System Status</span>
-                      <span className="text-emerald-400 font-mono text-[10px]">● Operational</span>
-                    </div>
-                    <div className="grid grid-cols-2 gap-2 text-xs">
-                      <div className="p-2 rounded bg-studio-900 border border-slate-800">
-                        <p className="text-slate-400 text-[10px]">Active Users</p>
-                        <p className="font-bold text-white text-sm font-mono">14,250</p>
-                      </div>
-                      <div className="p-2 rounded bg-studio-900 border border-slate-800">
-                        <p className="text-slate-400 text-[10px]">Response Time</p>
-                        <p className="font-bold text-emerald-400 text-sm font-mono">28ms</p>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Footer status line */}
-                <div className="pt-2 border-t border-white/5 flex items-center justify-between text-[11px] text-slate-400 font-mono">
-                  <span>Standard: ISO 27001 Clean Code</span>
-                  <span className="text-brand-primary font-bold">NEXUS STUDIO</span>
+                  <span className="text-[10px] text-slate-400">REST & WebSockets</span>
                 </div>
+                <p className="text-[11px] text-slate-400 font-sans">
+                  Node.js • Modular Microservices • JWT / OAuth2 Auth
+                </p>
+              </div>
+
+              {/* Layer Connector Arrow */}
+              <div className="flex justify-center -my-2 text-slate-600 font-mono text-xs">
+                ↓ Database Connection Pool
+              </div>
+
+              {/* Layer 03: Data & Storage */}
+              <div className="p-4 rounded-lg bg-studio-950/80 border border-slate-800 space-y-2 font-mono text-xs">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Database size={14} className="text-emerald-400" />
+                    <span className="font-bold text-white">03 — DATA PERSISTENCE</span>
+                  </div>
+                  <span className="text-[10px] text-slate-400">Redis Cache Layer</span>
+                </div>
+                <p className="text-[11px] text-slate-400 font-sans">
+                  PostgreSQL • Encrypted Storage • Automated Backups
+                </p>
+              </div>
+
+              {/* Layer 04: Infrastructure & Security */}
+              <div className="p-4 rounded-lg bg-studio-950/80 border border-slate-800 space-y-2 font-mono text-xs">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <ShieldCheck size={14} className="text-brand-primary" />
+                    <span className="font-bold text-white">04 — INFRASTRUCTURE</span>
+                  </div>
+                  <span className="text-[10px] text-emerald-400 font-semibold">99.9% Uptime SLA</span>
+                </div>
+                <p className="text-[11px] text-slate-400 font-sans">
+                  AWS Docker Container • CDN Edge • SOC2 Compliance
+                </p>
+              </div>
+
+              {/* Metadata Footer Line */}
+              <div className="pt-2 border-t border-slate-800 flex items-center justify-between text-[11px] font-mono text-slate-400">
+                <span>Standard: ISO 27001</span>
+                <span className="text-brand-primary font-bold">NEXUS LABS</span>
               </div>
 
             </div>
-
-            {/* Floating Hotline Badge */}
-            <div className="absolute -bottom-6 -left-6 studio-card-border p-3.5 rounded-2xl bg-studio-900 border-brand-primary/50 shadow-2xl flex items-center gap-3 backdrop-blur-xl">
-              <div className="w-10 h-10 rounded-xl bg-brand-primary text-white flex items-center justify-center shrink-0 shadow-glow-primary animate-pulse-slow">
-                <PhoneCall size={18} />
-              </div>
-              <div>
-                <p className="text-[10px] font-mono text-slate-400 uppercase font-bold">{t('techSupport')}</p>
-                <a href="tel:0908123456" className="text-sm font-extrabold text-white hover:text-brand-primary font-mono transition-colors block">
-                  0908.123.456
-                </a>
-              </div>
-            </div>
-
           </div>
 
         </div>
+
       </div>
     </section>
   );

@@ -4,44 +4,48 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
         brand: {
-          primary: '#E63A27',   // Mona Construction Red
-          hover: '#C92C1B',     // Darker Red
-          navy: '#0C2271',      // Deep Navy Blue
-          navyDark: '#08174A',
-          dark: '#101828',      // Charcoal Dark
-          darker: '#0B101B',
-          lightBg: '#F8F9FA',   // Off-white light section bg
-          cardBorder: '#E2E8F0',
-          amber: '#F59E0B',
+          primary: '#2848D8',   // Cobalt Accent
+          cobalt: '#2848D8',
+          hover: '#1D3BB3',     // Dark Cobalt
+          navy: '#0C1838',      // Deep Navy
+          dark: '#080B12',      // Near Black
+          ink: '#0B1020',       // Ink Black
+          slate: '#151B28',     // Slate Dark
+          lightBg: '#F5F6F3',   // Swiss Editorial Light Gray
+          lightSurface: '#FFFFFF',
+          lightBorder: '#E2E8F0',
+          accentRed: '#E63A27', // Limited status red accent
           emerald: '#10B981',
-          blue: '#2563EB'
+          amber: '#F59E0B',
         },
         studio: {
-          950: '#0B101B',
-          900: '#101828',
-          850: '#1A2333',
-          800: '#232E42',
-          700: '#334155',
-          400: '#94A3B8',
-          300: '#CBD5E1',
-          200: '#E2E8F0',
-          100: '#F1F5F9',
-          50: '#F8FAFC'
+          950: '#080B12',
+          900: '#0B1020',
+          850: '#111620',
+          800: '#1A2130',
+          700: '#242B38',
+          600: '#3A4454',
+          500: '#5F6673',
+          400: '#8A919D',
+          300: '#9AA3B2',
+          200: '#CBD2DC',
+          100: '#E6EBF2',
+          50: '#F5F7FA'
         }
       },
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'Work Sans', 'Inter', 'system-ui', 'sans-serif'],
+        sans: ['Manrope', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'monospace']
       },
       boxShadow: {
-        'glow-primary': '0 0 25px -5px rgba(230, 58, 39, 0.35)',
-        'glow-navy': '0 0 25px -5px rgba(12, 34, 113, 0.35)',
-        'mona-card': '0 10px 30px -10px rgba(0, 0, 0, 0.08)',
-        'mona-hover': '0 20px 40px -15px rgba(230, 58, 39, 0.2)'
+        'cobalt-glow': '0 0 20px -5px rgba(40, 72, 216, 0.25)',
+        'subtle-card': '0 4px 20px rgba(0, 0, 0, 0.04)',
+        'subtle-hover': '0 12px 30px rgba(0, 0, 0, 0.08)'
       }
     },
   },
