@@ -4,12 +4,24 @@
 
 @layer base {
   html {
-    font-family: 'Manrope', 'Plus Jakarta Sans', sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Outfit', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
   body {
     background-color: #080B12;
     color: #F5F7FA;
     transition: background-color 0.3s ease, color 0.3s ease;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+  }
+
+  /* Headings smooth tracking */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+    letter-spacing: -0.025em;
   }
 
   /* Light Theme Styles */
@@ -41,20 +53,20 @@ html.light ::-webkit-scrollbar-thumb {
   background: #2848D8;
 }
 
-/* Engineering Swiss Design Tokens */
+/* Smooth Studio Tokens */
 .studio-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.25rem 0.75rem;
-  border-radius: 6px;
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
   background-color: rgba(40, 72, 216, 0.08);
   border: 1px solid rgba(40, 72, 216, 0.2);
   color: #2848D8;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
+  font-weight: 500;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
 }
 html.dark .studio-badge {
@@ -68,18 +80,20 @@ html.dark .studio-badge {
   color: #FFFFFF;
   font-weight: 600;
   font-size: 0.875rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0.75rem 1.6rem;
+  border-radius: 10px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   border: 1px solid transparent;
+  box-shadow: 0 4px 14px rgba(40, 72, 216, 0.25);
 }
 .btn-primary:hover {
   background: #1D3BB3;
   transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(40, 72, 216, 0.35);
 }
 
 .btn-secondary {
@@ -87,10 +101,10 @@ html.dark .studio-badge {
   color: #111318;
   font-weight: 600;
   font-size: 0.875rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
+  padding: 0.75rem 1.6rem;
+  border-radius: 10px;
   border: 1px solid #DDE0E5;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -109,7 +123,7 @@ html.dark .btn-secondary {
 .studio-card {
   background: #FFFFFF;
   border: 1px solid #E2E8F0;
-  border-radius: 12px;
+  border-radius: 14px;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 html.dark .studio-card {
@@ -123,7 +137,7 @@ html.dark .studio-card {
 .studio-callout {
   border-left: 4px solid #2848D8;
   background: rgba(40, 72, 216, 0.04);
-  border-radius: 0 8px 8px 0;
+  border-radius: 0 12px 12px 0;
   padding: 1.25rem 1.5rem;
 }
 html.dark .studio-callout {
