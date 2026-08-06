@@ -1,31 +1,31 @@
 import React from 'react';
-import { ShieldCheck, Building2, HardHat, Compass, Users, CheckCircle2, Award } from 'lucide-react';
+import { ShieldCheck, Code, Cpu, Users, CheckCircle2, Terminal } from 'lucide-react';
 
 export const AboutSection = () => {
   const principles = [
     {
-      icon: Compass,
-      title: 'Architectural Excellence',
-      titleVi: 'Kiến Trúc Độc Bản & Đẳng Cấp',
-      desc: 'Mỗi bản thiết kế là một tác phẩm kiến trúc độc bản hòa hợp phong thủy, tối ưu hóa công năng sinh hoạt và thể hiện cá tính riêng của từng gia chủ.'
+      icon: Code,
+      title: 'Custom Architecture Only',
+      titleVi: 'Kiến Trúc Tùy Chỉnh 100%',
+      desc: 'Chúng tôi không sử dụng template có sẵn. Mọi dòng code và kiến trúc CSDL đều được thiết kế từ đầu tối ưu cho riêng bài toán kinh doanh của bạn.'
+    },
+    {
+      icon: Cpu,
+      title: 'Performance & Scale',
+      titleVi: 'Hiệu Năng & Khả Năng Mở Rộng',
+      desc: 'Áp dụng Server-Side Rendering (SSR), Caching 3 lớp (Redis/CDN), và REST/GraphQL API chuẩn hóa để chịu tải hàng trăm nghìn truy cập cùng lúc.'
     },
     {
       icon: ShieldCheck,
-      title: '100% Genuine Materials',
-      titleVi: 'Vật Tư Chính Hãng Minh Bạch',
-      desc: 'Cam kết 100% vật tư đầu vào đúng chủng loại thương hiệu đã ký kết (Thép Hòa Phát, Xi măng Hà Tiên, Gạch Tuynel, Sơn Inchem...). Phạt 200% nếu phát hiện vật tư giả.'
+      title: 'Security & Enterprise Standards',
+      titleVi: 'Bảo Mật Chuẩn Enterprise',
+      desc: 'Tuân thủ các tiêu chuẩn mã hóa dữ liệu nghiêm ngặt (ISO 27001, OWASP Top 10), bảo vệ dữ liệu người dùng và phòng chống tấn công mạng.'
     },
     {
-      icon: HardHat,
-      title: 'Rigorous Quality Control',
-      titleVi: 'Giám Sát & Thi Công Chuẩn Mực',
-      desc: 'Đội ngũ kỹ sư kết cấu nhiều năm kinh nghiệm túc trực giám sát hiện trường 24/7. Nghiệm thu nghiêm ngặt từng giai đoạn đan thép, đổ bê tông móng dầm sàn.'
-    },
-    {
-      icon: Award,
-      title: 'Zero Cost Overrun Guarantee',
-      titleVi: 'Cam Kết Không Phát Sinh Chi Phí',
-      desc: 'Dự toán báo giá trọn gói chi tiết minh bạch ngay từ hợp đồng ban đầu. Chủ nhà hoàn toàn yên tâm tâm lý tài chính không phát sinh bất kỳ khoản phí phụ nào.'
+      icon: Users,
+      title: 'Transparent Communication',
+      titleVi: 'Giao Tiếp Minh Bạch & Đồng Hành',
+      desc: 'Báo cáo tiến độ Sprint hàng tuần qua Slack/Jira, cấp quyền truy cập Staging environment theo thời gian thực và hỗ trợ kỹ thuật SLA 24/7 sau bàn giao.'
     }
   ];
 
@@ -36,13 +36,13 @@ export const AboutSection = () => {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs font-mono font-bold tracking-wider uppercase">
-            VỀ XÂY NHÀ ĐẸP
+            STUDIO PHILOSOPHY
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Giá Trị Cốt Lõi & Cam Kết Kỹ Thuật
+            Về Nexus Studio • Định Hướng Kỹ Thuật
           </h2>
           <p className="text-slate-400 text-base leading-relaxed">
-            Chúng tôi tự hào là đơn vị hàng đầu trong lĩnh vực thiết kế kiến trúc và thi công xây dựng trọn gói. Đặt sự an tâm của khách hàng làm thước đo thành công.
+            Chúng tôi không phải công ty gia công phần mềm giá rẻ đại trà. Nexus Studio là đối tác chiến lược về kỹ thuật phần mềm (Engineering Partner) đồng hành cùng Doanh nghiệp & SaaS Startup.
           </p>
         </div>
 
@@ -70,22 +70,22 @@ export const AboutSection = () => {
           })}
         </div>
 
-        {/* Specs Banner */}
+        {/* Studio Specs Banner */}
         <div className="studio-card-border p-8 rounded-2xl bg-studio-900 flex flex-col lg:flex-row items-center justify-between gap-8 border-brand-primary/30">
           <div className="space-y-3 max-w-xl">
-            <h3 className="text-xl font-bold text-white">Chính Sách Bảo Hành Công Trình 10 Năm</h3>
+            <h3 className="text-xl font-bold text-white">Cam Kết Chất Lượng Mã Nguồn & Hợp Đồng SLA</h3>
             <p className="text-xs text-slate-300 leading-relaxed">
-              Tất cả công trình do Xây Nhà Đẹp thi công trọn gói đều được cấp Sổ Bảo Hành Kết Cấu 10 năm và bảo trì kiểm tra định kỳ hàng năm hoàn toàn miễn phí.
+              Tất cả các dự án bàn giao bởi Nexus Studio đều đi kèm tài liệu mô tả kiến trúc API, bộ test tự động (Automated Tests) và cam kết bảo hành nâng cấp dài hạn theo tiêu chuẩn SLA.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-4 text-xs font-mono">
             <div className="p-3.5 rounded-xl bg-studio-950 border border-slate-800 text-slate-200 flex items-center gap-2 font-bold">
               <CheckCircle2 size={16} className="text-brand-primary" />
-              <span>Bảo Hành Kết Cấu 10 Năm</span>
+              <span>Full Source Code Transfer</span>
             </div>
             <div className="p-3.5 rounded-xl bg-studio-950 border border-slate-800 text-slate-200 flex items-center gap-2 font-bold">
               <CheckCircle2 size={16} className="text-brand-primary" />
-              <span>Miễn Phí Thiết Kế 100%</span>
+              <span>SOC2 & OWASP Security Ready</span>
             </div>
           </div>
         </div>

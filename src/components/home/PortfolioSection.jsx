@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { INITIAL_PROJECTS } from '../../data/seedData';
 import { ProjectDetailModal } from './ProjectDetailModal';
-import { ArrowUpRight, Filter, Building2 } from 'lucide-react';
+import { ArrowUpRight, Filter, Code2 } from 'lucide-react';
 
 export const PortfolioSection = ({ onOpenRequestModal }) => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedProject, setSelectedProject] = useState(null);
 
   const categories = [
-    { id: 'All', label: 'Tất cả Công Trình' },
-    { id: 'Biệt thự', label: 'Biệt Thự Cao Cấp' },
-    { id: 'Nhà phố', label: 'Nhà Phố Hiện Đại' },
-    { id: 'Căn hộ', label: 'Căn Hộ & Penthouse' },
-    { id: 'Nội thất', label: 'Nội Thất Sang Trọng' }
+    { id: 'All', label: 'Tất cả Dự Án' },
+    { id: 'SaaS', label: 'SaaS Platform' },
+    { id: 'Dashboard', label: 'Enterprise Dashboard' },
+    { id: 'E-commerce', label: 'E-commerce App' },
+    { id: 'Business Web App', label: 'Business App' }
   ];
 
   const filteredProjects = selectedCategory === 'All'
@@ -27,13 +27,13 @@ export const PortfolioSection = ({ onOpenRequestModal }) => {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="space-y-3 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs font-mono font-bold tracking-wider uppercase">
-              CÔNG TRÌNH TIÊU BIỂU
+              FEATURED CASE STUDIES
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Dự Án Thiết Kế & Thi Công Hoàn Thành
+              Các Dự Án Web App Tiêu Biểu
             </h2>
             <p className="text-slate-400 text-sm leading-relaxed">
-              Khám phá các công trình thực tế Xây Nhà Đẹp đã trực tiếp thiết kế, thi công và bàn giao trọn gói chìa khóa trao tay cho chủ nhà.
+              Khám phá các sản phẩm phần mềm chúng tôi đã trực tiếp nghiên cứu, thiết kế kiến trúc và lập trình cho khách hàng doanh nghiệp.
             </p>
           </div>
 
@@ -100,7 +100,7 @@ export const PortfolioSection = ({ onOpenRequestModal }) => {
                   {project.shortDesc}
                 </p>
 
-                {/* Specifications Pills */}
+                {/* Tech Stack Pills */}
                 <div className="pt-4 border-t border-white/5 flex flex-wrap gap-1.5">
                   {project.techStack.map((tech, idx) => (
                     <span

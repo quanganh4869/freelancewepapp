@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRequests } from '../../context/RequestContext';
 import { useAuth } from '../../context/AuthContext';
-import { X, ArrowRight, ArrowLeft, CheckCircle2, AlertCircle, Loader2, Sparkles, Building, Mail, Phone, User, Home, Ruler, DollarSign, Clock, FileText } from 'lucide-react';
+import { X, ArrowRight, ArrowLeft, CheckCircle2, AlertCircle, Loader2, Sparkles, Building, Mail, Phone, User, Globe, Code, DollarSign, Clock, FileText } from 'lucide-react';
 
 export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) => {
   const { submitProjectRequest } = useRequests();
@@ -20,17 +20,17 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
     clientCompany: currentUser?.company || '',
 
     // Step 2: Project Info
-    projectName: initialService ? `Dự án ${initialService}` : 'Xây dựng nhà phố 3 tầng',
-    projectType: 'Biệt thự', // Default
+    projectName: initialService ? `Dự án ${initialService}` : 'Phát triển Web App tùy chỉnh',
+    projectType: 'Business Web App', // Default
     projectDescription: initialService ? `Yêu cầu tư vấn & báo giá chi tiết cho dịch vụ: ${initialService}` : '',
-    mainFeatures: 'Bao gồm 3 phòng ngủ, 1 phòng khách, 1 phòng bếp, sân vườn & gara ô tô',
-    targetUsers: 'Gia đình 4 thành viên',
+    mainFeatures: 'Đăng nhập/Đăng ký, Phân quyền Role, WebSockets, Payment Gateway',
+    targetUsers: 'Khách hàng doanh nghiệp & Nhân viên nội bộ',
 
     // Step 3: Budget & Timeline & Tech
-    budget: '$30,000 – $50,000',
-    timeline: '2–3 tháng',
+    budget: '$3,000 – $5,000',
+    timeline: '1–2 months',
     referenceWebsites: '',
-    preferredTechnologies: 'Gỗ An Cường, Thép Hòa Phát, Bê tông thương phẩm M250',
+    preferredTechnologies: 'React 18, Node.js, PostgreSQL, Redis',
     additionalNotes: ''
   });
 
@@ -60,9 +60,9 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
     }
 
     if (currentStep === 2) {
-      if (!formData.projectName.trim()) newErrors.projectName = 'Vui lòng nhập Tên / Địa điểm công trình.';
+      if (!formData.projectName.trim()) newErrors.projectName = 'Vui lòng nhập Tên dự án.';
       if (!formData.projectDescription.trim() || formData.projectDescription.length < 10) {
-        newErrors.projectDescription = 'Mô tả nhu cầu cần ít nhất 10 ký tự.';
+        newErrors.projectDescription = 'Mô tả dự án cần ít nhất 10 ký tự.';
       }
     }
 
@@ -108,11 +108,11 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
         <div className="bg-studio-950 px-6 py-4 border-b border-white/10 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center text-brand-primary shadow-glow-primary">
-              <Home size={18} />
+              <Sparkles size={18} />
             </div>
             <div>
-              <h3 className="text-base font-bold text-white">Yêu Cầu Tư Vấn & Báo Giá Xây Nhà</h3>
-              <p className="text-xs text-slate-400 font-mono">Xây Nhà Đẹp Studio • Khảo sát & Dự toán miễn phí</p>
+              <h3 className="text-base font-bold text-white">Start Your Web App Project</h3>
+              <p className="text-xs text-slate-400 font-mono">Nexus Digital Product Studio • Báo giá trong 24h</p>
             </div>
           </div>
 
@@ -134,14 +134,14 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
             <div className="space-y-2 max-w-md mx-auto">
               <h3 className="text-2xl font-extrabold text-white">Gửi Yêu Cầu Thành Công!</h3>
               <p className="text-slate-300 text-sm leading-relaxed">
-                Mã hồ sơ yêu cầu là <span className="font-mono font-bold text-brand-primary px-2 py-0.5 rounded bg-brand-primary/10 border border-brand-primary/20">{submitSuccess.id}</span>. Đội ngũ KTS Xây Nhà Đẹp sẽ gọi điện tư vấn trực tiếp trong vòng 24h.
+                Mã yêu cầu của bạn là <span className="font-mono font-bold text-brand-primary px-2 py-0.5 rounded bg-brand-primary/10 border border-brand-primary/20">{submitSuccess.id}</span>. Đội ngũ Nexus Studio sẽ xem xét và phản hồi trong vòng 24h.
               </p>
             </div>
 
             <div className="p-4 rounded-xl bg-studio-950 border border-white/5 text-xs text-slate-400 space-y-1 font-mono text-left max-w-md mx-auto">
-              <div className="flex justify-between"><span>Công trình:</span> <span className="text-white font-bold">{submitSuccess.projectName}</span></div>
-              <div className="flex justify-between"><span>Hạng mục:</span> <span className="text-slate-200">{submitSuccess.projectType}</span></div>
-              <div className="flex justify-between"><span>Trạng thái:</span> <span className="text-amber-400 font-bold">Pending (Đang Tiếp Nhận)</span></div>
+              <div className="flex justify-between"><span>Dự án:</span> <span className="text-white font-bold">{submitSuccess.projectName}</span></div>
+              <div className="flex justify-between"><span>Loại hình:</span> <span className="text-slate-200">{submitSuccess.projectType}</span></div>
+              <div className="flex justify-between"><span>Trạng thái:</span> <span className="text-amber-400 font-bold">Pending (Đang Chờ Duyệt)</span></div>
             </div>
 
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -159,17 +159,17 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
             <div className="bg-studio-950/60 px-6 py-3 border-b border-white/5 flex items-center justify-between text-xs font-mono">
               <div className={`flex items-center gap-2 ${step >= 1 ? 'text-brand-primary font-bold' : 'text-slate-500'}`}>
                 <span className="w-5 h-5 rounded-full bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center text-[10px]">1</span>
-                <span className="hidden sm:inline">Thông tin chủ nhà</span>
+                <span className="hidden sm:inline">Thông tin liên hệ</span>
               </div>
               <div className="text-slate-700">→</div>
               <div className={`flex items-center gap-2 ${step >= 2 ? 'text-brand-primary font-bold' : 'text-slate-500'}`}>
                 <span className="w-5 h-5 rounded-full bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center text-[10px]">2</span>
-                <span className="hidden sm:inline">Công trình</span>
+                <span className="hidden sm:inline">Chi tiết Web App</span>
               </div>
               <div className="text-slate-700">→</div>
               <div className={`flex items-center gap-2 ${step >= 3 ? 'text-brand-primary font-bold' : 'text-slate-500'}`}>
                 <span className="w-5 h-5 rounded-full bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center text-[10px]">3</span>
-                <span className="hidden sm:inline">Ngân sách & Tiến độ</span>
+                <span className="hidden sm:inline">Ngân sách & Công nghệ</span>
               </div>
               <div className="text-slate-700">→</div>
               <div className={`flex items-center gap-2 ${step >= 4 ? 'text-brand-primary font-bold' : 'text-slate-500'}`}>
@@ -185,14 +185,14 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
               {step === 1 && (
                 <div className="space-y-4 animate-fadeIn">
                   <div className="border-b border-white/5 pb-3">
-                    <h4 className="text-base font-bold text-white">1. Thông tin liên hệ gia chủ</h4>
-                    <p className="text-xs text-slate-400">Cho chúng tôi biết thông tin để KTS liên hệ tư vấn trực tiếp.</p>
+                    <h4 className="text-base font-bold text-white">1. Thông tin cá nhân & Doanh nghiệp</h4>
+                    <p className="text-xs text-slate-400">Cho chúng tôi biết thông tin để KTS/Kỹ sư liên hệ tư vấn.</p>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-mono text-slate-300 mb-1">
-                        Họ và Tên chủ nhà <span className="text-rose-400">*</span>
+                        Họ và Tên <span className="text-rose-400">*</span>
                       </label>
                       <div className="relative">
                         <User size={15} className="absolute left-3 top-3 text-slate-500" />
@@ -209,7 +209,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
 
                     <div>
                       <label className="block text-xs font-mono text-slate-300 mb-1">
-                        Email nhận bản vẽ / báo giá <span className="text-rose-400">*</span>
+                        Email liên hệ <span className="text-rose-400">*</span>
                       </label>
                       <div className="relative">
                         <Mail size={15} className="absolute left-3 top-3 text-slate-500" />
@@ -217,7 +217,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                           type="email"
                           value={formData.clientEmail}
                           onChange={(e) => handleInputChange('clientEmail', e.target.value)}
-                          placeholder="name@gmail.com"
+                          placeholder="name@company.com"
                           className="w-full bg-studio-950 border border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors"
                         />
                       </div>
@@ -228,7 +228,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-mono text-slate-300 mb-1">
-                        Số điện thoại / Zalo tư vấn
+                        Số điện thoại / Zalo <span className="text-slate-500 text-[10px]">(Tùy chọn)</span>
                       </label>
                       <div className="relative">
                         <Phone size={15} className="absolute left-3 top-3 text-slate-500" />
@@ -236,7 +236,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                           type="text"
                           value={formData.clientPhone}
                           onChange={(e) => handleInputChange('clientPhone', e.target.value)}
-                          placeholder="0908 123 456"
+                          placeholder="+84 908 123 456"
                           className="w-full bg-studio-950 border border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors"
                         />
                       </div>
@@ -244,7 +244,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
 
                     <div>
                       <label className="block text-xs font-mono text-slate-300 mb-1">
-                        Địa chỉ mảnh đất / Công trình
+                        Công ty / Tổ chức <span className="text-slate-500 text-[10px]">(Tùy chọn)</span>
                       </label>
                       <div className="relative">
                         <Building size={15} className="absolute left-3 top-3 text-slate-500" />
@@ -252,7 +252,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                           type="text"
                           value={formData.clientCompany}
                           onChange={(e) => handleInputChange('clientCompany', e.target.value)}
-                          placeholder="Quận 7, TP. Hồ Chí Minh"
+                          placeholder="Công ty TNHH Tech Asia"
                           className="w-full bg-studio-950 border border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors"
                         />
                       </div>
@@ -265,20 +265,20 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
               {step === 2 && (
                 <div className="space-y-4 animate-fadeIn">
                   <div className="border-b border-white/5 pb-3">
-                    <h4 className="text-base font-bold text-white">2. Chi tiết công trình cần thi công</h4>
-                    <p className="text-xs text-slate-400">Chọn loại hình, quy mô và diện tích dự kiến.</p>
+                    <h4 className="text-base font-bold text-white">2. Thông tin dự án Web App</h4>
+                    <p className="text-xs text-slate-400">Mô tả tổng quan bài toán và mục tiêu phần mềm.</p>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-mono text-slate-300 mb-1">
-                        Tên / Tóm tắt công trình <span className="text-rose-400">*</span>
+                        Tên dự án <span className="text-rose-400">*</span>
                       </label>
                       <input
                         type="text"
                         value={formData.projectName}
                         onChange={(e) => handleInputChange('projectName', e.target.value)}
-                        placeholder="VD: Xây mới biệt thự vườn 3 tầng"
+                        placeholder="VD: Nền tảng SaaS OmniDesk B2B"
                         className="w-full bg-studio-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors"
                       />
                       {errors.projectName && <p className="text-[11px] text-rose-400 mt-1">{errors.projectName}</p>}
@@ -286,31 +286,32 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
 
                     <div>
                       <label className="block text-xs font-mono text-slate-300 mb-1">
-                        Loại hình công trình <span className="text-rose-400">*</span>
+                        Loại dự án (Project Type) <span className="text-rose-400">*</span>
                       </label>
                       <select
                         value={formData.projectType}
                         onChange={(e) => handleInputChange('projectType', e.target.value)}
                         className="w-full bg-studio-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-brand-primary transition-colors font-semibold"
                       >
-                        <option value="Biệt thự">Biệt Thự Cao Cấp</option>
-                        <option value="Nhà phố">Nhà Phố Hiện Đại</option>
-                        <option value="Căn hộ">Nội Thất Căn Hộ / Penthouse</option>
-                        <option value="Nội thất">Thi Thiết Kế Nội Thất Khách Sạn / Villa</option>
-                        <option value="Sửa chữa">Sửa Chữa & Cải Tạo Nhà</option>
+                        <option value="Business Web App">Business Web App (Ứng dụng doanh nghiệp)</option>
+                        <option value="SaaS">SaaS Platform (Phần mềm dịch vụ)</option>
+                        <option value="E-commerce">E-commerce Web App (Thương mại điện tử)</option>
+                        <option value="Dashboard">Dashboard & Admin System</option>
+                        <option value="Internal Tool">Internal Workflow Tool (Công cụ nội bộ)</option>
+                        <option value="Other">Khác (Other)</option>
                       </select>
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-xs font-mono text-slate-300 mb-1">
-                      Mô tả mong muốn kiến trúc & Công năng <span className="text-rose-400">*</span>
+                      Mô tả bài toán & Mục tiêu phần mềm <span className="text-rose-400">*</span>
                     </label>
                     <textarea
                       rows={3}
                       value={formData.projectDescription}
                       onChange={(e) => handleInputChange('projectDescription', e.target.value)}
-                      placeholder="Mô tả phong cách kiến trúc mong muốn (Hiện đại, Tân cổ điển, Indochine...), số phòng ngủ, sân vườn, hồ bơi..."
+                      placeholder="Mô tả ý tưởng, đối tượng người dùng và mục tiêu bạn muốn ứng dụng Web App đạt được..."
                       className="w-full bg-studio-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors resize-none"
                     />
                     {errors.projectDescription && <p className="text-[11px] text-rose-400 mt-1">{errors.projectDescription}</p>}
@@ -319,26 +320,26 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-mono text-slate-300 mb-1">
-                        Các tiện ích chính (Hồ bơi, Thang máy, Sân vườn...)
+                        Các tính năng chính (Main Features)
                       </label>
                       <textarea
                         rows={2}
                         value={formData.mainFeatures}
                         onChange={(e) => handleInputChange('mainFeatures', e.target.value)}
-                        placeholder="VD: Thang máy gia đình, Hồ bơi vô cực, Sân thượng BBQ..."
+                        placeholder="VD: Phân quyền Role, WebSockets Chat, Cổng thanh toán..."
                         className="w-full bg-studio-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors resize-none"
                       />
                     </div>
 
                     <div>
                       <label className="block text-xs font-mono text-slate-300 mb-1">
-                        Thành viên gia đình / Người sử dụng
+                        Đối tượng sử dụng (Target Users)
                       </label>
                       <textarea
                         rows={2}
                         value={formData.targetUsers}
                         onChange={(e) => handleInputChange('targetUsers', e.target.value)}
-                        placeholder="VD: Gia đình 6 người (3 thế hệ ông bà, bố mẹ, 2 con)..."
+                        placeholder="VD: Đội ngũ nhân viên kinh doanh, Khách hàng B2B..."
                         className="w-full bg-studio-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors resize-none"
                       />
                     </div>
@@ -350,17 +351,17 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
               {step === 3 && (
                 <div className="space-y-5 animate-fadeIn">
                   <div className="border-b border-white/5 pb-3">
-                    <h4 className="text-base font-bold text-white">3. Ngân sách đầu tư & Tiến độ dự kiến</h4>
-                    <p className="text-xs text-slate-400">Ước tính khoảng chi phí đầu tư và thời gian mong muốn khởi công.</p>
+                    <h4 className="text-base font-bold text-white">3. Ngân sách, Thời gian & Công nghệ</h4>
+                    <p className="text-xs text-slate-400">Ước tính khoảng ngân sách đầu tư và kỳ hạn bàn giao dự kiến.</p>
                   </div>
 
                   {/* Budget Options Tiers */}
                   <div>
                     <label className="block text-xs font-mono text-slate-300 mb-2">
-                      Ngân sách đầu tư dự kiến (VNĐ / USD)
+                      Mức ngân sách dự kiến (Estimated Budget)
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                      {['Dưới $10,000', '$10,000 – $30,000', '$30,000 – $50,000', '$50,000 – $100,000', 'Trên $100,000'].map((b) => (
+                      {['Dưới $1,000', '$1,000 – $3,000', '$3,000 – $5,000', '$5,000 – $10,000', 'Trên $10,000'].map((b) => (
                         <button
                           key={b}
                           type="button"
@@ -380,10 +381,10 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                   {/* Timeline Selection */}
                   <div>
                     <label className="block text-xs font-mono text-slate-300 mb-2">
-                      Thời gian dự kiến bàn giao
+                      Thời gian dự kiến bàn giao (Timeline)
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                      {['Càng sớm càng tốt', '1–2 tháng', '2–3 tháng', '3–6 tháng', 'Linh hoạt'].map((t) => (
+                      {['ASAP', '1–2 tháng', '2–3 tháng', '3–6 tháng', 'Linh hoạt'].map((t) => (
                         <button
                           key={t}
                           type="button"
@@ -402,13 +403,13 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
 
                   <div>
                     <label className="block text-xs font-mono text-slate-300 mb-1">
-                      Vật liệu ưu tiên (Thép Hòa Phát, Gỗ An Cường, Đá Marble...)
+                      Công nghệ ưu tiên (React 18, Node.js, PostgreSQL, Docker...)
                     </label>
                     <input
                       type="text"
                       value={formData.preferredTechnologies}
                       onChange={(e) => handleInputChange('preferredTechnologies', e.target.value)}
-                      placeholder="Gỗ An Cường, Bê tông tươi M250, Nhôm XINGFA..."
+                      placeholder="React, Next.js, Node.js, PostgreSQL..."
                       className="w-full bg-studio-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary transition-colors font-mono"
                     />
                   </div>
@@ -420,36 +421,36 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                 <div className="space-y-4 animate-fadeIn">
                   <div className="border-b border-white/5 pb-3">
                     <h4 className="text-base font-bold text-white">4. Xác nhận thông tin hồ sơ</h4>
-                    <p className="text-xs text-slate-400">Rà soát lại yêu cầu trước khi gửi cho Xây Nhà Đẹp Studio.</p>
+                    <p className="text-xs text-slate-400">Rà soát lại yêu cầu trước khi gửi cho Nexus Studio.</p>
                   </div>
 
                   <div className="p-4 rounded-xl bg-studio-950 border border-white/5 space-y-3 text-xs text-slate-300">
                     <div className="grid grid-cols-2 gap-2 border-b border-slate-800 pb-2">
-                      <div><span className="text-slate-500 font-mono">Gia chủ:</span> <p className="font-bold text-white">{formData.clientName}</p></div>
+                      <div><span className="text-slate-500 font-mono">Khách hàng:</span> <p className="font-bold text-white">{formData.clientName}</p></div>
                       <div><span className="text-slate-500 font-mono">Email:</span> <p className="text-white">{formData.clientEmail}</p></div>
                       <div><span className="text-slate-500 font-mono">SĐT / Zalo:</span> <p className="text-white">{formData.clientPhone || 'N/A'}</p></div>
-                      <div><span className="text-slate-500 font-mono">Địa chỉ:</span> <p className="text-white">{formData.clientCompany || 'N/A'}</p></div>
+                      <div><span className="text-slate-500 font-mono">Công ty:</span> <p className="text-white">{formData.clientCompany || 'N/A'}</p></div>
                     </div>
 
                     <div className="space-y-1">
-                      <span className="text-slate-500 font-mono">Công trình:</span>
+                      <span className="text-slate-500 font-mono">Dự án:</span>
                       <p className="font-bold text-brand-primary">{formData.projectName} ({formData.projectType})</p>
                     </div>
 
                     <div className="space-y-1">
-                      <span className="text-slate-500 font-mono">Mô tả mong muốn:</span>
+                      <span className="text-slate-500 font-mono">Mô tả bài toán:</span>
                       <p className="text-slate-300 italic">{formData.projectDescription}</p>
                     </div>
 
                     <div className="grid grid-cols-2 gap-2 border-t border-slate-800 pt-2">
                       <div><span className="text-slate-500 font-mono">Ngân sách dự kiến:</span> <p className="font-bold text-emerald-400 font-mono">{formData.budget}</p></div>
-                      <div><span className="text-slate-500 font-mono">Thời gian thi công:</span> <p className="font-bold text-white font-mono">{formData.timeline}</p></div>
+                      <div><span className="text-slate-500 font-mono">Kỳ hạn bàn giao:</span> <p className="font-bold text-white font-mono">{formData.timeline}</p></div>
                     </div>
                   </div>
 
                   <div className="p-3 rounded-xl bg-brand-primary/10 border border-brand-primary/20 text-xs text-slate-300 flex items-start gap-2">
                     <Sparkles size={16} className="text-brand-primary shrink-0 mt-0.5" />
-                    <span>Sau khi gửi, thông tin hồ sơ của bạn sẽ tự động đồng bộ vào cổng theo dõi Client & Admin Control Center.</span>
+                    <span>Sau khi gửi, thông tin dự án của bạn sẽ lập tức hiển thị trong danh sách theo dõi của Admin & Client Portal.</span>
                   </div>
                 </div>
               )}
@@ -487,11 +488,11 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                     {isSubmitting ? (
                       <>
                         <Loader2 size={16} className="animate-spin" />
-                        <span>Đang gửi hồ sơ...</span>
+                        <span>Đang gửi yêu cầu...</span>
                       </>
                     ) : (
                       <>
-                        <span>Gửi Hồ Sơ Yêu Cầu Báo Giá</span>
+                        <span>Gửi Yêu Cầu Báo Giá</span>
                         <ArrowRight size={16} />
                       </>
                     )}

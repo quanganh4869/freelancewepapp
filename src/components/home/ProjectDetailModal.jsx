@@ -70,9 +70,9 @@ export const ProjectDetailModal = ({ project, onClose, onOpenRequestModal }) => 
             </div>
           )}
 
-          {/* Specifications Tags */}
+          {/* Tech Stack Tags */}
           <div>
-            <p className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-3">Thông số quy mô & Vật liệu</p>
+            <p className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-3">Công nghệ sử dụng (Tech Stack)</p>
             <div className="flex flex-wrap gap-2">
               {project.techStack.map((tech, idx) => (
                 <span
@@ -90,11 +90,11 @@ export const ProjectDetailModal = ({ project, onClose, onOpenRequestModal }) => 
             <button
               onClick={() => {
                 onClose();
-                onOpenRequestModal(`Tư vấn thi công công trình tương tự ${project.title}`);
+                onOpenRequestModal(`Tư vấn phát triển Web App tương tự ${project.title}`);
               }}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-brand-primary hover:bg-brand-hover text-white text-xs font-bold shadow-glow-primary transition-all ml-auto"
             >
-              <span>Yêu Cầu Tư Vấn Mẫu Nhà Này</span>
+              <span>Xây Dựng Web App Tương Tự</span>
             </button>
           </div>
 

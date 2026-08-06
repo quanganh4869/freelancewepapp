@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { Home, ArrowRight, Menu, X, Shield, LayoutDashboard, LogIn, LogOut, PhoneCall, Mail, Clock, Calculator } from 'lucide-react';
+import { Layers, ArrowRight, Menu, X, Shield, LayoutDashboard, LogIn, LogOut, PhoneCall, Mail, Clock } from 'lucide-react';
 
 export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
   const { activeRole, currentUser, logout } = useAuth();
@@ -8,7 +8,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
 
   const navItems = [
     { label: 'Dịch Vụ', href: '#services', id: 'services' },
-    { label: 'Báo Giá', href: '#cost-estimator', id: 'cost-estimator' },
+    { label: 'Tính Báo Giá', href: '#cost-estimator', id: 'cost-estimator' },
     { label: 'Quy Trình', href: '#process', id: 'process' },
     { label: 'Dự Án', href: '#portfolio', id: 'portfolio' },
     { label: 'Về Chúng Tôi', href: '#about', id: 'about' },
@@ -18,19 +18,19 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
   return (
     <div className="sticky top-0 z-40 font-sans">
       
-      {/* Top Contact Bar */}
+      {/* Top Contact Bar with Mona Media Visual Styling */}
       <div className="bg-brand-dark font-mono text-xs text-slate-300 border-b border-white/5 py-2 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
           
           <div className="flex items-center gap-6">
             <a href="tel:0908123456" className="flex items-center gap-1.5 hover:text-brand-primary transition-colors text-white font-bold">
               <PhoneCall size={13} className="text-brand-primary" />
-              <span>Hotline: 0908.123.456</span>
+              <span>Hotline: +84 (0) 908 123 456</span>
             </a>
             <span className="hidden sm:inline text-slate-600">|</span>
             <div className="hidden sm:flex items-center gap-1.5">
               <Mail size={13} className="text-brand-primary" />
-              <span>Email: info@xaynhadep.vn</span>
+              <span>Email: hello@nexusstudio.dev</span>
             </div>
             <span className="hidden md:inline text-slate-600">|</span>
             <div className="hidden md:flex items-center gap-1.5">
@@ -73,13 +73,13 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
             {/* Logo */}
             <a href="#" className="flex items-center gap-3 group">
               <div className="w-10 h-10 rounded-xl bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-all shadow-glow-primary">
-                <Home size={22} className="transition-transform group-hover:scale-110" />
+                <Layers size={22} className="transition-transform group-hover:scale-110" />
               </div>
               <div>
                 <span className="font-extrabold text-lg tracking-tight text-white flex items-center gap-1.5">
-                  XÂY NHÀ ĐẸP <span className="text-brand-primary font-mono text-[10px] font-bold uppercase px-1.5 py-0.5 rounded bg-brand-primary/10 border border-brand-primary/20">Studio</span>
+                  NEXUS <span className="text-brand-primary font-mono text-[10px] font-bold uppercase px-1.5 py-0.5 rounded bg-brand-primary/10 border border-brand-primary/20">Studio</span>
                 </span>
-                <p className="text-[10px] text-slate-400 font-mono tracking-wider uppercase">Thiết Kế & Thi Công Trọn Gói</p>
+                <p className="text-[10px] text-slate-400 font-mono tracking-wider uppercase">Web App Architecture & Engineering</p>
               </div>
             </a>
 
@@ -122,7 +122,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
                 onClick={() => onOpenRequestModal()}
                 className="flex items-center gap-2 bg-brand-primary hover:bg-brand-hover text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow-glow-primary transition-all transform hover:-translate-y-0.5"
               >
-                <span>Yêu Cầu Báo Giá</span>
+                <span>Bắt Đầu Dự Án</span>
                 <ArrowRight size={16} />
               </button>
             </div>
@@ -133,7 +133,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
                 onClick={() => onOpenRequestModal()}
                 className="bg-brand-primary text-white text-xs font-bold px-3 py-2 rounded-lg"
               >
-                Báo Giá
+                Bắt Đầu
               </button>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -170,7 +170,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
                 }}
                 className="w-full flex items-center justify-center gap-2 bg-brand-primary text-white font-bold py-3 rounded-xl shadow-glow-primary text-xs"
               >
-                <span>Yêu Cầu Báo Giá Xây Nhà</span>
+                <span>Bắt Đầu Dự Án Web App</span>
                 <ArrowRight size={16} />
               </button>
             </div>
