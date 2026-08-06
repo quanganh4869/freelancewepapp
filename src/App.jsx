@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { AuthProvider, useAuth, ADMIN_EMAIL } from './context/AuthContext';
 import { RequestProvider } from './context/RequestContext';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
+import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import { ErrorBoundary } from './components/layout/ErrorBoundary';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
@@ -25,6 +27,7 @@ import { AdminDashboard } from './components/admin/AdminDashboard';
 
 const MainAppContent = () => {
   const { activeRole, currentUser } = useAuth();
+  const { isDark } = useTheme();
 
   const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -44,7 +47,9 @@ const MainAppContent = () => {
   const isAuthorizedAdmin = activeRole === 'ADMIN' && currentUser?.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase();
 
   return (
-    <div className="min-h-screen bg-studio-950 text-slate-200 flex flex-col font-sans selection:bg-brand-primary selection:text-white">
+    <div className={`min-h-screen flex flex-col font-sans selection:bg-brand-primary selection:text-white transition-colors duration-300 ${
+      isDark ? 'bg-studio-950 text-slate-200' : 'bg-slate-50 text-slate-800'
+    }`}>
       
       {/* Main Navbar */}
       <Navbar
@@ -117,11 +122,15 @@ const MainAppContent = () => {
 export function App() {
   return (
     <ErrorBoundary>
-      <AuthProvider>
-        <RequestProvider>
-          <MainAppContent />
-        </RequestProvider>
-      </AuthProvider>
+      <ThemeProvider>
+        <LanguageProvider>
+          <AuthProvider>
+            <RequestProvider>
+              <MainAppContent />
+            </RequestProvider>
+          </AuthProvider>
+        </LanguageProvider>
+      </ThemeProvider>
     </ErrorBoundary>
   );
 }

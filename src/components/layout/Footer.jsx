@@ -1,7 +1,10 @@
 import React from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import { Layers, Mail, Phone, MapPin, Github, Linkedin, Twitter, Dribbble, ShieldCheck } from 'lucide-react';
 
 export const Footer = ({ onOpenRequestModal }) => {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-studio-950 border-t border-white/10 pt-16 pb-12 text-slate-400 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -21,7 +24,7 @@ export const Footer = ({ onOpenRequestModal }) => {
               </div>
             </div>
             <p className="text-xs text-slate-400 max-w-md leading-relaxed">
-              Studio chuyên nghiệp thiết kế và phát triển Web App cao cấp cho Doanh nghiệp & SaaS Startup. Chuyển hóa ý tưởng kinh doanh thành phần mềm thực tế, tối ưu hiệu năng và quy mô dài hạn.
+              {t('footerDesc')}
             </p>
             <div className="flex items-center gap-2 text-xs text-brand-primary font-mono bg-brand-primary/10 border border-brand-primary/20 px-3 py-1.5 rounded-lg w-fit font-bold">
               <ShieldCheck size={14} />
@@ -50,7 +53,7 @@ export const Footer = ({ onOpenRequestModal }) => {
               <li><a href="#process" className="hover:text-white transition-colors">Quy Trình 7 Bước</a></li>
               <li><a href="#portfolio" className="hover:text-white transition-colors">Dự Án Tiêu Biểu</a></li>
               <li><a href="#why-us" className="hover:text-white transition-colors">Ưu Thế Kỹ Thuật</a></li>
-              <li><button onClick={() => onOpenRequestModal()} className="text-brand-primary hover:underline font-bold">Bắt Đầu Dự Án</button></li>
+              <li><button onClick={() => onOpenRequestModal()} className="text-brand-primary hover:underline font-bold">{t('startProject')}</button></li>
             </ul>
           </div>
 
@@ -77,7 +80,7 @@ export const Footer = ({ onOpenRequestModal }) => {
 
         {/* Bottom copyright */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-          <p>© {new Date().getFullYear()} NEXUS LABS STUDIO • Mona Media UX/UI Style Standard. Tất cả quyền được bảo lưu.</p>
+          <p>© {new Date().getFullYear()} NEXUS LABS STUDIO. {t('copyright')}</p>
           <div className="flex items-center gap-4">
             <a href="#" className="hover:text-white transition-colors"><Github size={16} /></a>
             <a href="#" className="hover:text-white transition-colors"><Linkedin size={16} /></a>

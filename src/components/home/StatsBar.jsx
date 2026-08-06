@@ -1,31 +1,34 @@
 import React from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import { Code2, ShieldCheck, Rocket, Award } from 'lucide-react';
 
 export const StatsBar = () => {
+  const { t } = useLanguage();
+
   const stats = [
     {
       icon: Code2,
       number: '100%',
-      label: 'Custom Code Architecture',
-      sub: 'Mã nguồn tùy chỉnh độc quyền 100%'
+      label: t('statsCustomCode'),
+      sub: t('statsCustomSub')
     },
     {
       icon: ShieldCheck,
       number: '99.9%',
-      label: 'Uptime SLA Guarantee',
-      sub: 'Cam kết bảo trì hệ thống 24/7'
+      label: t('statsUptime'),
+      sub: t('statsUptimeSub')
     },
     {
       icon: Rocket,
       number: '500+',
-      label: 'Web Apps Delivered',
-      sub: 'Sản phẩm phần mềm thực tế'
+      label: t('statsApps'),
+      sub: t('statsAppsSub')
     },
     {
       icon: Award,
       number: '15+',
-      label: 'Years Experience',
-      sub: 'Kinh nghiệm lập trình Enterprise'
+      label: t('statsExp'),
+      sub: t('statsExpSub')
     }
   ];
 

@@ -1,7 +1,10 @@
 import React from 'react';
-import { ShieldCheck, Code, Cpu, Users, CheckCircle2, Terminal } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
+import { ShieldCheck, Code, Cpu, Users, CheckCircle2 } from 'lucide-react';
 
 export const AboutSection = () => {
+  const { t } = useLanguage();
+
   const principles = [
     {
       icon: Code,
@@ -36,13 +39,13 @@ export const AboutSection = () => {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs font-mono font-bold tracking-wider uppercase">
-            STUDIO PHILOSOPHY
+            {t('aboutTag')}
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Về Nexus Studio • Định Hướng Kỹ Thuật
+            {t('aboutTitle')}
           </h2>
           <p className="text-slate-400 text-base leading-relaxed">
-            Chúng tôi không phải công ty gia công phần mềm giá rẻ đại trà. Nexus Studio là đối tác chiến lược về kỹ thuật phần mềm (Engineering Partner) đồng hành cùng Doanh nghiệp & SaaS Startup.
+            {t('aboutDesc')}
           </p>
         </div>
 
@@ -53,7 +56,7 @@ export const AboutSection = () => {
             return (
               <div
                 key={idx}
-                className="studio-card-border p-8 rounded-2xl space-y-4 hover:border-brand-primary/40 transition-all duration-300 bg-studio-900"
+                className="mona-card p-8 rounded-2xl space-y-4"
               >
                 <div className="w-12 h-12 rounded-xl bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center text-brand-primary shadow-glow-primary">
                   <IconComp size={24} />
@@ -73,7 +76,7 @@ export const AboutSection = () => {
         {/* Studio Specs Banner */}
         <div className="studio-card-border p-8 rounded-2xl bg-studio-900 flex flex-col lg:flex-row items-center justify-between gap-8 border-brand-primary/30">
           <div className="space-y-3 max-w-xl">
-            <h3 className="text-xl font-bold text-white">Cam Kết Chất Lượng Mã Nguồn & Hợp Đồng SLA</h3>
+            <h3 className="text-xl font-bold text-white">{t('aboutSlaTitle')}</h3>
             <p className="text-xs text-slate-300 leading-relaxed">
               Tất cả các dự án bàn giao bởi Nexus Studio đều đi kèm tài liệu mô tả kiến trúc API, bộ test tự động (Automated Tests) và cam kết bảo hành nâng cấp dài hạn theo tiêu chuẩn SLA.
             </p>

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { ArrowRight, CheckCircle2, Terminal, Code2, Cpu, PhoneCall, Award, Play } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
+import { ArrowRight, CheckCircle2, Terminal, Code2, Cpu, PhoneCall } from 'lucide-react';
 
 export const HeroSection = ({ onOpenRequestModal }) => {
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState('architecture');
 
   return (
@@ -20,23 +22,23 @@ export const HeroSection = ({ onOpenRequestModal }) => {
             {/* Mona Style Badge */}
             <div className="mona-badge">
               <span className="w-2.5 h-2.5 rounded-full bg-brand-primary animate-pulse"></span>
-              <span>NEXUS DIGITAL PRODUCT STUDIO</span>
+              <span>{t('heroStatus')}</span>
               <span className="text-slate-600">|</span>
-              <span className="text-white">Q3/Q4 Booking Open</span>
+              <span className="text-white">{t('heroBooking')}</span>
             </div>
 
             {/* Main Headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.15]">
-              Biến ý tưởng của bạn thành <br className="hidden sm:inline" />
+              {t('heroTitlePart1')} <br className="hidden sm:inline" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary via-rose-400 to-amber-400">
-                Web App thực tế.
+                {t('heroTitlePart2')}
               </span>
             </h1>
 
             {/* Sub-headline Callout Box */}
             <div className="mona-callout">
               <p className="text-base sm:text-lg text-slate-200 font-medium leading-relaxed">
-                Chúng tôi là Digital Product Studio chuyên thiết kế & phát triển Web App cao cấp cho Doanh nghiệp & Startup. Tập trung vào <strong className="text-white font-bold">hiệu năng, kiến trúc mở rộng và bảo mật Enterprise.</strong>
+                {t('heroSubtitle')} <strong className="text-white font-bold">{t('heroSubHighlight')}</strong>
               </p>
             </div>
 
@@ -44,19 +46,19 @@ export const HeroSection = ({ onOpenRequestModal }) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs text-slate-300 font-medium">
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 size={16} className="text-brand-primary shrink-0" />
-                <span>Mã nguồn tùy chỉnh <strong className="text-white">Custom Code 100%</strong></span>
+                <span>{t('heroCheck1')}</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 size={16} className="text-brand-primary shrink-0" />
-                <span>Bảo mật chuẩn <strong className="text-white">Enterprise & SOC2 Ready</strong></span>
+                <span>{t('heroCheck2')}</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 size={16} className="text-brand-primary shrink-0" />
-                <span>Cam kết Uptime SLA <strong className="text-white">99.9% Uptime SLA</strong></span>
+                <span>{t('heroCheck3')}</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 size={16} className="text-brand-primary shrink-0" />
-                <span>Bàn giao MVP nhanh trong <strong className="text-white">3–8 tuần</strong></span>
+                <span>{t('heroCheck4')}</span>
               </div>
             </div>
 
@@ -66,7 +68,7 @@ export const HeroSection = ({ onOpenRequestModal }) => {
                 onClick={() => onOpenRequestModal()}
                 className="mona-btn-primary"
               >
-                <span>Bắt Đầu Dự Án Web App</span>
+                <span>{t('btnStart')}</span>
                 <ArrowRight size={18} />
               </button>
 
@@ -75,7 +77,7 @@ export const HeroSection = ({ onOpenRequestModal }) => {
                 className="mona-btn-secondary"
               >
                 <Cpu size={16} className="text-brand-primary" />
-                <span>Tính Chi Phí Lập Trình</span>
+                <span>{t('btnCalc')}</span>
               </a>
             </div>
 
@@ -212,13 +214,13 @@ export const HeroSection = ({ onOpenRequestModal }) => {
 
             </div>
 
-            {/* Floating Hotline Badge in Mona style */}
+            {/* Floating Hotline Badge */}
             <div className="absolute -bottom-6 -left-6 studio-card-border p-3.5 rounded-2xl bg-studio-900 border-brand-primary/50 shadow-2xl flex items-center gap-3 backdrop-blur-xl">
               <div className="w-10 h-10 rounded-xl bg-brand-primary text-white flex items-center justify-center shrink-0 shadow-glow-primary animate-pulse-slow">
                 <PhoneCall size={18} />
               </div>
               <div>
-                <p className="text-[10px] font-mono text-slate-400 uppercase font-bold">Tư Vấn Kỹ Thuật 24/7</p>
+                <p className="text-[10px] font-mono text-slate-400 uppercase font-bold">{t('techSupport')}</p>
                 <a href="tel:0908123456" className="text-sm font-extrabold text-white hover:text-brand-primary font-mono transition-colors block">
                   0908.123.456
                 </a>

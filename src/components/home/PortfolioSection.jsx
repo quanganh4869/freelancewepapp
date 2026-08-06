@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { INITIAL_PROJECTS } from '../../data/seedData';
+import { useLanguage } from '../../context/LanguageContext';
 import { ProjectDetailModal } from './ProjectDetailModal';
-import { ArrowUpRight, Filter, Code2 } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 export const PortfolioSection = ({ onOpenRequestModal }) => {
+  const { t } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedProject, setSelectedProject] = useState(null);
 
   const categories = [
-    { id: 'All', label: 'Tất cả Dự Án' },
+    { id: 'All', label: t('allProjects') },
     { id: 'SaaS', label: 'SaaS Platform' },
     { id: 'Dashboard', label: 'Enterprise Dashboard' },
     { id: 'E-commerce', label: 'E-commerce App' },
@@ -27,13 +29,13 @@ export const PortfolioSection = ({ onOpenRequestModal }) => {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="space-y-3 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs font-mono font-bold tracking-wider uppercase">
-              FEATURED CASE STUDIES
+              {t('portfolioTag')}
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Các Dự Án Web App Tiêu Biểu
+              {t('portfolioTitle')}
             </h2>
             <p className="text-slate-400 text-sm leading-relaxed">
-              Khám phá các sản phẩm phần mềm chúng tôi đã trực tiếp nghiên cứu, thiết kế kiến trúc và lập trình cho khách hàng doanh nghiệp.
+              {t('portfolioDesc')}
             </p>
           </div>
 
@@ -61,7 +63,7 @@ export const PortfolioSection = ({ onOpenRequestModal }) => {
             <div
               key={project.id}
               onClick={() => setSelectedProject(project)}
-              className="studio-card-border rounded-2xl overflow-hidden group cursor-pointer border-white/10 hover:border-brand-primary/40 transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between bg-studio-900"
+              className="mona-card overflow-hidden group cursor-pointer flex flex-col justify-between"
             >
               {/* Thumbnail Container */}
               <div className="relative h-64 sm:h-72 overflow-hidden bg-studio-950">

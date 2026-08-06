@@ -1,7 +1,10 @@
 import React from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import { ShieldCheck, Code, Sparkles, Cpu, MessageSquare, Headphones } from 'lucide-react';
 
 export const WhyUsSection = () => {
+  const { t } = useLanguage();
+
   const advantages = [
     {
       icon: Code,
@@ -48,13 +51,13 @@ export const WhyUsSection = () => {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs font-mono font-bold tracking-wider uppercase">
-            WHY CHOOSE NEXUS
+            {t('whyUsTag')}
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Tại Sao Các Thương Hiệu Tin Tưởng Chúng Tôi?
+            {t('whyUsTitle')}
           </h2>
           <p className="text-slate-400 text-base leading-relaxed">
-            Chúng tôi đặt chất lượng kỹ thuật, tính thẩm mỹ và độ tin cậy của phần mềm lên hàng đầu.
+            {t('whyUsDesc')}
           </p>
         </div>
 
@@ -65,7 +68,7 @@ export const WhyUsSection = () => {
             return (
               <div
                 key={idx}
-                className="p-8 rounded-2xl bg-studio-950 border border-white/5 hover:border-brand-primary/40 transition-all duration-300 group"
+                className="mona-card p-8 rounded-2xl group"
               >
                 <div className="w-12 h-12 rounded-xl bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-all mb-6 shadow-glow-primary">
                   <Icon size={24} />

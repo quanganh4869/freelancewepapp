@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { Calculator, ArrowRight, CheckCircle2, ShieldCheck, PhoneCall, Sparkles, Cpu, Layers } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
+import { Calculator, ArrowRight, CheckCircle2, PhoneCall, Cpu } from 'lucide-react';
 
 export const CostEstimator = ({ onOpenRequestModal }) => {
+  const { t } = useLanguage();
+
   const [appType, setAppType] = useState('saas');
   const [scale, setScale] = useState('medium');
   const [featuresCount, setFeaturesCount] = useState(8);
@@ -23,9 +26,9 @@ export const CostEstimator = ({ onOpenRequestModal }) => {
   };
 
   const slaAddons = {
-    'basic': { label: 'Bảo Hành Tiêu Chuẩn 6 Tháng', price: 0 },
-    'standard': { label: 'Bảo Trì & SLA 99.9% 12 Tháng', price: 800 },
-    'dedicated': { label: 'Đội Ngũ Kỹ Thuật Độc Quyền 24/7', price: 1800 }
+    'basic': { label: 'Standard 6-Month Support', price: 0 },
+    'standard': { label: '12-Month SLA 99.9% Maintenance', price: 800 },
+    'dedicated': { label: '24/7 Dedicated Tech Team', price: 1800 }
   };
 
   const baseRate = appTypeRates[appType].rate;
@@ -47,13 +50,13 @@ export const CostEstimator = ({ onOpenRequestModal }) => {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/30 text-brand-primary text-xs font-mono font-bold tracking-wider uppercase">
-            <Calculator size={14} /> CÔNG CỤ TÍNH CHI PHÍ WEB APP
+            <Calculator size={14} /> {t('calcTag')}
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Ước Tính Ngân Sách Phát Triển Web App
+            {t('calcTitle')}
           </h2>
           <p className="text-slate-400 text-base leading-relaxed">
-            Dự toán chi phí thiết kế & lập trình phần mềm tùy chỉnh nhanh chóng trong 30 giây. Báo giá minh bạch, cam kết mã nguồn sạch và bảo mật cao.
+            {t('calcDesc')}
           </p>
         </div>
 
@@ -65,7 +68,7 @@ export const CostEstimator = ({ onOpenRequestModal }) => {
             {/* App Type Selector */}
             <div>
               <label className="block text-xs font-mono font-bold text-slate-300 uppercase tracking-wider mb-3">
-                1. Chọn loại hình ứng dụng Web App:
+                {t('calcStep1')}
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {Object.keys(appTypeRates).map((key) => (
@@ -89,7 +92,7 @@ export const CostEstimator = ({ onOpenRequestModal }) => {
             {/* Scale Selector */}
             <div>
               <label className="block text-xs font-mono font-bold text-slate-300 uppercase tracking-wider mb-3">
-                2. Quy mô người dùng dự kiến:
+                {t('calcStep2')}
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {Object.keys(scaleFactors).map((s) => (
@@ -112,8 +115,8 @@ export const CostEstimator = ({ onOpenRequestModal }) => {
             {/* Features Range */}
             <div>
               <div className="flex justify-between items-center mb-2">
-                <label className="text-xs font-mono font-bold text-slate-300 uppercase">3. Số lượng tính năng cốt lõi (MVP Features):</label>
-                <span className="font-mono text-sm font-bold text-brand-primary bg-brand-primary/10 px-2.5 py-0.5 rounded border border-brand-primary/20">{featuresCount} Tính năng</span>
+                <label className="text-xs font-mono font-bold text-slate-300 uppercase">{t('calcStep3')}</label>
+                <span className="font-mono text-sm font-bold text-brand-primary bg-brand-primary/10 px-2.5 py-0.5 rounded border border-brand-primary/20">{featuresCount} MVP Features</span>
               </div>
               <input
                 type="range"
@@ -129,7 +132,7 @@ export const CostEstimator = ({ onOpenRequestModal }) => {
             {/* SLA Tier */}
             <div>
               <label className="block text-xs font-mono font-bold text-slate-300 uppercase tracking-wider mb-3">
-                4. Cấp độ bảo trì & Đồng hành SLA:
+                {t('calcStep4')}
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {Object.keys(slaAddons).map((t) => (
@@ -155,52 +158,49 @@ export const CostEstimator = ({ onOpenRequestModal }) => {
           <div className="lg:col-span-5 studio-card-border p-6 sm:p-8 rounded-2xl bg-studio-950 border-brand-primary/30 space-y-6 sticky top-24">
             
             <div className="border-b border-white/10 pb-4">
-              <span className="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider">TỔNG THỜI GIAN PHÁT TRIỂN DỰ KIẾN</span>
+              <span className="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider">{t('calcTotalTime')}</span>
               <p className="text-3xl font-extrabold text-white font-mono mt-1">
-                {Math.round(4 + featuresCount * 0.4)} <span className="text-sm font-normal text-slate-400">tuần làm việc (Weeks)</span>
+                {Math.round(4 + featuresCount * 0.4)} <span className="text-sm font-normal text-slate-400">Weeks</span>
               </p>
             </div>
 
             <div className="space-y-3 text-xs font-mono">
               <div className="flex justify-between py-2 border-b border-slate-800 text-slate-300">
-                <span>Khung ứng dụng ({appTypeRates[appType].name}):</span>
+                <span>App Base ({appTypeRates[appType].name}):</span>
                 <span className="text-white font-bold">${baseRate}</span>
               </div>
               <div className="flex justify-between py-2 border-b border-slate-800 text-slate-300">
-                <span>Hệ số quy mô ({scaleFactors[scale].label}):</span>
+                <span>Scale Multiplier ({scaleFactors[scale].label}):</span>
                 <span className="text-white font-bold">x{scaleMultiplier}</span>
               </div>
               <div className="flex justify-between py-2 border-b border-slate-800 text-slate-300">
-                <span>{featuresCount} tính năng tích hợp:</span>
+                <span>{featuresCount} Integrated Features:</span>
                 <span className="text-white font-bold">${featureCost}</span>
               </div>
               <div className="flex justify-between py-2 border-b border-slate-800 text-slate-300">
-                <span>Gói bảo trì SLA:</span>
+                <span>SLA Support Addon:</span>
                 <span className="text-emerald-400 font-bold">+${slaCost}</span>
               </div>
             </div>
 
             {/* Total Highlight Box */}
             <div className="p-5 rounded-2xl bg-brand-primary/10 border border-brand-primary/30 space-y-2 text-center">
-              <span className="text-xs font-mono font-bold text-brand-primary uppercase">DỰ TOÁN NGÂN SÁCH LẬP TRÌNH</span>
+              <span className="text-xs font-mono font-bold text-brand-primary uppercase">{t('calcTotalBudget')}</span>
               <p className="text-3xl sm:text-4xl font-extrabold text-white font-mono tracking-tight">
                 ${totalEstimatedUSD.toLocaleString()}
               </p>
               <p className="text-xs text-slate-300 font-mono font-bold">
                 (~ {formatVND(totalEstimatedVND)})
               </p>
-              <p className="text-[11px] text-slate-400 italic">
-                * Báo giá sơ bộ cho sản phẩm chuẩn Clean Code. Đã bao gồm thiết kế UI/UX & bàn giao mã nguồn 100%.
-              </p>
             </div>
 
             {/* CTAs */}
             <div className="space-y-3">
               <button
-                onClick={() => onOpenRequestModal(`Web App ${appTypeRates[appType].name} (${featuresCount} tính năng, quy mô ${scaleFactors[scale].label})`)}
-                className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-brand-primary hover:bg-brand-hover text-white text-xs font-bold shadow-glow-primary transition-all transform hover:-translate-y-0.5"
+                onClick={() => onOpenRequestModal(`Web App ${appTypeRates[appType].name} (${featuresCount} features, scale ${scaleFactors[scale].label})`)}
+                className="mona-btn-primary w-full py-3.5"
               >
-                <span>Nhận Báo Giá Chi Tiết Theo Yêu Cầu</span>
+                <span>{t('calcGetQuote')}</span>
                 <ArrowRight size={16} />
               </button>
 
@@ -209,7 +209,7 @@ export const CostEstimator = ({ onOpenRequestModal }) => {
                 className="w-full flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-studio-900 border border-slate-800 hover:border-slate-700 text-slate-300 text-xs font-semibold transition-all"
               >
                 <PhoneCall size={15} className="text-brand-primary" />
-                <span>Tư Vấn Kỹ Thuật Trực Tiếp: 0908.123.456</span>
+                <span>Hotline: +84 (0) 908 123 456</span>
               </a>
             </div>
 
