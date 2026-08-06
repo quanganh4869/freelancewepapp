@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layers, Mail, Phone, MapPin, Github, Linkedin, Twitter, Dribbble, CheckCircle2 } from 'lucide-react';
+import { Home, Mail, Phone, MapPin, Facebook, Youtube, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
 export const Footer = ({ onOpenRequestModal }) => {
   return (
@@ -10,57 +10,61 @@ export const Footer = ({ onOpenRequestModal }) => {
           {/* Col 1: Studio Identity */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center text-brand-primary">
-                <Layers size={20} />
+              <div className="w-10 h-10 rounded-xl bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center text-brand-primary shadow-glow-primary">
+                <Home size={22} />
               </div>
-              <span className="font-extrabold text-xl tracking-tight text-white">
-                NEXUS <span className="text-brand-primary font-mono text-xs uppercase px-1.5 py-0.5 rounded bg-brand-primary/10 border border-brand-primary/20">Studio</span>
-              </span>
+              <div>
+                <span className="font-extrabold text-xl tracking-tight text-white flex items-center gap-1.5">
+                  XÂY NHÀ ĐẸP <span className="text-brand-primary font-mono text-[10px] font-bold uppercase px-1.5 py-0.5 rounded bg-brand-primary/10 border border-brand-primary/20">Studio</span>
+                </span>
+                <p className="text-[10px] text-slate-400 font-mono tracking-wider uppercase">Thiết Kế & Thi Công Trọn Gói</p>
+              </div>
             </div>
-            <p className="text-sm text-slate-400 max-w-md leading-relaxed">
-              Studio chuyên nghiệp thiết kế và phát triển Web App cao cấp cho Doanh nghiệp & SaaS Startup. Chuyển hóa ý tưởng kinh doanh thành phần mềm thực tế, tối ưu hiệu năng và quy mô dài hạn.
+            <p className="text-xs text-slate-400 max-w-md leading-relaxed">
+              Công ty hàng đầu chuyên thiết kế kiến trúc, thi công biệt thự, nhà phố, căn hộ trọn gói chìa khóa trao tay. Cam kết vật tư chính hãng 100%, không phát sinh chi phí và bảo hành công trình lên đến 10 năm.
             </p>
-            <div className="flex items-center gap-2 text-xs text-emerald-400 font-mono bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-lg w-fit">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span>All Engineering Systems Operational (99.9% Uptime)</span>
+            <div className="flex items-center gap-2 text-xs text-brand-primary font-mono bg-brand-primary/10 border border-brand-primary/20 px-3 py-1.5 rounded-lg w-fit font-bold">
+              <ShieldCheck size={14} />
+              <span>Chính Sách Bảo Hành Kết Cấu 10 Năm</span>
             </div>
           </div>
 
           {/* Col 2: Services */}
           <div>
-            <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider mb-4">Dịch vụ chính</h4>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#services" className="hover:text-white transition-colors">Custom Web App</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">SaaS Development</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Dashboard & Admin</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">E-commerce App</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">UI/UX Architecture</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">API & Integrations</a></li>
+            <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider mb-4">Hạng Mục Thi Công</h4>
+            <ul className="space-y-2 text-xs">
+              <li><a href="#services" className="hover:text-white transition-colors">Xây Nhà Trọn Gói</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Thiết Kế Kiến Trúc 3D</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Thiết Kế & Thi Công Nội Thất</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Sửa Chữa & Cải Tạo Nhà</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Thi Công Phần Thô</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Giám Sát Xây Dựng</a></li>
             </ul>
           </div>
 
           {/* Col 3: Company */}
           <div>
-            <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider mb-4">Studio</h4>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#process" className="hover:text-white transition-colors">Quy trình làm việc</a></li>
-              <li><a href="#portfolio" className="hover:text-white transition-colors">Dự án tiêu biểu</a></li>
-              <li><a href="#why-us" className="hover:text-white transition-colors">Tại sao chọn Nexus</a></li>
-              <li><button onClick={onOpenRequestModal} className="text-brand-primary hover:underline font-medium">Bắt đầu dự án</button></li>
+            <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider mb-4">Về Chúng Tôi</h4>
+            <ul className="space-y-2 text-xs">
+              <li><a href="#cost-estimator" className="hover:text-white transition-colors">Tính Chi Phí Xây Nhà</a></li>
+              <li><a href="#process" className="hover:text-white transition-colors">Quy Trình 6 Bước</a></li>
+              <li><a href="#portfolio" className="hover:text-white transition-colors">Dự Án Tiêu Biểu</a></li>
+              <li><a href="#why-us" className="hover:text-white transition-colors">Ưu Thế Xây Nhà Đẹp</a></li>
+              <li><button onClick={() => onOpenRequestModal()} className="text-brand-primary hover:underline font-bold">Yêu Cầu Báo Giá</button></li>
             </ul>
           </div>
 
           {/* Col 4: Contact */}
           <div>
-            <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider mb-4">Liên hệ</h4>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-center gap-2.5 text-slate-300">
-                <Mail size={15} className="text-brand-primary shrink-0" />
-                <span>hello@nexusstudio.dev</span>
-              </li>
+            <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider mb-4">Thông Tin Liên Hệ</h4>
+            <ul className="space-y-3 text-xs">
               <li className="flex items-center gap-2.5 text-slate-300">
                 <Phone size={15} className="text-brand-primary shrink-0" />
-                <span>+84 (0) 908 123 456</span>
+                <a href="tel:0908123456" className="hover:text-white font-bold font-mono">0908.123.456</a>
+              </li>
+              <li className="flex items-center gap-2.5 text-slate-300">
+                <Mail size={15} className="text-brand-primary shrink-0" />
+                <span>info@xaynhadep.vn</span>
               </li>
               <li className="flex items-start gap-2.5 text-slate-300">
                 <MapPin size={15} className="text-brand-primary shrink-0 mt-0.5" />
@@ -73,12 +77,10 @@ export const Footer = ({ onOpenRequestModal }) => {
 
         {/* Bottom copyright */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-          <p>© {new Date().getFullYear()} NEXUS LABS STUDIO. Tất cả quyền được bảo lưu.</p>
+          <p>© {new Date().getFullYear()} XÂY NHÀ ĐẸP STUDIO • Monamedia UX/UI Design Standard. Tất cả quyền được bảo lưu.</p>
           <div className="flex items-center gap-4">
-            <a href="#" className="hover:text-white transition-colors"><Github size={16} /></a>
-            <a href="#" className="hover:text-white transition-colors"><Linkedin size={16} /></a>
-            <a href="#" className="hover:text-white transition-colors"><Twitter size={16} /></a>
-            <a href="#" className="hover:text-white transition-colors"><Dribbble size={16} /></a>
+            <a href="#" className="hover:text-white transition-colors"><Facebook size={16} /></a>
+            <a href="#" className="hover:text-white transition-colors"><Youtube size={16} /></a>
           </div>
         </div>
       </div>

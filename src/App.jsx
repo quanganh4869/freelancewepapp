@@ -4,11 +4,12 @@ import { RequestProvider } from './context/RequestContext';
 import { ErrorBoundary } from './components/layout/ErrorBoundary';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
-import { Shield, Lock } from 'lucide-react';
+import { Shield } from 'lucide-react';
 
 // Home Sections
 import { HeroSection } from './components/home/HeroSection';
 import { ServicesSection } from './components/home/ServicesSection';
+import { CostEstimator } from './components/home/CostEstimator';
 import { ProcessSection } from './components/home/ProcessSection';
 import { PortfolioSection } from './components/home/PortfolioSection';
 import { AboutSection } from './components/home/AboutSection';
@@ -79,8 +80,9 @@ const MainAppContent = () => {
           <>
             <HeroSection onOpenRequestModal={() => handleOpenRequestModal()} />
             <ServicesSection onSelectService={(service) => handleOpenRequestModal(service)} />
-            <ProcessSection onOpenRequestModal={() => handleOpenRequestModal()} />
-            <PortfolioSection onOpenRequestModal={() => handleOpenRequestModal()} />
+            <CostEstimator onOpenRequestModal={(initial) => handleOpenRequestModal(initial)} />
+            <ProcessSection onOpenRequestModal={(initial) => handleOpenRequestModal(initial)} />
+            <PortfolioSection onOpenRequestModal={(initial) => handleOpenRequestModal(initial)} />
             <AboutSection />
             <WhyUsSection />
             <CallToAction onOpenRequestModal={() => handleOpenRequestModal()} />
@@ -88,7 +90,7 @@ const MainAppContent = () => {
         )}
       </main>
 
-      {/* Main Footer (Hidden on Admin dashboard for high efficiency layout) */}
+      {/* Main Footer */}
       {!isAuthorizedAdmin && (
         <Footer onOpenRequestModal={() => handleOpenRequestModal()} />
       )}

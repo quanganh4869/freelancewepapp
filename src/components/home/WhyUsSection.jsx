@@ -1,60 +1,60 @@
 import React from 'react';
-import { ShieldCheck, Code, Sparkles, Cpu, MessageSquare, Headphones } from 'lucide-react';
+import { ShieldCheck, HardHat, Compass, Sparkles, Award, PhoneCall } from 'lucide-react';
 
 export const WhyUsSection = () => {
   const advantages = [
     {
-      icon: Code,
-      title: 'Custom Solutions',
-      titleVi: 'Giải Pháp Độc Quyền 100%',
-      desc: 'Nói KHÔNG với template dựng sẵn hoặc CMS cồng kềnh. Mỗi dòng code Web App đều được viết tay chính xác theo logic kinh doanh của bạn.'
-    },
-    {
-      icon: Cpu,
-      title: 'Modern Technology',
-      titleVi: 'Công Nghệ Hiện Đại Nhất',
-      desc: 'Sử dụng React 18, Next.js, Node.js, PostgreSQL và Docker. Đảm bảo tốc độ tải dưới 1 giây, bảo mật cao và tương thích chuẩn OpenAPI.'
-    },
-    {
-      icon: Sparkles,
-      title: 'Clean UI/UX Architecture',
-      titleVi: 'Thiết Kế UI/UX Chuẩn Studio',
-      desc: 'Giao diện sang trọng, đẳng cấp chuẩn Editorial & Digital Product Studio. Tập trung tối đa hóa tỷ lệ chuyển đổi và trải nghiệm thao tác người dùng.'
+      icon: Compass,
+      title: 'Custom Architecture',
+      titleVi: 'Kiến Trúc Độc Bản 100%',
+      desc: 'Nói KHÔNG với thiết kế rập khuôn. Mỗi ngôi nhà đều được KTS nghiên cứu ánh sáng, hướng gió và phong thủy riêng cho gia chủ.'
     },
     {
       icon: ShieldCheck,
-      title: 'Scalable Architecture',
-      titleVi: 'Kiến Trúc Sẵn Sàng Mở Rộng',
-      desc: 'Hệ thống thiết kế theo mô hình Microservices/Modular, giúp bạn dễ dàng nâng cấp thêm tính năng mà không phải đập đi xây lại.'
+      title: 'Genuine Materials',
+      titleVi: 'Vật Tư Chính Hãng Minh Bạch',
+      desc: 'Cam kết 100% vật tư đầu vào đúng thương hiệu niêm yết trong hợp đồng (Thép Hòa Phát, Xi măng Hà Tiên, Gạch Tuynel...)'
     },
     {
-      icon: MessageSquare,
-      title: 'Transparent Communication',
-      titleVi: 'Giao Tiếp Minh Bạch 24/7',
-      desc: 'Báo cáo tiến độ theo tuần qua Slack & Jira. Bạn được cập nhật liên tục từng Sprint và thử nghiệm tính năng ngay khi hoàn tất.'
+      icon: HardHat,
+      title: '24/7 Site Supervision',
+      titleVi: 'Giám Sát Hiện Trường 24/7',
+      desc: 'Kỹ sư công trình thường trực tại hiện trường kiểm tra từng khâu đan thép móng, đổ bê tông và cập nhật tiến độ hàng ngày.'
     },
     {
-      icon: Headphones,
-      title: 'Long-term Support & SLA',
-      titleVi: 'Đồng Hành & Bảo Trì Dài Hạn',
-      desc: 'Cam kết Uptime 99.9%. Đội ngũ kỹ thuật túc trực xử lý sự cố tức thì và bảo hành hệ thống lâu dài sau khi triển khai.'
+      icon: Award,
+      title: 'Zero Extra Fee Guarantee',
+      titleVi: 'Tuyệt Đối Không Phát Sinh Phí',
+      desc: 'Dự toán báo giá chính xác 100% ngay từ đầu. Cam kết không nảy sinh chi phí vô lý trong suốt quá trình thi công.'
+    },
+    {
+      icon: Sparkles,
+      title: 'Free 3D Design Package',
+      titleVi: 'Tặng 100% Bản Vẽ Thiết Kế',
+      desc: 'Miễn phí hoàn toàn bộ hồ sơ thiết kế 3D kiến trúc & kết cấu khi chủ nhà ký hợp đồng thi công trọn gói.'
+    },
+    {
+      icon: PhoneCall,
+      title: '10-Year Warranty SLA',
+      titleVi: 'Bảo Hành Kết Cấu 10 Năm',
+      desc: 'Sổ bảo hành kết cấu 10 năm kèm chính sách kiểm tra bảo trì định kỳ hàng năm hoàn toàn miễn phí.'
     }
   ];
 
   return (
-    <section id="why-us" className="py-24 bg-studio-900 relative border-b border-white/5">
+    <section id="why-us" className="py-24 bg-studio-900 relative border-b border-white/5 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-xs font-mono font-medium">
-            WHY CHOOSE NEXUS
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs font-mono font-bold tracking-wider uppercase">
+            ƯU THẾ NỔI BẬT
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Tại sao các thương hiệu tin tưởng chúng tôi?
+            Tại Sao Chọn Xây Nhà Đẹp Studio?
           </h2>
           <p className="text-slate-400 text-base leading-relaxed">
-            Chúng tôi đặt chất lượng kỹ thuật, tính thẩm mỹ và độ tin cậy của phần mềm lên hàng đầu.
+            Chúng tôi tự hào trao gửi những ngôi nhà kiên cố, sang trọng và bền vững cùng thời gian.
           </p>
         </div>
 
