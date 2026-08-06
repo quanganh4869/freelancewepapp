@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useRequests } from '../../context/RequestContext';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
-import { X, ArrowRight, ArrowLeft, CheckCircle2, Loader2, Sparkles, Building, Mail, Phone, User, ShieldCheck, Check, FileText, Globe, Layers, DollarSign, Clock, HelpCircle } from 'lucide-react';
+import { X, ArrowRight, ArrowLeft, CheckCircle2, Loader2, Sparkles, Building, Mail, Phone, User, ShieldCheck, Check } from 'lucide-react';
 
 export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) => {
   const { submitProjectRequest } = useRequests();
@@ -40,7 +40,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
     referenceWebsites: '',
 
     // Step 4: Budget, Timeline & SLA
-    budget: '$3,500 – $7,000 (~ 88–175 triệu VNĐ)',
+    budget: '30 – 50 Triệu VNĐ',
     timeline: '2–3 tháng',
     slaTier: '12 Tháng SLA 99.9% Maintenance (Khuyên dùng)',
     needNda: 'Có (Cần ký thỏa thuận bảo mật NDA trước khi chia sẻ tài liệu)',
@@ -150,7 +150,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
             </div>
             <div>
               <h3 className="text-base font-bold">Khởi Tạo Hồ Sơ Yêu Cầu Dự Án Web App</h3>
-              <p className="text-xs text-slate-500 font-mono">Nexus Engineering Studio • Cam kết tư vấn trong 24h</p>
+              <p className="text-xs text-slate-500 font-mono">Nexus Engineering Studio • Báo giá nhanh trong 24h</p>
             </div>
           </div>
 
@@ -500,21 +500,21 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                 <div className="space-y-5 animate-fadeIn">
                   <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
                     <h4 className="text-base font-bold">4. Ngân sách, Kỳ hạn bàn giao & Cam kết bảo mật NDA</h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Xác định khung ngân sách đầu tư dự kiến để Nexus Studio cân đối giải pháp phù hợp.</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">Xác định khung ngân sách đầu tư dự kiến để Nexus Studio cân đối giải pháp phù hợp thị trường Việt Nam.</p>
                   </div>
 
-                  {/* Budget Options */}
+                  {/* Budget Options in VNĐ */}
                   <div>
                     <label className="block text-xs font-mono font-semibold mb-2 text-slate-700 dark:text-slate-300">
-                      Khoảng ngân sách đầu tư dự kiến
+                      Khoảng ngân sách đầu tư dự kiến (VNĐ)
                     </label>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {[
-                        'Dưới $1,500 (~ 38 triệu VNĐ)',
-                        '$1,500 – $3,500 (~ 38–88 triệu VNĐ)',
-                        '$3,500 – $7,000 (~ 88–175 triệu VNĐ)',
-                        '$7,000 – $15,000 (~ 175–375 triệu VNĐ)',
-                        'Trên $15,000 (> 375 triệu VNĐ)'
+                        'Dưới 15 Triệu VNĐ',
+                        '15 – 30 Triệu VNĐ',
+                        '30 – 50 Triệu VNĐ',
+                        '50 – 100 Triệu VNĐ',
+                        'Trên 100 Triệu VNĐ'
                       ].map((b) => (
                         <button
                           key={b}

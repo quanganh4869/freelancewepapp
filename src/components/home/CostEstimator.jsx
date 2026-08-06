@@ -13,35 +13,39 @@ export const CostEstimator = ({ onOpenRequestModal }) => {
   const [slaTier, setSlaTier] = useState('standard');
 
   const appTypeRates = {
-    'business': { name: 'Business Web App', rate: 2500 },
-    'saas': { name: 'SaaS Platform (MVP)', rate: 4500 },
-    'dashboard': { name: 'Enterprise Dashboard', rate: 3500 },
-    'ecommerce': { name: 'E-commerce Web App', rate: 3800 },
-    'internal': { name: 'Internal Workflow Tool', rate: 2800 }
+    'business': { name: 'Business Web App', rate: 12000000, label: '12 Triệu VNĐ' },
+    'saas': { name: 'SaaS Platform (MVP)', rate: 25000000, label: '25 Triệu VNĐ' },
+    'dashboard': { name: 'Enterprise Dashboard', rate: 18000000, label: '18 Triệu VNĐ' },
+    'ecommerce': { name: 'E-commerce Web App', rate: 15000000, label: '15 Triệu VNĐ' },
+    'internal': { name: 'Internal Workflow Tool', rate: 14000000, label: '14 Triệu VNĐ' }
   };
 
   const scaleFactors = {
-    'small': { label: 'Startup (1K Users)', factor: 1.0 },
-    'medium': { label: 'Growth (10K Users)', factor: 1.25 },
-    'enterprise': { label: 'Enterprise (100K+ Users)', factor: 1.6 }
+    'small': { label: 'Startup (Dưới 1K Users)', factor: 1.0 },
+    'medium': { label: 'Growth (1K - 10K Users)', factor: 1.2 },
+    'enterprise': { label: 'Enterprise (Trên 10K Users)', factor: 1.4 }
   };
 
   const slaAddons = {
-    'basic': { label: 'Standard 6-Month Support', price: 0 },
-    'standard': { label: '12-Month SLA 99.9% Maintenance', price: 800 },
-    'dedicated': { label: '24/7 Dedicated Tech Team', price: 1800 }
+    'basic': { label: 'Bảo hành 6 tháng (Miễn phí)', price: 0 },
+    'standard': { label: 'Gói 12 Tháng SLA 99.9% Maintenance', price: 3000000 },
+    'dedicated': { label: 'Đội kỹ thuật túc trực riêng 24/7', price: 8000000 }
   };
 
   const baseRate = appTypeRates[appType].rate;
   const scaleMultiplier = scaleFactors[scale].factor;
-  const featureCost = featuresCount * 250;
+  const featureCost = featuresCount * 1000000;
   const slaCost = slaAddons[slaTier].price;
 
-  const totalEstimatedUSD = Math.round((baseRate * scaleMultiplier) + featureCost + slaCost);
-  const totalEstimatedVND = totalEstimatedUSD * 25400;
+  const totalEstimatedVND = Math.round((baseRate * scaleMultiplier) + featureCost + slaCost);
 
   const formatVND = (amount) => {
     return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+  };
+
+  const formatMillionVND = (amount) => {
+    const millions = (amount / 1000000).toFixed(1).replace('.0', '');
+    return `${millions} Triệu VNĐ`;
   };
 
   return (
@@ -60,7 +64,7 @@ export const CostEstimator = ({ onOpenRequestModal }) => {
             {t('calcTitle')}
           </h2>
           <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            {t('calcDesc')}
+            Ước tính ngân sách phát triển ứng dụng Web App tùy chỉnh phù hợp với nhu cầu doanh nghiệp Việt Nam. Chi phí minh bạch, mã nguồn sạch và bảo mật cao.
           </p>
         </div>
 
@@ -86,8 +90,11 @@ export const CostEstimator = ({ onOpenRequestModal }) => {
                         : 'border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-300'
                     }`}
                   >
-                    <span>{appTypeRates[key].name}</span>
-                    {appType === key && <CheckCircle2 size={15} className="text-brand-primary shrink-0 ml-2" />}
+                    <div>
+                      <p>{appTypeRates[key].name}</p>
+                      <p className="text-[11px] font-mono text-slate-500 font-normal mt-0.5">{appTypeRates[key].label}</p>
+                    </div>
+                    {appType === key && <CheckCircle2 size={16} className="text-brand-primary shrink-0 ml-2" />}
                   </button>
                 ))}
               </div>
@@ -168,43 +175,43 @@ export const CostEstimator = ({ onOpenRequestModal }) => {
                 {t('calcTotalTime')}
               </span>
               <p className="text-3xl font-extrabold font-mono mt-1 text-slate-900 dark:text-white">
-                {Math.round(4 + featuresCount * 0.4)} <span className="text-sm font-normal text-slate-500">Weeks</span>
+                {Math.round(3 + featuresCount * 0.3)} <span className="text-sm font-normal text-slate-500">Tuần</span>
               </p>
             </div>
 
             <div className="space-y-3 text-xs font-mono">
               <div className="flex justify-between py-2 border-b border-slate-100 dark:border-slate-800/60 text-slate-600 dark:text-slate-400">
-                <span>App Base ({appTypeRates[appType].name}):</span>
-                <span className="text-slate-900 dark:text-slate-200 font-bold">${baseRate}</span>
+                <span>Khung giá cơ bản ({appTypeRates[appType].name}):</span>
+                <span className="text-slate-900 dark:text-slate-200 font-bold">{formatVND(baseRate)}</span>
               </div>
               <div className="flex justify-between py-2 border-b border-slate-100 dark:border-slate-800/60 text-slate-600 dark:text-slate-400">
-                <span>Scale Multiplier ({scaleFactors[scale].label}):</span>
+                <span>Hệ số quy mô ({scaleFactors[scale].label}):</span>
                 <span className="text-slate-900 dark:text-slate-200 font-bold">x{scaleMultiplier}</span>
               </div>
               <div className="flex justify-between py-2 border-b border-slate-100 dark:border-slate-800/60 text-slate-600 dark:text-slate-400">
-                <span>{featuresCount} Integrated Features:</span>
-                <span className="text-slate-900 dark:text-slate-200 font-bold">${featureCost}</span>
+                <span>{featuresCount} Tính năng cốt lõi tích hợp:</span>
+                <span className="text-slate-900 dark:text-slate-200 font-bold">{formatVND(featureCost)}</span>
               </div>
               <div className="flex justify-between py-2 border-b border-slate-100 dark:border-slate-800/60 text-slate-600 dark:text-slate-400">
-                <span>SLA Support Addon:</span>
-                <span className="text-emerald-600 dark:text-emerald-400 font-bold">+${slaCost}</span>
+                <span>Dịch vụ bảo trì SLA:</span>
+                <span className="text-emerald-600 dark:text-emerald-400 font-bold">+{formatVND(slaCost)}</span>
               </div>
             </div>
 
             {/* Total Highlight */}
             <div className="p-5 rounded-xl bg-brand-primary/10 border border-brand-primary/20 text-center space-y-1">
               <span className="text-xs font-mono font-bold text-brand-primary uppercase">{t('calcTotalBudget')}</span>
-              <p className="text-3xl sm:text-4xl font-extrabold font-mono tracking-tight text-slate-900 dark:text-white">
-                ${totalEstimatedUSD.toLocaleString()}
+              <p className="text-3xl sm:text-4xl font-extrabold font-mono tracking-tight text-brand-primary">
+                {formatMillionVND(totalEstimatedVND)}
               </p>
-              <p className="text-xs text-slate-600 dark:text-slate-400 font-mono">
-                (~ {formatVND(totalEstimatedVND)})
+              <p className="text-xs text-slate-600 dark:text-slate-400 font-mono font-bold">
+                ({formatVND(totalEstimatedVND)})
               </p>
             </div>
 
             {/* CTA */}
             <button
-              onClick={() => onOpenRequestModal(`Web App ${appTypeRates[appType].name} (${featuresCount} features, scale ${scaleFactors[scale].label})`)}
+              onClick={() => onOpenRequestModal(`Web App ${appTypeRates[appType].name} (${featuresCount} tính năng, quy mô ${scaleFactors[scale].label})`)}
               className="btn-primary w-full py-3.5 text-sm"
             >
               <span>{t('calcGetQuote')}</span>
