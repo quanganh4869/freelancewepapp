@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
 import { useLanguage } from '../../context/LanguageContext';
-import { Menu, X, Shield, LayoutDashboard, LogIn, LogOut, Sun, Moon, Globe } from 'lucide-react';
+import { Menu, X, Shield, LayoutDashboard, LogOut, Sun, Moon, Globe } from 'lucide-react';
 
 export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
   const { activeRole, currentUser, logout } = useAuth();
@@ -19,7 +19,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
   return (
     <header className={`sticky top-0 z-40 transition-colors duration-200 border-b ${
       isDark ? 'bg-studio-950/95 border-slate-800/80 text-slate-100' : 'bg-white/95 border-slate-200 text-slate-900'
-    } backdrop-blur-md`}>
+    } backdrop-blur-md font-sans`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           
@@ -29,7 +29,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
               <span>QA</span>
             </div>
             <div className="flex flex-col leading-none">
-              <span className="font-extrabold text-base tracking-tight font-sans text-slate-900 dark:text-white">
+              <span className="font-extrabold text-base tracking-tight font-display text-slate-900 dark:text-white">
                 QUANG ANH <span className="text-brand-primary font-mono text-[11px] font-bold tracking-widest ml-1 uppercase">STUDIO</span>
               </span>
               <span className={`text-[10px] font-mono tracking-wider uppercase mt-1 ${
@@ -88,11 +88,10 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
             {activeRole === 'GUEST' ? (
               <button
                 onClick={onOpenAuthModal}
-                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg transition-colors font-medium border ${
-                  isDark ? 'border-slate-800 text-slate-300 hover:text-white hover:border-slate-700' : 'border-slate-200 text-slate-700 hover:text-slate-900 hover:border-slate-300'
+                className={`flex items-center px-4 py-2 rounded-lg transition-colors font-bold border font-display ${
+                  isDark ? 'border-slate-800 text-slate-300 hover:text-white hover:border-brand-primary' : 'border-slate-200 text-slate-700 hover:text-slate-900 hover:border-brand-primary'
                 }`}
               >
-                <LogIn size={14} className="text-brand-primary" />
                 <span>{t('login')}</span>
               </button>
             ) : (
@@ -100,7 +99,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
                 {activeRole === 'USER' && (
                   <button
                     onClick={() => onNavigate('client-dashboard')}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-primary/10 border border-brand-primary/20 text-brand-primary font-medium"
+                    className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-brand-primary/10 border border-brand-primary/20 text-brand-primary font-bold font-display"
                   >
                     <LayoutDashboard size={13} />
                     <span>{t('myProjects')}</span>
@@ -110,7 +109,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
                 {activeRole === 'ADMIN' && (
                   <button
                     onClick={() => onNavigate('admin-dashboard')}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-500 font-medium"
+                    className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-500 font-bold font-display"
                   >
                     <Shield size={13} />
                     <span>{t('adminDashboard')}</span>
@@ -175,6 +174,17 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
               <span>Ngôn ngữ / Language:</span>
               <span className="font-bold text-brand-primary">{language === 'vi' ? 'TIẾNG VIỆT' : 'ENGLISH'}</span>
             </button>
+            {activeRole === 'GUEST' && (
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenAuthModal();
+                }}
+                className="btn-primary w-full py-2.5 text-xs font-bold"
+              >
+                <span>{t('login')}</span>
+              </button>
+            )}
           </div>
         </div>
       )}

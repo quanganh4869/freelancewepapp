@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { X, Lock, Mail, Shield, User, AlertCircle, ArrowRight } from 'lucide-react';
+import { X, Mail, Shield, User, AlertCircle, ArrowRight } from 'lucide-react';
 
 export const AuthModal = ({ isOpen, onClose }) => {
   const { loginWithEmail, authError, clearAuthError } = useAuth();
@@ -48,11 +48,8 @@ export const AuthModal = ({ isOpen, onClose }) => {
           <X size={18} />
         </button>
 
-        <div className="text-center space-y-2 mb-6">
-          <div className="w-12 h-12 rounded-2xl bg-brand-primary/10 border border-brand-primary/30 text-brand-primary flex items-center justify-center mx-auto shadow-sm">
-            <Lock size={22} />
-          </div>
-          <h3 className="text-xl font-bold text-white">
+        <div className="text-center space-y-1 mb-6">
+          <h3 className="text-2xl font-bold text-white font-display">
             Đăng Nhập Hệ Thống
           </h3>
           <p className="text-xs text-slate-400 font-mono">
@@ -68,7 +65,7 @@ export const AuthModal = ({ isOpen, onClose }) => {
               setTargetRole('USER');
               setLocalError('');
             }}
-            className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-all flex items-center justify-center gap-1.5 ${
+            className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-all flex items-center justify-center gap-1.5 font-display ${
               targetRole === 'USER'
                 ? 'bg-studio-850 text-white shadow-sm border border-slate-700 font-bold'
                 : 'text-slate-400 hover:text-slate-200'
@@ -82,7 +79,7 @@ export const AuthModal = ({ isOpen, onClose }) => {
               setTargetRole('ADMIN');
               setLocalError('');
             }}
-            className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-all flex items-center justify-center gap-1.5 ${
+            className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-all flex items-center justify-center gap-1.5 font-display ${
               targetRole === 'ADMIN'
                 ? 'bg-amber-500/20 text-amber-300 shadow-sm border border-amber-500/30 font-bold'
                 : 'text-slate-400 hover:text-slate-200'
@@ -112,7 +109,7 @@ export const AuthModal = ({ isOpen, onClose }) => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder={targetRole === 'ADMIN' ? 'quanganhqb04@gmail.com' : 'client@company.com'}
-                className="w-full bg-studio-950 border border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary"
+                className="w-full bg-studio-950 border border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary font-mono"
               />
             </div>
           </div>
@@ -124,7 +121,7 @@ export const AuthModal = ({ isOpen, onClose }) => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full bg-studio-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary"
+              className="w-full bg-studio-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-brand-primary font-mono"
             />
           </div>
 
