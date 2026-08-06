@@ -7,6 +7,7 @@ import { ErrorBoundary } from './components/layout/ErrorBoundary';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { Shield } from 'lucide-react';
+import { useScrollReveal } from './hooks/useScrollReveal';
 
 // Essential Home Sections Only
 import { HeroSection } from './components/home/HeroSection';
@@ -23,6 +24,9 @@ import { AdminDashboard } from './components/admin/AdminDashboard';
 const MainAppContent = () => {
   const { activeRole, currentUser } = useAuth();
   const { isDark } = useTheme();
+
+  // Enable scroll reveal animations
+  useScrollReveal();
 
   const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);

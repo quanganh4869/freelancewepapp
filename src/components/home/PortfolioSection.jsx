@@ -30,7 +30,7 @@ export const PortfolioSection = ({ onOpenRequestModal }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 reveal">
           <div className="space-y-3 max-w-2xl">
             <div className="studio-badge">
               <span>{t('portfolioTag')}</span>
@@ -65,11 +65,12 @@ export const PortfolioSection = ({ onOpenRequestModal }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {filteredProjects.map((project, index) => {
             const projectNum = String(index + 1).padStart(2, '0');
+            const delayClass = `reveal-delay-${(index % 2) + 1}`;
             return (
               <div
                 key={project.id}
                 onClick={() => setSelectedProject(project)}
-                className="studio-card overflow-hidden group cursor-pointer flex flex-col justify-between rounded-2xl shadow-sm hover:shadow-md"
+                className={`studio-card overflow-hidden group cursor-pointer flex flex-col justify-between rounded-2xl shadow-sm hover:shadow-md reveal ${delayClass}`}
               >
                 {/* Thumbnail Frame */}
                 <div className="relative h-64 sm:h-72 overflow-hidden bg-slate-950">

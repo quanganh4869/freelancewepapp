@@ -55,7 +55,7 @@ export const CostEstimator = ({ onOpenRequestModal }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4 reveal">
           <div className="studio-badge">
             <Calculator size={14} />
             <span>{t('calcTag')}</span>
@@ -71,7 +71,7 @@ export const CostEstimator = ({ onOpenRequestModal }) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left Form Controls */}
-          <div className="lg:col-span-7 studio-card p-6 sm:p-8 rounded-2xl space-y-6">
+          <div className="lg:col-span-7 studio-card p-6 sm:p-8 rounded-2xl space-y-6 reveal reveal-delay-1">
             
             {/* Step 1: App Type */}
             <div>
@@ -168,7 +168,7 @@ export const CostEstimator = ({ onOpenRequestModal }) => {
           </div>
 
           {/* Right Summary Panel */}
-          <div className="lg:col-span-5 studio-card p-6 sm:p-8 rounded-2xl space-y-6 sticky top-24 border border-brand-primary/30 shadow-md">
+          <div className="lg:col-span-5 studio-card p-6 sm:p-8 rounded-2xl space-y-6 sticky top-24 border border-brand-primary/30 shadow-md reveal reveal-delay-2">
             
             <div className="border-b border-slate-200 dark:border-slate-800 pb-4">
               <span className="text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">

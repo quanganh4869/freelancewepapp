@@ -15,7 +15,7 @@ export const ServicesSection = ({ onSelectService }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 reveal">
           <div className="space-y-4 max-w-2xl">
             <div className="studio-badge">
               <span>{t('servicesTag')}</span>
@@ -34,10 +34,11 @@ export const ServicesSection = ({ onSelectService }) => {
           {INITIAL_SERVICES.map((service, index) => {
             const title = language === 'en' ? service.title : service.titleVi;
             const numberFormatted = String(index + 1).padStart(2, '0');
+            const delayClass = `reveal-delay-${(index % 3) + 1}`;
             return (
               <div
                 key={service.id}
-                className="studio-card p-8 rounded-2xl flex flex-col justify-between group hover:border-brand-primary transition-all duration-250 shadow-sm"
+                className={`studio-card p-8 rounded-2xl flex flex-col justify-between group hover:border-brand-primary transition-all duration-250 shadow-sm reveal ${delayClass}`}
               >
                 <div className="space-y-6">
                   {/* Top Number & Badge */}
