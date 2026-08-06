@@ -8,8 +8,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
+  
   body {
     background-color: #080B12;
     color: #F5F7FA;
@@ -20,14 +20,45 @@
 
   /* Headings smooth tracking */
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
-    letter-spacing: -0.025em;
+    font-family: 'Plus Jakarta Sans', 'Outfit', sans-serif;
+    letter-spacing: -0.02em;
+    font-weight: 700;
   }
 
-  /* Light Theme Styles */
+  /* Light Theme High-Contrast Overrides */
   html.light body {
-    background-color: #F5F6F3;
-    color: #111318;
+    background-color: #F8F9FB;
+    color: #0F172A;
+  }
+
+  html.light h1, 
+  html.light h2, 
+  html.light h3, 
+  html.light h4 {
+    color: #0F172A !important;
+  }
+
+  html.light .text-slate-400,
+  html.light .text-slate-300 {
+    color: #475569 !important;
+  }
+
+  html.light .text-slate-200,
+  html.light .text-slate-100 {
+    color: #1E293B !important;
+  }
+
+  html.light .bg-studio-950 {
+    background-color: #F8F9FB !important;
+  }
+
+  html.light .bg-studio-900 {
+    background-color: #FFFFFF !important;
+  }
+
+  html.light .border-slate-800,
+  html.light .border-white\/10 {
+    border-color: #E2E8F0 !important;
   }
 }
 
@@ -40,7 +71,7 @@
   background: #080B12;
 }
 html.light ::-webkit-scrollbar-track {
-  background: #F5F6F3;
+  background: #F8F9FB;
 }
 ::-webkit-scrollbar-thumb {
   background: #242B38;
@@ -58,14 +89,14 @@ html.light ::-webkit-scrollbar-thumb {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.3rem 0.85rem;
+  padding: 0.35rem 0.9rem;
   border-radius: 999px;
   background-color: rgba(40, 72, 216, 0.08);
   border: 1px solid rgba(40, 72, 216, 0.2);
   color: #2848D8;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.02em;
   text-transform: uppercase;
 }
@@ -77,11 +108,11 @@ html.dark .studio-badge {
 
 .btn-primary {
   background: #2848D8;
-  color: #FFFFFF;
+  color: #FFFFFF !important;
   font-weight: 600;
   font-size: 0.875rem;
   padding: 0.75rem 1.6rem;
-  border-radius: 10px;
+  border-radius: 12px;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-flex;
   align-items: center;
@@ -97,38 +128,43 @@ html.dark .studio-badge {
 }
 
 .btn-secondary {
-  background: transparent;
-  color: #111318;
+  background: #FFFFFF;
+  color: #0F172A !important;
   font-weight: 600;
   font-size: 0.875rem;
   padding: 0.75rem 1.6rem;
-  border-radius: 10px;
-  border: 1px solid #DDE0E5;
+  border-radius: 12px;
+  border: 1px solid #CBD5E1;
   transition: all 0.25s ease;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 html.dark .btn-secondary {
-  color: #F5F7FA;
+  background: transparent;
+  color: #F5F7FA !important;
   border-color: #242B38;
+  box-shadow: none;
 }
 .btn-secondary:hover {
   border-color: #2848D8;
-  color: #2848D8;
+  color: #2848D8 !important;
   transform: translateY(-1px);
 }
 
 .studio-card {
   background: #FFFFFF;
   border: 1px solid #E2E8F0;
-  border-radius: 14px;
+  border-radius: 16px;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
 }
 html.dark .studio-card {
   background: #0B1020;
   border-color: #242B38;
+  box-shadow: none;
 }
 .studio-card:hover {
   border-color: #2848D8;
@@ -136,7 +172,7 @@ html.dark .studio-card {
 
 .studio-callout {
   border-left: 4px solid #2848D8;
-  background: rgba(40, 72, 216, 0.04);
+  background: rgba(40, 72, 216, 0.05);
   border-radius: 0 12px 12px 0;
   padding: 1.25rem 1.5rem;
 }
@@ -148,8 +184,8 @@ html.dark .studio-callout {
 .grid-bg-engineering {
   background-size: 40px 40px;
   background-image: 
-    linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
 }
 html.dark .grid-bg-engineering {
   background-image: 

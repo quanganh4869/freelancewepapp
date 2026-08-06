@@ -1,9 +1,11 @@
 import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
+import { useTheme } from '../../context/ThemeContext';
 import { Code, Cpu, Sparkles, ShieldCheck, MessageSquare, Headphones } from 'lucide-react';
 
 export const WhyUsSection = () => {
   const { t } = useLanguage();
+  const { isDark } = useTheme();
 
   const advantages = [
     {
@@ -51,7 +53,9 @@ export const WhyUsSection = () => {
   ];
 
   return (
-    <section id="why-us" className="py-24 bg-studio-900 border-b border-white/10 font-sans">
+    <section id="why-us" className={`py-24 border-b font-sans ${
+      isDark ? 'bg-studio-900 border-white/10 text-white' : 'bg-slate-50 border-slate-200 text-slate-900'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -59,10 +63,10 @@ export const WhyUsSection = () => {
           <div className="studio-badge">
             <span>{t('whyUsTag')}</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">
             {t('whyUsTitle')}
           </h2>
-          <p className="text-slate-400 text-sm leading-relaxed">
+          <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
             {t('whyUsDesc')}
           </p>
         </div>
@@ -74,18 +78,18 @@ export const WhyUsSection = () => {
             return (
               <div
                 key={idx}
-                className="studio-card p-8 rounded-xl space-y-4 group hover:border-brand-primary transition-all duration-200"
+                className="studio-card p-8 rounded-2xl space-y-4 group hover:border-brand-primary transition-all duration-200 shadow-sm"
               >
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-sm font-bold text-brand-primary">
                     {item.num}
                   </span>
-                  <Icon size={20} className="text-slate-400 group-hover:text-brand-primary transition-colors" />
+                  <Icon size={20} className="text-slate-500 dark:text-slate-400 group-hover:text-brand-primary transition-colors" />
                 </div>
-                <h3 className="text-base font-bold group-hover:text-brand-primary transition-colors">
+                <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-brand-primary transition-colors">
                   {item.titleVi}
                 </h3>
-                <p className="text-xs text-slate-400 leading-relaxed">
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                   {item.desc}
                 </p>
               </div>

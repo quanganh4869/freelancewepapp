@@ -1,9 +1,11 @@
 import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
+import { useTheme } from '../../context/ThemeContext';
 import { ShieldCheck, Code, Cpu, Users, CheckCircle2 } from 'lucide-react';
 
 export const AboutSection = () => {
   const { t, language } = useLanguage();
+  const { isDark } = useTheme();
 
   const principles = [
     {
@@ -37,7 +39,9 @@ export const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="py-24 bg-studio-950 border-b border-white/10 font-sans">
+    <section id="about" className={`py-24 border-b font-sans ${
+      isDark ? 'bg-studio-950 border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Editorial Heading Statement */}
@@ -45,7 +49,7 @@ export const AboutSection = () => {
           <div className="studio-badge">
             <span>{t('aboutTag')}</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight text-slate-900 dark:text-white">
             {language === 'en' ? (
               <>
                 "We don't just build interfaces. <br />
@@ -58,7 +62,7 @@ export const AboutSection = () => {
               </>
             )}
           </h2>
-          <p className="text-slate-400 text-base leading-relaxed max-w-2xl">
+          <p className="text-slate-600 dark:text-slate-400 text-base leading-relaxed max-w-2xl">
             Nexus Studio là đối tác kỹ thuật số đồng hành cùng các Doanh nghiệp & SaaS Startup. Chúng tôi kết hợp tư duy kiến trúc hệ thống quy chuẩn với quy trình phát triển minh bạch.
           </p>
         </div>
@@ -70,19 +74,19 @@ export const AboutSection = () => {
             return (
               <div
                 key={idx}
-                className="studio-card p-8 rounded-xl space-y-4"
+                className="studio-card p-8 rounded-2xl space-y-4"
               >
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-sm font-bold text-brand-primary">
                     {item.num}
                   </span>
-                  <IconComp size={20} className="text-slate-400" />
+                  <IconComp size={20} className="text-slate-500 dark:text-slate-400" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold mb-1">{item.titleVi}</h3>
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">{item.titleVi}</h3>
                   <p className="text-xs font-mono text-brand-primary font-bold">{item.title}</p>
                 </div>
-                <p className="text-xs text-slate-400 leading-relaxed">
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                   {item.desc}
                 </p>
               </div>
@@ -91,19 +95,19 @@ export const AboutSection = () => {
         </div>
 
         {/* Specs Banner */}
-        <div className="studio-card p-8 rounded-xl bg-studio-900 flex flex-col lg:flex-row items-center justify-between gap-8 border-brand-primary/30">
+        <div className="studio-card p-8 rounded-2xl bg-slate-50 dark:bg-studio-900 flex flex-col lg:flex-row items-center justify-between gap-8 border-brand-primary/30">
           <div className="space-y-2 max-w-xl">
-            <h3 className="text-lg font-bold">{t('aboutSlaTitle')}</h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white">{t('aboutSlaTitle')}</h3>
+            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
               Tất cả dự án bàn giao đều đi kèm tài liệu mô tả kiến trúc API, bộ test tự động và cam kết hỗ trợ bảo hành nâng cấp dài hạn theo hợp đồng SLA.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-3 text-xs font-mono">
-            <div className="p-3 rounded-lg bg-studio-950 border border-slate-800 flex items-center gap-2 font-bold">
+            <div className="p-3.5 rounded-xl bg-white dark:bg-studio-950 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 flex items-center gap-2 font-bold shadow-sm">
               <CheckCircle2 size={15} className="text-brand-primary" />
               <span>Full Source Code Transfer</span>
             </div>
-            <div className="p-3 rounded-lg bg-studio-950 border border-slate-800 flex items-center gap-2 font-bold">
+            <div className="p-3.5 rounded-xl bg-white dark:bg-studio-950 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 flex items-center gap-2 font-bold shadow-sm">
               <CheckCircle2 size={15} className="text-brand-primary" />
               <span>SOC2 & OWASP Ready</span>
             </div>

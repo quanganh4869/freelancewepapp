@@ -1,19 +1,23 @@
 import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
+import { useTheme } from '../../context/ThemeContext';
 import { Mail, Phone, MapPin } from 'lucide-react';
 
 export const Footer = ({ onOpenRequestModal }) => {
   const { t } = useLanguage();
+  const { isDark } = useTheme();
 
   return (
-    <footer className="bg-studio-950 border-t border-white/10 pt-16 pb-12 text-slate-400 font-sans">
+    <footer className={`border-t pt-16 pb-12 font-sans transition-colors ${
+      isDark ? 'bg-studio-950 border-white/10 text-slate-400' : 'bg-slate-900 border-slate-800 text-slate-300'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800">
           
           {/* Col 1: Studio Identity */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-brand-primary text-white flex items-center justify-center font-mono font-bold text-sm">
+              <div className="w-8 h-8 rounded-xl bg-brand-primary text-white flex items-center justify-center font-mono font-bold text-sm">
                 <span>N</span>
               </div>
               <span className="font-extrabold text-lg tracking-tight text-white font-sans">
@@ -23,7 +27,7 @@ export const Footer = ({ onOpenRequestModal }) => {
             <p className="text-xs text-slate-400 max-w-md leading-relaxed">
               {t('footerDesc')}
             </p>
-            <div className="font-mono text-[11px] text-brand-primary">
+            <div className="font-mono text-[11px] text-brand-primary font-semibold">
               Standard: ISO 27001 & SOC2 Compliant
             </div>
           </div>
