@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRequests } from '../../context/RequestContext';
-import { formatStatusBadge, formatDate } from '../../utils/formatters';
-import { X, Save, Trash2, Calendar, DollarSign, Clock, Mail, Phone, Building, User, Globe, Code, MessageSquare, ShieldCheck, Check } from 'lucide-react';
+import { formatDate } from '../../utils/formatters';
+import { X, Save, Trash2, Mail, Phone, Building, User, ShieldCheck, Check, Globe, Layers, DollarSign, Clock, FileText } from 'lucide-react';
 
 export const AdminRequestDetailModal = ({ request, onClose, onDeleteClick }) => {
   const { updateStatus, updateNotes } = useRequests();
@@ -22,15 +22,15 @@ export const AdminRequestDetailModal = ({ request, onClose, onDeleteClick }) => 
   const statusOptions = ['Pending', 'Reviewing', 'Contacted', 'In Progress', 'Completed', 'Rejected'];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn font-sans">
       <div
-        className="bg-studio-900 border border-white/10 rounded-2xl max-w-3xl w-full max-h-[92vh] overflow-y-auto shadow-2xl relative text-slate-200"
+        className="bg-studio-900 border border-slate-800 rounded-xl max-w-3xl w-full max-h-[92vh] overflow-y-auto shadow-2xl relative text-slate-100"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="bg-studio-950 px-6 py-4 border-b border-white/10 flex items-center justify-between sticky top-0 z-10">
+        <div className="bg-studio-950 px-6 py-4 border-b border-slate-800 flex items-center justify-between sticky top-0 z-10">
           <div className="flex items-center gap-3">
-            <span className="font-mono text-xs font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded">
+            <span className="font-mono text-xs font-bold text-brand-primary bg-brand-primary/10 border border-brand-primary/20 px-2.5 py-1 rounded">
               ADMIN CONTROL • {request.id}
             </span>
             <div>
@@ -49,7 +49,7 @@ export const AdminRequestDetailModal = ({ request, onClose, onDeleteClick }) => 
             </button>
             <button
               onClick={onClose}
-              className="w-8 h-8 rounded-full bg-studio-900 hover:bg-studio-800 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white transition-colors"
+              className="w-8 h-8 rounded-lg bg-studio-950 hover:bg-studio-800 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white transition-colors"
             >
               <X size={16} />
             </button>
@@ -60,7 +60,7 @@ export const AdminRequestDetailModal = ({ request, onClose, onDeleteClick }) => 
         <div className="p-6 sm:p-8 space-y-6">
 
           {/* Admin Status & Action Box */}
-          <div className="p-5 rounded-2xl bg-studio-950 border border-brand-primary/30 space-y-4">
+          <div className="p-5 rounded-xl bg-studio-950 border border-brand-primary/30 space-y-4">
             <div className="flex items-center justify-between">
               <span className="text-xs font-mono font-bold text-brand-primary uppercase tracking-wider flex items-center gap-1.5">
                 <ShieldCheck size={16} /> Quản lý trạng thái & Ghi chú
@@ -78,7 +78,7 @@ export const AdminRequestDetailModal = ({ request, onClose, onDeleteClick }) => 
                 <select
                   value={status}
                   onChange={(e) => setStatus(e.target.value)}
-                  className="w-full bg-studio-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-brand-primary font-mono"
+                  className="w-full bg-studio-900 border border-slate-700 rounded-lg px-3 py-2.5 text-xs text-white focus:outline-none focus:border-brand-primary font-mono"
                 >
                   {statusOptions.map(opt => (
                     <option key={opt} value={opt}>{opt}</option>
@@ -89,7 +89,7 @@ export const AdminRequestDetailModal = ({ request, onClose, onDeleteClick }) => 
               <div className="flex items-end">
                 <button
                   onClick={handleSave}
-                  className="w-full flex items-center justify-center gap-2 bg-brand-primary hover:bg-brand-hover text-white text-xs font-bold py-2.5 px-4 rounded-xl shadow-glow-primary transition-all"
+                  className="btn-primary w-full py-2.5 text-xs font-semibold"
                 >
                   <Save size={15} />
                   <span>Lưu Thay Đổi Admin</span>
@@ -104,16 +104,16 @@ export const AdminRequestDetailModal = ({ request, onClose, onDeleteClick }) => 
                 value={internalNotes}
                 onChange={(e) => setInternalNotes(e.target.value)}
                 placeholder="Nhập ghi chú theo dõi hợp đồng, báo giá, hoặc trao đổi đội ngũ..."
-                className="w-full bg-studio-900 border border-slate-700 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-brand-primary resize-none"
+                className="w-full bg-studio-900 border border-slate-700 rounded-lg p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-brand-primary resize-none"
               />
             </div>
           </div>
 
           {/* Client Info Grid */}
           <div>
-            <h4 className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">Thông tin khách hàng (Client Info)</h4>
+            <h4 className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">Thông tin khách hàng & Doanh nghiệp</h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-              <div className="p-3.5 rounded-xl bg-studio-950 border border-slate-800 flex items-center gap-3">
+              <div className="p-3.5 rounded-lg bg-studio-950 border border-slate-800 flex items-center gap-3">
                 <User size={16} className="text-brand-primary" />
                 <div>
                   <p className="text-slate-500 text-[10px]">Họ tên:</p>
@@ -121,7 +121,7 @@ export const AdminRequestDetailModal = ({ request, onClose, onDeleteClick }) => 
                 </div>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-studio-950 border border-slate-800 flex items-center gap-3">
+              <div className="p-3.5 rounded-lg bg-studio-950 border border-slate-800 flex items-center gap-3">
                 <Mail size={16} className="text-brand-primary" />
                 <div>
                   <p className="text-slate-500 text-[10px]">Email:</p>
@@ -129,57 +129,88 @@ export const AdminRequestDetailModal = ({ request, onClose, onDeleteClick }) => 
                 </div>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-studio-950 border border-slate-800 flex items-center gap-3">
+              <div className="p-3.5 rounded-lg bg-studio-950 border border-slate-800 flex items-center gap-3">
                 <Phone size={16} className="text-brand-primary" />
                 <div>
-                  <p className="text-slate-500 text-[10px]">Số điện thoại:</p>
+                  <p className="text-slate-500 text-[10px]">Số điện thoại / Zalo:</p>
                   <p className="font-bold text-white">{request.clientPhone || 'Chưa cung cấp'}</p>
                 </div>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-studio-950 border border-slate-800 flex items-center gap-3">
+              <div className="p-3.5 rounded-lg bg-studio-950 border border-slate-800 flex items-center gap-3">
                 <Building size={16} className="text-brand-primary" />
                 <div>
-                  <p className="text-slate-500 text-[10px]">Công ty / Tổ chức:</p>
-                  <p className="font-bold text-white">{request.clientCompany || 'Cá nhân'}</p>
+                  <p className="text-slate-500 text-[10px]">Công ty & Lĩnh vực:</p>
+                  <p className="font-bold text-white">{request.clientCompany || 'Cá nhân'} ({request.businessSector || 'Chưa chọn'})</p>
+                  {request.companyScale && <p className="text-[10px] text-slate-400">Quy mô: {request.companyScale}</p>}
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Project Details */}
+          {/* Project Technical Specifications */}
           <div className="space-y-3">
-            <h4 className="text-xs font-mono text-slate-400 uppercase tracking-wider">Thông tin kỹ thuật & Yêu cầu</h4>
+            <h4 className="text-xs font-mono text-slate-400 uppercase tracking-wider">Thông tin kỹ thuật & Phạm vi tính năng</h4>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
-              <div className="p-3 rounded-xl bg-studio-950 border border-slate-800">
-                <span className="text-slate-500 font-mono text-[10px]">Loại Web App:</span>
+              <div className="p-3 rounded-lg bg-studio-950 border border-slate-800">
+                <span className="text-slate-500 font-mono text-[10px]">Phân loại Web App:</span>
                 <p className="font-bold text-white">{request.projectType}</p>
               </div>
-              <div className="p-3 rounded-xl bg-studio-950 border border-slate-800">
-                <span className="text-slate-500 font-mono text-[10px]">Ngân sách:</span>
+              <div className="p-3 rounded-lg bg-studio-950 border border-slate-800">
+                <span className="text-slate-500 font-mono text-[10px]">Ngân sách dự kiến:</span>
                 <p className="font-bold text-emerald-400 font-mono">{request.budget}</p>
               </div>
-              <div className="p-3 rounded-xl bg-studio-950 border border-slate-800">
-                <span className="text-slate-500 font-mono text-[10px]">Kỳ hạn:</span>
+              <div className="p-3 rounded-lg bg-studio-950 border border-slate-800">
+                <span className="text-slate-500 font-mono text-[10px]">Kỳ hạn bàn giao:</span>
                 <p className="font-bold text-white font-mono">{request.timeline}</p>
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-studio-950 border border-slate-800 text-xs space-y-1">
-              <span className="text-slate-500 font-mono text-[10px]">Mô tả bài toán:</span>
-              <p className="text-slate-300 leading-relaxed">{request.projectDescription}</p>
+            {request.projectStage && (
+              <div className="p-3.5 rounded-lg bg-studio-950 border border-slate-800 text-xs">
+                <span className="text-slate-500 font-mono text-[10px]">Giai đoạn chuẩn bị hiện tại:</span>
+                <p className="text-slate-200 font-semibold">{request.projectStage}</p>
+              </div>
+            )}
+
+            <div className="p-4 rounded-lg bg-studio-950 border border-slate-800 text-xs space-y-1">
+              <span className="text-slate-500 font-mono text-[10px]">Mô tả bài toán kinh doanh & Mục tiêu:</span>
+              <p className="text-slate-200 leading-relaxed">{request.projectDescription}</p>
             </div>
 
-            <div className="p-4 rounded-xl bg-studio-950 border border-slate-800 text-xs space-y-1">
-              <span className="text-slate-500 font-mono text-[10px]">Tính năng chính:</span>
-              <p className="text-slate-300 leading-relaxed">{request.mainFeatures}</p>
-            </div>
+            {/* Selected Features Checklist */}
+            {request.selectedFeatures && request.selectedFeatures.length > 0 && (
+              <div className="p-4 rounded-lg bg-studio-950 border border-slate-800 text-xs space-y-2">
+                <span className="text-slate-500 font-mono text-[10px]">Các tính năng cốt lõi đã chọn ({request.selectedFeatures.length}):</span>
+                <div className="flex flex-wrap gap-1.5">
+                  {request.selectedFeatures.map((f, idx) => (
+                    <span key={idx} className="px-2.5 py-1 rounded bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-[11px] font-mono font-semibold">
+                      ✓ {f}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {request.targetUsers && (
-              <div className="p-4 rounded-xl bg-studio-950 border border-slate-800 text-xs space-y-1">
+              <div className="p-3.5 rounded-lg bg-studio-950 border border-slate-800 text-xs space-y-1">
                 <span className="text-slate-500 font-mono text-[10px]">Đối tượng người dùng mục tiêu:</span>
-                <p className="text-slate-300">{request.targetUsers}</p>
+                <p className="text-slate-200">{request.targetUsers}</p>
+              </div>
+            )}
+
+            {request.preferredTechnologies && (
+              <div className="p-3.5 rounded-lg bg-studio-950 border border-slate-800 text-xs space-y-1 font-mono">
+                <span className="text-slate-500 text-[10px]">Công nghệ ưu tiên:</span>
+                <p className="text-slate-200">{request.preferredTechnologies}</p>
+              </div>
+            )}
+
+            {request.slaTier && (
+              <div className="p-3.5 rounded-lg bg-studio-950 border border-slate-800 text-xs space-y-1">
+                <span className="text-slate-500 font-mono text-[10px]">Gói bảo trì SLA & NDA:</span>
+                <p className="text-slate-200">SLA: <strong className="text-white">{request.slaTier}</strong> • NDA: <strong className="text-slate-300">{request.needNda || 'Không'}</strong></p>
               </div>
             )}
           </div>
@@ -187,10 +218,10 @@ export const AdminRequestDetailModal = ({ request, onClose, onDeleteClick }) => 
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 bg-studio-950 border-t border-white/10 flex justify-end">
+        <div className="px-6 py-4 bg-studio-950 border-t border-slate-800 flex justify-end">
           <button
             onClick={onClose}
-            className="px-5 py-2 rounded-xl bg-studio-800 hover:bg-studio-700 text-xs font-semibold text-white transition-colors"
+            className="btn-secondary py-2 px-5 text-xs font-semibold"
           >
             Đóng
           </button>
