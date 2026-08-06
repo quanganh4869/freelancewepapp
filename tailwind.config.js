@@ -40,7 +40,7 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', 'Be Vietnam Pro', 'system-ui', 'sans-serif'],
-        display: ['Inter', 'Be Vietnam Pro', 'sans-serif'],
+        display: ['Outfit', 'Inter', 'Be Vietnam Pro', 'sans-serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'monospace']
       },
       boxShadow: {

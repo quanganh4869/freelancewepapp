@@ -18,11 +18,12 @@
     letter-spacing: -0.011em;
   }
 
-  /* Headings: Smooth, Bold Inter & Be Vietnam Pro */
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Inter', 'Be Vietnam Pro', sans-serif;
+  /* Headings & Bold Text: Distinctive Bold Outfit Display Font */
+  h1, h2, h3, h4, h5, h6,
+  strong, b,
+  .font-bold, .font-extrabold, .font-black {
+    font-family: 'Outfit', 'Inter', 'Be Vietnam Pro', sans-serif;
     letter-spacing: -0.025em;
-    font-weight: 800;
   }
 
   /* Light Mode High-Contrast DV60 Style */
@@ -84,7 +85,7 @@ html.light ::-webkit-scrollbar-thumb {
   background: #F97316;
 }
 
-/* Visual Tokens */
+/* Visual Tokens with Outfit Display Font */
 .studio-badge {
   display: inline-flex;
   align-items: center;
@@ -109,6 +110,7 @@ html.dark .studio-badge {
 .btn-primary {
   background: #F97316;
   color: #FFFFFF !important;
+  font-family: 'Outfit', sans-serif;
   font-weight: 700;
   font-size: 0.875rem;
   padding: 0.85rem 1.8rem;
@@ -130,6 +132,7 @@ html.dark .studio-badge {
 .btn-secondary {
   background: #FFFFFF;
   color: #0F172A !important;
+  font-family: 'Outfit', sans-serif;
   font-weight: 700;
   font-size: 0.875rem;
   padding: 0.85rem 1.8rem;
