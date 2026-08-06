@@ -9,7 +9,7 @@ export default {
     extend: {
       colors: {
         brand: {
-          primary: '#F97316',   // DV60 Vibrant Flame Orange Accent
+          primary: '#F97316',   // Flame Orange Accent
           orange: '#F97316',
           hover: '#EA580C',     // Dark Flame Orange
           navy: '#0F172A',      // Deep Corporate Navy
@@ -39,8 +39,8 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'Outfit', 'system-ui', 'sans-serif'],
-        display: ['Outfit', 'Plus Jakarta Sans', 'sans-serif'],
+        sans: ['Inter', 'Be Vietnam Pro', 'system-ui', 'sans-serif'],
+        display: ['Inter', 'Be Vietnam Pro', 'sans-serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'monospace']
       },
       boxShadow: {
