@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
 import { useLanguage } from '../../context/LanguageContext';
-import { ArrowRight, Menu, X, Shield, LayoutDashboard, LogIn, LogOut, Sun, Moon, Globe } from 'lucide-react';
+import { Menu, X, Shield, LayoutDashboard, LogIn, LogOut, Sun, Moon, Globe } from 'lucide-react';
 
 export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
   const { activeRole, currentUser, logout } = useAuth();
@@ -25,19 +25,19 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           
-          {/* Logo */}
+          {/* Brand Logo - QUANG ANH STUDIO */}
           <a href="#" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded-lg bg-brand-primary text-white flex items-center justify-center font-mono font-bold text-sm shadow-sm transition-transform group-hover:scale-105">
-              <span>N</span>
+            <div className="w-8 h-8 rounded-xl bg-brand-primary text-white flex items-center justify-center font-mono font-bold text-sm shadow-sm transition-transform group-hover:scale-105">
+              <span>QA</span>
             </div>
             <div className="flex flex-col leading-none">
               <span className="font-extrabold text-base tracking-tight font-sans">
-                NEXUS <span className="text-brand-primary font-mono text-[11px] font-bold tracking-widest ml-1">STUDIO</span>
+                QUANG ANH <span className="text-brand-primary font-mono text-[11px] font-bold tracking-widest ml-1">STUDIO</span>
               </span>
               <span className={`text-[10px] font-mono tracking-wider uppercase mt-0.5 ${
                 isDark ? 'text-slate-400' : 'text-slate-500'
               }`}>
-                Engineering Studio
+                Web App Engineering
               </span>
             </div>
           </a>
@@ -57,13 +57,13 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
             ))}
           </nav>
 
-          {/* Right Action Controls */}
+          {/* Right Action Controls (Without Topbar CTA Button) */}
           <div className="hidden md:flex items-center gap-4 text-xs font-medium">
             
             {/* Language Switcher */}
             <button
               onClick={toggleLanguage}
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md border font-mono font-semibold transition-colors ${
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border font-mono font-semibold transition-colors ${
                 isDark
                   ? 'bg-studio-900 border-slate-800 text-slate-300 hover:border-slate-700'
                   : 'bg-slate-100 border-slate-200 text-slate-700 hover:border-slate-300'
@@ -77,7 +77,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
             {/* Dark/Light Theme Switcher */}
             <button
               onClick={toggleTheme}
-              className={`p-1.5 rounded-md border transition-colors ${
+              className={`p-2 rounded-lg border transition-colors ${
                 isDark
                   ? 'bg-studio-900 border-slate-800 text-amber-400 hover:border-slate-700'
                   : 'bg-slate-100 border-slate-200 text-slate-700 hover:border-slate-300'
@@ -90,11 +90,11 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
             {activeRole === 'GUEST' ? (
               <button
                 onClick={onOpenAuthModal}
-                className={`flex items-center gap-1.5 px-3 py-1.5 transition-colors font-medium ${
-                  isDark ? 'text-slate-300 hover:text-white' : 'text-slate-600 hover:text-slate-900'
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors font-medium border ${
+                  isDark ? 'border-slate-800 text-slate-300 hover:text-white hover:border-slate-700' : 'border-slate-200 text-slate-700 hover:text-slate-900 hover:border-slate-300'
                 }`}
               >
-                <LogIn size={14} />
+                <LogIn size={14} className="text-brand-primary" />
                 <span>{t('login')}</span>
               </button>
             ) : (
@@ -102,7 +102,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
                 {activeRole === 'USER' && (
                   <button
                     onClick={() => onNavigate('client-dashboard')}
-                    className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-brand-primary/10 border border-brand-primary/20 text-brand-primary font-medium"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-primary/10 border border-brand-primary/20 text-brand-primary font-medium"
                   >
                     <LayoutDashboard size={13} />
                     <span>{t('myProjects')}</span>
@@ -112,7 +112,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
                 {activeRole === 'ADMIN' && (
                   <button
                     onClick={() => onNavigate('admin-dashboard')}
-                    className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-amber-500/10 border border-amber-500/20 text-amber-500 font-medium"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-500 font-medium"
                   >
                     <Shield size={13} />
                     <span>{t('adminDashboard')}</span>
@@ -121,21 +121,12 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
 
                 <button
                   onClick={logout}
-                  className="flex items-center gap-1 text-slate-400 hover:text-rose-400 transition-colors"
+                  className="flex items-center gap-1 text-slate-400 hover:text-rose-400 transition-colors p-1"
                 >
-                  <LogOut size={13} />
+                  <LogOut size={14} />
                 </button>
               </div>
             )}
-
-            {/* Primary CTA */}
-            <button
-              onClick={() => onOpenRequestModal()}
-              className="btn-primary py-2 px-4 text-xs font-semibold shadow-none"
-            >
-              <span>{t('startProject')}</span>
-              <ArrowRight size={14} />
-            </button>
 
           </div>
 
@@ -143,13 +134,13 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
           <div className="flex md:hidden items-center gap-3">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-md border border-slate-700 text-slate-300"
+              className="p-2 rounded-lg border border-slate-700 text-slate-300"
             >
               {isDark ? <Sun size={16} /> : <Moon size={16} />}
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-md border border-slate-700 text-slate-300"
+              className="p-2 rounded-lg border border-slate-700 text-slate-300"
             >
               {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -181,20 +172,10 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
           <div className="pt-4 border-t border-slate-800 flex flex-col gap-3">
             <button
               onClick={toggleLanguage}
-              className="flex items-center justify-between px-3 py-2 rounded-md bg-slate-800 text-xs text-slate-200 font-mono"
+              className="flex items-center justify-between px-3 py-2 rounded-lg bg-slate-800 text-xs text-slate-200 font-mono"
             >
-              <span>Switch Language:</span>
+              <span>Ngôn ngữ / Language:</span>
               <span className="font-bold text-brand-primary">{language === 'vi' ? 'TIẾNG VIỆT' : 'ENGLISH'}</span>
-            </button>
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenRequestModal();
-              }}
-              className="btn-primary w-full py-2.5 text-xs font-semibold"
-            >
-              <span>{t('startProject')}</span>
-              <ArrowRight size={14} />
             </button>
           </div>
         </div>

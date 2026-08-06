@@ -19,7 +19,7 @@ export const HeroSection = ({ onOpenRequestModal }) => {
             {/* Technical Eyebrow */}
             <div className="studio-badge">
               <span className="w-2 h-2 rounded-full bg-brand-primary"></span>
-              <span>NEXUS STUDIO • THIẾT KẾ WEB APP CHO DOANH NGHIỆP</span>
+              <span>QUANG ANH STUDIO • THIẾT KẾ WEB APP CHO DOANH NGHIỆP</span>
             </div>
 
             {/* Headline H1 */}
@@ -159,7 +159,7 @@ export const HeroSection = ({ onOpenRequestModal }) => {
               {/* Metadata Footer Line */}
               <div className="pt-2 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-[11px] font-mono text-slate-500">
                 <span>Tiêu chuẩn: An toàn & Bảo mật</span>
-                <span className="text-brand-primary font-bold">NEXUS LABS</span>
+                <span className="text-brand-primary font-bold">QUANG ANH STUDIO</span>
               </div>
 
             </div>
