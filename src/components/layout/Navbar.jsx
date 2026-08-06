@@ -13,9 +13,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
   const navItems = [
     { label: t('servicesNav'), href: '#services', id: 'services' },
     { label: t('calculatorNav'), href: '#cost-estimator', id: 'cost-estimator' },
-    { label: t('processNav'), href: '#process', id: 'process' },
     { label: t('portfolioNav'), href: '#portfolio', id: 'portfolio' },
-    { label: t('aboutNav'), href: '#about', id: 'about' },
   ];
 
   return (
@@ -48,7 +46,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
               <a
                 key={item.id}
                 href={item.href}
-                className={`text-sm font-medium transition-colors hover:text-brand-primary ${
+                className={`text-sm font-semibold transition-colors hover:text-brand-primary ${
                   isDark ? 'text-slate-300' : 'text-slate-600'
                 }`}
               >
@@ -57,7 +55,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
             ))}
           </nav>
 
-          {/* Right Action Controls (Without Topbar CTA Button) */}
+          {/* Right Action Controls */}
           <div className="hidden md:flex items-center gap-4 text-xs font-medium">
             
             {/* Language Switcher */}

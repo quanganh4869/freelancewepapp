@@ -8,16 +8,11 @@ import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { Shield } from 'lucide-react';
 
-// Home Sections
+// Essential Home Sections Only
 import { HeroSection } from './components/home/HeroSection';
-import { StatsBar } from './components/home/StatsBar';
 import { ServicesSection } from './components/home/ServicesSection';
 import { CostEstimator } from './components/home/CostEstimator';
-import { ProcessSection } from './components/home/ProcessSection';
 import { PortfolioSection } from './components/home/PortfolioSection';
-import { AboutSection } from './components/home/AboutSection';
-import { WhyUsSection } from './components/home/WhyUsSection';
-import { CallToAction } from './components/home/CallToAction';
 
 // Dashboards & Request Form & Auth
 import { ProjectRequestModal } from './components/request/ProjectRequestModal';
@@ -58,7 +53,7 @@ const MainAppContent = () => {
         onNavigate={(view) => setActiveView(view)}
       />
 
-      {/* Main View Router / Switcher */}
+      {/* Main View Router */}
       <main className="flex-grow">
         {activeRole === 'ADMIN' ? (
           isAuthorizedAdmin ? (
@@ -84,15 +79,11 @@ const MainAppContent = () => {
           <ClientDashboard onOpenRequestModal={() => handleOpenRequestModal()} />
         ) : (
           <>
+            {/* Essential Streamlined Sections */}
             <HeroSection onOpenRequestModal={() => handleOpenRequestModal()} />
-            <StatsBar />
             <ServicesSection onSelectService={(service) => handleOpenRequestModal(service)} />
             <CostEstimator onOpenRequestModal={(initial) => handleOpenRequestModal(initial)} />
-            <ProcessSection onOpenRequestModal={(initial) => handleOpenRequestModal(initial)} />
             <PortfolioSection onOpenRequestModal={(initial) => handleOpenRequestModal(initial)} />
-            <AboutSection />
-            <WhyUsSection />
-            <CallToAction onOpenRequestModal={() => handleOpenRequestModal()} />
           </>
         )}
       </main>
