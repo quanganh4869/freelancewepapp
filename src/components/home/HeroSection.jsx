@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, CheckCircle2, Terminal, Code2, Cpu, Sparkles, Layers, ShieldCheck } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Terminal, Code2, Cpu, PhoneCall, Award, Play } from 'lucide-react';
 
 export const HeroSection = ({ onOpenRequestModal }) => {
   const [activeTab, setActiveTab] = useState('architecture');
@@ -7,9 +7,9 @@ export const HeroSection = ({ onOpenRequestModal }) => {
   return (
     <section className="relative overflow-hidden pt-12 pb-20 md:pt-16 md:pb-28 bg-grid-pattern border-b border-white/5 font-sans">
       
-      {/* Ambient Red Glow Background */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-brand-primary/15 blur-[140px] pointer-events-none rounded-full" />
-      <div className="absolute top-10 right-10 w-[350px] h-[350px] bg-brand-navy/30 blur-[100px] pointer-events-none rounded-full" />
+      {/* Mona Red & Navy Glow Ambient Background */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[450px] bg-brand-primary/15 blur-[150px] pointer-events-none rounded-full" />
+      <div className="absolute top-10 right-10 w-[400px] h-[400px] bg-brand-navy/35 blur-[120px] pointer-events-none rounded-full" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -17,44 +17,46 @@ export const HeroSection = ({ onOpenRequestModal }) => {
           {/* Left Column: Headline & Content */}
           <div className="lg:col-span-7 space-y-6 text-left">
             
-            {/* Status Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-studio-900 border border-brand-primary/30 text-xs font-mono text-slate-200 shadow-sm">
+            {/* Mona Style Badge */}
+            <div className="mona-badge">
               <span className="w-2.5 h-2.5 rounded-full bg-brand-primary animate-pulse"></span>
-              <span className="font-bold text-white uppercase tracking-wider">NEXUS DIGITAL PRODUCT STUDIO</span>
+              <span>NEXUS DIGITAL PRODUCT STUDIO</span>
               <span className="text-slate-600">|</span>
-              <span className="text-brand-primary font-semibold">Booking Q3/Q4 Open</span>
+              <span className="text-white">Q3/Q4 Booking Open</span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.18]">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.15]">
               Biến ý tưởng của bạn thành <br className="hidden sm:inline" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary via-rose-400 to-amber-400">
                 Web App thực tế.
               </span>
             </h1>
 
-            {/* Sub-headline */}
-            <p className="text-base sm:text-lg text-slate-300 max-w-2xl font-normal leading-relaxed">
-              Chúng tôi là Digital Product Studio chuyên thiết kế & lập trình Web App cao cấp cho Doanh nghiệp & Startup. Tập trung vào <span className="text-white font-semibold">hiệu năng, kiến trúc mở rộng và trải nghiệm người dùng vượt trội.</span>
-            </p>
+            {/* Sub-headline Callout Box */}
+            <div className="mona-callout">
+              <p className="text-base sm:text-lg text-slate-200 font-medium leading-relaxed">
+                Chúng tôi là Digital Product Studio chuyên thiết kế & phát triển Web App cao cấp cho Doanh nghiệp & Startup. Tập trung vào <strong className="text-white font-bold">hiệu năng, kiến trúc mở rộng và bảo mật Enterprise.</strong>
+              </p>
+            </div>
 
-            {/* Feature Highlights checklist */}
+            {/* Feature Highlights Checklist */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs text-slate-300 font-medium">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
                 <CheckCircle2 size={16} className="text-brand-primary shrink-0" />
                 <span>Mã nguồn tùy chỉnh <strong className="text-white">Custom Code 100%</strong></span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
                 <CheckCircle2 size={16} className="text-brand-primary shrink-0" />
                 <span>Bảo mật chuẩn <strong className="text-white">Enterprise & SOC2 Ready</strong></span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
                 <CheckCircle2 size={16} className="text-brand-primary shrink-0" />
                 <span>Cam kết Uptime SLA <strong className="text-white">99.9% Uptime SLA</strong></span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
                 <CheckCircle2 size={16} className="text-brand-primary shrink-0" />
-                <span>Bàn giao MVP nhanh chóng trong <strong className="text-white">3–8 tuần</strong></span>
+                <span>Bàn giao MVP nhanh trong <strong className="text-white">3–8 tuần</strong></span>
               </div>
             </div>
 
@@ -62,7 +64,7 @@ export const HeroSection = ({ onOpenRequestModal }) => {
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
               <button
                 onClick={() => onOpenRequestModal()}
-                className="flex items-center justify-center gap-3 bg-brand-primary hover:bg-brand-hover text-white text-sm font-bold px-8 py-4 rounded-xl shadow-glow-primary transition-all transform hover:-translate-y-0.5"
+                className="mona-btn-primary"
               >
                 <span>Bắt Đầu Dự Án Web App</span>
                 <ArrowRight size={18} />
@@ -70,34 +72,18 @@ export const HeroSection = ({ onOpenRequestModal }) => {
 
               <a
                 href="#cost-estimator"
-                className="flex items-center justify-center gap-2 bg-studio-900 hover:bg-studio-850 text-slate-200 border border-white/10 text-sm font-semibold px-6 py-4 rounded-xl transition-all hover:border-brand-primary/40"
+                className="mona-btn-secondary"
               >
                 <Cpu size={16} className="text-brand-primary" />
                 <span>Tính Chi Phí Lập Trình</span>
               </a>
             </div>
 
-            {/* Key Trust Signals */}
-            <div className="pt-6 border-t border-white/10 grid grid-cols-3 gap-4 max-w-lg">
-              <div>
-                <p className="text-2xl font-extrabold text-white font-mono">100%</p>
-                <p className="text-[11px] text-slate-400 font-medium">Custom Architecture</p>
-              </div>
-              <div>
-                <p className="text-2xl font-extrabold text-brand-primary font-mono">99.9%</p>
-                <p className="text-[11px] text-slate-400 font-medium">Uptime SLA Guarantee</p>
-              </div>
-              <div>
-                <p className="text-2xl font-extrabold text-emerald-400 font-mono">3–8w</p>
-                <p className="text-[11px] text-slate-400 font-medium">Average MVP Delivery</p>
-              </div>
-            </div>
-
           </div>
 
-          {/* Right Column: Web App Interactive Architectural Preview */}
-          <div className="lg:col-span-5">
-            <div className="rounded-2xl border border-white/10 bg-studio-900 shadow-2xl overflow-hidden backdrop-blur-xl border-brand-primary/20">
+          {/* Right Column: Web App Interactive Architectural Preview Frame */}
+          <div className="lg:col-span-5 relative">
+            <div className="mona-card rounded-2xl border border-brand-primary/30 shadow-2xl overflow-hidden backdrop-blur-xl">
               
               {/* Window Header Bar */}
               <div className="bg-studio-950 px-4 py-3 border-b border-white/10 flex items-center justify-between">
@@ -225,6 +211,20 @@ export const HeroSection = ({ onOpenRequestModal }) => {
               </div>
 
             </div>
+
+            {/* Floating Hotline Badge in Mona style */}
+            <div className="absolute -bottom-6 -left-6 studio-card-border p-3.5 rounded-2xl bg-studio-900 border-brand-primary/50 shadow-2xl flex items-center gap-3 backdrop-blur-xl">
+              <div className="w-10 h-10 rounded-xl bg-brand-primary text-white flex items-center justify-center shrink-0 shadow-glow-primary animate-pulse-slow">
+                <PhoneCall size={18} />
+              </div>
+              <div>
+                <p className="text-[10px] font-mono text-slate-400 uppercase font-bold">Tư Vấn Kỹ Thuật 24/7</p>
+                <a href="tel:0908123456" className="text-sm font-extrabold text-white hover:text-brand-primary font-mono transition-colors block">
+                  0908.123.456
+                </a>
+              </div>
+            </div>
+
           </div>
 
         </div>

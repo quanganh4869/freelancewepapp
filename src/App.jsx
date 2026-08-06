@@ -8,6 +8,7 @@ import { Shield } from 'lucide-react';
 
 // Home Sections
 import { HeroSection } from './components/home/HeroSection';
+import { StatsBar } from './components/home/StatsBar';
 import { ServicesSection } from './components/home/ServicesSection';
 import { CostEstimator } from './components/home/CostEstimator';
 import { ProcessSection } from './components/home/ProcessSection';
@@ -79,6 +80,7 @@ const MainAppContent = () => {
         ) : (
           <>
             <HeroSection onOpenRequestModal={() => handleOpenRequestModal()} />
+            <StatsBar />
             <ServicesSection onSelectService={(service) => handleOpenRequestModal(service)} />
             <CostEstimator onOpenRequestModal={(initial) => handleOpenRequestModal(initial)} />
             <ProcessSection onOpenRequestModal={(initial) => handleOpenRequestModal(initial)} />
