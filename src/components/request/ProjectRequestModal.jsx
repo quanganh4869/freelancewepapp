@@ -106,11 +106,21 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
     if (!validateStep(step)) return;
 
     setIsSubmitting(true);
-    setTimeout(() => {
-      const createdRequest = submitProjectRequest(formData);
-      setIsSubmitting(false);
-      setSubmitSuccess(createdRequest);
-    }, 1200);
+
+    try {
+      // Call Vercel Serverless Function to send email notification to quanganhqb04@gmail.com
+      await fetch('/api/send-request', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      }).catch(err => console.log('Email API notice:', err));
+    } catch (err) {
+      console.log('Error triggering email API:', err);
+    }
+
+    const createdRequest = submitProjectRequest(formData);
+    setIsSubmitting(false);
+    setSubmitSuccess(createdRequest);
   };
 
   const handleResetAndClose = () => {
@@ -150,7 +160,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
             </div>
             <div>
               <h3 className="text-base font-bold">Khởi Tạo Hồ Sơ Yêu Cầu Dự Án Web App</h3>
-              <p className="text-xs text-slate-500 font-mono">Nexus Engineering Studio • Báo giá nhanh trong 24h</p>
+              <p className="text-xs text-slate-500 font-mono">Quang Anh Studio • Báo giá nhanh trong 24h</p>
             </div>
           </div>
 
@@ -172,7 +182,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
             <div className="space-y-2 max-w-md mx-auto">
               <h3 className="text-2xl font-extrabold">Đã Gửi Hồ Sơ Dự Án Thành Công!</h3>
               <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-                Mã theo dõi yêu cầu của bạn là <span className="font-mono font-bold text-brand-primary px-2.5 py-1 rounded bg-brand-primary/10 border border-brand-primary/20">{submitSuccess.id}</span>. Đội ngũ Kỹ sư kiến trúc Nexus Studio sẽ xem xét hồ sơ và liên hệ báo giá trong vòng 24 giờ.
+                Mã theo dõi yêu cầu của bạn là <span className="font-mono font-bold text-brand-primary px-2.5 py-1 rounded bg-brand-primary/10 border border-brand-primary/20">{submitSuccess.id}</span>. Quang Anh Studio sẽ xem xét hồ sơ và liên hệ báo giá trong vòng 24 giờ.
               </p>
             </div>
 
@@ -500,7 +510,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                 <div className="space-y-5 animate-fadeIn">
                   <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
                     <h4 className="text-base font-bold">4. Ngân sách, Kỳ hạn bàn giao & Cam kết bảo mật NDA</h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Xác định khung ngân sách đầu tư dự kiến để Nexus Studio cân đối giải pháp phù hợp thị trường Việt Nam.</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">Xác định khung ngân sách đầu tư dự kiến để Quang Anh Studio cân đối giải pháp phù hợp thị trường Việt Nam.</p>
                   </div>
 
                   {/* Budget Options in VNĐ */}
@@ -604,7 +614,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                 <div className="space-y-4 animate-fadeIn">
                   <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
                     <h4 className="text-base font-bold">5. Rà soát & Xác nhận gửi hồ sơ yêu cầu</h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Kiểm tra lại toàn bộ thông tin trước khi chuyển hồ sơ cho phòng Kỹ thuật Nexus Studio.</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">Kiểm tra lại toàn bộ thông tin trước khi chuyển hồ sơ cho Quang Anh Studio.</p>
                   </div>
 
                   <div className="p-5 rounded-xl bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 space-y-4 text-xs">
@@ -669,7 +679,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
 
                   <div className="p-3.5 rounded-xl bg-brand-primary/10 border border-brand-primary/20 text-xs text-slate-700 dark:text-slate-300 flex items-start gap-2.5">
                     <ShieldCheck size={18} className="text-brand-primary shrink-0 mt-0.5" />
-                    <span>Hồ sơ yêu cầu của bạn sẽ được bảo mật 100%. Thông tin dự án sẽ hiển thị ngay trong danh sách theo dõi của Admin Control Center và Client Dashboard.</span>
+                    <span>Hồ sơ yêu cầu của bạn sẽ được gửi thẳng về Email của Quang Anh & bảo mật 100%. Thông tin dự án sẽ hiển thị ngay trong danh sách theo dõi của Admin Control Center và Client Dashboard.</span>
                   </div>
                 </div>
               )}
