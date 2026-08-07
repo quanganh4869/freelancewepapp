@@ -9,11 +9,14 @@ import { Footer } from './components/layout/Footer';
 import { Shield } from 'lucide-react';
 import { useScrollReveal } from './hooks/useScrollReveal';
 
-// Essential Home Sections Only
+// Freelancer Personal Homepage Sections
 import { HeroSection } from './components/home/HeroSection';
 import { ServicesSection } from './components/home/ServicesSection';
-import { CostEstimator } from './components/home/CostEstimator';
+import { PricingSection } from './components/home/PricingSection';
+import { ProcessSection } from './components/home/ProcessSection';
 import { PortfolioSection } from './components/home/PortfolioSection';
+import { AboutSection } from './components/home/AboutSection';
+import { ContactCTASection } from './components/home/ContactCTASection';
 
 // Dashboards & Request Form & Auth
 import { ProjectRequestModal } from './components/request/ProjectRequestModal';
@@ -83,11 +86,14 @@ const MainAppContent = () => {
           <ClientDashboard onOpenRequestModal={() => handleOpenRequestModal()} />
         ) : (
           <>
-            {/* Essential Streamlined Sections */}
+            {/* Streamlined Personal Freelancer Sections */}
             <HeroSection onOpenRequestModal={() => handleOpenRequestModal()} />
             <ServicesSection onSelectService={(service) => handleOpenRequestModal(service)} />
-            <CostEstimator onOpenRequestModal={(initial) => handleOpenRequestModal(initial)} />
+            <PricingSection onOpenRequestModal={(tierName) => handleOpenRequestModal(tierName)} />
+            <ProcessSection onOpenRequestModal={() => handleOpenRequestModal()} />
             <PortfolioSection onOpenRequestModal={(initial) => handleOpenRequestModal(initial)} />
+            <AboutSection onOpenRequestModal={() => handleOpenRequestModal()} />
+            <ContactCTASection onOpenRequestModal={() => handleOpenRequestModal()} />
           </>
         )}
       </main>
@@ -97,7 +103,7 @@ const MainAppContent = () => {
         <Footer onOpenRequestModal={() => handleOpenRequestModal()} />
       )}
 
-      {/* Multi-step Project Request Wizard Modal */}
+      {/* Project Request Wizard Modal */}
       <ProjectRequestModal
         isOpen={isRequestModalOpen}
         onClose={handleCloseRequestModal}

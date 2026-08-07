@@ -1,152 +1,98 @@
-import React, { useState } from 'react';
-import { useLanguage } from '../../context/LanguageContext';
+import React from 'react';
 import { useTheme } from '../../context/ThemeContext';
-import { Search, Compass, Palette, Code, CheckSquare, Rocket, Shield, ArrowRight } from 'lucide-react';
+import { MessageSquare, Layout, Code, CheckCircle, ArrowRight } from 'lucide-react';
 
 export const ProcessSection = ({ onOpenRequestModal }) => {
-  const { language, t } = useLanguage();
   const { isDark } = useTheme();
-  const [activeStep, setActiveStep] = useState(0);
 
   const steps = [
     {
       num: '01',
-      title: 'TƯ VẤN',
-      titleVi: '01 TƯ VẤN • Lắng Nghe & Lập Kế Hoạch',
-      titleEn: '01 CONSULTING • Discovery & Planning',
-      icon: Search,
-      details: language === 'en'
-        ? 'We listen to your business challenges, clarify core requirements, and create a clear roadmap.'
-        : 'Chúng tôi lắng nghe nhu cầu và bài toán kinh doanh của bạn, tư vấn giải pháp tối ưu nhất và lập kế hoạch triển khai rõ ràng từng bước.'
+      title: 'Trao đổi yêu cầu',
+      desc: 'Tiếp nhận nhu cầu, mong muốn giao diện và ngân sách dự kiến của bạn.',
+      icon: MessageSquare
     },
     {
       num: '02',
-      title: 'LẬP SƠ ĐỒ',
-      titleVi: '02 QUY TRÌNH • Sơ Đồ & Cấu Trúc Phần Mềm',
-      titleEn: '02 ARCHITECT • Workflow & System Architecture',
-      icon: Compass,
-      details: language === 'en'
-        ? 'Organizing database structures, system workflows, and breaking down features into clear stages.'
-        : 'Thống nhất sơ đồ quy trình công việc, cách thức quản lý dữ liệu và chia nhỏ tiến độ bàn giao minh bạch để bạn dễ theo dõi.'
+      title: 'Thống nhất giao diện & chi phí',
+      desc: 'Chốt cấu trúc trang, giao diện mẫu và báo giá minh bạch trước khi làm.',
+      icon: Layout
     },
     {
       num: '03',
-      title: 'THIẾT KẾ',
-      titleVi: '03 DESIGN • Thiết Kế Giao Diện Đẹp Mắt',
-      titleEn: '03 DESIGN • Beautiful UI/UX Prototyping',
-      icon: Palette,
-      details: language === 'en'
-        ? 'Crafting clean, attractive user interfaces. You can view and test the interactive design preview before coding begins.'
-        : 'Vẽ giao diện phần mềm hiện đại, sang trọng và dễ sử dụng. Bạn được duyệt mẫu thiết kế tương tác thực tế trước khi tiến hành viết code.'
+      title: 'Tiến hành phát triển',
+      desc: 'Lập trình, tối ưu tốc độ và kiểm thử hiển thị mượt trên di động & máy tính.',
+      icon: Code
     },
     {
       num: '04',
-      title: 'LẬP TRÌNH',
-      titleVi: '04 BUILD • Lập Trình Code Tự Viết 100%',
-      titleEn: '04 BUILD • Software Engineering',
-      icon: Code,
-      details: language === 'en'
-        ? 'Writing high-quality custom code for front-end interface and back-end database system.'
-        : 'Lập trình viên viết code chuẩn tay 100%, không dùng mẫu dựng sẵn. Đảm bảo ứng dụng chạy mượt mà, tốc độ cực nhanh và bảo mật an toàn.'
-    },
-    {
-      num: '05',
-      title: 'KIỂM THỬ',
-      titleVi: '05 TEST • Kiểm Tra Chất Lượng Kỹ Càng',
-      titleEn: '05 TEST • Quality Testing & Verification',
-      icon: CheckSquare,
-      details: language === 'en'
-        ? 'Testing all features thoroughly on phones, tablets, and computers to ensure zero bugs.'
-        : 'Chạy thử nghiệm toàn bộ tính năng trên Điện thoại, Máy tính bảng và Máy tính để bàn. Kiểm tra độ ổn định và xử lý triệt để mọi lỗi nhỏ.'
-    },
-    {
-      num: '06',
-      title: 'BÀN GIAO',
-      titleVi: '06 DEPLOY • Đưa Phần Mềm Vào Vận Hành',
-      titleEn: '06 DEPLOY • Launch & Training',
-      icon: Rocket,
-      details: language === 'en'
-        ? 'Deploying to your domain name and guiding your team on how to use the admin control panel.'
-        : 'Đưa ứng dụng chạy chính thức trên tên miền của bạn, chuyển giao toàn bộ mã nguồn và hướng dẫn nhân viên thao tác quản trị dễ dàng.'
-    },
-    {
-      num: '07',
-      title: 'BẢO HÀNH',
-      titleVi: '07 MAINTAIN • Bảo Hành & Hỗ Trợ 24/7',
-      titleEn: '07 MAINTAIN • 24/7 Support & Maintenance',
-      icon: Shield,
-      details: language === 'en'
-        ? 'Providing continuous technical support, regular data backups, and quick troubleshooting.'
-        : 'Túc trực hỗ trợ kỹ thuật 24/7, sao lưu dữ liệu tự động hàng ngày và sẵn sàng nâng cấp thêm tính năng mới khi công ty bạn mở rộng.'
+      title: 'Bàn giao website',
+      desc: 'Hướng dẫn bạn quản trị, bàn giao mã nguồn và bảo hành kỹ thuật lâu dài.',
+      icon: CheckCircle
     }
   ];
 
   return (
-    <section id="process" className={`py-24 border-b font-sans ${
+    <section id="process" className={`py-16 md:py-24 border-b font-sans ${
       isDark ? 'bg-studio-950 border-white/10 text-white' : 'bg-slate-50 border-slate-200 text-slate-900'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div className="text-center max-w-3xl mx-auto mb-14 reveal space-y-3">
           <div className="studio-badge">
-            <span>{t('processTag')}</span>
+            <span>QUY TRÌNH NĂNG ĐỘNG</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-            {t('processTitle')}
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white font-display">
+            Quy Trình 4 Bước Đơn Giản
           </h2>
           <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            {t('processDesc')}
+            Trao đổi trực tiếp, làm việc nhanh gọn và bàn giao đúng hẹn.
           </p>
         </div>
 
-        {/* Process Step Tabs */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 mb-10">
-          {steps.map((step, idx) => {
-            const Icon = step.icon;
-            const isActive = activeStep === idx;
+        {/* 4 Steps Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {steps.map((step, index) => {
+            const IconComponent = step.icon;
+            const delayClass = `reveal-delay-${index + 1}`;
             return (
-              <button
+              <div
                 key={step.num}
-                onClick={() => setActiveStep(idx)}
-                className={`p-4 rounded-xl text-left border transition-all ${
-                  isActive
-                    ? 'bg-brand-primary text-white border-brand-primary font-bold shadow-sm'
-                    : 'bg-white dark:bg-studio-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-300'
-                }`}
+                className={`studio-card p-6 rounded-2xl flex flex-col justify-between space-y-4 reveal ${delayClass}`}
               >
-                <div className="flex items-center justify-between mb-2">
-                  <span className={`font-mono text-xs ${isActive ? 'text-white' : 'text-brand-primary font-bold'}`}>
-                    {step.num}
-                  </span>
-                  <Icon size={16} />
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-3xl font-extrabold text-brand-primary">
+                      {step.num}
+                    </span>
+                    <div className="w-10 h-10 rounded-xl bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center text-brand-primary">
+                      <IconComponent size={20} />
+                    </div>
+                  </div>
+
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white font-display">
+                    {step.title}
+                  </h3>
+
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
+                    {step.desc}
+                  </p>
                 </div>
-                <p className="text-xs font-bold truncate">{step.title}</p>
-              </button>
+              </div>
             );
           })}
         </div>
 
-        {/* Active Stage Detail Panel */}
-        <div className="studio-card p-8 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-8 border-brand-primary/30 shadow-md">
-          <div className="space-y-4 max-w-2xl">
-            <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
-              {language === 'en' ? steps[activeStep].titleEn : steps[activeStep].titleVi}
-            </h3>
-            <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-              {steps[activeStep].details}
-            </p>
-          </div>
-
-          <div className="shrink-0">
-            <button
-              onClick={() => onOpenRequestModal()}
-              className="btn-primary py-3 px-6 text-sm"
-            >
-              <span>{t('processStageBtn')}</span>
-              <ArrowRight size={16} />
-            </button>
-          </div>
+        {/* Action Button */}
+        <div className="mt-12 text-center reveal">
+          <button
+            onClick={() => onOpenRequestModal()}
+            className="btn-primary py-3.5 px-8 text-sm font-bold font-display"
+          >
+            <span>Bắt Đầu Đặt Làm Website</span>
+            <ArrowRight size={16} />
+          </button>
         </div>
 
       </div>

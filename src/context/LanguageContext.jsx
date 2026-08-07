@@ -5,202 +5,126 @@ const LanguageContext = createContext();
 const translations = {
   vi: {
     // Topbar & Nav
-    hotline: 'Hotline tư vấn: +84 (0) 908 123 456',
-    email: 'Email: hello@nexusstudio.dev',
-    workingHours: 'Giờ làm việc: 8:00 - 18:00 (T2 - T7)',
+    hotline: 'Zalo / SĐT: 0908 123 456',
+    email: 'Email: quanganhqb04@gmail.com',
     login: 'Quản Trị Admin',
     logout: 'Đăng Xuất',
-    myProjects: 'Dự Án Của Tôi',
-    adminDashboard: 'Trang Quản Trị Admin',
-    startProject: 'Bắt Đầu Dự Án',
+    myProjects: 'Yêu Cầu Của Tôi',
+    adminDashboard: 'Quản Trị Admin',
+    startProject: 'Đặt Làm Website',
     
     // Nav Items
     servicesNav: 'Dịch Vụ',
-    calculatorNav: 'Tính Chi Phí',
+    pricingNav: 'Bảng Giá',
     processNav: 'Quy Trình',
-    portfolioNav: 'Dự Án Đã Làm',
-    aboutNav: 'Về Chúng Tôi',
-    whyUsNav: 'Vì Sao Chọn Nexus',
+    portfolioNav: 'Sản Phẩm Đã Làm',
+    aboutNav: 'Về Tôi',
 
     // Hero Section
-    heroStatus: 'QUANG ANH STUDIO',
-    heroBooking: 'Đang Nhận Dự Án Mới',
-    heroTitlePart1: 'Biến ý tưởng kinh doanh thành',
-    heroTitlePart2: 'Web App chạy thực tế.',
-    heroSubtitle: 'Chúng tôi giúp bạn xây dựng ứng dụng web, phần mềm quản lý và hệ thống bán hàng dễ sử dụng, tốc độ nhanh, vận hành ổn định và bảo mật cao.',
-    heroSubHighlight: 'dễ sử dụng, tốc độ nhanh, vận hành ổn định và bảo mật cao.',
-    heroCheck1: 'Code tự viết 100% (Không dùng mẫu sẵn)',
-    heroCheck2: 'Bảo mật dữ liệu & vận hành an toàn',
-    heroCheck3: 'Cam kết hỗ trợ kỹ thuật chu đáo 24/7',
-    heroCheck4: 'Bàn giao nhanh chỉ từ 3–6 tuần',
-    btnStart: 'Bắt Đầu Dự Án Ngay',
-    btnCalc: 'Tính Dự Toán Chi Phí',
-    stat1: 'Thiết Kế Tùy Chỉnh',
-    stat2: 'Bảo Hành Chu Đáo',
-    stat3: 'Thời Gian Bàn Giao',
-    techSupport: 'Tư Vấn Trực Tiếp 24/7',
-
-    // Stats Bar
-    statsCustomCode: 'Code Viết Tay Tùy Chỉnh 100%',
-    statsCustomSub: 'Thiết kế riêng theo nhu cầu kinh doanh',
-    statsUptime: 'Vận Hành Ổn Định 24/7',
-    statsUptimeSub: 'Cam kết hỗ trợ kỹ thuật lâu dài',
-    statsApps: '500+ Web App Đã Bàn Giao',
-    statsAppsSub: 'Sản phẩm phần mềm đang chạy thực tế',
-    statsExp: '15+ Năm Kinh Nghiệm',
-    statsExpSub: 'Đội ngũ lập trình viên chuyên nghiệp',
+    heroStatus: 'QUANG ANH • FREELANCER WEB DEVELOPER',
+    heroTitlePart1: 'Nhận Làm Website',
+    heroTitlePart2: 'Theo Yêu Cầu.',
+    heroSubtitle: 'Từ website cá nhân, landing page đến web app nhỏ — tôi trực tiếp thiết kế và phát triển theo nhu cầu của bạn.',
+    priceBadge: 'Từ 1.000.000đ · Thời gian từ 1 tuần',
+    btnStart: 'Đặt Làm Website',
+    btnPortfolio: 'Xem Sản Phẩm Đã Làm',
 
     // Services Section
-    servicesTag: 'DỊCH VỤ CỦA CHÚNG TÔI',
-    servicesTitle: 'Giải Pháp Phần Mềm Web Dễ Dùng Cho Doanh Nghiệp',
-    servicesDesc: 'Chúng tôi không dùng các mẫu website dựng sẵn sơ sài. Mỗi ứng dụng web đều được lập trình riêng để giải quyết đúng bài toán và giúp doanh nghiệp bạn phát triển.',
-    deliverablesLabel: 'Kết quả bàn giao:',
-    requestServiceBtn: 'Nhận Báo Giá Dịch Vụ Này',
+    servicesTag: 'DỊCH VỤ THIẾT KẾ WEB',
+    servicesTitle: 'Dịch Vụ Thiết Kế & Lập Trình Web Theo Nhu Cầu',
+    servicesDesc: 'Làm việc trực tiếp 1-1, không qua trung gian. Tôi xây dựng sản phẩm tối ưu giao diện, tốc độ nhanh và dễ sử dụng.',
 
-    // Calculator Section
-    calcTag: 'CÔNG CỤ TÍNH CHI PHÍ DỰ KIẾN',
-    calcTitle: 'Ước Tính Chi Phí Xây Dựng Web App',
-    calcDesc: 'Tính toán nhanh ngân sách thiết kế & lập trình phần mềm trong 30 giây. Báo giá minh bạch, hợp lý theo đúng quy mô của bạn.',
-    calcStep1: '1. Chọn loại hình ứng dụng Web bạn cần:',
-    calcStep2: '2. Quy mô người dùng sử dụng:',
-    calcStep3: '3. Số lượng tính năng chính cần có:',
-    calcStep4: '4. Gói hỗ trợ bảo trì sau bàn giao:',
-    calcTotalTime: 'THỜI GIAN HOÀN THÀNH DỰ KIẾN',
-    calcTotalBudget: 'DỰ TOÁN CHI PHÍ DỰ KIẾN',
-    calcGetQuote: 'Nhận Báo Giá Chi Tiết Ngay',
+    // Pricing Section
+    pricingTag: 'BẢNG GIÁ THAM KHẢO',
+    pricingTitle: 'Chi Phí Phù Hợp Cho Mọi Quy Mô Dự Án',
+    pricingDesc: 'Bảng giá minh bạch theo đúng quy mô và chức năng bạn cần. Có thể điều chỉnh linh hoạt theo ngân sách thực tế.',
+    pricingNote: '* Các mức giá trên mang tính chất tham khảo. Chi phí chính xác sẽ được thống nhất sau khi trao đổi chi tiết yêu cầu.',
+    btnDiscuss: 'Trao Đổi Yêu Cầu Cụ Thể',
 
     // Process Section
     processTag: 'QUY TRÌNH LÀM VIỆC',
-    processTitle: 'Quy Trình 7 Bước Đơn Giản & Minh Bạch',
-    processDesc: 'Từ ý tưởng ban đầu đến khi ứng dụng chạy hoàn chỉnh, chúng tôi đồng hành cùng bạn từng bước một cách rõ ràng và dễ hiểu.',
-    processStageBtn: 'Bắt Đầu Ngay Hôm Nay',
+    processTitle: 'Quy Trình 4 Bước Đơn Giản & Nhanh Gọn',
+    processDesc: 'Trực tiếp trao đổi, minh bạch chi phí và tiến độ. Bàn giao đúng hẹn.',
 
     // Portfolio Section
-    portfolioTag: 'DỰ ÁN TIÊU BIỂU',
-    portfolioTitle: 'Các Sản Phẩm Phần Mềm Đã Thực Hiện',
-    portfolioDesc: 'Khám phá những ứng dụng web thực tế chúng tôi đã thiết kế và bàn giao cho các khách hàng doanh nghiệp.',
-    allProjects: 'Tất cả Dự Án',
-    requestSimilar: 'Làm Web App Tương Tự',
+    portfolioTag: 'SẢN PHẨM THỰC TẾ',
+    portfolioTitle: 'Những Website Tôi Đã Trực Tiếp Triển Khai',
+    portfolioDesc: 'Xem qua các sản phẩm thực tế tôi đã thiết kế và bàn giao cho khách hàng cá nhân, shop và doanh nghiệp.',
 
     // About Section
-    aboutTag: 'TRIẾT LÝ LÀM VIỆC',
-    aboutTitle: 'Về Quang Anh Studio • Định Hướng Tận Tâm',
-    aboutDesc: 'Chúng tôi tạo ra những sản phẩm phần mềm thực sự mang lại hiệu quả kinh doanh, giúp doanh nghiệp tiết kiệm chi phí và quản lý dễ dàng hơn.',
-    aboutSlaTitle: 'Cam Kết Chất Lượng & Hỗ Trợ Dài Hạn',
+    aboutTag: 'VỀ TÔI',
+    aboutTitle: 'Quang Anh — Freelancer Lập Trình Web Theo Yêu Cầu',
+    aboutDesc: 'Tôi là freelancer chuyên thiết kế và phát triển website theo yêu cầu. Tôi trực tiếp trao đổi, xây dựng và bàn giao sản phẩm, giúp bạn có một website chuyên nghiệp, mượt mà với chi phí hợp lý nhất.',
 
-    // Why Us Section
-    whyUsTag: 'VÌ SAO CHỌN QUANG ANH',
-    whyUsTitle: 'Lý Do Khách Hàng Tin Tưởng Quang Anh Studio',
-    whyUsDesc: 'Chúng tôi luôn đặt sự dễ dùng, tính ổn định và sự hài lòng của khách hàng lên hàng đầu.',
-
-    // CTA Section
-    ctaTag: 'BẮT ĐẦU DỰ ÁN NGAY',
-    ctaTitle: 'Bạn đang có ý tưởng cần xây dựng thành phần mềm?',
-    ctaDesc: 'Hãy chia sẻ với chúng tôi về mong muốn của bạn. Đội ngũ Quang Anh sẽ tư vấn giải pháp phù hợp nhất và gửi báo giá chi tiết trong 24 giờ.',
-    ctaEmailBtn: 'Gửi Email Trực Tiếp',
+    // Contact CTA
+    ctaTitle: 'Bạn đang cần một website?',
+    ctaDesc: 'Hãy gửi yêu cầu, tôi sẽ xem qua và trao đổi trực tiếp với bạn về chi phí, thời gian và giải pháp phù hợp nhất.',
+    btnSubmitRequest: 'Gửi Yêu Cầu Ngay',
 
     // Footer
-    footerDesc: 'Quang Anh Studio chuyên thiết kế & lập trình Web App dễ sử dụng cho doanh nghiệp và các thương hiệu bán hàng. Giúp bạn quản lý hiệu quả và tăng trưởng doanh thu.',
+    footerDesc: 'Quang Anh Freelancer — Chuyên nhận làm website cá nhân, landing page, web bán hàng và web app theo yêu cầu với chi phí từ 1 triệu đồng.',
     copyright: 'Tất cả quyền được bảo lưu.'
   },
   en: {
     // Topbar & Nav
-    hotline: 'Hotline: +84 (0) 908 123 456',
-    email: 'Email: hello@nexusstudio.dev',
-    workingHours: 'Working Hours: 8:00 AM - 6:00 PM (Mon - Sat)',
+    hotline: 'Phone / Zalo: +84 908 123 456',
+    email: 'Email: quanganhqb04@gmail.com',
     login: 'Admin Login',
     logout: 'Log Out',
-    myProjects: 'My Projects',
-    adminDashboard: 'Admin Control',
-    startProject: 'Start a Project',
+    myProjects: 'My Requests',
+    adminDashboard: 'Admin Center',
+    startProject: 'Order a Website',
 
     // Nav Items
     servicesNav: 'Services',
-    calculatorNav: 'Cost Calculator',
+    pricingNav: 'Pricing',
     processNav: 'Process',
-    portfolioNav: 'Projects',
-    aboutNav: 'About Us',
-    whyUsNav: 'Why Choose Us',
+    portfolioNav: 'Portfolio',
+    aboutNav: 'About Me',
 
     // Hero Section
-    heroStatus: 'QUANG ANH STUDIO',
-    heroBooking: 'Now Accepting New Projects',
-    heroTitlePart1: 'Turn your business ideas into',
-    heroTitlePart2: 'working Web Apps.',
-    heroSubtitle: 'We help you build fast, easy-to-use web applications and software that streamline your business and boost sales.',
-    heroSubHighlight: 'easy-to-use, fast, reliable, and secure.',
-    heroCheck1: '100% Custom Code (No ready-made templates)',
-    heroCheck2: 'Safe Data & Secure System Operation',
-    heroCheck3: 'Dedicated 24/7 Tech Support & Warranty',
-    heroCheck4: 'Fast Handover in 3–6 Weeks',
-    btnStart: 'Start Your Project Now',
-    btnCalc: 'Calculate Estimated Cost',
-    stat1: 'Custom Design',
-    stat2: 'Reliable Support',
-    stat3: 'Fast Delivery',
-    techSupport: '24/7 Direct Consultation',
-
-    // Stats Bar
-    statsCustomCode: '100% Custom Handcrafted Code',
-    statsCustomSub: 'Tailored specifically for your business',
-    statsUptime: '24/7 Reliable Operation',
-    statsUptimeSub: 'Long-term technical support commitment',
-    statsApps: '500+ Web Apps Delivered',
-    statsAppsSub: 'Real working software products',
-    statsExp: '15+ Years Experience',
-    statsExpSub: 'Professional software engineering team',
+    heroStatus: 'QUANG ANH • FREELANCER WEB DEVELOPER',
+    heroTitlePart1: 'Custom Web Development',
+    heroTitlePart2: 'On Demand.',
+    heroSubtitle: 'From personal websites, landing pages to small web apps — I directly design and develop tailored to your exact needs.',
+    priceBadge: 'From 1,000,000 VND · Delivered from 1 week',
+    btnStart: 'Order a Website',
+    btnPortfolio: 'View Portfolio',
 
     // Services Section
-    servicesTag: 'OUR SERVICES',
-    servicesTitle: 'Easy-to-Use Web Software Solutions for Businesses',
-    servicesDesc: 'We do not build generic templates. Every web application is custom tailored to solve your exact business needs and help you grow.',
-    deliverablesLabel: 'What you get:',
-    requestServiceBtn: 'Get Quote For This Service',
+    servicesTag: 'SERVICES',
+    servicesTitle: 'Custom Web Design & Development Services',
+    servicesDesc: 'Direct 1-on-1 collaboration with no middlemen. Fast, clean, responsive, and easy to use.',
 
-    // Calculator Section
-    calcTag: 'ESTIMATED COST CALCULATOR',
-    calcTitle: 'Estimate Your Web App Development Cost',
-    calcDesc: 'Quickly calculate your software development budget in 30 seconds. Transparent and affordable pricing tailored to your scale.',
-    calcStep1: '1. Choose the type of Web App you need:',
-    calcStep2: '2. Expected user scale:',
-    calcStep3: '3. Number of core features:',
-    calcStep4: '4. Maintenance & support package:',
-    calcTotalTime: 'ESTIMATED COMPLETION TIME',
-    calcTotalBudget: 'ESTIMATED COST BUDGET',
-    calcGetQuote: 'Get Detailed Quote Now',
+    // Pricing Section
+    pricingTag: 'TRANSPARENT PRICING',
+    pricingTitle: 'Affordable Pricing for Any Project Scope',
+    pricingDesc: 'Clear rates based on features and scope. Flexible to fit your budget.',
+    pricingNote: '* Rates listed are reference starting prices and will be finalized after discussing your specific requirements.',
+    btnDiscuss: 'Discuss Your Requirements',
 
     // Process Section
-    processTag: 'OUR WORKFLOW',
-    processTitle: '7 Simple & Transparent Steps',
-    processDesc: 'From initial idea to launch, we guide you step-by-step in a clear and easy-to-understand way.',
-    processStageBtn: 'Get Started Today',
+    processTag: 'WORKFLOW',
+    processTitle: 'Simple 4-Step Process',
+    processDesc: 'Clear communication, transparent costs, and on-time delivery.',
 
     // Portfolio Section
-    portfolioTag: 'FEATURED PROJECTS',
-    portfolioTitle: 'Real Software Products We Have Built',
-    portfolioDesc: 'Explore real-world web applications we have designed and delivered for business clients.',
-    allProjects: 'All Projects',
-    requestSimilar: 'Build Similar Web App',
+    portfolioTag: 'FEATURED WORK',
+    portfolioTitle: 'Real Web Projects Delivered to Clients',
+    portfolioDesc: 'Explore real-world websites designed and built directly for personal clients, shops, and small businesses.',
 
     // About Section
-    aboutTag: 'OUR PHILOSOPHY',
-    aboutTitle: 'About Quang Anh Studio • Dedicated & Caring',
-    aboutDesc: 'We build web software that delivers real business results, helping you save costs and manage operations easily.',
-    aboutSlaTitle: 'Quality Assurance & Long-Term Support',
+    aboutTag: 'ABOUT ME',
+    aboutTitle: 'Quang Anh — Freelancer Web Developer',
+    aboutDesc: 'I am a freelance developer specializing in custom website design and development. I directly handle every step to deliver clean, professional websites within your budget.',
 
-    // Why Us Section
-    whyUsTag: 'WHY CHOOSE QUANG ANH',
-    whyUsTitle: 'Why Clients Trust Quang Anh Studio',
-    whyUsDesc: 'We always prioritize ease of use, stability, and customer satisfaction.',
-
-    // CTA Section
-    ctaTag: 'START YOUR PROJECT TODAY',
-    ctaTitle: 'Have a business idea ready to build into software?',
-    ctaDesc: 'Tell us what you need. Our team will consult the best solution and send a detailed quote within 24 hours.',
-    ctaEmailBtn: 'Send Direct Email',
+    // Contact CTA
+    ctaTitle: 'Need a website for your project?',
+    ctaDesc: 'Send me your details. I will review and discuss estimated cost, timeline, and the best solution with you.',
+    btnSubmitRequest: 'Submit Request',
 
     // Footer
-    footerDesc: 'Quang Anh Studio specializes in building easy-to-use Web Apps for businesses and merchants. Helping you manage efficiently and boost revenue.',
+    footerDesc: 'Quang Anh Freelancer — Custom website development starting from 1,000,000 VND.',
     copyright: 'All rights reserved.'
   }
 };

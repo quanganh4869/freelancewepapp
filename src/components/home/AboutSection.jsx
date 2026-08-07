@@ -1,116 +1,134 @@
 import React from 'react';
-import { useLanguage } from '../../context/LanguageContext';
 import { useTheme } from '../../context/ThemeContext';
-import { ShieldCheck, Code, Cpu, Users, CheckCircle2 } from 'lucide-react';
+import { Check, Mail, Phone, User, ShieldCheck, HeartHandshake } from 'lucide-react';
 
-export const AboutSection = () => {
-  const { t, language } = useLanguage();
+export const AboutSection = ({ onOpenRequestModal }) => {
   const { isDark } = useTheme();
 
-  const principles = [
-    {
-      num: '01',
-      icon: Code,
-      title: 'Code Tự Viết Tùy Chỉnh 100%',
-      titleVi: 'Code Tự Viết Tùy Chỉnh 100%',
-      desc: 'Chúng tôi không sử dụng các giao diện mẫu có sẵn chất lượng kém. Mọi dòng code đều được lập trình riêng tối ưu đúng theo nhu cầu quản lý của bạn.'
-    },
-    {
-      num: '02',
-      icon: Cpu,
-      title: 'Tốc Độ Nhanh & Dễ Mở Rộng',
-      titleVi: 'Tốc Độ Nhanh & Dễ Mở Rộng',
-      desc: 'Áp dụng các công nghệ ứng dụng web hiện đại giúp trang web tải cực nhanh dưới 1 giây, hoạt động mượt mà và dễ dàng thêm tính năng mới về sau.'
-    },
-    {
-      num: '03',
-      icon: ShieldCheck,
-      title: 'Bảo Mật & An Toàn Dữ Liệu',
-      titleVi: 'Bảo Mật & An Toàn Dữ Liệu',
-      desc: 'Tuân thủ các tiêu chuẩn bảo mật dữ liệu nghiêm ngặt, tự động sao lưu định kỳ giúp bảo vệ thông tin khách hàng và tài sản của doanh nghiệp.'
-    },
-    {
-      num: '04',
-      icon: Users,
-      title: 'Hỗ Trợ Chu Đáo & Đồng Hành',
-      titleVi: 'Hỗ Trợ Chu Đáo & Đồng Hành',
-      desc: 'Báo cáo tiến độ rõ ràng hàng tuần, hướng dẫn sử dụng tận tình cho nhân viên và luôn sẵn sàng hỗ trợ kỹ thuật nhanh chóng sau khi bàn giao.'
-    }
-  ];
-
   return (
-    <section id="about" className={`py-24 border-b font-sans ${
-      isDark ? 'bg-studio-950 border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900'
+    <section id="about" className={`py-16 md:py-24 border-b font-sans ${
+      isDark ? 'bg-studio-950 border-white/10 text-white' : 'bg-slate-50 border-slate-200 text-slate-900'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Editorial Heading Statement */}
-        <div className="max-w-4xl mb-16 space-y-6">
-          <div className="studio-badge">
-            <span>{t('aboutTag')}</span>
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight text-slate-900 dark:text-white">
-            {language === 'en' ? (
-              <>
-                "We don't just build websites. <br />
-                We build tools that help your business grow."
-              </>
-            ) : (
-              <>
-                "Chúng tôi không chỉ làm website đẹp, <br />
-                chúng tôi tạo ra công cụ giúp doanh nghiệp của bạn phát triển."
-              </>
-            )}
-          </h2>
-          <p className="text-slate-600 dark:text-slate-400 text-base leading-relaxed max-w-2xl">
-            Nexus Studio là đối tác đồng hành cùng các Doanh nghiệp & Cửa hàng kinh doanh. Chúng tôi tập trung tạo ra phần mềm thực sự hữu ích, dễ sử dụng và đem lại giá trị thực tế.
-          </p>
-        </div>
-
-        {/* 2-Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          {principles.map((item, idx) => {
-            const IconComp = item.icon;
-            return (
-              <div
-                key={idx}
-                className="studio-card p-8 rounded-2xl space-y-4"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-sm font-bold text-brand-primary">
-                    {item.num}
-                  </span>
-                  <IconComp size={20} className="text-slate-500 dark:text-slate-400" />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          
+          {/* Left Column: Personal Photo & Profile Card */}
+          <div className="lg:col-span-5 reveal">
+            <div className={`p-7 rounded-2xl border space-y-6 shadow-md ${
+              isDark ? 'bg-studio-900 border-slate-800' : 'bg-white border-slate-200'
+            }`}>
+              
+              <div className="flex items-center gap-4 border-b border-slate-200 dark:border-slate-800 pb-5">
+                <div className="w-16 h-16 rounded-2xl bg-brand-primary text-white font-mono font-bold flex items-center justify-center text-xl shadow-md shrink-0">
+                  QA
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">{item.titleVi}</h3>
+                  <h3 className="text-xl font-extrabold text-slate-900 dark:text-white font-display">Nguyễn Quang Anh</h3>
+                  <p className="text-xs font-mono text-brand-primary font-bold mt-0.5">Freelancer Web Developer</p>
+                  <p className="text-[11px] text-slate-500 font-mono">Việt Nam • Hỗ trợ toàn quốc</p>
                 </div>
-                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                  {item.desc}
+              </div>
+
+              <div className="space-y-3 text-xs font-mono">
+                <div className="flex justify-between py-1.5 border-b border-slate-100 dark:border-slate-800">
+                  <span className="text-slate-500">Chuyên môn:</span>
+                  <span className="font-bold text-slate-900 dark:text-white">React, Next.js, Node.js</span>
+                </div>
+                <div className="flex justify-between py-1.5 border-b border-slate-100 dark:border-slate-800">
+                  <span className="text-slate-500">Hình thức:</span>
+                  <span className="font-bold text-brand-primary">Trực tiếp 1-1 (Freelance)</span>
+                </div>
+                <div className="flex justify-between py-1.5 border-b border-slate-100 dark:border-slate-800">
+                  <span className="text-slate-500">Ngân sách nhận làm:</span>
+                  <span className="font-bold text-slate-900 dark:text-white">Từ 1.000.000đ trở lên</span>
+                </div>
+                <div className="flex justify-between py-1.5">
+                  <span className="text-slate-500">Zalo / Hotline:</span>
+                  <a href="tel:0908123456" className="font-bold text-brand-primary hover:underline">0908 123 456</a>
+                </div>
+              </div>
+
+              <div className="p-4 rounded-xl bg-brand-primary/10 border border-brand-primary/20 text-xs text-slate-700 dark:text-slate-300 space-y-1">
+                <p className="font-bold text-brand-primary font-display flex items-center gap-1.5">
+                  <HeartHandshake size={15} />
+                  <span>Cam kết trách nhiệm</span>
+                </p>
+                <p className="text-[11px] leading-relaxed">
+                  Làm việc trực tiếp không qua môi giới hay sale. Báo giá đúng, làm chuẩn và bàn giao đúng hẹn.
                 </p>
               </div>
-            );
-          })}
-        </div>
 
-        {/* Specs Banner */}
-        <div className="studio-card p-8 rounded-2xl bg-slate-50 dark:bg-studio-900 flex flex-col lg:flex-row items-center justify-between gap-8 border-brand-primary/30">
-          <div className="space-y-2 max-w-xl">
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white">{t('aboutSlaTitle')}</h3>
-            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              Tất cả phần mềm khi bàn giao đều được bàn giao đầy đủ mã nguồn (Full Source Code), tài liệu hướng dẫn và cam kết bảo hành hỗ trợ dài hạn theo hợp đồng.
-            </p>
-          </div>
-          <div className="flex flex-wrap items-center gap-3 text-xs font-mono">
-            <div className="p-3.5 rounded-xl bg-white dark:bg-studio-950 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 flex items-center gap-2 font-bold shadow-sm">
-              <CheckCircle2 size={15} className="text-brand-primary" />
-              <span>Bàn Giao Trọn Bộ Mã Nguồn</span>
-            </div>
-            <div className="p-3.5 rounded-xl bg-white dark:bg-studio-950 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 flex items-center gap-2 font-bold shadow-sm">
-              <CheckCircle2 size={15} className="text-brand-primary" />
-              <span>Bảo Hành & Hỗ Trợ 24/7</span>
             </div>
           </div>
+
+          {/* Right Column: Personal Story & Value Proposition */}
+          <div className="lg:col-span-7 space-y-6 reveal reveal-delay-1">
+            
+            <div className="studio-badge">
+              <User size={14} />
+              <span>VỀ TÔI</span>
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white font-display">
+              Tôi Là Quang Anh — Freelancer Lập Trình Web Theo Yêu Cầu
+            </h2>
+
+            <div className="space-y-4 text-slate-700 dark:text-slate-300 text-sm leading-relaxed font-medium">
+              <p>
+                Tôi là freelancer chuyên thiết kế và phát triển website theo yêu cầu. Tôi trực tiếp trao đổi, xây dựng và bàn giao sản phẩm, giúp khách hàng có một website phù hợp với nhu cầu và ngân sách.
+              </p>
+              <p>
+                Khác với các công ty agency hay đội ngũ cồng kềnh với nhiều chi phí vận hành, khi làm việc với tôi, bạn sẽ trao đổi trực tiếp 1-1 với người trực tiếp viết mã cho website của bạn.
+              </p>
+            </div>
+
+            {/* Why Work With Quang Anh */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs font-bold font-display text-slate-800 dark:text-slate-200">
+              <div className="p-3.5 rounded-xl bg-white dark:bg-studio-900 border border-slate-200 dark:border-slate-800 shadow-sm flex items-start gap-2.5">
+                <ShieldCheck size={18} className="text-brand-primary shrink-0 mt-0.5" />
+                <div>
+                  <span>Chi phí hợp lý từ 1 triệuđ</span>
+                  <p className="text-[11px] font-normal text-slate-500 font-sans mt-0.5">Không phát sinh chi phí thừa không cần thiết</p>
+                </div>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-white dark:bg-studio-900 border border-slate-200 dark:border-slate-800 shadow-sm flex items-start gap-2.5">
+                <ShieldCheck size={18} className="text-brand-primary shrink-0 mt-0.5" />
+                <div>
+                  <span>Giao diện đẹp & Tải nhanh</span>
+                  <p className="text-[11px] font-normal text-slate-500 font-sans mt-0.5">Tối ưu mượt mà trên di động và máy tính</p>
+                </div>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-white dark:bg-studio-900 border border-slate-200 dark:border-slate-800 shadow-sm flex items-start gap-2.5">
+                <ShieldCheck size={18} className="text-brand-primary shrink-0 mt-0.5" />
+                <div>
+                  <span>Bàn giao mã nguồn 100%</span>
+                  <p className="text-[11px] font-normal text-slate-500 font-sans mt-0.5">Bạn toàn quyền sở hữu website của mình</p>
+                </div>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-white dark:bg-studio-900 border border-slate-200 dark:border-slate-800 shadow-sm flex items-start gap-2.5">
+                <ShieldCheck size={18} className="text-brand-primary shrink-0 mt-0.5" />
+                <div>
+                  <span>Bảo hành & Hướng dẫn tận tình</span>
+                  <p className="text-[11px] font-normal text-slate-500 font-sans mt-0.5">Hỗ trợ sửa lỗi và hướng dẫn cập nhật bài viết</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-2">
+              <button
+                onClick={() => onOpenRequestModal()}
+                className="btn-primary py-3.5 px-8 text-sm font-bold font-display"
+              >
+                <span>Trao Đổi Trực Tiếp Với Quang Anh</span>
+              </button>
+            </div>
+
+          </div>
+
         </div>
 
       </div>

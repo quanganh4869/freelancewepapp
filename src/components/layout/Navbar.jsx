@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
 import { useLanguage } from '../../context/LanguageContext';
-import { Menu, X, Shield, LayoutDashboard, LogOut, Sun, Moon, Globe } from 'lucide-react';
+import { Menu, X, Shield, LayoutDashboard, LogOut, Sun, Moon, Globe, Send } from 'lucide-react';
 
 export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
   const { activeRole, currentUser, logout } = useAuth();
@@ -12,8 +12,10 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
 
   const navItems = [
     { label: t('servicesNav'), href: '#services', id: 'services' },
-    { label: t('calculatorNav'), href: '#cost-estimator', id: 'cost-estimator' },
+    { label: t('pricingNav'), href: '#pricing', id: 'pricing' },
+    { label: t('processNav'), href: '#process', id: 'process' },
     { label: t('portfolioNav'), href: '#portfolio', id: 'portfolio' },
+    { label: t('aboutNav'), href: '#about', id: 'about' },
   ];
 
   return (
@@ -23,25 +25,25 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           
-          {/* Authentic Brand Identity - QUANG ANH STUDIO */}
+          {/* Authentic Personal Identity - QUANG ANH FREELANCER */}
           <a href="#" className="flex items-center gap-3 group">
             <div className="w-9 h-9 rounded-lg bg-brand-primary text-white flex items-center justify-center font-mono font-bold text-sm shadow-sm transition-transform group-hover:scale-105">
               <span>QA</span>
             </div>
             <div className="flex flex-col leading-none">
               <span className="font-extrabold text-base tracking-tight font-display text-slate-900 dark:text-white">
-                QUANG ANH <span className="text-brand-primary font-mono text-[11px] font-bold tracking-widest ml-1 uppercase">STUDIO</span>
+                QUANG ANH <span className="text-brand-primary font-mono text-[10px] font-bold tracking-wider ml-1 uppercase">FREELANCER</span>
               </span>
               <span className={`text-[10px] font-mono tracking-wider uppercase mt-1 ${
                 isDark ? 'text-slate-400' : 'text-slate-500'
               }`}>
-                Web App Architect
+                Web Developer
               </span>
             </div>
           </a>
 
-          {/* Center Editorial Links */}
-          <nav className="hidden md:flex items-center gap-8">
+          {/* Center Links */}
+          <nav className="hidden lg:flex items-center gap-7">
             {navItems.map((item) => (
               <a
                 key={item.id}
@@ -55,13 +57,13 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
             ))}
           </nav>
 
-          {/* Right Action Controls */}
-          <div className="hidden md:flex items-center gap-3 text-xs font-medium">
+          {/* Right Controls */}
+          <div className="hidden sm:flex items-center gap-3 text-xs font-medium">
             
             {/* Language Switcher */}
             <button
               onClick={toggleLanguage}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border font-mono font-semibold transition-colors ${
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border font-mono font-semibold transition-colors ${
                 isDark
                   ? 'bg-studio-900 border-slate-800 text-slate-300 hover:border-slate-700'
                   : 'bg-slate-100 border-slate-200 text-slate-700 hover:border-slate-300'
@@ -69,10 +71,10 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
               title="Switch Language"
             >
               <Globe size={13} className="text-brand-primary" />
-              <span>{language === 'vi' ? 'TIẾNG VIỆT' : 'ENGLISH'}</span>
+              <span>{language === 'vi' ? 'VIE' : 'ENG'}</span>
             </button>
 
-            {/* Dark/Light Theme Switcher */}
+            {/* Dark/Light Switcher */}
             <button
               onClick={toggleTheme}
               className={`p-2 rounded-lg border transition-colors ${
@@ -85,34 +87,35 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
               {isDark ? <Sun size={15} /> : <Moon size={15} />}
             </button>
 
+            {/* Order Website Primary CTA Button */}
+            <button
+              onClick={() => onOpenRequestModal()}
+              className="btn-primary py-2 px-4 text-xs font-bold font-display shadow-sm"
+            >
+              <Send size={13} />
+              <span>{t('startProject')}</span>
+            </button>
+
+            {/* Admin Login Button */}
             {activeRole === 'GUEST' ? (
               <button
                 onClick={onOpenAuthModal}
-                className={`flex items-center px-4 py-2 rounded-lg transition-colors font-bold border font-display ${
-                  isDark ? 'border-slate-800 text-slate-300 hover:text-white hover:border-brand-primary' : 'border-slate-200 text-slate-700 hover:text-slate-900 hover:border-brand-primary'
+                className={`flex items-center px-3 py-1.5 rounded-lg transition-colors font-mono text-[11px] font-semibold border ${
+                  isDark ? 'border-slate-800 text-slate-400 hover:text-white hover:border-brand-primary' : 'border-slate-200 text-slate-600 hover:text-slate-900 hover:border-brand-primary'
                 }`}
+                title="Quản Trị Admin"
               >
-                <span>{t('login')}</span>
+                <span>Admin</span>
               </button>
             ) : (
-              <div className="flex items-center gap-3">
-                {activeRole === 'USER' && (
-                  <button
-                    onClick={() => onNavigate('client-dashboard')}
-                    className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-brand-primary/10 border border-brand-primary/20 text-brand-primary font-bold font-display"
-                  >
-                    <LayoutDashboard size={13} />
-                    <span>{t('myProjects')}</span>
-                  </button>
-                )}
-
+              <div className="flex items-center gap-2">
                 {activeRole === 'ADMIN' && (
                   <button
                     onClick={() => onNavigate('admin-dashboard')}
-                    className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-500 font-bold font-display"
+                    className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-500 font-bold font-display text-[11px]"
                   >
                     <Shield size={13} />
-                    <span>{t('adminDashboard')}</span>
+                    <span>Admin</span>
                   </button>
                 )}
 
@@ -128,7 +131,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
           </div>
 
           {/* Mobile Hamburger Toggle */}
-          <div className="flex md:hidden items-center gap-2">
+          <div className="flex sm:hidden items-center gap-2">
             <button
               onClick={toggleTheme}
               className="p-2 rounded-lg border border-slate-700 text-slate-300"
@@ -148,7 +151,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className={`md:hidden border-b px-4 py-6 space-y-4 font-sans ${
+        <div className={`sm:hidden border-b px-4 py-6 space-y-4 font-sans ${
           isDark ? 'bg-studio-900 border-slate-800' : 'bg-white border-slate-200'
         }`}>
           <nav className="flex flex-col space-y-3">
@@ -157,7 +160,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
                 key={item.id}
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`text-sm font-semibold transition-colors py-1 ${
+                className={`text-sm font-bold font-display transition-colors py-1 ${
                   isDark ? 'text-slate-200 hover:text-brand-primary' : 'text-slate-800 hover:text-brand-primary'
                 }`}
               >
@@ -168,23 +171,35 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
           
           <div className="pt-4 border-t border-slate-800 flex flex-col gap-3">
             <button
-              onClick={toggleLanguage}
-              className="flex items-center justify-between px-3 py-2 rounded-lg bg-slate-800 text-xs text-slate-200 font-mono"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenRequestModal();
+              }}
+              className="btn-primary w-full py-2.5 text-xs font-bold font-display"
             >
-              <span>Ngôn ngữ / Language:</span>
-              <span className="font-bold text-brand-primary">{language === 'vi' ? 'TIẾNG VIỆT' : 'ENGLISH'}</span>
+              <span>{t('startProject')}</span>
             </button>
-            {activeRole === 'GUEST' && (
+
+            <div className="flex items-center justify-between">
               <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenAuthModal();
-                }}
-                className="btn-primary w-full py-2.5 text-xs font-bold"
+                onClick={toggleLanguage}
+                className="text-xs font-mono font-semibold text-brand-primary"
               >
-                <span>{t('login')}</span>
+                {language === 'vi' ? 'EN - English' : 'VI - Tiếng Việt'}
               </button>
-            )}
+
+              {activeRole === 'GUEST' && (
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenAuthModal();
+                  }}
+                  className="text-xs font-mono text-slate-400 hover:text-white"
+                >
+                  Admin Login
+                </button>
+              )}
+            </div>
           </div>
         </div>
       )}

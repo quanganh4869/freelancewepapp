@@ -1,31 +1,29 @@
 import React from 'react';
-import { useLanguage } from '../../context/LanguageContext';
 import { useTheme } from '../../context/ThemeContext';
-import { Mail, Phone, MapPin, Github } from 'lucide-react';
+import { Mail, Phone, MapPin, Github, Send } from 'lucide-react';
 
 export const Footer = ({ onOpenRequestModal }) => {
-  const { t } = useLanguage();
   const { isDark } = useTheme();
 
   return (
-    <footer className={`border-t pt-16 pb-12 font-sans transition-colors ${
+    <footer className={`border-t pt-14 pb-10 font-sans transition-colors ${
       isDark ? 'bg-studio-950 border-slate-800/80 text-slate-400' : 'bg-slate-900 border-slate-800 text-slate-300'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 border-b border-slate-800">
           
-          {/* Col 1: Developer Personal Info & Identity */}
-          <div className="lg:col-span-2 space-y-4">
+          {/* Col 1: Developer Personal Identity */}
+          <div className="space-y-4">
             <div className="flex items-center gap-2.5">
               <div className="w-9 h-9 rounded-lg bg-brand-primary text-white flex items-center justify-center font-mono font-bold text-sm">
                 <span>QA</span>
               </div>
               <span className="font-extrabold text-lg tracking-tight text-white font-display">
-                QUANG ANH <span className="text-brand-primary font-mono text-[11px] font-bold tracking-widest ml-1">STUDIO</span>
+                QUANG ANH <span className="text-brand-primary font-mono text-[10px] font-bold tracking-wider ml-1 uppercase">FREELANCER</span>
               </span>
             </div>
-            <p className="text-xs text-slate-400 max-w-md leading-relaxed">
-              Quang Anh chuyên thiết kế & lập trình ứng dụng Web App tùy chỉnh cho Doanh nghiệp và Startup. Giúp tự động hóa quy trình quản lý, tiết kiệm chi phí và tăng trưởng doanh thu thực tế.
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Tôi là freelancer chuyên thiết kế và phát triển website theo yêu cầu. Giá cả minh bạch từ 1 triệu đồng, làm việc trực tiếp 1-1 và đúng hẹn.
             </p>
             <div className="font-mono text-[11px] text-brand-primary font-bold flex items-center gap-2">
               <Github size={14} />
@@ -37,41 +35,41 @@ export const Footer = ({ onOpenRequestModal }) => {
 
           {/* Col 2: Services */}
           <div>
-            <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider mb-4 font-display">Dịch Vụ Nổi Bật</h4>
-            <ul className="space-y-2.5 text-xs">
-              <li><a href="#services" className="hover:text-white transition-colors">Custom Web App</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Phần Mềm Dịch Vụ SaaS</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Trang Quản Trị & Admin System</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Web App Bán Hàng B2B</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Công Cụ Tự Động Hóa Nội Bộ</a></li>
+            <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider mb-3 font-display">Dịch Vụ</h4>
+            <ul className="space-y-2 text-xs">
+              <li><a href="#services" className="hover:text-white transition-colors">Website Cá Nhân & Portfolio</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Landing Page Bán Hàng</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Website Doanh Nghiệp & Shop</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Web App & Dashboard Nhỏ</a></li>
             </ul>
           </div>
 
           {/* Col 3: Navigation */}
           <div>
-            <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider mb-4 font-display">Điều Hướng</h4>
-            <ul className="space-y-2.5 text-xs">
-              <li><a href="#cost-estimator" className="hover:text-white transition-colors">Tính Chi Phí Dự Kiến</a></li>
-              <li><a href="#portfolio" className="hover:text-white transition-colors">Dự Án Đã Làm</a></li>
-              <li><button onClick={() => onOpenRequestModal()} className="text-brand-primary hover:underline font-bold font-display">Gửi Yêu Cầu Báo Giá</button></li>
+            <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider mb-3 font-display">Bảng Giá & Dự Án</h4>
+            <ul className="space-y-2 text-xs">
+              <li><a href="#pricing" className="hover:text-white transition-colors">Bảng Giá Tham Khảo (Từ 1 Tr)</a></li>
+              <li><a href="#process" className="hover:text-white transition-colors">Quy Trình 4 Bước</a></li>
+              <li><a href="#portfolio" className="hover:text-white transition-colors">Dự Án Đã Triển Khai</a></li>
+              <li><button onClick={() => onOpenRequestModal()} className="text-brand-primary hover:underline font-bold font-display">Gửi Yêu Cầu Đặt Web</button></li>
             </ul>
           </div>
 
           {/* Col 4: Personal Contact Info */}
           <div>
-            <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider mb-4 font-display">Thông Tin Liên Hệ</h4>
-            <ul className="space-y-3 text-xs">
+            <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider mb-3 font-display">Liên Hệ Trực Tiếp</h4>
+            <ul className="space-y-2.5 text-xs">
               <li className="flex items-center gap-2 text-slate-300">
                 <Mail size={14} className="text-brand-primary shrink-0" />
                 <a href="mailto:quanganhqb04@gmail.com" className="hover:text-white font-bold font-mono">quanganhqb04@gmail.com</a>
               </li>
               <li className="flex items-center gap-2 text-slate-300 font-mono">
                 <Phone size={14} className="text-brand-primary shrink-0" />
-                <a href="tel:0908123456" className="hover:text-white font-bold">+84 (0) 908 123 456</a>
+                <a href="tel:0908123456" className="hover:text-white font-bold">Zalo: 0908 123 456</a>
               </li>
               <li className="flex items-start gap-2 text-slate-300">
                 <MapPin size={14} className="text-brand-primary shrink-0 mt-0.5" />
-                <span>Việt Nam (Hỗ trợ trực tuyến & Trực tiếp)</span>
+                <span>Việt Nam (Hỗ trợ trực tiếp & Trực tuyến)</span>
               </li>
             </ul>
           </div>
@@ -79,10 +77,12 @@ export const Footer = ({ onOpenRequestModal }) => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 font-mono">
-          <p>© {new Date().getFullYear()} QUANG ANH STUDIO. {t('copyright')}</p>
-          <div className="flex items-center gap-6">
-            <a href="https://github.com/quanganh4869/freelancewepapp" target="_blank" rel="noreferrer" className="hover:text-slate-200 transition-colors">GitHub Repository</a>
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 font-mono">
+          <p>© {new Date().getFullYear()} QUANG ANH FREELANCER. Tất cả quyền được bảo lưu.</p>
+          <div className="flex items-center gap-4">
+            <a href="#about" className="hover:text-slate-200 transition-colors">Về Tôi</a>
+            <span>•</span>
+            <a href="#services" className="hover:text-slate-200 transition-colors">Dịch Vụ</a>
           </div>
         </div>
       </div>
