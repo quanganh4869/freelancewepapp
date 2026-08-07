@@ -12,13 +12,15 @@ import { useScrollReveal } from './hooks/useScrollReveal';
 // Agentation visual feedback tool for dev mode
 import { Agentation } from 'agentation';
 
-// Freelancer Personal Homepage Sections
+// Freelancer Personal Homepage Sections (matching reference layout https://freelance-crafted-webs.lovable.app)
 import { HeroSection } from './components/home/HeroSection';
-import { PersonalCraftSection } from './components/home/PersonalCraftSection';
 import { ServicesSection } from './components/home/ServicesSection';
+import { PortfolioSection } from './components/home/PortfolioSection';
 import { PricingSection } from './components/home/PricingSection';
 import { ProcessSection } from './components/home/ProcessSection';
-import { PortfolioSection } from './components/home/PortfolioSection';
+import { AboutSection } from './components/home/AboutSection';
+import { FaqSection } from './components/home/FaqSection';
+import { ContactCTASection } from './components/home/ContactCTASection';
 
 // Standalone Pages & Dashboards & Auth
 import { EstimatorPage } from './components/pages/EstimatorPage';
@@ -57,7 +59,7 @@ const MainAppContent = () => {
   const isAuthorizedAdmin = activeRole === 'ADMIN' && currentUser?.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase();
 
   return (
-    <div className={`min-h-screen flex flex-col font-sans selection:bg-brand-primary selection:text-white transition-colors duration-300 ${
+    <div id="top" className={`min-h-screen flex flex-col font-sans selection:bg-brand-primary selection:text-white transition-colors duration-300 ${
       isDark ? 'bg-studio-950 text-slate-200' : 'bg-slate-50 text-slate-800'
     }`}>
       
@@ -101,13 +103,15 @@ const MainAppContent = () => {
           />
         ) : (
           <>
-            {/* Streamlined Personal Freelancer Homepage Sections */}
+            {/* Structured Personal Freelancer Homepage Sections (Matching https://freelance-crafted-webs.lovable.app) */}
             <HeroSection onOpenRequestModal={() => handleOpenRequestModal()} />
-            <PersonalCraftSection />
             <ServicesSection onSelectService={(service) => handleOpenRequestModal(service)} />
+            <PortfolioSection onOpenRequestModal={(initial) => handleOpenRequestModal(initial)} />
             <PricingSection onOpenRequestModal={(tierName) => handleOpenRequestModal(tierName)} />
             <ProcessSection onOpenRequestModal={() => handleOpenRequestModal()} />
-            <PortfolioSection onOpenRequestModal={(initial) => handleOpenRequestModal(initial)} />
+            <AboutSection onOpenRequestModal={() => handleOpenRequestModal()} />
+            <FaqSection />
+            <ContactCTASection onOpenRequestModal={() => handleOpenRequestModal()} />
           </>
         )}
       </main>

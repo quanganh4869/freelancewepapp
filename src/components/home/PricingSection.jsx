@@ -1,24 +1,27 @@
 import React from 'react';
 import { PRICING_TIERS } from '../../data/seedData';
 import { useTheme } from '../../context/ThemeContext';
-import { Check, Clock, MessageSquare } from 'lucide-react';
+import { Check, Clock, MessageSquare, Info } from 'lucide-react';
 
 export const PricingSection = ({ onOpenRequestModal }) => {
   const { isDark } = useTheme();
 
   return (
-    <section id="pricing" className={`py-16 md:py-24 border-b font-sans ${
+    <section id="chi-phi" className={`py-16 md:py-24 border-b font-sans ${
       isDark ? 'bg-studio-900 border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900 shadow-sm'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14 reveal space-y-3">
+        <div className="text-left max-w-3xl mb-12 reveal space-y-3">
+          <span className="text-xs font-bold text-brand-primary tracking-wider uppercase">
+            CHI PHÍ THAM KHẢO
+          </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-            Bảng giá theo quy mô dự án
+            Ngân sách của bạn mua được gì
           </h2>
-          <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed font-medium">
-            Ngân sách linh hoạt, phù hợp với cá nhân, cửa hàng online và doanh nghiệp nhỏ.
+          <p className="text-slate-600 dark:text-slate-400 text-base leading-relaxed font-medium">
+            Tôi báo giá trọn gói cho từng dự án, không tính theo tháng. Bảng này để bạn ước lượng trước khi nhắn.
           </p>
         </div>
 
@@ -31,7 +34,7 @@ export const PricingSection = ({ onOpenRequestModal }) => {
                 key={tier.id}
                 className={`rounded-2xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 relative reveal ${delayClass} ${
                   tier.isPopular
-                    ? 'border-2 border-brand-primary bg-slate-50 dark:bg-studio-950 shadow-lg scale-102'
+                    ? 'border-2 border-brand-primary bg-slate-50 dark:bg-studio-950 shadow-lg'
                     : 'border border-slate-200 dark:border-slate-800 bg-white dark:bg-studio-900 shadow-sm hover:border-slate-300'
                 }`}
               >
@@ -93,7 +96,7 @@ export const PricingSection = ({ onOpenRequestModal }) => {
                     }`}
                   >
                     <MessageSquare size={14} />
-                    <span>Trao đổi yêu cầu</span>
+                    <span>Nhắn yêu cầu gói này</span>
                   </button>
                 </div>
 
@@ -102,9 +105,15 @@ export const PricingSection = ({ onOpenRequestModal }) => {
           })}
         </div>
 
-        {/* Disclaimer Note */}
-        <div className="mt-10 text-center text-xs text-slate-500 max-w-2xl mx-auto font-medium">
-          <p>* Các mức giá trên mang tính chất tham khảo. Chi phí thực tế sẽ được thống nhất minh bạch sau khi tôi xem xét yêu cầu cụ thể của bạn.</p>
+        {/* Transparent Terms Note */}
+        <div className="mt-10 p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400 space-y-2 font-medium max-w-4xl">
+          <div className="flex items-start gap-2 text-slate-900 dark:text-white font-bold">
+            <Info size={16} className="text-brand-primary shrink-0 mt-0.5" />
+            <span>Ghi chú thanh toán & phạm vi:</span>
+          </div>
+          <p className="pl-6 leading-relaxed">
+            Chưa gồm tên miền, hosting và ảnh mua bản quyền. Cọc 30% khi bắt đầu, phần còn lại khi bàn giao. Nếu ngân sách của bạn thấp hơn các mức trên, cứ nhắn cho tôi — tôi sẽ tư vấn cắt bớt phạm vi thay vì làm ẩu.
+          </p>
         </div>
 
       </div>

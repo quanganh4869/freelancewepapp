@@ -20,7 +20,7 @@ export const PortfolioSection = ({ onOpenRequestModal }) => {
     : INITIAL_PROJECTS.filter(p => p.category === selectedCategory);
 
   return (
-    <section id="portfolio" className={`py-16 md:py-24 border-b font-sans ${
+    <section id="du-an" className={`py-16 md:py-24 border-b font-sans ${
       isDark ? 'bg-studio-900 border-white/10 text-white' : 'bg-white border-slate-200 text-slate-900 shadow-sm'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -28,11 +28,14 @@ export const PortfolioSection = ({ onOpenRequestModal }) => {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 reveal">
           <div className="space-y-3 max-w-2xl">
+            <span className="text-xs font-bold text-brand-primary tracking-wider uppercase">
+              DỰ ÁN ĐÃ LÀM
+            </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-              Dự án đã triển khai
+              Dự án đã làm
             </h2>
-            <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed font-medium">
-              Hình ảnh thực tế từ các website tôi trực tiếp thiết kế và lập trình cho khách hàng.
+            <p className="text-slate-600 dark:text-slate-400 text-base leading-relaxed font-medium">
+              Kèm luôn thời gian và chi phí thật của từng dự án để bạn dễ hình dung mức của mình.
             </p>
           </div>
 
@@ -61,7 +64,9 @@ export const PortfolioSection = ({ onOpenRequestModal }) => {
             return (
               <div
                 key={project.id}
-                className={`studio-card overflow-hidden rounded-2xl shadow-sm flex flex-col justify-between reveal ${delayClass}`}
+                className={`overflow-hidden rounded-2xl border shadow-sm flex flex-col justify-between reveal ${delayClass} ${
+                  isDark ? 'bg-studio-950 border-slate-800' : 'bg-slate-50 border-slate-200'
+                }`}
               >
                 {/* Thumbnail Frame */}
                 <div className="relative h-56 sm:h-64 overflow-hidden bg-slate-950 group">
@@ -93,7 +98,7 @@ export const PortfolioSection = ({ onOpenRequestModal }) => {
 
                 {/* Card Info */}
                 <div className="p-6 space-y-4">
-                  <div className="flex items-center justify-between text-xs text-slate-600 dark:text-slate-400 border-b border-slate-100 dark:border-slate-800 pb-2">
+                  <div className="flex items-center justify-between text-xs text-slate-600 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800 pb-2">
                     <span className="font-semibold text-slate-800 dark:text-slate-300">Khách hàng: {project.client}</span>
                     <span className="text-brand-primary font-bold">Năm {project.year}</span>
                   </div>
@@ -111,11 +116,11 @@ export const PortfolioSection = ({ onOpenRequestModal }) => {
                   <div className="flex items-center gap-4 text-xs pt-1 text-slate-600 dark:text-slate-400 font-medium">
                     <div className="flex items-center gap-1">
                       <Tag size={13} className="text-brand-primary" />
-                      <span>Chi phí: <strong className="text-brand-primary font-bold">{project.priceTag}</strong></span>
+                      <span>Chi phí thực tế: <strong className="text-brand-primary font-bold">{project.priceTag}</strong></span>
                     </div>
                     <div className="flex items-center gap-1">
                       <Clock size={13} className="text-brand-primary" />
-                      <span>Thực hiện: <strong className="text-slate-800 dark:text-slate-200 font-bold">{project.duration}</strong></span>
+                      <span>Thời gian: <strong className="text-slate-800 dark:text-slate-200 font-bold">{project.duration}</strong></span>
                     </div>
                   </div>
 
@@ -124,7 +129,7 @@ export const PortfolioSection = ({ onOpenRequestModal }) => {
                     {project.techStack.map((tech, idx) => (
                       <span
                         key={idx}
-                        className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 text-[11px] text-slate-700 dark:text-slate-300 font-semibold"
+                        className="px-2.5 py-1 rounded-lg bg-white dark:bg-studio-900 border border-slate-200 dark:border-slate-800 text-[11px] text-slate-700 dark:text-slate-300 font-semibold"
                       >
                         {tech}
                       </span>
