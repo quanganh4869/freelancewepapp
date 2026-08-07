@@ -14,12 +14,11 @@ import { Agentation } from 'agentation';
 
 // Freelancer Personal Homepage Sections
 import { HeroSection } from './components/home/HeroSection';
+import { AboutSection } from './components/home/AboutSection';
 import { ServicesSection } from './components/home/ServicesSection';
 import { PricingSection } from './components/home/PricingSection';
 import { ProcessSection } from './components/home/ProcessSection';
 import { PortfolioSection } from './components/home/PortfolioSection';
-import { AboutSection } from './components/home/AboutSection';
-import { ContactCTASection } from './components/home/ContactCTASection';
 
 // Dashboards & Request Form & Auth
 import { ProjectRequestModal } from './components/request/ProjectRequestModal';
@@ -91,12 +90,12 @@ const MainAppContent = () => {
           <>
             {/* Streamlined Personal Freelancer Sections */}
             <HeroSection onOpenRequestModal={() => handleOpenRequestModal()} />
+            {/* About section moved to top right after Hero per Agentation feedback */}
+            <AboutSection onOpenRequestModal={() => handleOpenRequestModal()} />
             <ServicesSection onSelectService={(service) => handleOpenRequestModal(service)} />
             <PricingSection onOpenRequestModal={(tierName) => handleOpenRequestModal(tierName)} />
             <ProcessSection onOpenRequestModal={() => handleOpenRequestModal()} />
             <PortfolioSection onOpenRequestModal={(initial) => handleOpenRequestModal(initial)} />
-            <AboutSection onOpenRequestModal={() => handleOpenRequestModal()} />
-            <ContactCTASection onOpenRequestModal={() => handleOpenRequestModal()} />
           </>
         )}
       </main>
