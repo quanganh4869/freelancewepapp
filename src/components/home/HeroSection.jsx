@@ -135,7 +135,7 @@ export const HeroSection = ({ onOpenRequestModal }) => {
               <div className="pt-4 border-t border-slate-200 dark:border-slate-800 space-y-2 text-xs font-mono">
                 <div className="flex items-center justify-between">
                   <span className="text-slate-500">Zalo / SĐT:</span>
-                  <a href="tel:0908123456" className="font-bold text-brand-primary hover:underline">0908 123 456</a>
+                  <a href="tel:0935989872" className="font-bold text-brand-primary hover:underline">0935 989 872</a>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-slate-500">Email:</span>

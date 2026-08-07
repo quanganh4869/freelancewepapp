@@ -1,7 +1,7 @@
 import React from 'react';
 import { INITIAL_SERVICES } from '../../data/seedData';
 import { useTheme } from '../../context/ThemeContext';
-import { ArrowRight, CheckCircle2, Clock, Users } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Clock, Users, Upload, Link as LinkIcon } from 'lucide-react';
 
 export const ServicesSection = ({ onSelectService }) => {
   const { isDark } = useTheme();
@@ -21,7 +21,7 @@ export const ServicesSection = ({ onSelectService }) => {
             Các gói dịch vụ thiết kế web
           </h2>
           <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            Tôi trực tiếp làm việc 1-1 với bạn từ khâu trao đổi ý tưởng đến khi bàn giao website hoàn chỉnh.
+            Tôi trực tiếp làm việc 1-1 với bạn từ khâu trao đổi ý tưởng đến khi bàn giao website hoàn chỉnh. Nhận làm theo file thiết kế hoặc link Figma mẫu có sẵn.
           </p>
         </div>
 
@@ -96,6 +96,12 @@ export const ServicesSection = ({ onSelectService }) => {
                     </div>
                   </div>
 
+                  {/* Design File / Figma Link Feature Badge */}
+                  <div className="flex items-center gap-2 p-2.5 rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-600 dark:text-orange-400 font-mono text-[11px] font-bold">
+                    <Upload size={14} className="shrink-0" />
+                    <span>Hỗ trợ gửi file thiết kế (PNG, PDF, Zip) hoặc link Figma khi đặt làm</span>
+                  </div>
+
                 </div>
 
                 {/* Bottom Action Line */}
@@ -104,7 +110,7 @@ export const ServicesSection = ({ onSelectService }) => {
                     onClick={() => onSelectService(service.titleVi)}
                     className="btn-primary w-full py-3 text-xs font-bold font-display"
                   >
-                    <span>Đặt làm gói này</span>
+                    <span>Đặt làm gói này (Kèm file thiết kế)</span>
                     <ArrowRight size={14} />
                   </button>
                 </div>

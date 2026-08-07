@@ -265,7 +265,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                           type="text"
                           value={formData.clientPhone}
                           onChange={(e) => handleInputChange('clientPhone', e.target.value)}
-                          placeholder="0908 123 456"
+                          placeholder="0935 989 872"
                           className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary transition-colors font-mono"
                         />
                       </div>

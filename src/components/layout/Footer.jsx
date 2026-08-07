@@ -71,7 +71,7 @@ export const Footer = ({ onOpenRequestModal }) => {
               </li>
               <li className="flex items-center gap-2 text-white font-mono">
                 <Phone size={15} className="text-brand-primary shrink-0" />
-                <a href="tel:0908123456" className="hover:text-brand-primary font-bold text-slate-100">Zalo: 0908 123 456</a>
+                <a href="tel:0935989872" className="hover:text-brand-primary font-bold text-slate-100">Zalo: 0935 989 872</a>
               </li>
               <li className="flex items-start gap-2 text-slate-300 font-medium">
                 <MapPin size={15} className="text-brand-primary shrink-0 mt-0.5" />

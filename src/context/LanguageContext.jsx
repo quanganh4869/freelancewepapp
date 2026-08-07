@@ -5,7 +5,7 @@ const LanguageContext = createContext();
 const translations = {
   vi: {
     // Topbar & Nav
-    hotline: 'Zalo / SĐT: 0908 123 456',
+    hotline: 'Zalo / SĐT: 0935 989 872',
     email: 'Email: quanganhqb04@gmail.com',
     login: 'Quản Trị Admin',
     logout: 'Đăng Xuất',

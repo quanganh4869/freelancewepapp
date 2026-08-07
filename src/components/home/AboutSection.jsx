@@ -45,7 +45,7 @@ export const AboutSection = ({ onOpenRequestModal }) => {
                 </div>
                 <div className="flex justify-between py-1.5">
                   <span className="text-slate-500">Zalo / Hotline:</span>
-                  <a href="tel:0908123456" className="font-bold text-brand-primary hover:underline">0908 123 456</a>
+                  <a href="tel:0935989872" className="font-bold text-brand-primary hover:underline">0935 989 872</a>
                 </div>
               </div>
 
