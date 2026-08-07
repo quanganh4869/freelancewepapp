@@ -9,6 +9,9 @@ import { Footer } from './components/layout/Footer';
 import { Shield } from 'lucide-react';
 import { useScrollReveal } from './hooks/useScrollReveal';
 
+// Agentation visual feedback tool for dev mode
+import { Agentation } from 'agentation';
+
 // Freelancer Personal Homepage Sections
 import { HeroSection } from './components/home/HeroSection';
 import { ServicesSection } from './components/home/ServicesSection';
@@ -115,6 +118,9 @@ const MainAppContent = () => {
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
       />
+
+      {/* Render Agentation toolbar in Dev mode */}
+      {import.meta.env.DEV && <Agentation />}
 
     </div>
   );
