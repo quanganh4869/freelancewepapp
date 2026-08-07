@@ -15,13 +15,13 @@ import { Agentation } from 'agentation';
 // Freelancer Personal Homepage Sections
 import { HeroSection } from './components/home/HeroSection';
 import { PersonalCraftSection } from './components/home/PersonalCraftSection';
-import { InteractiveEstimator } from './components/home/InteractiveEstimator';
 import { ServicesSection } from './components/home/ServicesSection';
 import { PricingSection } from './components/home/PricingSection';
 import { ProcessSection } from './components/home/ProcessSection';
 import { PortfolioSection } from './components/home/PortfolioSection';
 
-// Dashboards & Request Form & Auth
+// Standalone Pages & Dashboards & Auth
+import { EstimatorPage } from './components/pages/EstimatorPage';
 import { ProjectRequestModal } from './components/request/ProjectRequestModal';
 import { AuthModal } from './components/auth/AuthModal';
 import { ClientDashboard } from './components/client/ClientDashboard';
@@ -37,7 +37,7 @@ const MainAppContent = () => {
   const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [initialServiceForForm, setInitialServiceForForm] = useState('');
-  const [activeView, setActiveView] = useState('home');
+  const [activeView, setActiveView] = useState('home'); // 'home' | 'estimator' | 'admin-dashboard'
 
   const handleOpenRequestModal = (serviceTitle = '') => {
     setInitialServiceForForm(serviceTitle);
@@ -58,6 +58,7 @@ const MainAppContent = () => {
       
       {/* Main Navbar */}
       <Navbar
+        currentView={activeView}
         onOpenRequestModal={() => handleOpenRequestModal()}
         onOpenAuthModal={() => setIsAuthModalOpen(true)}
         onNavigate={(view) => setActiveView(view)}
@@ -87,12 +88,17 @@ const MainAppContent = () => {
           )
         ) : activeRole === 'USER' ? (
           <ClientDashboard onOpenRequestModal={() => handleOpenRequestModal()} />
+        ) : activeView === 'estimator' ? (
+          /* Standalone Estimator Page */
+          <EstimatorPage
+            onOpenRequestModal={(scope) => handleOpenRequestModal(scope)}
+            onBackHome={() => setActiveView('home')}
+          />
         ) : (
           <>
-            {/* Streamlined Personal Freelancer Sections */}
+            {/* Streamlined Personal Freelancer Homepage Sections */}
             <HeroSection onOpenRequestModal={() => handleOpenRequestModal()} />
             <PersonalCraftSection />
-            <InteractiveEstimator onOpenRequestModal={(scope) => handleOpenRequestModal(scope)} />
             <ServicesSection onSelectService={(service) => handleOpenRequestModal(service)} />
             <PricingSection onOpenRequestModal={(tierName) => handleOpenRequestModal(tierName)} />
             <ProcessSection onOpenRequestModal={() => handleOpenRequestModal()} />

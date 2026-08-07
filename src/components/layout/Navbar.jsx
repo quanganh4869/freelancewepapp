@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
 import { useLanguage } from '../../context/LanguageContext';
-import { Menu, X, Shield, LogOut, Sun, Moon, Globe } from 'lucide-react';
+import { Menu, X, Shield, LogOut, Sun, Moon, Globe, Calculator } from 'lucide-react';
 
-export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
+export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate, currentView = 'home' }) => {
   const { activeRole, currentUser, logout } = useAuth();
   const { isDark, toggleTheme } = useTheme();
   const { language, toggleLanguage, t } = useLanguage();
@@ -15,7 +15,6 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
     { label: t('pricingNav'), href: '#pricing', id: 'pricing' },
     { label: t('processNav'), href: '#process', id: 'process' },
     { label: t('portfolioNav'), href: '#portfolio', id: 'portfolio' },
-    { label: t('aboutNav'), href: '#about', id: 'about' },
   ];
 
   return (
@@ -26,7 +25,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
         <div className="flex items-center justify-between h-16 sm:h-20">
           
           {/* Authentic Personal Identity - QUANG ANH FREELANCER */}
-          <a href="#" className="flex items-center gap-3 group">
+          <button onClick={() => onNavigate('home')} className="flex items-center gap-3 group text-left">
             <div className="w-9 h-9 rounded-lg bg-brand-primary text-white flex items-center justify-center font-mono font-bold text-sm shadow-sm transition-transform group-hover:scale-105">
               <span>QA</span>
             </div>
@@ -35,14 +34,24 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
                 QUANG ANH <span className="text-brand-primary font-mono text-[10px] font-bold tracking-wider ml-1 uppercase">FREELANCER</span>
               </span>
             </div>
-          </a>
+          </button>
 
           {/* Center Links */}
-          <nav className="hidden lg:flex items-center gap-7">
+          <nav className="hidden lg:flex items-center gap-6">
             {navItems.map((item) => (
               <a
                 key={item.id}
-                href={item.href}
+                href={currentView === 'home' ? item.href : '#'}
+                onClick={(e) => {
+                  if (currentView !== 'home') {
+                    e.preventDefault();
+                    onNavigate('home');
+                    setTimeout(() => {
+                      const el = document.getElementById(item.id);
+                      if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                  }
+                }}
                 className={`text-xs font-mono font-bold uppercase tracking-wider transition-colors hover:text-brand-primary ${
                   isDark ? 'text-slate-300' : 'text-slate-700'
                 }`}
@@ -50,6 +59,19 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
                 {item.label}
               </a>
             ))}
+
+            {/* Dedicated Page Estimator Navigation Button */}
+            <button
+              onClick={() => onNavigate('estimator')}
+              className={`text-xs font-mono font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 px-3 py-1.5 rounded-lg border ${
+                currentView === 'estimator'
+                  ? 'bg-brand-primary text-white border-brand-primary shadow-sm'
+                  : 'bg-brand-primary/10 border-brand-primary/30 text-brand-primary hover:bg-brand-primary/20'
+              }`}
+            >
+              <Calculator size={13} />
+              <span>Tính chi phí</span>
+            </button>
           </nav>
 
           {/* Right Controls */}
@@ -119,6 +141,13 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
           {/* Mobile Hamburger Toggle */}
           <div className="flex sm:hidden items-center gap-2">
             <button
+              onClick={() => onNavigate('estimator')}
+              className="p-2 rounded-lg border border-brand-primary/40 bg-brand-primary/10 text-brand-primary text-xs font-bold"
+            >
+              <Calculator size={16} />
+            </button>
+
+            <button
               onClick={toggleTheme}
               className="p-2 rounded-lg border border-slate-700 text-slate-300"
             >
@@ -141,11 +170,25 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
           isDark ? 'bg-studio-900 border-slate-800' : 'bg-white border-slate-200'
         }`}>
           <nav className="flex flex-col space-y-3">
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onNavigate('estimator');
+              }}
+              className="text-sm font-bold font-display text-brand-primary flex items-center gap-2 py-1"
+            >
+              <Calculator size={16} />
+              <span>Tính Chi Phí Làm Web</span>
+            </button>
+
             {navItems.map((item) => (
               <a
                 key={item.id}
                 href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onNavigate('home');
+                }}
                 className={`text-sm font-bold font-display transition-colors py-1 ${
                   isDark ? 'text-slate-200 hover:text-brand-primary' : 'text-slate-800 hover:text-brand-primary'
                 }`}
