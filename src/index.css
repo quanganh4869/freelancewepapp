@@ -4,163 +4,176 @@
 
 @layer base {
   html {
-    font-family: 'Inter', 'Be Vietnam Pro', system-ui, sans-serif;
+    font-family: 'Inter', 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     scroll-behavior: smooth;
   }
   
+  /* Reference Site Aesthetic: Warm Off-White / Paper Cream (#FAF9F6) & Clean Charcoal (#121212) */
   body {
-    background-color: #0B0F19;
-    color: #F8FAFC;
+    background-color: #FAF9F6;
+    color: #1A1A1A;
     font-family: 'Inter', 'Be Vietnam Pro', system-ui, sans-serif;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    line-height: 1.65;
-    letter-spacing: -0.015em;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    line-height: 1.6;
+    letter-spacing: -0.011em;
   }
 
-  /* Headings & Display Typography: Unified Sans-Serif */
-  h1, h2, h3, h4, h5, h6,
-  .font-display,
-  .font-mono {
+  /* Headings: Clean, natural sentence case, tight tracking */
+  h1, h2, h3, h4, h5, h6 {
     font-family: 'Inter', 'Be Vietnam Pro', system-ui, sans-serif;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.022em;
+    color: #1A1A1A;
   }
 
-  /* Light Mode High-Contrast DV60 Style */
-  html.light body {
-    background-color: #F8FAFC;
-    color: #0F172A;
+  /* Dark Mode Aesthetic: Slate/Zinc Deep Charcoal */
+  html.dark body {
+    background-color: #121212;
+    color: #F4F4F2;
   }
 
-  html.light h1, 
-  html.light h2, 
-  html.light h3, 
-  html.light h4 {
-    color: #0F172A !important;
+  html.dark h1, 
+  html.dark h2, 
+  html.dark h3, 
+  html.dark h4 {
+    color: #FFFFFF !important;
   }
 
-  html.light .text-slate-400,
-  html.light .text-slate-300 {
-    color: #475569 !important;
+  html.dark .text-slate-600,
+  html.dark .text-slate-500,
+  html.dark .text-slate-400 {
+    color: #A1A19A !important;
   }
 
-  html.light .text-slate-200,
-  html.light .text-slate-100 {
-    color: #0F172A !important;
+  html.dark .text-slate-900,
+  html.dark .text-slate-800,
+  html.dark .text-slate-700 {
+    color: #F4F4F2 !important;
   }
 
-  html.light .bg-studio-950 {
-    background-color: #F8FAFC !important;
+  html.dark .bg-studio-950 {
+    background-color: #121212 !important;
   }
 
-  html.light .bg-studio-900 {
-    background-color: #FFFFFF !important;
+  html.dark .bg-studio-900 {
+    background-color: #1A1A19 !important;
   }
 
-  html.light .border-slate-800,
-  html.light .border-white\/10 {
-    border-color: #E2E8F0 !important;
+  html.dark .border-slate-800,
+  html.dark .border-slate-700,
+  html.dark .border-white\/10 {
+    border-color: #2A2A28 !important;
   }
 }
 
-/* Custom Scrollbars */
+/* Custom Minimalist Scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0B0F19;
+  background: #FAF9F6;
 }
-html.light ::-webkit-scrollbar-track {
-  background: #F8FAFC;
+html.dark ::-webkit-scrollbar-track {
+  background: #121212;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1E293B;
-  border-radius: 3px;
+  background: #D4D2C9;
+  border-radius: 4px;
 }
-html.light ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #F97316;
+html.dark ::-webkit-scrollbar-thumb {
+  background: #333330;
 }
 
-/* Button & UI Tokens */
+/* Reference UI Buttons & Card Tokens */
 .btn-primary {
-  background: #F97316;
+  background-color: #1A1A1A;
   color: #FFFFFF !important;
   font-family: 'Inter', 'Be Vietnam Pro', sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 0.875rem;
-  padding: 0.85rem 1.8rem;
-  border-radius: 14px;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 4px 20px -2px rgba(249, 115, 22, 0.4);
+  gap: 0.5rem;
+  border: 1px solid #1A1A1A;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+html.dark .btn-primary {
+  background-color: #FFFFFF;
+  color: #121212 !important;
+  border-color: #FFFFFF;
 }
 .btn-primary:hover {
-  background: #EA580C;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 28px -2px rgba(249, 115, 22, 0.5);
+  background-color: #333330;
+  border-color: #333330;
+  transform: translateY(-1px);
+}
+html.dark .btn-primary:hover {
+  background-color: #E6E6E3;
+  border-color: #E6E6E3;
 }
 
 .btn-secondary {
-  background: #FFFFFF;
-  color: #0F172A !important;
+  background-color: #FFFFFF;
+  color: #1A1A1A !important;
   font-family: 'Inter', 'Be Vietnam Pro', sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 0.875rem;
-  padding: 0.85rem 1.8rem;
-  border-radius: 14px;
-  border: 1px solid #E2E8F0;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #E6E4DD;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  gap: 0.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 html.dark .btn-secondary {
-  background: #111827;
-  color: #F8FAFC !important;
-  border-color: #1F2937;
+  background-color: #1A1A19;
+  color: #F4F4F2 !important;
+  border-color: #2A2A28;
 }
 .btn-secondary:hover {
-  border-color: #F97316;
-  color: #F97316 !important;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.15);
+  border-color: #1A1A1A;
+  background-color: #F5F4EF;
+  transform: translateY(-1px);
+}
+html.dark .btn-secondary:hover {
+  border-color: #555550;
+  background-color: #242422;
 }
 
+/* Lovable Minimalist Card Style */
 .studio-card {
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 20px;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
+  background-color: #FFFFFF;
+  border: 1px solid #E6E4DD;
+  border-radius: 16px;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 }
 html.dark .studio-card {
-  background: #111827;
-  border-color: #1F2937;
+  background-color: #1A1A19;
+  border-color: #2A2A28;
 }
 .studio-card:hover {
-  border-color: rgba(249, 115, 22, 0.6);
-  transform: translateY(-3px);
-  box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.25);
+  border-color: #C8C5B9;
+}
+html.dark .studio-card:hover {
+  border-color: #444440;
 }
 
 /* Scroll Reveal Animations */
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+  transform: translateY(16px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.active {
@@ -168,6 +181,6 @@ html.dark .studio-card {
   transform: translateY(0);
 }
 
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }

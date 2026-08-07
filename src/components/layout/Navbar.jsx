@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
-import { useLanguage } from '../../context/LanguageContext';
-import { Menu, X, Shield, LogOut, Sun, Moon, Globe, Calculator, Send } from 'lucide-react';
+import { Menu, X, Shield, LogOut, Sun, Moon, Calculator, Send } from 'lucide-react';
 
 export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate, currentView = 'home' }) => {
   const { activeRole, currentUser, logout } = useAuth();
   const { isDark, toggleTheme } = useTheme();
-  const { language, toggleLanguage } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
@@ -20,26 +18,24 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate, curren
   ];
 
   return (
-    <header className={`sticky top-0 z-40 transition-colors duration-200 border-b ${
-      isDark ? 'bg-studio-950/95 border-slate-800/80 text-slate-100' : 'bg-white/95 border-slate-200 text-slate-900'
+    <header className={`sticky top-0 z-40 transition-colors border-b ${
+      isDark ? 'bg-[#121212]/95 border-[#2A2A28] text-[#F4F4F2]' : 'bg-[#FAF9F6]/95 border-[#E6E4DD] text-[#1A1A1A]'
     } backdrop-blur-md font-sans`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-20">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 sm:h-18">
           
-          {/* Authentic Personal Identity - QUANG ANH FREELANCER */}
-          <button onClick={() => onNavigate('home')} className="flex items-center gap-3 group text-left">
-            <div className="w-9 h-9 rounded-lg bg-brand-primary text-white flex items-center justify-center font-bold text-sm shadow-sm transition-transform group-hover:scale-105">
-              <span>QA</span>
-            </div>
-            <div className="flex flex-col leading-none">
-              <span className="font-extrabold text-base tracking-tight text-slate-900 dark:text-white">
-                QUANG ANH <span className="text-brand-primary font-bold text-[10px] tracking-wider ml-1 uppercase">web freelancer</span>
-              </span>
-            </div>
+          {/* Lovable Reference Personal Logo Badge */}
+          <button onClick={() => onNavigate('home')} className="flex items-center gap-2 group text-left">
+            <span className="font-bold text-base tracking-tight text-[#1A1A1A] dark:text-white">
+              Nguyễn Quang Anh
+            </span>
+            <span className="text-[11px] text-[#666663] dark:text-[#A1A19A] font-medium px-2 py-0.5 rounded-full border border-[#E6E4DD] dark:border-[#2A2A28] bg-white dark:bg-[#1A1A19]">
+              web freelancer
+            </span>
           </button>
 
-          {/* Center Links */}
-          <nav className="hidden lg:flex items-center gap-5">
+          {/* Center Navigation Links */}
+          <nav className="hidden md:flex items-center gap-6">
             {navItems.map((item) => (
               <a
                 key={item.id}
@@ -54,22 +50,17 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate, curren
                     }, 100);
                   }
                 }}
-                className={`text-xs font-bold tracking-wide transition-colors hover:text-brand-primary ${
-                  isDark ? 'text-slate-200' : 'text-slate-800'
+                className={`text-xs font-medium transition-colors hover:text-black dark:hover:text-white ${
+                  isDark ? 'text-[#A1A19A]' : 'text-[#666663]'
                 }`}
               >
                 {item.label}
               </a>
             ))}
 
-            {/* Dedicated Page Estimator Navigation Button */}
             <button
               onClick={() => onNavigate('estimator')}
-              className={`text-xs font-bold transition-all flex items-center gap-1.5 px-3 py-1.5 rounded-lg border ${
-                currentView === 'estimator'
-                  ? 'bg-brand-primary text-white border-brand-primary shadow-sm'
-                  : 'bg-brand-primary/10 border-brand-primary/30 text-brand-primary hover:bg-brand-primary/20'
-              }`}
+              className="text-xs font-medium text-[#666663] dark:text-[#A1A19A] hover:text-black dark:hover:text-white flex items-center gap-1 transition-colors"
             >
               <Calculator size={13} />
               <span>Tính chi phí</span>
@@ -82,19 +73,18 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate, curren
             {/* Direct Order CTA Button */}
             <button
               onClick={() => onOpenRequestModal()}
-              className="btn-primary py-2 px-4 text-xs font-bold shadow-sm"
+              className="btn-primary text-xs font-semibold py-2 px-4 rounded-xl shadow-none"
             >
-              <Send size={13} />
               <span>Đặt làm website</span>
             </button>
 
             {/* Dark/Light Switcher */}
             <button
               onClick={toggleTheme}
-              className={`p-2 rounded-lg border transition-colors ${
+              className={`p-2 rounded-xl border transition-colors ${
                 isDark
-                  ? 'bg-studio-900 border-slate-800 text-amber-400 hover:border-slate-700'
-                  : 'bg-slate-100 border-slate-200 text-slate-700 hover:border-slate-300'
+                  ? 'bg-[#1A1A19] border-[#2A2A28] text-amber-400 hover:border-[#444440]'
+                  : 'bg-white border-[#E6E4DD] text-[#1A1A1A] hover:border-[#C8C5B9]'
               }`}
               title="Toggle Theme Mode"
             >
@@ -105,9 +95,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate, curren
             {activeRole === 'GUEST' ? (
               <button
                 onClick={onOpenAuthModal}
-                className={`flex items-center px-3 py-1.5 rounded-lg transition-colors text-[11px] font-bold border ${
-                  isDark ? 'border-slate-800 text-slate-300 hover:text-white hover:border-brand-primary' : 'border-slate-200 text-slate-700 hover:text-slate-900 hover:border-brand-primary'
-                }`}
+                className="text-[11px] font-medium text-[#666663] dark:text-[#A1A19A] hover:text-black dark:hover:text-white px-2 py-1"
                 title="Quản Trị Admin"
               >
                 <span>Admin</span>
@@ -117,7 +105,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate, curren
                 {activeRole === 'ADMIN' && (
                   <button
                     onClick={() => onNavigate('admin-dashboard')}
-                    className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-500 font-bold text-[11px]"
+                    className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 font-bold text-[11px]"
                   >
                     <Shield size={13} />
                     <span>Admin</span>
@@ -126,7 +114,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate, curren
 
                 <button
                   onClick={logout}
-                  className="flex items-center gap-1 text-slate-400 hover:text-rose-400 transition-colors p-1"
+                  className="flex items-center gap-1 text-[#666663] hover:text-rose-500 transition-colors p-1"
                 >
                   <LogOut size={14} />
                 </button>
@@ -139,22 +127,22 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate, curren
           <div className="flex sm:hidden items-center gap-2">
             <button
               onClick={() => onOpenRequestModal()}
-              className="px-3 py-1.5 rounded-lg bg-brand-primary text-white text-xs font-bold shadow-sm"
+              className="btn-primary text-xs font-semibold py-1.5 px-3 rounded-lg"
             >
               Đặt làm web
             </button>
 
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg border border-slate-700 text-slate-300"
+              className="p-1.5 rounded-lg border border-[#E6E4DD] dark:border-[#2A2A28] text-[#1A1A1A] dark:text-[#F4F4F2]"
             >
               {isDark ? <Sun size={16} /> : <Moon size={16} />}
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg border border-slate-700 text-slate-300"
+              className="p-1.5 rounded-lg border border-[#E6E4DD] dark:border-[#2A2A28] text-[#1A1A1A] dark:text-[#F4F4F2]"
             >
-              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
 
@@ -163,21 +151,10 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate, curren
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className={`sm:hidden border-b px-4 py-6 space-y-4 font-sans ${
-          isDark ? 'bg-studio-900 border-slate-800' : 'bg-white border-slate-200'
+        <div className={`sm:hidden border-b px-4 py-5 space-y-3 font-sans ${
+          isDark ? 'bg-[#1A1A19] border-[#2A2A28]' : 'bg-white border-[#E6E4DD]'
         }`}>
-          <nav className="flex flex-col space-y-3">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onNavigate('estimator');
-              }}
-              className="text-sm font-bold text-brand-primary flex items-center gap-2 py-1"
-            >
-              <Calculator size={16} />
-              <span>Tính chi phí làm web</span>
-            </button>
-
+          <nav className="flex flex-col space-y-2">
             {navItems.map((item) => (
               <a
                 key={item.id}
@@ -186,28 +163,39 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate, curren
                   setMobileMenuOpen(false);
                   onNavigate('home');
                 }}
-                className={`text-sm font-bold transition-colors py-1 ${
-                  isDark ? 'text-slate-200 hover:text-brand-primary' : 'text-slate-800 hover:text-brand-primary'
+                className={`text-sm font-medium transition-colors py-1 ${
+                  isDark ? 'text-[#F4F4F2] hover:text-white' : 'text-[#1A1A1A] hover:text-black'
                 }`}
               >
                 {item.label}
               </a>
             ))}
+
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onNavigate('estimator');
+              }}
+              className="text-sm font-medium text-[#666663] dark:text-[#A1A19A] flex items-center gap-1.5 py-1"
+            >
+              <Calculator size={15} />
+              <span>Tính chi phí làm web</span>
+            </button>
           </nav>
           
-          <div className="pt-4 border-t border-slate-800 flex items-center justify-between">
-            {activeRole === 'GUEST' && (
+          {activeRole === 'GUEST' && (
+            <div className="pt-3 border-t border-[#E6E4DD] dark:border-[#2A2A28]">
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
                   onOpenAuthModal();
                 }}
-                className="text-xs text-slate-300 hover:text-white"
+                className="text-xs text-[#666663] dark:text-[#A1A19A]"
               >
                 Admin Login
               </button>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       )}
     </header>
