@@ -16,10 +16,10 @@ export const PricingSection = ({ onOpenRequestModal }) => {
         <div className="text-center max-w-3xl mx-auto mb-14 reveal space-y-3">
           <div className="studio-badge">
             <Tag size={14} />
-            <span>BẢNG GIÁ THAM KHẢO</span>
+            <span>Bảng giá tham khảo</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white font-display">
-            Bảng Giá Theo Quy Mô Dự Án
+            Bảng giá theo quy mô dự án
           </h2>
           <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
             Ngân sách linh hoạt, phù hợp với cá nhân, cửa hàng online và doanh nghiệp nhỏ.
@@ -41,7 +41,7 @@ export const PricingSection = ({ onOpenRequestModal }) => {
               >
                 {/* Popular Badge */}
                 {tier.isPopular && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-brand-primary text-white text-[11px] font-mono font-bold uppercase tracking-wider shadow-sm">
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-brand-primary text-white text-[11px] font-mono font-bold tracking-wider shadow-sm">
                     {tier.badge}
                   </div>
                 )}
@@ -71,7 +71,7 @@ export const PricingSection = ({ onOpenRequestModal }) => {
 
                   {/* Features List */}
                   <div className="space-y-2.5">
-                    <span className="text-xs font-mono font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider block">
+                    <span className="text-xs font-mono font-bold text-slate-700 dark:text-slate-300 tracking-wider block">
                       Tính năng bao gồm:
                     </span>
                     <ul className="space-y-2 text-xs text-slate-700 dark:text-slate-300">
@@ -97,7 +97,7 @@ export const PricingSection = ({ onOpenRequestModal }) => {
                     }`}
                   >
                     <MessageSquare size={14} />
-                    <span>Trao Đổi Yêu Cầu</span>
+                    <span>Trao đổi yêu cầu</span>
                   </button>
                 </div>
 

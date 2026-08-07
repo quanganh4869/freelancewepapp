@@ -1,7 +1,7 @@
 import React from 'react';
 import { INITIAL_SERVICES } from '../../data/seedData';
 import { useTheme } from '../../context/ThemeContext';
-import { ArrowRight, CheckCircle2, Clock, Tag, Users } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Clock, Users } from 'lucide-react';
 
 export const ServicesSection = ({ onSelectService }) => {
   const { isDark } = useTheme();
@@ -15,10 +15,10 @@ export const ServicesSection = ({ onSelectService }) => {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 reveal space-y-3">
           <div className="studio-badge">
-            <span>DỊCH VỤ CỦA TÔI</span>
+            <span>Dịch vụ của tôi</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white font-display">
-            Các Gói Dịch Vụ Thiết Kế Web
+            Các gói dịch vụ thiết kế web
           </h2>
           <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
             Tôi trực tiếp làm việc 1-1 với bạn từ khâu trao đổi ý tưởng đến khi bàn giao website hoàn chỉnh.
@@ -43,7 +43,7 @@ export const ServicesSection = ({ onSelectService }) => {
                         {service.titleVi}
                       </h3>
                       {service.badge && (
-                        <span className="inline-block text-[10px] font-mono font-bold text-brand-primary bg-brand-primary/10 border border-brand-primary/20 px-2.5 py-0.5 rounded-full uppercase mt-1">
+                        <span className="inline-block text-[10px] font-mono font-bold text-brand-primary bg-brand-primary/10 border border-brand-primary/20 px-2.5 py-0.5 rounded-full mt-1">
                           {service.badge}
                         </span>
                       )}
@@ -83,7 +83,7 @@ export const ServicesSection = ({ onSelectService }) => {
 
                   {/* Deliverables Checklist */}
                   <div className="space-y-2 pt-2">
-                    <p className="text-[11px] font-mono text-slate-700 dark:text-slate-300 uppercase tracking-wider font-bold">
+                    <p className="text-[11px] font-mono text-slate-700 dark:text-slate-300 tracking-wider font-bold">
                       Sản phẩm bao gồm:
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
@@ -104,7 +104,7 @@ export const ServicesSection = ({ onSelectService }) => {
                     onClick={() => onSelectService(service.titleVi)}
                     className="btn-primary w-full py-3 text-xs font-bold font-display"
                   >
-                    <span>Đặt Làm Gói Này</span>
+                    <span>Đặt làm gói này</span>
                     <ArrowRight size={14} />
                   </button>
                 </div>

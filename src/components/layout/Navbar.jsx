@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
 import { useLanguage } from '../../context/LanguageContext';
-import { Menu, X, Shield, LayoutDashboard, LogOut, Sun, Moon, Globe, Send } from 'lucide-react';
+import { Menu, X, Shield, LogOut, Sun, Moon, Globe } from 'lucide-react';
 
 export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
   const { activeRole, currentUser, logout } = useAuth();
@@ -33,11 +33,6 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
             <div className="flex flex-col leading-none">
               <span className="font-extrabold text-base tracking-tight font-display text-slate-900 dark:text-white">
                 QUANG ANH <span className="text-brand-primary font-mono text-[10px] font-bold tracking-wider ml-1 uppercase">FREELANCER</span>
-              </span>
-              <span className={`text-[10px] font-mono tracking-wider uppercase mt-1 ${
-                isDark ? 'text-slate-400' : 'text-slate-500'
-              }`}>
-                Web Developer
               </span>
             </div>
           </a>
@@ -85,15 +80,6 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
               title="Toggle Theme Mode"
             >
               {isDark ? <Sun size={15} /> : <Moon size={15} />}
-            </button>
-
-            {/* Order Website Primary CTA Button */}
-            <button
-              onClick={() => onOpenRequestModal()}
-              className="btn-primary py-2 px-4 text-xs font-bold font-display shadow-sm"
-            >
-              <Send size={13} />
-              <span>{t('startProject')}</span>
             </button>
 
             {/* Admin Login Button */}
@@ -169,37 +155,25 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate }) => {
             ))}
           </nav>
           
-          <div className="pt-4 border-t border-slate-800 flex flex-col gap-3">
+          <div className="pt-4 border-t border-slate-800 flex items-center justify-between">
             <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenRequestModal();
-              }}
-              className="btn-primary w-full py-2.5 text-xs font-bold font-display"
+              onClick={toggleLanguage}
+              className="text-xs font-mono font-semibold text-brand-primary"
             >
-              <span>{t('startProject')}</span>
+              {language === 'vi' ? 'EN - English' : 'VI - Tiếng Việt'}
             </button>
 
-            <div className="flex items-center justify-between">
+            {activeRole === 'GUEST' && (
               <button
-                onClick={toggleLanguage}
-                className="text-xs font-mono font-semibold text-brand-primary"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenAuthModal();
+                }}
+                className="text-xs font-mono text-slate-400 hover:text-white"
               >
-                {language === 'vi' ? 'EN - English' : 'VI - Tiếng Việt'}
+                Admin Login
               </button>
-
-              {activeRole === 'GUEST' && (
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenAuthModal();
-                  }}
-                  className="text-xs font-mono text-slate-400 hover:text-white"
-                >
-                  Admin Login
-                </button>
-              )}
-            </div>
+            )}
           </div>
         </div>
       )}
