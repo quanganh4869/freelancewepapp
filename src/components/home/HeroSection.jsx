@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { useTheme } from '../../context/ThemeContext';
-import { ArrowRight, CheckCircle, Cpu, ShieldCheck, Mail, Terminal, Clock, Sparkles, Layers, Database, Lock, Code2 } from 'lucide-react';
+import { ArrowRight, Check, Mail, Phone, Cpu } from 'lucide-react';
 
 export const HeroSection = ({ onOpenRequestModal }) => {
   const { language, t } = useLanguage();
@@ -9,155 +9,130 @@ export const HeroSection = ({ onOpenRequestModal }) => {
   const [activeTab, setActiveTab] = useState('stack');
 
   return (
-    <section className="relative pt-16 pb-24 md:pt-28 md:pb-36 border-b border-slate-200 dark:border-slate-800 font-sans overflow-hidden">
+    <section className="relative pt-14 pb-20 md:pt-24 md:pb-28 border-b border-slate-200 dark:border-slate-800 font-sans overflow-hidden">
       
       {/* Background Accent Grids */}
-      <div className="absolute inset-0 pointer-events-none opacity-40 dark:opacity-20 bg-[radial-gradient(#2563eb_1px,transparent_1px)] [background-size:32px_32px]"></div>
+      <div className="absolute inset-0 pointer-events-none opacity-30 dark:opacity-15 bg-[radial-gradient(#F97316_1px,transparent_1px)] [background-size:32px_32px]"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           
-          {/* Left Column: Bold Personal & Professional Statement */}
-          <div className="lg:col-span-7 space-y-8 text-left reveal">
+          {/* Left Column: Direct, Human Editorial Statement */}
+          <div className="lg:col-span-7 space-y-7 text-left reveal">
             
             {/* Direct Studio Eyebrow Tag */}
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-brand-primary/10 border border-brand-primary/30 text-brand-primary text-xs font-mono font-bold tracking-wide uppercase">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
-              <span>QUANG ANH STUDIO • LẬP TRÌNH WEB APP CHO DOANH NGHIỆP</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/30 text-brand-primary text-xs font-mono font-bold tracking-wide uppercase">
+              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span>QUANG ANH STUDIO</span>
             </div>
 
-            {/* Headline H1: Large & Striking */}
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] text-slate-900 dark:text-white">
-              Biến Ý Tưởng Kinh Doanh <br className="hidden sm:inline" />
-              Thành <span className="text-brand-primary underline decoration-brand-primary/30 underline-offset-8">Web App Chạy Thực Tế.</span>
+            {/* Headline H1 */}
+            <h1 className="text-4xl sm:text-6xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] text-slate-900 dark:text-white font-display">
+              Lập Trình Web App <br className="hidden sm:inline" />
+              Tùy Chỉnh Cho <span className="text-brand-primary">Doanh Nghiệp</span>
             </h1>
 
-            {/* Distinctive Callout Box */}
+            {/* Concise Human Callout */}
             <div className="hero-highlight-box max-w-2xl">
               <p className="text-base sm:text-lg font-medium leading-relaxed text-slate-800 dark:text-slate-200">
-                Tôi là <strong className="text-brand-primary">Quang Anh</strong> — Kỹ sư lập trình chuyên thiết kế & xây dựng ứng dụng web tùy chỉnh cho Doanh nghiệp & Startup Việt Nam. Giúp tự động hóa quy trình quản lý, mượt mà, tốc độ dưới 1 giây và bảo mật 100%.
+                Tôi giúp các doanh nghiệp biến quy trình quản lý thành ứng dụng web mượt mà, dễ dùng, chạy ổn định và bảo mật cao.
               </p>
             </div>
 
-            {/* 4 Crisp Commitments Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-bold text-slate-800 dark:text-slate-200">
-              <div className="flex items-center gap-3 p-3.5 rounded-xl bg-white dark:bg-studio-900 border border-slate-200 dark:border-slate-800 shadow-sm">
-                <CheckCircle size={18} className="text-brand-primary shrink-0" />
-                <span>Code tự viết 100% (Không mẫu dựng sẵn)</span>
+            {/* 4 Crisp Commitments */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-bold text-slate-800 dark:text-slate-200 font-display">
+              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white dark:bg-studio-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+                <Check size={16} className="text-brand-primary shrink-0" />
+                <span>Code tự viết tùy chỉnh 100%</span>
               </div>
-              <div className="flex items-center gap-3 p-3.5 rounded-xl bg-white dark:bg-studio-900 border border-slate-200 dark:border-slate-800 shadow-sm">
-                <CheckCircle size={18} className="text-brand-primary shrink-0" />
-                <span>Bàn giao full Source Code & Hướng dẫn</span>
+              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white dark:bg-studio-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+                <Check size={16} className="text-brand-primary shrink-0" />
+                <span>Bàn giao trọn bộ mã nguồn</span>
               </div>
-              <div className="flex items-center gap-3 p-3.5 rounded-xl bg-white dark:bg-studio-900 border border-slate-200 dark:border-slate-800 shadow-sm">
-                <CheckCircle size={18} className="text-brand-primary shrink-0" />
-                <span>Tốc độ mở siêu nhanh & Bảo mật cao</span>
+              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white dark:bg-studio-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+                <Check size={16} className="text-brand-primary shrink-0" />
+                <span>Tốc độ mượt mà dưới 1 giây</span>
               </div>
-              <div className="flex items-center gap-3 p-3.5 rounded-xl bg-white dark:bg-studio-900 border border-slate-200 dark:border-slate-800 shadow-sm">
-                <CheckCircle size={18} className="text-brand-primary shrink-0" />
-                <span>Hỗ trợ kỹ thuật 24/7 trực tiếp dài hạn</span>
+              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white dark:bg-studio-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+                <Check size={16} className="text-brand-primary shrink-0" />
+                <span>Bảo hành & Hỗ trợ kỹ thuật 24/7</span>
               </div>
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
               <button
                 onClick={() => onOpenRequestModal()}
-                className="btn-primary py-4 px-8 text-sm font-bold shadow-lg"
+                className="btn-primary py-3.5 px-7 text-sm font-bold shadow-md"
               >
-                <span>Bắt Đầu Khởi Tạo Dự Án</span>
-                <ArrowRight size={18} />
+                <span>Gửi Yêu Cầu Dự Án</span>
+                <ArrowRight size={16} />
               </button>
 
               <a
                 href="#cost-estimator"
-                className="btn-secondary py-4 px-8 text-sm font-bold"
+                className="btn-secondary py-3.5 px-6 text-sm font-bold"
               >
-                <Cpu size={18} className="text-brand-primary" />
-                <span>Tính Dự Toán Chi Phí Dự Dự Án</span>
+                <Cpu size={16} className="text-brand-primary" />
+                <span>Tính Chi Phí Dự Kiến</span>
               </a>
             </div>
 
           </div>
 
-          {/* Right Column: Interactive Studio Technical Console */}
+          {/* Right Column: Clean Spec Card */}
           <div className="lg:col-span-5 reveal reveal-delay-1">
-            <div className={`rounded-2xl border p-6 sm:p-8 space-y-6 shadow-xl ${
+            <div className={`rounded-2xl border p-6 sm:p-7 space-y-5 shadow-lg ${
               isDark ? 'bg-studio-900 border-slate-800 text-slate-100' : 'bg-white border-slate-200 text-slate-900'
             }`}>
               
-              {/* Console Header */}
+              {/* Profile Card Header */}
               <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
-                <div className="flex items-center gap-2 font-mono text-xs font-bold text-slate-900 dark:text-white">
-                  <Terminal size={16} className="text-brand-primary" />
-                  <span>STUDIO TECHNICAL CONSOLE</span>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-brand-primary text-white font-mono font-bold flex items-center justify-center text-sm shadow-sm">
+                    QA
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-slate-900 dark:text-white font-display">QUANG ANH</h3>
+                    <p className="text-[11px] font-mono text-slate-500">Web App Engineer</p>
+                  </div>
                 </div>
 
-                <span className="font-mono text-[11px] px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 font-bold">
-                  SẴN SÀNG ĐẢM NHẬN
+                <span className="font-mono text-[11px] px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 font-bold">
+                  ONLINE
                 </span>
               </div>
 
-              {/* Tabs selector */}
-              <div className="flex bg-slate-100 dark:bg-studio-950 p-1 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-mono">
-                <button
-                  onClick={() => setActiveTab('stack')}
-                  className={`flex-1 py-2 rounded-lg font-bold transition-all ${
-                    activeTab === 'stack' ? 'bg-brand-primary text-white shadow-sm' : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
-                  }`}
-                >
-                  Công Nghệ
-                </button>
-                <button
-                  onClick={() => setActiveTab('guarantee')}
-                  className={`flex-1 py-2 rounded-lg font-bold transition-all ${
-                    activeTab === 'guarantee' ? 'bg-brand-primary text-white shadow-sm' : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
-                  }`}
-                >
-                  Cam Kết SLA
-                </button>
+              {/* Specification Grid */}
+              <div className="space-y-2.5 font-mono text-xs">
+                <div className="flex justify-between py-2 border-b border-slate-100 dark:border-slate-800/60">
+                  <span className="text-slate-500">Công nghệ:</span>
+                  <span className="font-bold text-slate-900 dark:text-white">React, Next.js, Node.js, Postgres</span>
+                </div>
+                <div className="flex justify-between py-2 border-b border-slate-100 dark:border-slate-800/60">
+                  <span className="text-slate-500">Kinh nghiệm:</span>
+                  <span className="font-bold text-slate-900 dark:text-white">15+ Năm Lập Trình</span>
+                </div>
+                <div className="flex justify-between py-2 border-b border-slate-100 dark:border-slate-800/60">
+                  <span className="text-slate-500">Bàn giao:</span>
+                  <span className="font-bold text-brand-primary">3 – 6 Tuần / Dự án</span>
+                </div>
+                <div className="flex justify-between py-2 border-b border-slate-100 dark:border-slate-800/60">
+                  <span className="text-slate-500">Bảo hành:</span>
+                  <span className="font-bold text-slate-900 dark:text-white">Bảo Hành Kỹ Thuật 24/7</span>
+                </div>
+                <div className="flex justify-between py-2">
+                  <span className="text-slate-500">Email nhận thông báo:</span>
+                  <a href="mailto:quanganhqb04@gmail.com" className="font-bold text-brand-primary hover:underline">quanganhqb04@gmail.com</a>
+                </div>
               </div>
 
-              {/* Tab 1: Stack Specs */}
-              {activeTab === 'stack' ? (
-                <div className="space-y-3 font-mono text-xs animate-fadeIn">
-                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
-                    <span className="text-slate-500">Giao Diện User:</span>
-                    <span className="font-bold text-brand-primary">React 18 / Next.js 15 / Tailwind</span>
-                  </div>
-                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
-                    <span className="text-slate-500">Hệ Thống Backend:</span>
-                    <span className="font-bold text-slate-900 dark:text-white">Node.js Express / Python API</span>
-                  </div>
-                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
-                    <span className="text-slate-500">Cơ Sở Dữ Liệu:</span>
-                    <span className="font-bold text-slate-900 dark:text-white">PostgreSQL / Redis / MongoDB</span>
-                  </div>
-                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
-                    <span className="text-slate-500">Vận Hành Server:</span>
-                    <span className="font-bold text-emerald-600 dark:text-emerald-400">AWS / Vercel / Docker (24/7)</span>
-                  </div>
-                </div>
-              ) : (
-                /* Tab 2: Guarantees */
-                <div className="space-y-3 font-mono text-xs animate-fadeIn">
-                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 space-y-1">
-                    <p className="font-bold text-brand-primary">1. Kiểm Thử Chất Lượng (QA/QC):</p>
-                    <p className="text-[11px] text-slate-600 dark:text-slate-400">Chạy thử nghiệm toàn bộ tính năng trên Điện thoại & Máy tính trước bàn giao.</p>
-                  </div>
-                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 space-y-1">
-                    <p className="font-bold text-emerald-600 dark:text-emerald-400">2. Bảo Hành 24/7 Dài Hạn:</p>
-                    <p className="text-[11px] text-slate-600 dark:text-slate-400">Cam kết khắc phục sự cố kỹ thuật tức thì trong suốt quá trình vận hành.</p>
-                  </div>
-                </div>
-              )}
-
               {/* Direct Contact Banner */}
-              <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs font-mono">
+              <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs font-mono">
                 <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300 font-bold">
-                  <Mail size={15} className="text-brand-primary" />
-                  <a href="mailto:quanganhqb04@gmail.com" className="hover:underline">quanganhqb04@gmail.com</a>
+                  <Mail size={14} className="text-brand-primary" />
+                  <span>Gửi Mail Tức Thì</span>
                 </div>
                 <span className="text-slate-500 font-bold">Zalo: 0908 123 456</span>
               </div>

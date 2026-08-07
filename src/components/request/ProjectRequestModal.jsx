@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRequests } from '../../context/RequestContext';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
@@ -13,6 +13,17 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(null);
 
+  // Close modal on Esc key press (UI/UX Improvement)
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   // Form State
   const [formData, setFormData] = useState({
     // Step 1: Client & Company Info
@@ -26,9 +37,9 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
     // Step 2: Project Scope & Core Requirements
     projectName: initialService ? `Dự án ${initialService}` : 'Phát triển Web App tùy chỉnh',
     projectType: 'SaaS Platform (Phần mềm dịch vụ)',
-    projectStage: 'Đã có ý tưởng sơ khai & Yêu cầu tính năng',
+    projectStage: 'Đã có ý tưởng sơ khai',
     projectDescription: initialService ? `Yêu cầu tư vấn & báo giá chi tiết cho dịch vụ: ${initialService}` : '',
-    targetUsers: 'Khách hàng doanh nghiệp B2B & Nhân viên điều hành',
+    targetUsers: 'Khách hàng doanh nghiệp & Nhân viên điều hành',
     
     // Step 3: Feature Scope & Integrations
     selectedFeatures: [
@@ -36,14 +47,14 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
       'Bảng điều khiển Analytics & Báo cáo',
       'Tích hợp Cổng thanh toán (VNPay/MOMO/Stripe)'
     ],
-    preferredTechnologies: 'React 18 / Next.js, Node.js, PostgreSQL, Redis, Docker',
+    preferredTechnologies: 'React 18 / Next.js, Node.js, PostgreSQL',
     referenceWebsites: '',
 
     // Step 4: Budget, Timeline & SLA
     budget: '30 – 50 Triệu VNĐ',
     timeline: '2–3 tháng',
-    slaTier: '12 Tháng SLA 99.9% Maintenance (Khuyên dùng)',
-    needNda: 'Có (Cần ký thỏa thuận bảo mật NDA trước khi chia sẻ tài liệu)',
+    slaTier: '12 Tháng SLA Maintenance (Khuyên dùng)',
+    needNda: 'Có (Ký thỏa thuận NDA bảo mật)',
     additionalNotes: ''
   });
 
@@ -72,16 +83,16 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
     const newErrors = {};
 
     if (currentStep === 1) {
-      if (!formData.clientName.trim()) newErrors.clientName = 'Vui lòng nhập Họ & Tên của bạn.';
+      if (!formData.clientName.trim()) newErrors.clientName = 'Vui lòng nhập Họ & Tên.';
       if (!formData.clientEmail.trim()) {
-        newErrors.clientEmail = 'Vui lòng nhập Email doanh nghiệp.';
+        newErrors.clientEmail = 'Vui lòng nhập Email.';
       } else if (!/\S+@\S+\.\S+/.test(formData.clientEmail)) {
         newErrors.clientEmail = 'Email không hợp lệ.';
       }
     }
 
     if (currentStep === 2) {
-      if (!formData.projectName.trim()) newErrors.projectName = 'Vui lòng nhập Tên dự án dự kiến.';
+      if (!formData.projectName.trim()) newErrors.projectName = 'Vui lòng nhập Tên dự án.';
       if (!formData.projectDescription.trim() || formData.projectDescription.length < 10) {
         newErrors.projectDescription = 'Mô tả bài toán cần ít nhất 10 ký tự.';
       }
@@ -108,7 +119,6 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
     setIsSubmitting(true);
 
     try {
-      // Call Vercel Serverless Function to send email notification to quanganhqb04@gmail.com
       await fetch('/api/send-request', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -129,16 +139,15 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
     onClose();
   };
 
-  // Feature Options List
   const availableFeatures = [
     'Xác thực tài khoản & Phân quyền Role (RBAC)',
-    'Bảng điều khiển Analytics & Báo cáo Real-time',
+    'Bảng điều khiển Analytics & Báo cáo',
     'Tích hợp Cổng thanh toán (VNPay/MOMO/Stripe)',
-    'Thông báo đẩy & WebSockets Real-time Chat',
-    'Xuất/Nhập dữ liệu tự động (Excel / PDF / CSV)',
-    'Hỗ trợ Đa ngôn ngữ (Multi-language Support)',
-    'Tích hợp Trí tuệ nhân tạo (AI / LLM API)',
-    'Hệ thống Workflow & Tự động hóa quy trình',
+    'Thông báo đẩy & Real-time Chat',
+    'Xuất/Nhập dữ liệu tự động (Excel / PDF)',
+    'Hỗ trợ Đa ngôn ngữ',
+    'Tích hợp Trí tuệ nhân tạo (AI API)',
+    'Hệ thống Workflow & Tự động hóa',
     'API Gateway & Tích hợp phần mềm bên thứ 3'
   ];
 
@@ -159,8 +168,8 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
               <Sparkles size={18} />
             </div>
             <div>
-              <h3 className="text-base font-bold">Khởi Tạo Hồ Sơ Yêu Cầu Dự Án Web App</h3>
-              <p className="text-xs text-slate-500 font-mono">Quang Anh Studio • Báo giá nhanh trong 24h</p>
+              <h3 className="text-base font-bold font-display">Gửi Yêu Cầu Báo Giá Dự Án Web App</h3>
+              <p className="text-xs text-slate-500 font-mono">Quang Anh Studio • Phản hồi trong 24h</p>
             </div>
           </div>
 
@@ -180,9 +189,9 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
             </div>
 
             <div className="space-y-2 max-w-md mx-auto">
-              <h3 className="text-2xl font-extrabold">Đã Gửi Hồ Sơ Dự Án Thành Công!</h3>
+              <h3 className="text-2xl font-extrabold font-display">Đã Gửi Yêu Cầu Thành Công!</h3>
               <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-                Mã theo dõi yêu cầu của bạn là <span className="font-mono font-bold text-brand-primary px-2.5 py-1 rounded bg-brand-primary/10 border border-brand-primary/20">{submitSuccess.id}</span>. Quang Anh Studio sẽ xem xét hồ sơ và liên hệ báo giá trong vòng 24 giờ.
+                Thông tin dự án đã được gửi trực tiếp về email <span className="font-mono font-bold text-brand-primary">quanganhqb04@gmail.com</span>. Quang Anh sẽ liên hệ tư vấn báo giá trong vòng 24 giờ.
               </p>
             </div>
 
@@ -193,18 +202,15 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
               <div className="flex justify-between border-b border-slate-200 dark:border-slate-800 pb-1.5">
                 <span>Dự án:</span> <span className="text-brand-primary font-bold">{submitSuccess.projectName}</span>
               </div>
-              <div className="flex justify-between border-b border-slate-200 dark:border-slate-800 pb-1.5">
-                <span>Loại hình:</span> <span className="text-slate-900 dark:text-slate-200">{submitSuccess.projectType}</span>
-              </div>
               <div className="flex justify-between">
-                <span>Trạng thái hồ sơ:</span> <span className="text-amber-600 dark:text-amber-400 font-bold">Pending (Đang Đánh Giá)</span>
+                <span>Ngân sách dự kiến:</span> <span className="text-emerald-600 dark:text-emerald-400 font-bold">{submitSuccess.budget}</span>
               </div>
             </div>
 
             <div className="pt-2 flex items-center justify-center">
               <button
                 onClick={handleResetAndClose}
-                className="btn-primary py-3 px-8 text-sm font-semibold"
+                className="btn-primary py-3 px-8 text-sm font-bold font-display"
               >
                 Hoàn Tất & Đóng
               </button>
@@ -215,7 +221,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
             {/* 5-Step Progress Indicator */}
             <div className="bg-slate-50 dark:bg-studio-950/80 px-6 py-3 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs font-mono">
               {[
-                { s: 1, label: '1. Khách Hàng' },
+                { s: 1, label: '1. Liên Hệ' },
                 { s: 2, label: '2. Yêu Cầu' },
                 { s: 3, label: '3. Tính Năng' },
                 { s: 4, label: '4. Ngân Sách' },
@@ -223,9 +229,9 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
               ].map((item) => (
                 <div key={item.s} className={`flex items-center gap-1.5 ${step >= item.s ? 'text-brand-primary font-bold' : 'text-slate-400'}`}>
                   <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] ${
-                    step >= item.s ? 'bg-brand-primary text-white' : 'bg-slate-200 dark:bg-slate-800 text-slate-500'
+                    step >= item.s ? 'bg-brand-primary text-white font-bold' : 'bg-slate-200 dark:bg-slate-800 text-slate-500'
                   }`}>{item.s}</span>
-                  <span className="hidden md:inline">{item.label}</span>
+                  <span className="hidden md:inline font-display">{item.label}</span>
                 </div>
               ))}
             </div>
@@ -233,18 +239,17 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
             {/* Form Steps Body */}
             <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-6 max-h-[70vh] overflow-y-auto">
 
-              {/* STEP 1: Client & Company Information */}
+              {/* STEP 1: Client Information */}
               {step === 1 && (
                 <div className="space-y-4 animate-fadeIn">
                   <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
-                    <h4 className="text-base font-bold">1. Thông tin cá nhân & Doanh nghiệp</h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Cung cấp thông tin người đại diện để kỹ sư tư vấn liên hệ phản hồi.</p>
+                    <h4 className="text-base font-bold font-display">1. Thông tin người đại diện</h4>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-mono font-semibold mb-1 text-slate-700 dark:text-slate-300">
-                        Họ và Tên đại diện <span className="text-rose-500">*</span>
+                        Họ và Tên <span className="text-rose-500">*</span>
                       </label>
                       <div className="relative">
                         <User size={15} className="absolute left-3 top-3 text-slate-400" />
@@ -252,7 +257,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                           type="text"
                           value={formData.clientName}
                           onChange={(e) => handleInputChange('clientName', e.target.value)}
-                          placeholder="VD: Nguyễn Văn Anh"
+                          placeholder="VD: Nguyễn Văn A"
                           className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary transition-colors"
                         />
                       </div>
@@ -261,7 +266,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
 
                     <div>
                       <label className="block text-xs font-mono font-semibold mb-1 text-slate-700 dark:text-slate-300">
-                        Email công việc <span className="text-rose-500">*</span>
+                        Email liên hệ <span className="text-rose-500">*</span>
                       </label>
                       <div className="relative">
                         <Mail size={15} className="absolute left-3 top-3 text-slate-400" />
@@ -289,7 +294,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                           value={formData.clientPhone}
                           onChange={(e) => handleInputChange('clientPhone', e.target.value)}
                           placeholder="+84 908 123 456"
-                          className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary transition-colors"
+                          className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary transition-colors font-mono"
                         />
                       </div>
                     </div>
@@ -304,59 +309,20 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                           type="text"
                           value={formData.clientCompany}
                           onChange={(e) => handleInputChange('clientCompany', e.target.value)}
-                          placeholder="Công ty TNHH Công Nghệ Asia"
+                          placeholder="Công ty TNHH Asia"
                           className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary transition-colors"
                         />
                       </div>
                     </div>
                   </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-mono font-semibold mb-1 text-slate-700 dark:text-slate-300">
-                        Lĩnh vực hoạt động doanh nghiệp
-                      </label>
-                      <select
-                        value={formData.businessSector}
-                        onChange={(e) => handleInputChange('businessSector', e.target.value)}
-                        className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary transition-colors font-semibold"
-                      >
-                        <option value="B2B SaaS / Công Nghệ">B2B SaaS / Công Nghệ</option>
-                        <option value="Thương Mại Điện Tử & Bán Lẻ">Thương Mại Điện Tử & Bán Lẻ</option>
-                        <option value="FinTech & Tài Chính">FinTech & Tài Chính</option>
-                        <option value="Logistics & Chuỗi Cung Ứng">Logistics & Chuỗi Cung Ứng</option>
-                        <option value="Y Tế & Chăm Sóc Sức Khỏe">Y Tế & Chăm Sóc Sức Khỏe</option>
-                        <option value="Giáo Dục EdTech">Giáo Dục EdTech</option>
-                        <option value="Bất Động Sản & Xây Dựng">Bất Động Sản & Xây Dựng</option>
-                        <option value="Khác">Lĩnh vực khác</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-mono font-semibold mb-1 text-slate-700 dark:text-slate-300">
-                        Quy mô nhân sự công ty
-                      </label>
-                      <select
-                        value={formData.companyScale}
-                        onChange={(e) => handleInputChange('companyScale', e.target.value)}
-                        className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary transition-colors font-semibold"
-                      >
-                        <option value="Dưới 10 nhân sự">Dưới 10 nhân sự (Startup nhỏ)</option>
-                        <option value="10–50 nhân sự">10–50 nhân sự (Doanh nghiệp vừa)</option>
-                        <option value="50–200 nhân sự">50–200 nhân sự (Tăng trưởng nhanh)</option>
-                        <option value="Trên 200 nhân sự">Trên 200 nhân sự (Enterprise)</option>
-                      </select>
-                    </div>
-                  </div>
                 </div>
               )}
 
-              {/* STEP 2: Project Scope & Core Requirements */}
+              {/* STEP 2: Project Requirements */}
               {step === 2 && (
                 <div className="space-y-4 animate-fadeIn">
                   <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
-                    <h4 className="text-base font-bold">2. Loại hình & Mục tiêu phần mềm Web App</h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Mô tả bài toán kinh doanh và kết quả mong muốn thu được.</p>
+                    <h4 className="text-base font-bold font-display">2. Thông tin dự án</h4>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -368,15 +334,15 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                         type="text"
                         value={formData.projectName}
                         onChange={(e) => handleInputChange('projectName', e.target.value)}
-                        placeholder="VD: Nền tảng SaaS OmniDesk B2B"
-                        className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary transition-colors"
+                        placeholder="VD: Nền tảng SaaS B2B"
+                        className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary transition-colors font-semibold"
                       />
                       {errors.projectName && <p className="text-[11px] text-rose-500 mt-1">{errors.projectName}</p>}
                     </div>
 
                     <div>
                       <label className="block text-xs font-mono font-semibold mb-1 text-slate-700 dark:text-slate-300">
-                        Phân loại phần mềm Web App <span className="text-rose-500">*</span>
+                        Loại hình phần mềm <span className="text-rose-500">*</span>
                       </label>
                       <select
                         value={formData.projectType}
@@ -388,132 +354,67 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                         <option value="Enterprise Dashboard & Admin System">Enterprise Dashboard & Admin System</option>
                         <option value="E-commerce & Marketplace Web App">E-commerce & Marketplace Web App</option>
                         <option value="Internal Workflow Automation Tool">Internal Workflow Automation Tool</option>
-                        <option value="API & Data Integration Platform">API & Data Integration Platform</option>
                       </select>
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-xs font-mono font-semibold mb-1 text-slate-700 dark:text-slate-300">
-                      Giai đoạn chuẩn bị hiện tại của dự án
-                    </label>
-                    <select
-                      value={formData.projectStage}
-                      onChange={(e) => handleInputChange('projectStage', e.target.value)}
-                      className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary transition-colors font-semibold"
-                    >
-                      <option value="Đã có ý tưởng sơ khai & Yêu cầu tính năng">Đã có ý tưởng sơ khai & Yêu cầu tính năng</option>
-                      <option value="Đã có tài liệu mô tả yêu cầu (BRD / PRD)">Đã có tài liệu mô tả yêu cầu (BRD / PRD)</option>
-                      <option value="Đã có thiết kế Wireframe / UI Figma hoàn chỉnh">Đã có thiết kế Wireframe / UI Figma hoàn chỉnh</option>
-                      <option value="Đã có phần mềm cũ cần nâng cấp đập đi xây lại">Đã có phần mềm cũ cần nâng cấp đập đi xây lại</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-mono font-semibold mb-1 text-slate-700 dark:text-slate-300">
-                      Mô tả chi tiết bài toán kinh doanh & Mục tiêu phần mềm <span className="text-rose-500">*</span>
+                      Mô tả bài toán kinh doanh <span className="text-rose-500">*</span>
                     </label>
                     <textarea
                       rows={3}
                       value={formData.projectDescription}
                       onChange={(e) => handleInputChange('projectDescription', e.target.value)}
-                      placeholder="Mô tả quy trình nghiệp vụ hiện tại, nỗi đau cần giải quyết và các kết quả kinh doanh bạn mong muốn đạt được..."
+                      placeholder="Mô tả quy trình làm việc hiện tại và các yêu cầu bạn mong muốn đạt được..."
                       className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary transition-colors resize-none"
                     />
                     {errors.projectDescription && <p className="text-[11px] text-rose-500 mt-1">{errors.projectDescription}</p>}
                   </div>
-
-                  <div>
-                    <label className="block text-xs font-mono font-semibold mb-1 text-slate-700 dark:text-slate-300">
-                      Đối tượng người dùng mục tiêu & Phân quyền Role
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.targetUsers}
-                      onChange={(e) => handleInputChange('targetUsers', e.target.value)}
-                      placeholder="VD: Ban giám đốc (SuperAdmin), Nhân viên kinh doanh (Sales), Khách hàng B2B"
-                      className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary transition-colors"
-                    />
-                  </div>
                 </div>
               )}
 
-              {/* STEP 3: Feature Scope & Integrations */}
+              {/* STEP 3: Feature Scope */}
               {step === 3 && (
-                <div className="space-y-5 animate-fadeIn">
+                <div className="space-y-4 animate-fadeIn">
                   <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
-                    <h4 className="text-base font-bold">3. Danh sách tính năng cốt lõi & Công nghệ</h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Chọn các khối mô-đun chức năng bạn cần tích hợp vào sản phẩm Web App.</p>
+                    <h4 className="text-base font-bold font-display">3. Chọn tính năng cốt lõi</h4>
                   </div>
 
-                  {/* Multi-Select Features Pills */}
-                  <div>
-                    <label className="block text-xs font-mono font-semibold mb-2 text-slate-700 dark:text-slate-300">
-                      Chọn các tính năng cốt lõi cần lập trình (Multi-select):
-                    </label>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      {availableFeatures.map((feat) => {
-                        const isSelected = formData.selectedFeatures.includes(feat);
-                        return (
-                          <button
-                            key={feat}
-                            type="button"
-                            onClick={() => toggleFeature(feat)}
-                            className={`p-3 rounded-xl border text-xs text-left transition-all flex items-center justify-between font-medium ${
-                              isSelected
-                                ? 'bg-brand-primary/10 border-brand-primary text-brand-primary font-bold'
-                                : 'bg-slate-50 dark:bg-studio-950 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-300'
-                            }`}
-                          >
-                            <span className="pr-2">{feat}</span>
-                            <div className={`w-4 h-4 rounded flex items-center justify-center border shrink-0 ${
-                              isSelected ? 'bg-brand-primary border-brand-primary text-white' : 'border-slate-400'
-                            }`}>
-                              {isSelected && <Check size={12} />}
-                            </div>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-mono font-semibold mb-1 text-slate-700 dark:text-slate-300">
-                      Công nghệ ưu tiên sử dụng (Nếu có yêu cầu riêng)
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.preferredTechnologies}
-                      onChange={(e) => handleInputChange('preferredTechnologies', e.target.value)}
-                      placeholder="React 18, Next.js, Node.js, PostgreSQL, Redis, Docker..."
-                      className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white font-mono focus:outline-none focus:border-brand-primary transition-colors"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-mono font-semibold mb-1 text-slate-700 dark:text-slate-300">
-                      Link sản phẩm mẫu tham khảo hoặc ứng dụng tương tự (Tùy chọn)
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.referenceWebsites}
-                      onChange={(e) => handleInputChange('referenceWebsites', e.target.value)}
-                      placeholder="https://example-app.com, https://figma.com/file/..."
-                      className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white font-mono focus:outline-none focus:border-brand-primary transition-colors"
-                    />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {availableFeatures.map((feat) => {
+                      const isSelected = formData.selectedFeatures.includes(feat);
+                      return (
+                        <button
+                          key={feat}
+                          type="button"
+                          onClick={() => toggleFeature(feat)}
+                          className={`p-3 rounded-xl border text-xs text-left transition-all flex items-center justify-between font-medium ${
+                            isSelected
+                              ? 'bg-brand-primary/10 border-brand-primary text-brand-primary font-bold'
+                              : 'bg-slate-50 dark:bg-studio-950 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-300'
+                          }`}
+                        >
+                          <span className="pr-2">{feat}</span>
+                          <div className={`w-4 h-4 rounded flex items-center justify-center border shrink-0 ${
+                            isSelected ? 'bg-brand-primary border-brand-primary text-white' : 'border-slate-400'
+                          }`}>
+                            {isSelected && <Check size={12} />}
+                          </div>
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
               )}
 
-              {/* STEP 4: Budget, Timeline & SLA */}
+              {/* STEP 4: Budget & Timeline */}
               {step === 4 && (
-                <div className="space-y-5 animate-fadeIn">
+                <div className="space-y-4 animate-fadeIn">
                   <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
-                    <h4 className="text-base font-bold">4. Ngân sách, Kỳ hạn bàn giao & Cam kết bảo mật NDA</h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Xác định khung ngân sách đầu tư dự kiến để Quang Anh Studio cân đối giải pháp phù hợp thị trường Việt Nam.</p>
+                    <h4 className="text-base font-bold font-display">4. Ngân sách & Thời gian triển khai</h4>
                   </div>
 
-                  {/* Budget Options in VNĐ */}
                   <div>
                     <label className="block text-xs font-mono font-semibold mb-2 text-slate-700 dark:text-slate-300">
                       Khoảng ngân sách đầu tư dự kiến (VNĐ)
@@ -542,10 +443,9 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                     </div>
                   </div>
 
-                  {/* Timeline Selection */}
                   <div>
                     <label className="block text-xs font-mono font-semibold mb-2 text-slate-700 dark:text-slate-300">
-                      Thời gian triển khai & Bàn giao sản phẩm mong muốn
+                      Thời gian triển khai mong muốn
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                       {['Cần gấp trong 1 tháng', '1–2 tháng', '2–3 tháng', 'Linh hoạt'].map((t) => (
@@ -564,134 +464,46 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                       ))}
                     </div>
                   </div>
-
-                  {/* SLA Level */}
-                  <div>
-                    <label className="block text-xs font-mono font-semibold mb-2 text-slate-700 dark:text-slate-300">
-                      Cấp độ bảo trì & Đồng hành SLA sau bàn giao
-                    </label>
-                    <select
-                      value={formData.slaTier}
-                      onChange={(e) => handleInputChange('slaTier', e.target.value)}
-                      className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary transition-colors font-semibold"
-                    >
-                      <option value="6 Tháng Bảo Hành Tiêu Chuẩn">6 Tháng Bảo Hành Tiêu Chuẩn (Miễn phí)</option>
-                      <option value="12 Tháng SLA 99.9% Maintenance (Khuyên dùng)">12 Tháng SLA 99.9% Maintenance (Khuyên dùng)</option>
-                      <option value="24/7 Dedicated Tech Team (Đội kỹ thuật túc trực riêng)">24/7 Dedicated Tech Team (Đội kỹ thuật túc trực riêng)</option>
-                    </select>
-                  </div>
-
-                  {/* NDA Option */}
-                  <div>
-                    <label className="block text-xs font-mono font-semibold mb-2 text-slate-700 dark:text-slate-300">
-                      Thỏa thuận bảo mật thông tin (NDA)
-                    </label>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      {[
-                        'Có (Cần ký thỏa thuận bảo mật NDA trước khi chia sẻ tài liệu)',
-                        'Không (Trao đổi trực tiếp bình thường)'
-                      ].map((nda) => (
-                        <button
-                          key={nda}
-                          type="button"
-                          onClick={() => handleInputChange('needNda', nda)}
-                          className={`p-3 rounded-xl border text-xs text-left transition-all font-medium ${
-                            formData.needNda === nda
-                              ? 'bg-brand-primary/10 border-brand-primary text-brand-primary font-bold'
-                              : 'bg-slate-50 dark:bg-studio-950 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-300'
-                          }`}
-                        >
-                          {nda}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
                 </div>
               )}
 
-              {/* STEP 5: Review & Submit */}
+              {/* STEP 5: Confirm & Submit */}
               {step === 5 && (
                 <div className="space-y-4 animate-fadeIn">
                   <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
-                    <h4 className="text-base font-bold">5. Rà soát & Xác nhận gửi hồ sơ yêu cầu</h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Kiểm tra lại toàn bộ thông tin trước khi chuyển hồ sơ cho Quang Anh Studio.</p>
+                    <h4 className="text-base font-bold font-display">5. Xác nhận & Gửi yêu cầu</h4>
                   </div>
 
-                  <div className="p-5 rounded-xl bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 space-y-4 text-xs">
-                    
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 border-b border-slate-200 dark:border-slate-800 pb-3">
-                      <div>
-                        <span className="text-slate-500 font-mono">Người đại diện:</span>
-                        <p className="font-bold text-slate-900 dark:text-white text-sm">{formData.clientName}</p>
-                      </div>
-                      <div>
-                        <span className="text-slate-500 font-mono">Email liên hệ:</span>
-                        <p className="font-bold text-slate-900 dark:text-white">{formData.clientEmail}</p>
-                      </div>
-                      <div>
-                        <span className="text-slate-500 font-mono">Số điện thoại / Zalo:</span>
-                        <p className="text-slate-800 dark:text-slate-200 font-mono">{formData.clientPhone || 'N/A'}</p>
-                      </div>
-                      <div>
-                        <span className="text-slate-500 font-mono">Công ty ({formData.businessSector}):</span>
-                        <p className="text-slate-800 dark:text-slate-200">{formData.clientCompany || 'Chưa cập nhật'} ({formData.companyScale})</p>
-                      </div>
+                  <div className="p-5 rounded-xl bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 space-y-3 text-xs font-mono">
+                    <div className="flex justify-between border-b border-slate-200 dark:border-slate-800 pb-2">
+                      <span>Người liên hệ:</span> <span className="font-bold text-slate-900 dark:text-white">{formData.clientName} ({formData.clientEmail})</span>
                     </div>
-
-                    <div className="space-y-1">
-                      <span className="text-slate-500 font-mono">Dự án Web App:</span>
-                      <p className="font-bold text-brand-primary text-sm">{formData.projectName} — <span className="text-slate-700 dark:text-slate-300 font-normal">{formData.projectType}</span></p>
-                      <p className="text-slate-500 font-mono text-[11px]">Giai đoạn: {formData.projectStage}</p>
+                    <div className="flex justify-between border-b border-slate-200 dark:border-slate-800 pb-2">
+                      <span>Dự án:</span> <span className="font-bold text-brand-primary">{formData.projectName}</span>
                     </div>
-
-                    <div className="space-y-1">
-                      <span className="text-slate-500 font-mono">Mô tả bài toán:</span>
-                      <p className="text-slate-700 dark:text-slate-300 leading-relaxed italic">{formData.projectDescription}</p>
+                    <div className="flex justify-between border-b border-slate-200 dark:border-slate-800 pb-2">
+                      <span>Ngân sách dự kiến:</span> <span className="font-bold text-emerald-600 dark:text-emerald-400">{formData.budget}</span>
                     </div>
-
-                    <div className="space-y-1.5 border-t border-slate-200 dark:border-slate-800 pt-3">
-                      <span className="text-slate-500 font-mono">Tính năng cốt lõi đã chọn ({formData.selectedFeatures.length} mục):</span>
-                      <div className="flex flex-wrap gap-1.5">
-                        {formData.selectedFeatures.map((f, idx) => (
-                          <span key={idx} className="px-2.5 py-1 rounded bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-[11px] font-mono font-semibold">
-                            ✓ {f}
-                          </span>
-                        ))}
-                      </div>
+                    <div className="flex justify-between">
+                      <span>Thời gian:</span> <span className="font-bold text-slate-900 dark:text-white">{formData.timeline}</span>
                     </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 border-t border-slate-200 dark:border-slate-800 pt-3">
-                      <div>
-                        <span className="text-slate-500 font-mono">Ngân sách dự kiến:</span>
-                        <p className="font-bold text-emerald-600 dark:text-emerald-400 font-mono text-sm">{formData.budget}</p>
-                      </div>
-                      <div>
-                        <span className="text-slate-500 font-mono">Kỳ hạn bàn giao:</span>
-                        <p className="font-bold text-slate-900 dark:text-white font-mono">{formData.timeline}</p>
-                      </div>
-                    </div>
-
-                    <div className="border-t border-slate-200 dark:border-slate-800 pt-2 text-[11px] text-slate-500 font-mono">
-                      <span>Gói SLA: {formData.slaTier}</span> • <span>Thỏa thuận NDA: {formData.needNda}</span>
-                    </div>
-
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-brand-primary/10 border border-brand-primary/20 text-xs text-slate-700 dark:text-slate-300 flex items-start gap-2.5">
-                    <ShieldCheck size={18} className="text-brand-primary shrink-0 mt-0.5" />
-                    <span>Hồ sơ yêu cầu của bạn sẽ được gửi thẳng về Email của Quang Anh & bảo mật 100%. Thông tin dự án sẽ hiển thị ngay trong danh sách theo dõi của Admin Control Center và Client Dashboard.</span>
+                  <div className="p-3 rounded-xl bg-brand-primary/10 border border-brand-primary/20 text-xs text-slate-700 dark:text-slate-300 flex items-start gap-2">
+                    <ShieldCheck size={16} className="text-brand-primary shrink-0 mt-0.5" />
+                    <span>Thông tin của bạn sẽ được gửi thẳng về Email admin `quanganhqb04@gmail.com` và bảo mật 100%.</span>
                   </div>
                 </div>
               )}
 
-              {/* Modal Buttons Footer */}
-              <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+              {/* Modal Footer Buttons */}
+              <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between font-display">
                 {step > 1 ? (
                   <button
                     type="button"
                     onClick={handleBack}
                     disabled={isSubmitting}
-                    className="btn-secondary py-2.5 px-5 text-xs font-semibold"
+                    className="btn-secondary py-2.5 px-5 text-xs font-bold"
                   >
                     <ArrowLeft size={14} /> Quay lại
                   </button>
@@ -703,7 +515,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                   <button
                     type="button"
                     onClick={handleNext}
-                    className="btn-primary py-2.5 px-6 text-xs font-semibold ml-auto"
+                    className="btn-primary py-2.5 px-6 text-xs font-bold ml-auto"
                   >
                     <span>Tiếp tục</span>
                     <ArrowRight size={14} />
@@ -712,16 +524,16 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="btn-primary py-3 px-7 text-xs font-semibold ml-auto disabled:opacity-50"
+                    className="btn-primary py-3 px-7 text-xs font-bold ml-auto disabled:opacity-50"
                   >
                     {isSubmitting ? (
                       <>
                         <Loader2 size={16} className="animate-spin" />
-                        <span>Đang gửi hồ sơ...</span>
+                        <span>Đang gửi mail...</span>
                       </>
                     ) : (
                       <>
-                        <span>Gửi Hồ Sơ Yêu Cầu Dự Án</span>
+                        <span>Gửi Báo Giá Ngay</span>
                         <ArrowRight size={16} />
                       </>
                     )}
