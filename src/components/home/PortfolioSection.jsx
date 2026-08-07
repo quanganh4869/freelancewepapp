@@ -8,11 +8,11 @@ export const PortfolioSection = ({ onOpenRequestModal }) => {
   const [selectedCategory, setSelectedCategory] = useState('All');
 
   const categories = [
-    { id: 'All', label: 'Tất cả Dự Án' },
-    { id: 'Personal', label: 'Website Cá Nhân' },
-    { id: 'Landing Page', label: 'Landing Page' },
-    { id: 'E-commerce', label: 'Website Bán Hàng' },
-    { id: 'Web App', label: 'Web App Đặt Lịch' }
+    { id: 'All', label: 'Tất cả dự án' },
+    { id: 'Personal', label: 'Website cá nhân' },
+    { id: 'Landing Page', label: 'Landing page' },
+    { id: 'E-commerce', label: 'Website bán hàng' },
+    { id: 'Web App', label: 'Web app' }
   ];
 
   const filteredProjects = selectedCategory === 'All'
@@ -28,13 +28,10 @@ export const PortfolioSection = ({ onOpenRequestModal }) => {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 reveal">
           <div className="space-y-3 max-w-2xl">
-            <div className="studio-badge">
-              <span>SẢN PHẨM THỰC TẾ</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white font-display">
-              Những Dự Án Tôi Đã Triển Khai
+              Dự án đã triển khai
             </h2>
-            <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed font-medium">
               Hình ảnh thực tế từ các website tôi trực tiếp thiết kế và lập trình cho khách hàng.
             </p>
           </div>
@@ -45,7 +42,7 @@ export const PortfolioSection = ({ onOpenRequestModal }) => {
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold font-display transition-all ${
+                className={`px-4 py-2 rounded-xl text-xs font-bold font-display transition-all ${
                   selectedCategory === cat.id
                     ? 'bg-brand-primary text-white shadow-sm'
                     : 'bg-slate-100 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-300'
@@ -77,7 +74,7 @@ export const PortfolioSection = ({ onOpenRequestModal }) => {
                   
                   {/* Category Badge */}
                   <div className="absolute top-4 left-4">
-                    <span className="font-mono text-xs font-bold text-white bg-brand-primary px-3 py-1 rounded-md shadow-sm">
+                    <span className="font-mono text-xs font-bold text-white bg-brand-primary px-3 py-1 rounded-lg shadow-sm">
                       {project.categoryLabel}
                     </span>
                   </div>
@@ -87,9 +84,9 @@ export const PortfolioSection = ({ onOpenRequestModal }) => {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="absolute top-4 right-4 px-3 py-1.5 rounded-lg bg-black/60 hover:bg-black/90 text-white text-xs font-mono font-bold backdrop-blur-md border border-white/20 flex items-center gap-1.5 transition-all"
+                    className="absolute top-4 right-4 px-3 py-1.5 rounded-xl bg-black/70 hover:bg-black/90 text-white text-xs font-mono font-bold backdrop-blur-md border border-white/20 flex items-center gap-1.5 transition-all"
                   >
-                    <span>Xem Demo</span>
+                    <span>Xem demo</span>
                     <ExternalLink size={13} />
                   </a>
                 </div>
@@ -105,7 +102,7 @@ export const PortfolioSection = ({ onOpenRequestModal }) => {
                     <h3 className="text-lg font-bold text-slate-900 dark:text-white font-display">
                       {project.title}
                     </h3>
-                    <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mt-1.5">
+                    <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mt-1.5 font-medium">
                       {project.shortDesc}
                     </p>
                   </div>
@@ -127,7 +124,7 @@ export const PortfolioSection = ({ onOpenRequestModal }) => {
                     {project.techStack.map((tech, idx) => (
                       <span
                         key={idx}
-                        className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 text-[11px] font-mono text-slate-700 dark:text-slate-300"
+                        className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 text-[11px] font-mono text-slate-700 dark:text-slate-300"
                       >
                         {tech}
                       </span>
@@ -138,7 +135,7 @@ export const PortfolioSection = ({ onOpenRequestModal }) => {
                     onClick={() => onOpenRequestModal(`Làm website tương tự như ${project.title}`)}
                     className="w-full py-2.5 text-xs font-bold font-display btn-secondary"
                   >
-                    <span>Làm Website Tương Tự</span>
+                    <span>Làm website tương tự</span>
                   </button>
 
                 </div>
