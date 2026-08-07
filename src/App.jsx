@@ -31,13 +31,18 @@ const MainAppContent = () => {
   const { activeRole, currentUser } = useAuth();
   const { isDark } = useTheme();
 
-  // Enable scroll reveal animations
-  useScrollReveal();
-
+  const [activeView, setActiveView] = useState('home'); // 'home' | 'estimator' | 'admin-dashboard'
   const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [initialServiceForForm, setInitialServiceForForm] = useState('');
-  const [activeView, setActiveView] = useState('home'); // 'home' | 'estimator' | 'admin-dashboard'
+
+  // Enable scroll reveal animations keyed to activeView
+  useScrollReveal(activeView);
+
+  const handleNavigate = (view) => {
+    setActiveView(view);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  };
 
   const handleOpenRequestModal = (serviceTitle = '') => {
     setInitialServiceForForm(serviceTitle);
@@ -61,7 +66,7 @@ const MainAppContent = () => {
         currentView={activeView}
         onOpenRequestModal={() => handleOpenRequestModal()}
         onOpenAuthModal={() => setIsAuthModalOpen(true)}
-        onNavigate={(view) => setActiveView(view)}
+        onNavigate={handleNavigate}
       />
 
       {/* Main View Router */}
@@ -92,7 +97,7 @@ const MainAppContent = () => {
           /* Standalone Estimator Page */
           <EstimatorPage
             onOpenRequestModal={(scope) => handleOpenRequestModal(scope)}
-            onBackHome={() => setActiveView('home')}
+            onBackHome={() => handleNavigate('home')}
           />
         ) : (
           <>
