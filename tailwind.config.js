@@ -40,8 +40,8 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', 'Be Vietnam Pro', 'system-ui', 'sans-serif'],
-        display: ['Outfit', 'Inter', 'Be Vietnam Pro', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+        display: ['Inter', 'Be Vietnam Pro', 'system-ui', 'sans-serif'],
+        mono: ['Inter', 'Be Vietnam Pro', 'system-ui', 'sans-serif']
       },
       boxShadow: {
         'orange-glow': '0 0 20px -5px rgba(249, 115, 22, 0.35)',

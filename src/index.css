@@ -4,7 +4,7 @@
 
 @layer base {
   html {
-    font-family: 'Inter', 'Be Vietnam Pro', sans-serif;
+    font-family: 'Inter', 'Be Vietnam Pro', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -14,16 +14,18 @@
   body {
     background-color: #0B0F19;
     color: #F8FAFC;
+    font-family: 'Inter', 'Be Vietnam Pro', system-ui, sans-serif;
     transition: background-color 0.3s ease, color 0.3s ease;
     line-height: 1.65;
     letter-spacing: -0.015em;
   }
 
-  /* Headings & Display Typography: Impeccable Scale */
+  /* Headings & Display Typography: Unified Sans-Serif */
   h1, h2, h3, h4, h5, h6,
-  .font-display {
-    font-family: 'Outfit', 'Inter', sans-serif;
-    letter-spacing: -0.028em;
+  .font-display,
+  .font-mono {
+    font-family: 'Inter', 'Be Vietnam Pro', system-ui, sans-serif;
+    letter-spacing: -0.025em;
   }
 
   /* Light Mode High-Contrast DV60 Style */
@@ -89,7 +91,7 @@ html.light ::-webkit-scrollbar-thumb {
 .btn-primary {
   background: #F97316;
   color: #FFFFFF !important;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Inter', 'Be Vietnam Pro', sans-serif;
   font-weight: 700;
   font-size: 0.875rem;
   padding: 0.85rem 1.8rem;
@@ -111,7 +113,7 @@ html.light ::-webkit-scrollbar-thumb {
 .btn-secondary {
   background: #FFFFFF;
   color: #0F172A !important;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Inter', 'Be Vietnam Pro', sans-serif;
   font-weight: 700;
   font-size: 0.875rem;
   padding: 0.85rem 1.8rem;
