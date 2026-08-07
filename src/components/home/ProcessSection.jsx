@@ -1,10 +1,7 @@
 import React from 'react';
-import { useTheme } from '../../context/ThemeContext';
 import { ArrowRight } from 'lucide-react';
 
 export const ProcessSection = ({ onOpenRequestModal }) => {
-  const { isDark } = useTheme();
-
   const steps = [
     {
       num: '1',
@@ -29,33 +26,33 @@ export const ProcessSection = ({ onOpenRequestModal }) => {
   ];
 
   return (
-    <section id="quy-trinh" className="py-16 md:py-24 border-b border-[#E6E4DD] dark:border-[#2A2A28] font-sans">
+    <section id="quy-trinh" className="py-16 md:py-24 border-b border-brand-border font-sans">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
         {/* Section Header */}
         <div className="text-left space-y-2 reveal">
-          <span className="text-xs font-semibold text-[#666663] dark:text-[#A1A19A]">
+          <span className="text-xs font-semibold text-brand-muted uppercase tracking-wider">
             Quy trình
           </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] dark:text-white">
+          <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-brand-primary dark:text-white">
             Bốn bước, không rườm rà
           </h2>
         </div>
 
-        {/* 4 Steps Vertical Grid (Lovable Minimalist Style) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {/* 4 Steps Vertical Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {steps.map((s, index) => (
             <div
               key={s.num}
-              className={`p-6 rounded-2xl border border-[#E6E4DD] dark:border-[#2A2A28] bg-white dark:bg-[#1A1A19] space-y-3 reveal reveal-delay-${index + 1}`}
+              className={`p-5 sm:p-6 rounded-lg border border-brand-border bg-brand-paper space-y-2 reveal reveal-delay-${index + 1}`}
             >
-              <div className="text-xs font-bold text-[#A1A19A]">
+              <span className="font-mono text-xs font-bold text-brand-muted">
                 Bước {s.num}
-              </div>
-              <h3 className="text-base font-bold text-[#1A1A1A] dark:text-white">
+              </span>
+              <h3 className="font-display text-base font-bold text-brand-primary dark:text-white">
                 {s.title}
               </h3>
-              <p className="text-sm text-[#666663] dark:text-[#A1A19A] leading-relaxed font-medium">
+              <p className="text-sm text-brand-muted leading-relaxed font-medium">
                 {s.desc}
               </p>
             </div>
@@ -65,7 +62,7 @@ export const ProcessSection = ({ onOpenRequestModal }) => {
         <div className="pt-2 reveal">
           <button
             onClick={() => onOpenRequestModal()}
-            className="btn-primary py-3 px-6 text-xs font-semibold"
+            className="btn-primary py-2.5 px-5 text-xs font-semibold"
           >
             <span>Đặt làm website</span>
             <ArrowRight size={14} />

@@ -9,35 +9,38 @@ export default {
     extend: {
       colors: {
         brand: {
-          primary: '#1A1A1A',     // Lovable Warm Charcoal / Black Primary
-          amber: '#D97706',       // Subtle Amber Accent
-          hover: '#333330',       // Dark Gray Hover
-          dark: '#121212',        // Lovable Dark Theme Deep Charcoal
-          ink: '#1A1A1A',
-          lightBg: '#FAF9F6',     // Lovable Light Theme Warm Off-White / Cream
-          lightSurface: '#FFFFFF',
-          lightBorder: '#E6E4DD',
-          emerald: '#10B981',
+          primary: '#24221E',     // Lovable Primary Charcoal
+          background: '#F7F5EE',  // Lovable Light Background Warm Paper
+          paper: '#FCFAF6',       // Lovable Card Off-White
+          border: '#E4DFD3',      // Lovable Subtle Border
+          accent: '#D05021',      // Lovable Warm Terracotta Rust Accent
+          muted: '#78736A',       // Lovable Muted Text Gray
+          hover: '#3D3A34',
         },
         studio: {
-          950: '#121212',
-          900: '#1A1A19',
-          850: '#222220',
-          800: '#2A2A28',
-          700: '#444440',
-          600: '#666663',
-          500: '#888883',
-          400: '#A1A19A',
-          300: '#C8C5B9',
-          200: '#E6E4DD',
-          100: '#F2F0E9',
-          50: '#FAF9F6'
+          950: '#1A1916',
+          900: '#24221E',
+          850: '#2E2B26',
+          800: '#3D3A34',
+          700: '#545048',
+          600: '#78736A',
+          500: '#999388',
+          400: '#B8B2A6',
+          300: '#D4CEBF',
+          200: '#E4DFD3',
+          100: '#EFECE5',
+          50: '#F7F5EE'
         }
       },
       fontFamily: {
-        sans: ['Inter', 'Be Vietnam Pro', 'system-ui', 'sans-serif'],
-        display: ['Inter', 'Be Vietnam Pro', 'system-ui', 'sans-serif'],
-        mono: ['Inter', 'Be Vietnam Pro', 'system-ui', 'sans-serif']
+        sans: ['"Be Vietnam Pro"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['"Bricolage Grotesque"', '"Be Vietnam Pro"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace']
+      },
+      borderRadius: {
+        'xl': '0.5rem',
+        '2xl': '0.75rem',
+        '3xl': '1rem'
       }
     },
   },

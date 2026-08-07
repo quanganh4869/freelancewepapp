@@ -3,177 +3,138 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --background: #F7F5EE;
+    --foreground: #25231F;
+    --paper: #FCFAF6;
+    --card: #FCFAF6;
+    --card-foreground: #25231F;
+    --primary: #25231F;
+    --primary-foreground: #FCFAF6;
+    --secondary: #EFECE5;
+    --secondary-foreground: #25231F;
+    --muted: #EFECE5;
+    --muted-foreground: #78736A;
+    --accent: #D05021;
+    --border: #E4DFD3;
+    --border-strong: #C6BFB1;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: #1A1916;
+    --foreground: #FCFAF6;
+    --paper: #24221E;
+    --card: #24221E;
+    --card-foreground: #FCFAF6;
+    --primary: #FCFAF6;
+    --primary-foreground: #25231F;
+    --secondary: #2E2B26;
+    --secondary-foreground: #FCFAF6;
+    --muted: #2E2B26;
+    --muted-foreground: #B8B2A6;
+    --accent: #D05021;
+    --border: #3D3A34;
+    --border-strong: #545048;
+  }
+
   html {
-    font-family: 'Inter', 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Be Vietnam Pro', ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     scroll-behavior: smooth;
   }
   
-  /* Reference Site Aesthetic: Warm Off-White / Paper Cream (#FAF9F6) & Clean Charcoal (#121212) */
   body {
-    background-color: #FAF9F6;
-    color: #1A1A1A;
-    font-family: 'Inter', 'Be Vietnam Pro', system-ui, sans-serif;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: 'Be Vietnam Pro', system-ui, sans-serif;
     transition: background-color 0.2s ease, color 0.2s ease;
     line-height: 1.6;
-    letter-spacing: -0.011em;
+    letter-spacing: -0.01em;
   }
 
-  /* Headings: Clean, natural sentence case, tight tracking */
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Inter', 'Be Vietnam Pro', system-ui, sans-serif;
-    letter-spacing: -0.022em;
-    color: #1A1A1A;
-  }
-
-  /* Dark Mode Aesthetic: Slate/Zinc Deep Charcoal */
-  html.dark body {
-    background-color: #121212;
-    color: #F4F4F2;
-  }
-
-  html.dark h1, 
-  html.dark h2, 
-  html.dark h3, 
-  html.dark h4 {
-    color: #FFFFFF !important;
-  }
-
-  html.dark .text-slate-600,
-  html.dark .text-slate-500,
-  html.dark .text-slate-400 {
-    color: #A1A19A !important;
-  }
-
-  html.dark .text-slate-900,
-  html.dark .text-slate-800,
-  html.dark .text-slate-700 {
-    color: #F4F4F2 !important;
-  }
-
-  html.dark .bg-studio-950 {
-    background-color: #121212 !important;
-  }
-
-  html.dark .bg-studio-900 {
-    background-color: #1A1A19 !important;
-  }
-
-  html.dark .border-slate-800,
-  html.dark .border-slate-700,
-  html.dark .border-white\/10 {
-    border-color: #2A2A28 !important;
+    font-family: 'Bricolage Grotesque', 'Be Vietnam Pro', system-ui, sans-serif;
+    letter-spacing: -0.025em;
+    color: var(--foreground);
   }
 }
 
-/* Custom Minimalist Scrollbars */
+/* Custom Scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #FAF9F6;
-}
-html.dark ::-webkit-scrollbar-track {
-  background: #121212;
+  background: var(--background);
 }
 ::-webkit-scrollbar-thumb {
-  background: #D4D2C9;
+  background: var(--border-strong);
   border-radius: 4px;
 }
-html.dark ::-webkit-scrollbar-thumb {
-  background: #333330;
-}
 
-/* Reference UI Buttons & Card Tokens */
+/* Reference Lovable Exact Buttons & Cards */
 .btn-primary {
-  background-color: #1A1A1A;
-  color: #FFFFFF !important;
-  font-family: 'Inter', 'Be Vietnam Pro', sans-serif;
+  background-color: var(--primary);
+  color: var(--primary-foreground) !important;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-weight: 600;
   font-size: 0.875rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 12px;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0.65rem 1.35rem;
+  border-radius: 0.5rem;
+  transition: all 0.15s ease-in-out;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  border: 1px solid #1A1A1A;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-}
-html.dark .btn-primary {
-  background-color: #FFFFFF;
-  color: #121212 !important;
-  border-color: #FFFFFF;
+  gap: 0.4rem;
+  border: 1px solid var(--primary);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 .btn-primary:hover {
-  background-color: #333330;
-  border-color: #333330;
+  opacity: 0.92;
   transform: translateY(-1px);
-}
-html.dark .btn-primary:hover {
-  background-color: #E6E6E3;
-  border-color: #E6E6E3;
 }
 
 .btn-secondary {
-  background-color: #FFFFFF;
-  color: #1A1A1A !important;
-  font-family: 'Inter', 'Be Vietnam Pro', sans-serif;
+  background-color: var(--card);
+  color: var(--foreground) !important;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-weight: 600;
   font-size: 0.875rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 12px;
-  border: 1px solid #E6E4DD;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0.65rem 1.35rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  transition: all 0.15s ease-in-out;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
-}
-html.dark .btn-secondary {
-  background-color: #1A1A19;
-  color: #F4F4F2 !important;
-  border-color: #2A2A28;
+  gap: 0.4rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 .btn-secondary:hover {
-  border-color: #1A1A1A;
-  background-color: #F5F4EF;
+  border-color: var(--border-strong);
+  background-color: var(--secondary);
   transform: translateY(-1px);
-}
-html.dark .btn-secondary:hover {
-  border-color: #555550;
-  background-color: #242422;
 }
 
 /* Lovable Minimalist Card Style */
 .studio-card {
-  background-color: #FFFFFF;
-  border: 1px solid #E6E4DD;
-  border-radius: 16px;
-  transition: all 0.2s ease-in-out;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-}
-html.dark .studio-card {
-  background-color: #1A1A19;
-  border-color: #2A2A28;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  transition: all 0.15s ease-in-out;
 }
 .studio-card:hover {
-  border-color: #C8C5B9;
-}
-html.dark .studio-card:hover {
-  border-color: #444440;
+  border-color: var(--border-strong);
 }
 
 /* Scroll Reveal Animations */
 .reveal {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(14px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
 .reveal.active {

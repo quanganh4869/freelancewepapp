@@ -1,10 +1,7 @@
 import React from 'react';
-import { useTheme } from '../../context/ThemeContext';
 import { ArrowRight } from 'lucide-react';
 
 export const ServicesSection = ({ onSelectService }) => {
-  const { isDark } = useTheme();
-
   const services = [
     {
       number: '01',
@@ -33,45 +30,45 @@ export const ServicesSection = ({ onSelectService }) => {
   ];
 
   return (
-    <section id="dich-vu" className="py-16 md:py-24 border-b border-[#E6E4DD] dark:border-[#2A2A28] font-sans">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <section id="dich-vu" className="py-16 md:py-24 border-b border-brand-border font-sans">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
         {/* Section Header */}
         <div className="text-left space-y-2 reveal">
-          <span className="text-xs font-semibold text-[#666663] dark:text-[#A1A19A]">
+          <span className="text-xs font-semibold text-brand-muted uppercase tracking-wider">
             Dịch vụ
           </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] dark:text-white">
+          <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-brand-primary dark:text-white">
             Bốn nhóm việc tôi làm thường xuyên nhất
           </h2>
-          <p className="text-[#666663] dark:text-[#A1A19A] text-sm leading-relaxed font-medium pt-1">
+          <p className="text-brand-muted text-sm leading-relaxed font-medium pt-1">
             Giá dưới đây là mức khởi điểm cho phạm vi cơ bản, còn con số cuối cùng phụ thuộc vào số trang và chức năng.
           </p>
         </div>
 
-        {/* 4 Service Cards List (Lovable Minimalist Style) */}
-        <div className="space-y-6">
+        {/* 4 Service Cards List */}
+        <div className="space-y-5">
           {services.map((service, index) => {
             const delayClass = `reveal-delay-${(index % 3) + 1}`;
             return (
               <div
                 key={service.number}
-                className={`p-6 sm:p-7 rounded-2xl border border-[#E6E4DD] dark:border-[#2A2A28] bg-white dark:bg-[#1A1A19] flex flex-col justify-between space-y-4 hover:border-[#C8C5B9] dark:hover:border-[#444440] transition-colors reveal ${delayClass}`}
+                className={`p-6 sm:p-7 rounded-lg border border-brand-border bg-brand-paper space-y-4 hover:border-brand-muted transition-colors reveal ${delayClass}`}
               >
                 <div className="flex items-start justify-between gap-4">
-                  <span className="text-sm font-bold text-[#A1A19A] dark:text-[#666663]">
+                  <span className="font-mono text-base font-bold text-brand-muted">
                     {service.number}
                   </span>
-                  <span className="text-xs font-medium text-[#666663] dark:text-[#A1A19A] bg-[#FAF9F6] dark:bg-[#121212] border border-[#E6E4DD] dark:border-[#2A2A28] px-3 py-1 rounded-full">
+                  <span className="text-xs font-medium text-brand-muted bg-brand-background border border-brand-border px-2.5 py-1 rounded-full">
                     {service.priceTimeline}
                   </span>
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-bold text-[#1A1A1A] dark:text-white">
+                  <h3 className="font-display text-lg font-bold text-brand-primary dark:text-white">
                     {service.title}
                   </h3>
-                  <p className="text-sm text-[#666663] dark:text-[#A1A19A] leading-relaxed font-medium mt-2">
+                  <p className="text-sm text-brand-muted leading-relaxed font-medium mt-2">
                     {service.desc}
                   </p>
                 </div>
@@ -79,7 +76,7 @@ export const ServicesSection = ({ onSelectService }) => {
                 <div className="pt-2 flex justify-end">
                   <button
                     onClick={() => onSelectService(service.title)}
-                    className="text-xs font-semibold text-[#1A1A1A] dark:text-white hover:underline flex items-center gap-1"
+                    className="text-xs font-semibold text-brand-primary dark:text-white hover:underline flex items-center gap-1"
                   >
                     <span>Đặt làm gói này</span>
                     <ArrowRight size={13} />

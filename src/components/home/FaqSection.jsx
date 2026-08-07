@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { useTheme } from '../../context/ThemeContext';
 import { ChevronDown } from 'lucide-react';
 
 export const FaqSection = () => {
-  const { isDark } = useTheme();
   const [openIndex, setOpenIndex] = useState(null);
 
   const faqs = [
@@ -34,15 +32,15 @@ export const FaqSection = () => {
   };
 
   return (
-    <section id="hoi-dap" className="py-16 md:py-24 border-b border-[#E6E4DD] dark:border-[#2A2A28] font-sans">
+    <section id="hoi-dap" className="py-16 md:py-24 border-b border-brand-border font-sans">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         {/* Section Header */}
         <div className="text-left space-y-2 reveal">
-          <span className="text-xs font-semibold text-[#666663] dark:text-[#A1A19A]">
+          <span className="text-xs font-semibold text-brand-muted uppercase tracking-wider">
             Câu hỏi hay gặp
           </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] dark:text-white">
+          <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-brand-primary dark:text-white">
             Những thứ khách hay hỏi tôi
           </h2>
         </div>
@@ -54,25 +52,21 @@ export const FaqSection = () => {
             return (
               <div
                 key={idx}
-                className={`rounded-2xl border transition-colors overflow-hidden ${
-                  isDark
-                    ? 'bg-[#1A1A19] border-[#2A2A28]'
-                    : 'bg-white border-[#E6E4DD]'
-                }`}
+                className="rounded-lg border border-brand-border bg-brand-paper transition-colors overflow-hidden"
               >
                 <button
                   onClick={() => toggleFaq(idx)}
-                  className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-sm text-[#1A1A1A] dark:text-white"
+                  className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 font-display font-bold text-sm text-brand-primary dark:text-white"
                 >
                   <span>{faq.q}</span>
                   <ChevronDown
                     size={16}
-                    className={`text-[#A1A19A] shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180 text-[#1A1A1A] dark:text-white' : ''}`}
+                    className={`text-brand-muted shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180 text-brand-primary dark:text-white' : ''}`}
                   />
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 pb-5 pt-0 text-sm text-[#666663] dark:text-[#A1A19A] leading-relaxed font-medium border-t border-[#E6E4DD] dark:border-[#2A2A28] pt-3">
+                  <div className="px-4 pb-4 sm:px-5 sm:pb-5 text-sm text-brand-muted leading-relaxed font-medium border-t border-brand-border pt-3">
                     {faq.a}
                   </div>
                 )}
