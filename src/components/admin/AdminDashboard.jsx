@@ -75,7 +75,7 @@ export const AdminDashboard = () => {
                 Admin Control Center • Lead & User Management
               </h1>
             </div>
-            <p className="text-xs text-slate-400 font-mono mt-1">
+            <p className="text-xs text-slate-400 mt-1 font-medium">
               Quản lý các yêu cầu phát triển Web App từ khách hàng, phân quyền & danh sách tài khoản
             </p>
           </div>
@@ -111,28 +111,28 @@ export const AdminDashboard = () => {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
           
           <div className="p-4 rounded-xl bg-studio-900 border border-white/5 space-y-1">
-            <span className="text-[11px] font-mono text-slate-400 uppercase">Tổng số yêu cầu</span>
-            <p className="text-2xl font-extrabold text-white font-mono">{totalRequests}</p>
+            <span className="text-[11px] font-bold text-slate-400 uppercase">Tổng số yêu cầu</span>
+            <p className="text-2xl font-extrabold text-white">{totalRequests}</p>
           </div>
 
           <div className="p-4 rounded-xl bg-studio-900 border border-amber-500/20 space-y-1">
-            <span className="text-[11px] font-mono text-amber-400 uppercase">Pending (Chờ duyệt)</span>
-            <p className="text-2xl font-extrabold text-amber-400 font-mono">{pendingCount}</p>
+            <span className="text-[11px] font-bold text-amber-400 uppercase">Pending (Chờ duyệt)</span>
+            <p className="text-2xl font-extrabold text-amber-400">{pendingCount}</p>
           </div>
 
           <div className="p-4 rounded-xl bg-studio-900 border border-blue-500/20 space-y-1">
-            <span className="text-[11px] font-mono text-blue-400 uppercase">Reviewing (Đánh giá)</span>
-            <p className="text-2xl font-extrabold text-blue-400 font-mono">{reviewingCount}</p>
+            <span className="text-[11px] font-bold text-blue-400 uppercase">Reviewing (Đánh giá)</span>
+            <p className="text-2xl font-extrabold text-blue-400">{reviewingCount}</p>
           </div>
 
           <div className="p-4 rounded-xl bg-studio-900 border border-indigo-500/20 space-y-1">
-            <span className="text-[11px] font-mono text-indigo-400 uppercase">In Progress (Đang làm)</span>
-            <p className="text-2xl font-extrabold text-indigo-400 font-mono">{inProgressCount}</p>
+            <span className="text-[11px] font-bold text-indigo-400 uppercase">In Progress (Đang làm)</span>
+            <p className="text-2xl font-extrabold text-indigo-400">{inProgressCount}</p>
           </div>
 
           <div className="p-4 rounded-xl bg-studio-900 border border-emerald-500/20 space-y-1">
-            <span className="text-[11px] font-mono text-emerald-400 uppercase">Completed (Bàn giao)</span>
-            <p className="text-2xl font-extrabold text-emerald-400 font-mono">{completedCount}</p>
+            <span className="text-[11px] font-bold text-emerald-400 uppercase">Completed (Bàn giao)</span>
+            <p className="text-2xl font-extrabold text-emerald-400">{completedCount}</p>
           </div>
 
         </div>
@@ -141,7 +141,7 @@ export const AdminDashboard = () => {
         {activeTab === 'requests' ? (
           <>
             {/* Filter & Search Bar */}
-            <div className="studio-card-border p-4 rounded-2xl bg-studio-900 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="p-4 rounded-2xl bg-studio-900 border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
               
               {/* Search Box */}
               <div className="relative w-full md:w-80">
@@ -150,153 +150,121 @@ export const AdminDashboard = () => {
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Tìm theo tên, email, công ty, dự án..."
-                  className="w-full bg-studio-950 border border-slate-800 rounded-xl pl-9 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-brand-primary"
+                  placeholder="Tìm theo tên, email, công ty..."
+                  className="w-full bg-studio-950 border border-slate-800 rounded-xl pl-9 pr-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-brand-primary"
                 />
               </div>
 
               {/* Filters */}
-              <div className="flex items-center gap-3 flex-wrap w-full md:w-auto">
-                {/* Status Filter */}
-                <div className="flex items-center gap-1.5 text-xs text-slate-400">
+              <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
+                <div className="flex items-center gap-2 text-xs text-slate-400">
                   <Filter size={14} />
-                  <select
-                    value={selectedStatus}
-                    onChange={(e) => setSelectedStatus(e.target.value)}
-                    className="bg-studio-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-primary font-mono"
-                  >
-                    <option value="All">Tất cả Trạng thái</option>
-                    <option value="Pending">Pending (Chờ duyệt)</option>
-                    <option value="Reviewing">Reviewing (Đang xem)</option>
-                    <option value="Contacted">Contacted (Đã liên hệ)</option>
-                    <option value="In Progress">In Progress (Đang làm)</option>
-                    <option value="Completed">Completed (Đã bàn giao)</option>
-                    <option value="Rejected">Rejected (Đã từ chối)</option>
-                  </select>
+                  <span>Trạng thái:</span>
                 </div>
+                <select
+                  value={selectedStatus}
+                  onChange={(e) => setSelectedStatus(e.target.value)}
+                  className="bg-studio-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-primary font-semibold"
+                >
+                  <option value="All">Tất cả trạng thái</option>
+                  <option value="Pending">Chờ tiếp nhận (Pending)</option>
+                  <option value="Reviewing">Đang tư vấn (Reviewing)</option>
+                  <option value="In Progress">Đang lập trình (In Progress)</option>
+                  <option value="Completed">Đã bàn giao (Completed)</option>
+                </select>
 
-                {/* Project Type Filter */}
                 <select
                   value={selectedType}
                   onChange={(e) => setSelectedType(e.target.value)}
-                  className="bg-studio-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-primary font-mono"
+                  className="bg-studio-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-primary font-semibold"
                 >
-                  <option value="All">Tất cả Loại Web App</option>
-                  <option value="Business Web App">Business Web App</option>
-                  <option value="SaaS">SaaS Platform</option>
-                  <option value="E-commerce">E-commerce</option>
-                  <option value="Dashboard">Dashboard & Admin</option>
-                  <option value="Internal Tool">Internal Tool</option>
-                  <option value="Other">Khác</option>
+                  <option value="All">Tất cả loại hình</option>
+                  <option value="Website cá nhân / Portfolio">Website cá nhân</option>
+                  <option value="Landing Page bán hàng">Landing Page</option>
+                  <option value="Website Doanh nghiệp / Shop">Doanh nghiệp / Shop</option>
+                  <option value="Web App / Dashboard nhỏ">Web App / Dashboard</option>
                 </select>
-
-                {/* Sort Toggle */}
-                <button
-                  onClick={() => setSortOrder(sortOrder === 'newest' ? 'oldest' : 'newest')}
-                  className="px-3 py-2 rounded-xl bg-studio-950 border border-slate-800 text-xs font-mono text-slate-300 hover:text-white transition-colors"
-                >
-                  Sắp xếp: {sortOrder === 'newest' ? 'Mới nhất ↓' : 'Cũ nhất ↑'}
-                </button>
               </div>
 
             </div>
 
-            {/* Requests Management Data Table */}
-            <div className="studio-card-border rounded-2xl bg-studio-900 overflow-hidden">
-              
-              <div className="p-4 px-6 border-b border-white/10 flex items-center justify-between">
-                <span className="text-xs font-mono font-bold text-white uppercase">
-                  Danh sách Yêu cầu Dự án ({filteredRequests.length})
+            {/* Requests Table */}
+            <div className="rounded-2xl bg-studio-900 border border-slate-800 overflow-hidden shadow-xl">
+              <div className="p-4 border-b border-slate-800 flex items-center justify-between">
+                <span className="text-xs font-bold text-white uppercase">
+                  Danh Sách Đơn Đặt Web ({filteredRequests.length})
                 </span>
-                <span className="text-[11px] text-slate-500 font-mono">Hiển thị {filteredRequests.length} trên {requests.length}</span>
+                <span className="text-[11px] text-slate-500 font-medium">Hiển thị {filteredRequests.length} trên {requests.length}</span>
               </div>
 
               {filteredRequests.length === 0 ? (
-                <div className="p-12 text-center text-slate-400 text-sm">
-                  Không tìm thấy yêu cầu nào phù hợp với bộ lọc.
+                <div className="p-12 text-center text-slate-400 space-y-3 font-medium">
+                  <AlertCircle size={32} className="mx-auto text-slate-500" />
+                  <p className="text-sm">Không tìm thấy yêu cầu làm web nào phù hợp với bộ lọc.</p>
                 </div>
               ) : (
                 <div className="overflow-x-auto">
-                  <table className="w-full text-left text-xs text-slate-300">
-                    <thead className="bg-studio-950 text-slate-400 font-mono uppercase text-[11px] border-b border-white/10">
+                  <table className="w-full text-left border-collapse">
+                    <thead className="bg-studio-950 text-slate-400 uppercase text-[11px] border-b border-white/10 font-bold">
                       <tr>
-                        <th className="py-3.5 px-6">Khách Hàng (Client)</th>
-                        <th className="py-3.5 px-6">Tên & Loại Dự Án</th>
-                        <th className="py-3.5 px-6">Ngân Sách & Timeline</th>
-                        <th className="py-3.5 px-6">Trạng Thái (Quick Switch)</th>
-                        <th className="py-3.5 px-6">Ngày Gửi</th>
-                        <th className="py-3.5 px-6 text-right">Thao Tác</th>
+                        <th className="py-3.5 px-6">Dự án & Khách hàng</th>
+                        <th className="py-3.5 px-6">Phân loại & Ngân sách</th>
+                        <th className="py-3.5 px-6">Trạng thái</th>
+                        <th className="py-3.5 px-6">Ngày gửi</th>
+                        <th className="py-3.5 px-6 text-right">Thao tác</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-white/5">
+                    <tbody className="divide-y divide-slate-800 text-xs font-medium">
                       {filteredRequests.map((req) => {
                         const statusBadge = formatStatusBadge(req.status);
                         return (
-                          <tr key={req.id} className="hover:bg-studio-850/50 transition-colors">
-                            
-                            {/* Client Info */}
+                          <tr key={req.id} className="hover:bg-slate-800/40 transition-colors">
                             <td className="py-4 px-6">
-                              <span className="font-bold text-white text-sm block">{req.clientName}</span>
-                              <span className="text-slate-400 font-mono text-[11px] block">{req.clientEmail}</span>
-                              {req.clientCompany && (
-                                <span className="text-brand-primary text-[10px] font-mono block">{req.clientCompany}</span>
-                              )}
+                              <span className="font-bold text-white text-sm block">{req.projectName || req.projectType}</span>
+                              <span className="text-slate-300 font-semibold block">{req.clientName} ({req.clientPhone || 'Không có SĐT'})</span>
+                              <span className="text-slate-400 text-[11px] block">{req.clientEmail}</span>
                             </td>
 
-                            {/* Project Info */}
                             <td className="py-4 px-6">
-                              <span className="font-mono text-[10px] text-slate-500 block">{req.id}</span>
-                              <span className="font-bold text-slate-200 text-sm block">{req.projectName}</span>
-                              <span className="text-xs text-slate-400">{req.projectType}</span>
+                              <span className="font-bold text-brand-primary block">{req.projectType}</span>
+                              <span className="text-emerald-400 font-bold block">{req.budget}</span>
                             </td>
 
-                            {/* Budget & Timeline */}
-                            <td className="py-4 px-6 font-mono">
-                              <span className="font-bold text-emerald-400 block">{req.budget}</span>
-                              <span className="text-[11px] text-slate-400 block">Kỳ hạn: {req.timeline}</span>
-                            </td>
-
-                            {/* Status Selector */}
                             <td className="py-4 px-6">
                               <select
                                 value={req.status}
                                 onChange={(e) => updateStatus(req.id, e.target.value)}
-                                className={`px-2.5 py-1 rounded-lg border text-[11px] font-bold font-mono focus:outline-none cursor-pointer ${statusBadge.bg} ${statusBadge.text} ${statusBadge.border}`}
+                                className={`px-2.5 py-1 rounded-lg border text-[11px] font-bold focus:outline-none cursor-pointer ${statusBadge.bg} ${statusBadge.text} ${statusBadge.border}`}
                               >
-                                <option value="Pending" className="bg-studio-900 text-amber-400">Pending</option>
-                                <option value="Reviewing" className="bg-studio-900 text-blue-400">Reviewing</option>
-                                <option value="Contacted" className="bg-studio-900 text-purple-400">Contacted</option>
-                                <option value="In Progress" className="bg-studio-900 text-indigo-400">In Progress</option>
-                                <option value="Completed" className="bg-studio-900 text-emerald-400">Completed</option>
-                                <option value="Rejected" className="bg-studio-900 text-rose-400">Rejected</option>
+                                <option value="Pending">Chờ tiếp nhận</option>
+                                <option value="Reviewing">Đang tư vấn</option>
+                                <option value="In Progress">Đang lập trình</option>
+                                <option value="Completed">Đã bàn giao</option>
                               </select>
                             </td>
 
-                            {/* Date */}
-                            <td className="py-4 px-6 font-mono text-slate-400 text-[11px]">
+                            <td className="py-4 px-6 text-slate-400 text-[11px]">
                               {formatDate(req.submittedAt)}
                             </td>
 
-                            {/* Actions */}
-                            <td className="py-4 px-6 text-right space-x-2">
-                              <button
-                                onClick={() => setActiveRequestDetail(req)}
-                                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-studio-950 hover:bg-studio-800 border border-slate-800 text-slate-200 text-xs transition-colors"
-                                title="Xem & Chỉnh sửa chi tiết"
-                              >
-                                <Eye size={13} />
-                                <span>Chi tiết</span>
-                              </button>
-
-                              <button
-                                onClick={() => setDeletingRequest(req)}
-                                className="p-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 text-xs transition-colors"
-                                title="Xóa yêu cầu"
-                              >
-                                <Trash2 size={13} />
-                              </button>
+                            <td className="py-4 px-6 text-right">
+                              <div className="flex items-center justify-end gap-2">
+                                <button
+                                  onClick={() => setActiveRequestDetail(req)}
+                                  className="p-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-colors"
+                                  title="Xem chi tiết"
+                                >
+                                  <Eye size={15} />
+                                </button>
+                                <button
+                                  onClick={() => setDeletingRequest(req)}
+                                  className="p-1.5 rounded-lg bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 transition-colors"
+                                  title="Xóa yêu cầu"
+                                >
+                                  <Trash2 size={15} />
+                                </button>
+                              </div>
                             </td>
-
                           </tr>
                         );
                       })}
@@ -307,70 +275,44 @@ export const AdminDashboard = () => {
             </div>
           </>
         ) : (
-          /* Users Tab View */
-          <div className="space-y-6">
-            <div className="studio-card-border p-4 rounded-2xl bg-studio-900 flex items-center justify-between">
-              <div className="relative w-full md:w-80">
-                <Search size={16} className="absolute left-3 top-3 text-slate-500" />
-                <input
-                  type="text"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Tìm kiếm tài khoản theo tên, email..."
-                  className="w-full bg-studio-950 border border-slate-800 rounded-xl pl-9 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-brand-primary"
-                />
-              </div>
-              <span className="text-xs font-mono text-slate-400">Tổng cộng: {filteredUsers.length} tài khoản</span>
+          /* Users Tab */
+          <div className="rounded-2xl bg-studio-900 border border-slate-800 overflow-hidden shadow-xl font-medium">
+            <div className="p-4 border-b border-slate-800 flex items-center justify-between">
+              <span className="text-xs font-bold text-white uppercase">Danh sách tài khoản hệ thống</span>
+              <span className="text-xs text-slate-400">Tổng cộng: {filteredUsers.length} tài khoản</span>
             </div>
 
-            <div className="studio-card-border rounded-2xl bg-studio-900 overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs text-slate-300">
-                  <thead className="bg-studio-950 text-slate-400 font-mono uppercase text-[11px] border-b border-white/10">
-                    <tr>
-                      <th className="py-3.5 px-6">Mã User</th>
-                      <th className="py-3.5 px-6">Họ và Tên & Email</th>
-                      <th className="py-3.5 px-6">Công Ty / Tổ Chức</th>
-                      <th className="py-3.5 px-6">Vai Trò (Role)</th>
-                      <th className="py-3.5 px-6">Ngày Đăng Ký</th>
-                      <th className="py-3.5 px-6 text-right">Số Yêu Cầu</th>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead className="bg-studio-950 text-slate-400 uppercase text-[11px] border-b border-white/10 font-bold">
+                  <tr>
+                    <th className="py-3.5 px-6">Họ và Tên</th>
+                    <th className="py-3.5 px-6">Email</th>
+                    <th className="py-3.5 px-6">Vai trò</th>
+                    <th className="py-3.5 px-6">Tổ chức / Đơn vị</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-800 text-xs">
+                  {filteredUsers.map((user) => (
+                    <tr key={user.id} className="hover:bg-slate-800/40 transition-colors">
+                      <td className="py-4 px-6 font-bold text-white">{user.name}</td>
+                      <td className="py-4 px-6 text-slate-300">{user.email}</td>
+                      <td className="py-4 px-6">
+                        {user.role === 'ADMIN' ? (
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-300 font-bold text-[11px]">
+                            ADMIN
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-[11px]">
+                            CLIENT
+                          </span>
+                        )}
+                      </td>
+                      <td className="py-4 px-6 text-slate-300">{user.company || 'Cá nhân'}</td>
                     </tr>
-                  </thead>
-                  <tbody className="divide-y divide-white/5">
-                    {filteredUsers.map((user) => (
-                      <tr key={user.id} className="hover:bg-studio-850/50 transition-colors">
-                        <td className="py-4 px-6 font-mono text-slate-400 text-[11px]">
-                          {user.id}
-                        </td>
-                        <td className="py-4 px-6">
-                          <span className="font-bold text-white text-sm block">{user.name}</span>
-                          <span className="text-slate-400 font-mono text-[11px]">{user.email}</span>
-                        </td>
-                        <td className="py-4 px-6 text-slate-300">
-                          {user.company || 'Cá nhân'}
-                        </td>
-                        <td className="py-4 px-6">
-                          {user.role === 'ADMIN' ? (
-                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-300 font-mono font-bold text-[11px]">
-                              <Shield size={12} /> ADMIN
-                            </span>
-                          ) : (
-                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 font-mono text-[11px]">
-                              <UserCheck size={12} /> CLIENT USER
-                            </span>
-                          )}
-                        </td>
-                        <td className="py-4 px-6 font-mono text-slate-400 text-[11px]">
-                          {formatDate(user.joinedAt)}
-                        </td>
-                        <td className="py-4 px-6 text-right font-mono font-bold text-emerald-400">
-                          {user.requestsCount} Yêu cầu
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         )}
@@ -382,17 +324,15 @@ export const AdminDashboard = () => {
         <AdminRequestDetailModal
           request={activeRequestDetail}
           onClose={() => setActiveRequestDetail(null)}
-          onDeleteClick={(req) => {
-            setDeletingRequest(req);
-          }}
+          onUpdateStatus={(status) => updateStatus(activeRequestDetail.id, status)}
+          onDelete={() => setDeletingRequest(activeRequestDetail)}
         />
       )}
 
       {/* Delete Confirmation Modal */}
       {deletingRequest && (
         <DeleteConfirmModal
-          isOpen={!!deletingRequest}
-          itemTitle={`${deletingRequest.projectName} (${deletingRequest.clientName})`}
+          request={deletingRequest}
           onClose={() => setDeletingRequest(null)}
           onConfirm={handleDeleteConfirm}
         />

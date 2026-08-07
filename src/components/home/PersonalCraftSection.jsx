@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTheme } from '../../context/ThemeContext';
-import { Code2, Zap, Shield, Smartphone, Terminal, Cpu, CheckCircle2 } from 'lucide-react';
+import { Zap, Shield, Smartphone, Terminal, CheckCircle2 } from 'lucide-react';
 
 export const PersonalCraftSection = () => {
   const { isDark } = useTheme();
@@ -39,7 +39,7 @@ function PersonalWebsite({ clientReq, designFile }) {
           
           {/* Left Column: Developer Philosophy */}
           <div className="lg:col-span-6 space-y-6 reveal">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white font-display">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">
               Cam kết chất lượng mã nguồn & tốc độ
             </h2>
 
@@ -54,7 +54,7 @@ function PersonalWebsite({ clientReq, designFile }) {
                   <Zap size={20} />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold font-display text-slate-900 dark:text-white">Tốc độ tải dưới 1 giây</h4>
+                  <h4 className="text-sm font-bold text-slate-900 dark:text-white">Tốc độ tải dưới 1 giây</h4>
                   <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-medium">Trang web load tức thì, tối ưu trải nghiệm khách hàng và tăng điểm SEO trên Google.</p>
                 </div>
               </div>
@@ -64,7 +64,7 @@ function PersonalWebsite({ clientReq, designFile }) {
                   <Smartphone size={20} />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold font-display text-slate-900 dark:text-white">Hiển thị hoàn hảo trên di động</h4>
+                  <h4 className="text-sm font-bold text-slate-900 dark:text-white">Hiển thị hoàn hảo trên di động</h4>
                   <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-medium">Tự động co giãn mượt mà trên iPhone, Android, Tablet và màn hình máy tính lớn.</p>
                 </div>
               </div>
@@ -74,7 +74,7 @@ function PersonalWebsite({ clientReq, designFile }) {
                   <Shield size={20} />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold font-display text-slate-900 dark:text-white">Bàn giao 100% mã nguồn gốc</h4>
+                  <h4 className="text-sm font-bold text-slate-900 dark:text-white">Bàn giao 100% mã nguồn gốc</h4>
                   <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-medium">Bạn hoàn toàn sở hữu mã nguồn và tên miền của mình mà không bị phụ thuộc.</p>
                 </div>
               </div>
@@ -84,7 +84,7 @@ function PersonalWebsite({ clientReq, designFile }) {
 
           {/* Right Column: Code Interactive Terminal Preview */}
           <div className="lg:col-span-6 reveal reveal-delay-1">
-            <div className="rounded-2xl border border-slate-800 bg-slate-950 overflow-hidden shadow-2xl font-mono text-xs">
+            <div className="rounded-2xl border border-slate-800 bg-slate-950 overflow-hidden shadow-2xl text-xs">
               
               {/* Terminal Titlebar */}
               <div className="bg-slate-900 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
@@ -119,12 +119,12 @@ function PersonalWebsite({ clientReq, designFile }) {
               </div>
 
               {/* Terminal Code Display */}
-              <div className="p-5 text-slate-200 bg-slate-950/90 font-mono leading-relaxed space-y-4">
+              <div className="p-5 text-slate-200 bg-slate-950/90 leading-relaxed space-y-4">
                 <pre className="text-brand-primary font-bold overflow-x-auto text-[11px]">
                   {codeSnippets[activeTab]}
                 </pre>
 
-                <div className="pt-3 border-t border-slate-800/80 grid grid-cols-2 gap-3 text-[11px]">
+                <div className="pt-3 border-t border-slate-800/80 grid grid-cols-2 gap-3 text-[11px] font-semibold">
                   <div className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center gap-2">
                     <CheckCircle2 size={14} className="text-emerald-400 shrink-0" />
                     <span>Speed Score: 100/100</span>

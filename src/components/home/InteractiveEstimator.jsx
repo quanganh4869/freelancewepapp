@@ -60,10 +60,10 @@ export const InteractiveEstimator = ({ onOpenRequestModal }) => {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 reveal space-y-3">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white font-display">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">
             Tính thử chi phí website của bạn
           </h2>
-          <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+          <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed font-medium">
             Chọn nhu cầu và tính năng bên dưới để ước tính chi phí & thời gian bàn giao thực tế ngay lập tức.
           </p>
         </div>
@@ -78,7 +78,7 @@ export const InteractiveEstimator = ({ onOpenRequestModal }) => {
             <div className={`p-6 rounded-2xl border ${
               isDark ? 'bg-studio-900 border-slate-800' : 'bg-white border-slate-200 shadow-sm'
             }`}>
-              <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-3">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-3">
                 1. Chọn loại website cần làm
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -93,11 +93,11 @@ export const InteractiveEstimator = ({ onOpenRequestModal }) => {
                       className={`p-4 rounded-xl text-left border transition-all ${
                         isSelected
                           ? 'border-brand-primary bg-brand-primary/10 text-brand-primary font-bold shadow-sm'
-                          : 'border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 hover:border-slate-400'
+                          : 'border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 hover:border-slate-400 font-medium'
                       }`}
                     >
-                      <div className="text-xs font-display font-bold">{item.name}</div>
-                      <div className="text-[11px] font-mono text-slate-500 dark:text-slate-400 mt-1">
+                      <div className="text-xs font-bold">{item.name}</div>
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 font-medium">
                         Từ {formatVND(item.basePrice)}
                       </div>
                     </button>
@@ -110,7 +110,7 @@ export const InteractiveEstimator = ({ onOpenRequestModal }) => {
             <div className={`p-6 rounded-2xl border ${
               isDark ? 'bg-studio-900 border-slate-800' : 'bg-white border-slate-200 shadow-sm'
             }`}>
-              <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-3">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-3">
                 2. Chọn các tính năng mong muốn
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -124,7 +124,7 @@ export const InteractiveEstimator = ({ onOpenRequestModal }) => {
                       className={`p-3 rounded-xl text-left border flex items-center justify-between text-xs transition-all ${
                         isChecked
                           ? 'border-brand-primary bg-brand-primary/10 text-slate-900 dark:text-white font-bold'
-                          : 'border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:border-slate-400'
+                          : 'border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:border-slate-400 font-medium'
                       }`}
                     >
                       <div className="flex items-center gap-2">
@@ -136,7 +136,7 @@ export const InteractiveEstimator = ({ onOpenRequestModal }) => {
                         <span>{feat.name}</span>
                       </div>
                       {feat.price > 0 && (
-                        <span className="text-[10px] font-mono text-brand-primary font-bold">
+                        <span className="text-[10px] text-brand-primary font-bold">
                           +{formatVND(feat.price)}
                         </span>
                       )}
@@ -150,7 +150,7 @@ export const InteractiveEstimator = ({ onOpenRequestModal }) => {
             <div className={`p-6 rounded-2xl border ${
               isDark ? 'bg-studio-900 border-slate-800' : 'bg-white border-slate-200 shadow-sm'
             }`}>
-              <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-3">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-3">
                 3. Tiến độ thực hiện
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -160,10 +160,10 @@ export const InteractiveEstimator = ({ onOpenRequestModal }) => {
                   className={`p-4 rounded-xl text-left border transition-all ${
                     selectedUrgency === 'standard'
                       ? 'border-brand-primary bg-brand-primary/10 font-bold text-brand-primary'
-                      : 'border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300'
+                      : 'border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 font-medium'
                   }`}
                 >
-                  <div className="text-xs font-display font-bold">Tiêu chuẩn ({currentType.baseDays} ngày)</div>
+                  <div className="text-xs font-bold">Tiêu chuẩn ({currentType.baseDays} ngày)</div>
                   <div className="text-[11px] text-slate-500 mt-0.5">Tiến độ làm việc bình thường</div>
                 </button>
 
@@ -173,10 +173,10 @@ export const InteractiveEstimator = ({ onOpenRequestModal }) => {
                   className={`p-4 rounded-xl text-left border transition-all ${
                     selectedUrgency === 'express'
                       ? 'border-orange-500 bg-orange-500/10 font-bold text-orange-500'
-                      : 'border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300'
+                      : 'border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 font-medium'
                   }`}
                 >
-                  <div className="text-xs font-display font-bold flex items-center gap-1">
+                  <div className="text-xs font-bold flex items-center gap-1">
                     <Zap size={13} className="text-orange-500" />
                     <span>Hỏa tốc (Khoảng {Math.max(3, Math.round(currentType.baseDays * 0.6))} ngày)</span>
                   </div>
@@ -194,29 +194,29 @@ export const InteractiveEstimator = ({ onOpenRequestModal }) => {
             }`}>
               
               <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
-                <div className="flex items-center gap-2 font-display font-bold text-base">
+                <div className="flex items-center gap-2 font-bold text-base">
                   <Calculator size={18} className="text-brand-primary" />
                   <span>Dự toán chi phí & thời gian</span>
                 </div>
-                <span className="text-[10px] font-mono bg-emerald-500/10 border border-emerald-500/30 text-emerald-500 font-bold px-2 py-0.5 rounded-full">
+                <span className="text-[10px] bg-emerald-500/10 border border-emerald-500/30 text-emerald-500 font-bold px-2 py-0.5 rounded-full">
                   BÁO GIÁ MINH BẠCH
                 </span>
               </div>
 
               {/* Price Output Banner */}
               <div className="p-4 rounded-xl bg-brand-primary/10 border border-brand-primary/25 space-y-1 text-center">
-                <span className="text-xs font-mono text-slate-500 dark:text-slate-400 block">Tổng chi phí ước tính</span>
-                <span className="text-3xl font-extrabold text-brand-primary font-mono font-display block">
+                <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">Tổng chi phí ước tính</span>
+                <span className="text-3xl font-extrabold text-brand-primary block">
                   {formatVND(totalPrice)}
                 </span>
-                <span className="text-xs font-mono text-slate-600 dark:text-slate-300 font-bold flex items-center justify-center gap-1 pt-1">
+                <span className="text-xs text-slate-600 dark:text-slate-300 font-bold flex items-center justify-center gap-1 pt-1">
                   <Clock size={13} className="text-brand-primary" />
                   <span>Thời gian hoàn thành: {totalDays} ngày làm việc</span>
                 </span>
               </div>
 
               {/* Breakdown List */}
-              <div className="space-y-2 text-xs font-mono text-slate-600 dark:text-slate-300">
+              <div className="space-y-2 text-xs text-slate-600 dark:text-slate-300 font-medium">
                 <div className="flex justify-between border-b border-slate-100 dark:border-slate-800 pb-1.5">
                   <span>Loại web:</span>
                   <span className="font-bold text-slate-900 dark:text-white">{currentType.name}</span>
@@ -232,7 +232,7 @@ export const InteractiveEstimator = ({ onOpenRequestModal }) => {
               </div>
 
               {/* Guarantee bullets */}
-              <div className="p-3 rounded-xl bg-slate-100 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 text-[11px] font-mono text-slate-600 dark:text-slate-400 space-y-1">
+              <div className="p-3 rounded-xl bg-slate-100 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 text-[11px] text-slate-600 dark:text-slate-400 space-y-1 font-medium">
                 <div className="flex items-center gap-1.5">
                   <ShieldCheck size={14} className="text-brand-primary shrink-0" />
                   <span>Không phát sinh chi phí ẩn ngoài thỏa thuận</span>
@@ -246,7 +246,7 @@ export const InteractiveEstimator = ({ onOpenRequestModal }) => {
               {/* Direct Order Button with Selected Scope */}
               <button
                 onClick={() => onOpenRequestModal(`Làm gói ${currentType.name} (${formatVND(totalPrice)}, ${totalDays} ngày)`)}
-                className="btn-primary w-full py-3.5 text-xs font-bold font-display shadow-md"
+                className="btn-primary w-full py-3.5 text-xs font-bold shadow-md"
               >
                 <span>Gửi yêu cầu theo dự toán này</span>
                 <ArrowRight size={15} />

@@ -46,13 +46,13 @@ export const StatsBar = () => {
               <div key={idx} className="flex flex-col space-y-2 px-4 py-3 md:py-0 first:pl-0 last:pr-0">
                 <div className="flex items-center gap-2 text-brand-primary">
                   <Icon size={18} />
-                  <span className="text-3xl sm:text-4xl font-extrabold font-mono tracking-tight text-slate-900 dark:text-white">
+                  <span className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
                     {stat.number}
                   </span>
                 </div>
                 <div>
                   <p className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">{stat.label}</p>
-                  <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-0.5">{stat.sub}</p>
+                  <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-0.5 font-medium">{stat.sub}</p>
                 </div>
               </div>
             );

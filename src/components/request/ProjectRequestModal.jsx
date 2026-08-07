@@ -151,12 +151,12 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
           isDark ? 'bg-studio-950 border-slate-800' : 'bg-slate-50 border-slate-200'
         }`}>
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-brand-primary text-white font-mono font-bold flex items-center justify-center text-xs shadow-sm">
+            <div className="w-8 h-8 rounded-lg bg-brand-primary text-white font-bold flex items-center justify-center text-xs shadow-sm">
               QA
             </div>
             <div>
-              <h3 className="text-base font-bold font-display">Chi Tiết Đơn Đặt Làm Website</h3>
-              <p className="text-xs text-slate-500 font-mono">Quang Anh Freelancer • Trực tiếp tư vấn 1-1</p>
+              <h3 className="text-base font-bold">Chi Tiết Đơn Đặt Làm Website</h3>
+              <p className="text-xs text-slate-400 font-medium">Quang Anh Freelancer • Trực tiếp tư vấn 1-1</p>
             </div>
           </div>
 
@@ -176,13 +176,13 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
             </div>
 
             <div className="space-y-2 max-w-md mx-auto">
-              <h3 className="text-2xl font-extrabold font-display">Đã Gửi Đơn Hàng Thành Công!</h3>
-              <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+              <h3 className="text-2xl font-extrabold">Đã Gửi Đơn Hàng Thành Công!</h3>
+              <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed font-medium">
                 Yêu cầu làm web của bạn đã được gửi thẳng về Email và Zalo của Quang Anh. Tôi sẽ liên hệ tư vấn báo giá ngay!
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400 space-y-2 font-mono text-left max-w-md mx-auto">
+            <div className="p-4 rounded-xl bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400 space-y-2 font-medium text-left max-w-md mx-auto">
               <div className="flex justify-between border-b border-slate-200 dark:border-slate-800 pb-1.5">
                 <span>Khách hàng:</span> <span className="text-slate-900 dark:text-white font-bold">{submitSuccess.clientName}</span>
               </div>
@@ -202,7 +202,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
             <div className="pt-2 flex items-center justify-center">
               <button
                 onClick={handleResetAndClose}
-                className="btn-primary py-3 px-8 text-xs font-bold font-display"
+                className="btn-primary py-3 px-8 text-xs font-bold"
               >
                 Hoàn Tất và Đóng
               </button>
@@ -211,7 +211,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
         ) : (
           <div className="w-full">
             {/* 3-Step Progress */}
-            <div className="bg-slate-50 dark:bg-studio-950/80 px-6 py-2.5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs font-mono">
+            <div className="bg-slate-50 dark:bg-studio-950/80 px-6 py-2.5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs font-semibold">
               {[
                 { s: 1, label: '1. Liên Hệ' },
                 { s: 2, label: '2. Chi Tiết Dự Án' },
@@ -221,25 +221,25 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                   <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] ${
                     step >= item.s ? 'bg-brand-primary text-white font-bold' : 'bg-slate-200 dark:bg-slate-800 text-slate-500'
                   }`}>{item.s}</span>
-                  <span className="font-display">{item.label}</span>
+                  <span>{item.label}</span>
                 </div>
               ))}
             </div>
 
-            <form onSubmit={handleSubmit} className="p-6 sm:p-7 space-y-5 max-h-[75vh] overflow-y-auto">
+            <form onSubmit={handleSubmit} className="p-6 sm:p-7 space-y-5 max-h-[75vh] overflow-y-auto font-sans">
 
               {/* STEP 1 */}
               {step === 1 ? (
                 <div className="space-y-4 animate-fadeIn">
                   <div className="border-b border-slate-200 dark:border-slate-800 pb-2">
-                    <h4 className="text-sm font-bold font-display uppercase tracking-wider text-slate-800 dark:text-slate-200">
+                    <h4 className="text-sm font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
                       1. Thông tin liên hệ
                     </h4>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-mono font-semibold mb-1 text-slate-700 dark:text-slate-300">
+                      <label className="block text-xs font-semibold mb-1 text-slate-700 dark:text-slate-300">
                         Họ và Tên của bạn <span className="text-rose-500">*</span>
                       </label>
                       <div className="relative">
@@ -249,14 +249,14 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                           value={formData.clientName}
                           onChange={(e) => handleInputChange('clientName', e.target.value)}
                           placeholder="VD: Anh Tuấn"
-                          className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary transition-colors"
+                          className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary transition-colors font-medium"
                         />
                       </div>
                       {errors.clientName ? <p className="text-[11px] text-rose-500 mt-1">{errors.clientName}</p> : null}
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono font-semibold mb-1 text-slate-700 dark:text-slate-300">
+                      <label className="block text-xs font-semibold mb-1 text-slate-700 dark:text-slate-300">
                         Số điện thoại hoặc Zalo <span className="text-rose-500">*</span>
                       </label>
                       <div className="relative">
@@ -266,7 +266,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                           value={formData.clientPhone}
                           onChange={(e) => handleInputChange('clientPhone', e.target.value)}
                           placeholder="0935 989 872"
-                          className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary transition-colors font-mono"
+                          className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary transition-colors font-semibold"
                         />
                       </div>
                       {errors.clientPhone ? <p className="text-[11px] text-rose-500 mt-1">{errors.clientPhone}</p> : null}
@@ -275,7 +275,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-mono font-semibold mb-1 text-slate-700 dark:text-slate-300">
+                      <label className="block text-xs font-semibold mb-1 text-slate-700 dark:text-slate-300">
                         Email liên hệ <span className="text-slate-400 text-[10px]">(Tùy chọn)</span>
                       </label>
                       <div className="relative">
@@ -285,13 +285,13 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                           value={formData.clientEmail}
                           onChange={(e) => handleInputChange('clientEmail', e.target.value)}
                           placeholder="email@example.com"
-                          className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary transition-colors font-mono"
+                          className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary transition-colors font-medium"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono font-semibold mb-1 text-slate-700 dark:text-slate-300">
+                      <label className="block text-xs font-semibold mb-1 text-slate-700 dark:text-slate-300">
                         Tên Shop hoặc Đơn vị <span className="text-slate-400 text-[10px]">(Tùy chọn)</span>
                       </label>
                       <div className="relative">
@@ -301,7 +301,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                           value={formData.clientCompany}
                           onChange={(e) => handleInputChange('clientCompany', e.target.value)}
                           placeholder="Mây Shop Handmade"
-                          className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary transition-colors"
+                          className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary transition-colors font-medium"
                         />
                       </div>
                     </div>
@@ -313,20 +313,20 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
               {step === 2 ? (
                 <div className="space-y-4 animate-fadeIn">
                   <div className="border-b border-slate-200 dark:border-slate-800 pb-2">
-                    <h4 className="text-sm font-bold font-display uppercase tracking-wider text-slate-800 dark:text-slate-200">
+                    <h4 className="text-sm font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
                       2. Yêu cầu làm website
                     </h4>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-mono font-semibold mb-1 text-slate-700 dark:text-slate-300">
+                      <label className="block text-xs font-semibold mb-1 text-slate-700 dark:text-slate-300">
                         Loại hình website <span className="text-rose-500">*</span>
                       </label>
                       <select
                         value={formData.projectType}
                         onChange={(e) => handleInputChange('projectType', e.target.value)}
-                        className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary font-bold font-display"
+                        className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary font-bold"
                       >
                         <option value="Website cá nhân / Portfolio">Website cá nhân - Portfolio - CV (Từ 1 tr)</option>
                         <option value="Landing Page bán hàng">Landing Page bán hàng - Giới thiệu (Từ 1.5 tr)</option>
@@ -336,7 +336,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono font-semibold mb-1 text-slate-700 dark:text-slate-300">
+                      <label className="block text-xs font-semibold mb-1 text-slate-700 dark:text-slate-300">
                         Tên dự án dự kiến
                       </label>
                       <input
@@ -350,7 +350,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono font-semibold mb-1 text-slate-700 dark:text-slate-300">
+                    <label className="block text-xs font-semibold mb-1 text-slate-700 dark:text-slate-300">
                       Mô tả chi tiết mong muốn và các chức năng cần có <span className="text-rose-500">*</span>
                     </label>
                     <textarea
@@ -358,20 +358,20 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                       value={formData.projectDescription}
                       onChange={(e) => handleInputChange('projectDescription', e.target.value)}
                       placeholder="Mô tả kỹ nội dung bạn cần làm (ví dụ: Cần 3 trang: Trang chủ, Danh mục sản phẩm, Trang liên hệ có nút chat Zalo)..."
-                      className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary transition-colors resize-none"
+                      className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary transition-colors resize-none font-medium"
                     />
                     {errors.projectDescription ? <p className="text-[11px] text-rose-500 mt-1">{errors.projectDescription}</p> : null}
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-mono font-semibold mb-1 text-slate-700 dark:text-slate-300">
+                      <label className="block text-xs font-semibold mb-1 text-slate-700 dark:text-slate-300">
                         Ngân sách dự kiến
                       </label>
                       <select
                         value={formData.budget}
                         onChange={(e) => handleInputChange('budget', e.target.value)}
-                        className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary font-mono font-bold"
+                        className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary font-bold"
                       >
                         <option value="Từ 1.000.000đ – 2.000.000đ">Khoảng 1 - 2 Triệu VNĐ</option>
                         <option value="Từ 2.000.000đ – 5.000.000đ">Khoảng 2 - 5 Triệu VNĐ</option>
@@ -381,13 +381,13 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono font-semibold mb-1 text-slate-700 dark:text-slate-300">
+                      <label className="block text-xs font-semibold mb-1 text-slate-700 dark:text-slate-300">
                         Thời gian mong muốn
                       </label>
                       <select
                         value={formData.timeline}
                         onChange={(e) => handleInputChange('timeline', e.target.value)}
-                        className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary font-mono"
+                        className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary font-medium"
                       >
                         <option value="1 tuần (5–7 ngày)">1 tuần (5-7 ngày)</option>
                         <option value="1–2 tuần">1-2 tuần</option>
@@ -403,14 +403,14 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
               {step === 3 ? (
                 <div className="space-y-4 animate-fadeIn">
                   <div className="border-b border-slate-200 dark:border-slate-800 pb-2">
-                    <h4 className="text-sm font-bold font-display uppercase tracking-wider text-slate-800 dark:text-slate-200">
+                    <h4 className="text-sm font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
                       3. Đính kèm File thiết kế hoặc Link tham khảo (Nếu có)
                     </h4>
                   </div>
 
                   {/* Design Link */}
                   <div>
-                    <label className="block text-xs font-mono font-semibold mb-1 text-slate-700 dark:text-slate-300">
+                    <label className="block text-xs font-semibold mb-1 text-slate-700 dark:text-slate-300">
                       Link Figma hoặc Drive hoặc Link web mẫu (Tùy chọn)
                     </label>
                     <div className="relative">
@@ -420,20 +420,20 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                         value={formData.designLink}
                         onChange={(e) => handleInputChange('designLink', e.target.value)}
                         placeholder="Dán link Figma hoặc Google Drive..."
-                        className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary transition-colors font-mono"
+                        className="w-full bg-slate-50 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 rounded-xl pl-9 pr-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-primary transition-colors font-medium"
                       />
                     </div>
                   </div>
 
                   {/* File Upload Dropzone */}
                   <div>
-                    <label className="block text-xs font-mono font-semibold mb-1 text-slate-700 dark:text-slate-300">
+                    <label className="block text-xs font-semibold mb-1 text-slate-700 dark:text-slate-300">
                       Tải file thiết kế hoặc ảnh mẫu (Ảnh, PDF, Zip tối đa 10MB)
                     </label>
                     
                     {formData.attachedFileName ? (
                       <div className="p-3.5 rounded-xl bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-between">
-                        <div className="flex items-center gap-2.5 text-xs font-mono font-bold text-brand-primary overflow-hidden">
+                        <div className="flex items-center gap-2.5 text-xs font-bold text-brand-primary overflow-hidden">
                           <FileText size={18} className="shrink-0" />
                           <span className="truncate">{formData.attachedFileName}</span>
                         </div>
@@ -449,10 +449,10 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                     ) : (
                       <label className="border-2 border-dashed border-slate-300 dark:border-slate-700 hover:border-brand-primary rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-colors bg-slate-50 dark:bg-studio-950 group">
                         <Upload size={24} className="text-slate-400 group-hover:text-brand-primary transition-colors mb-2" />
-                        <span className="text-xs font-bold text-slate-700 dark:text-slate-300 font-display">
+                        <span className="text-xs font-bold text-slate-700 dark:text-slate-300">
                           Bấm để chọn file từ máy tính
                         </span>
-                        <span className="text-[11px] font-mono text-slate-400 mt-0.5">
+                        <span className="text-[11px] text-slate-400 mt-0.5 font-medium">
                           Hỗ trợ PNG, JPG, PDF, DOCX, ZIP tối đa 10MB
                         </span>
                         <input
@@ -465,7 +465,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
                   </div>
 
                   {/* Summary Box */}
-                  <div className="p-4 rounded-xl bg-slate-100 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 text-xs font-mono space-y-1.5">
+                  <div className="p-4 rounded-xl bg-slate-100 dark:bg-studio-950 border border-slate-200 dark:border-slate-800 text-xs space-y-1.5 font-medium">
                     <div className="flex justify-between">
                       <span className="text-slate-500">Khách hàng:</span>
                       <span className="font-bold text-slate-900 dark:text-white">{formData.clientName} ({formData.clientPhone})</span>
@@ -484,7 +484,7 @@ export const ProjectRequestModal = ({ isOpen, onClose, initialService = '' }) =>
               ) : null}
 
               {/* Wizard Footer Buttons */}
-              <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between font-display">
+              <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
                 {step > 1 ? (
                   <button
                     type="button"

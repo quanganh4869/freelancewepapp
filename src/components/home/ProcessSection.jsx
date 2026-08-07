@@ -36,10 +36,10 @@ export const ProcessSection = ({ onOpenRequestModal }) => {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 reveal space-y-3">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white font-display">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">
             Quy trình 4 bước đơn giản
           </h2>
-          <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+          <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed font-medium">
             Trao đổi trực tiếp 1-1, làm việc nhanh gọn và bàn giao đúng hẹn.
           </p>
         </div>
@@ -59,7 +59,7 @@ export const ProcessSection = ({ onOpenRequestModal }) => {
                     <IconComponent size={22} />
                   </div>
 
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white font-display">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white">
                     {step.title}
                   </h3>
 
@@ -76,7 +76,7 @@ export const ProcessSection = ({ onOpenRequestModal }) => {
         <div className="mt-12 text-center reveal">
           <button
             onClick={() => onOpenRequestModal()}
-            className="btn-primary py-3.5 px-8 text-sm font-bold font-display"
+            className="btn-primary py-3.5 px-8 text-sm font-bold"
           >
             <span>Bắt đầu đặt làm website</span>
             <ArrowRight size={16} />

@@ -56,14 +56,10 @@ export const CostEstimator = ({ onOpenRequestModal }) => {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-3 reveal">
-          <div className="studio-badge">
-            <Calculator size={14} />
-            <span>TÍNH DỰ TOÁN</span>
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white font-display">
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">
             Tính Ngân Sách Web App
           </h2>
-          <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+          <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed font-medium">
             Ước tính chi phí lập trình theo đúng quy mô và tính năng bạn chọn.
           </p>
         </div>
@@ -75,7 +71,7 @@ export const CostEstimator = ({ onOpenRequestModal }) => {
             
             {/* Step 1: App Type */}
             <div>
-              <label className="block text-xs font-mono font-bold uppercase tracking-wider mb-2.5 text-slate-800 dark:text-slate-200 font-display">
+              <label className="block text-xs font-bold uppercase tracking-wider mb-2.5 text-slate-800 dark:text-slate-200">
                 1. Loại hình phần mềm
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -91,8 +87,8 @@ export const CostEstimator = ({ onOpenRequestModal }) => {
                     }`}
                   >
                     <div>
-                      <p className="font-display font-bold">{appTypeRates[key].name}</p>
-                      <p className="text-[11px] font-mono text-slate-500 font-normal mt-0.5">{appTypeRates[key].label}</p>
+                      <p className="font-bold">{appTypeRates[key].name}</p>
+                      <p className="text-[11px] text-slate-500 font-normal mt-0.5">{appTypeRates[key].label}</p>
                     </div>
                     {appType === key && <CheckCircle2 size={16} className="text-brand-primary shrink-0 ml-2" />}
                   </button>
@@ -102,7 +98,7 @@ export const CostEstimator = ({ onOpenRequestModal }) => {
 
             {/* Step 2: Scale */}
             <div>
-              <label className="block text-xs font-mono font-bold uppercase tracking-wider mb-2.5 text-slate-800 dark:text-slate-200 font-display">
+              <label className="block text-xs font-bold uppercase tracking-wider mb-2.5 text-slate-800 dark:text-slate-200">
                 2. Quy mô người dùng
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
@@ -126,10 +122,10 @@ export const CostEstimator = ({ onOpenRequestModal }) => {
             {/* Step 3: Features Count */}
             <div>
               <div className="flex justify-between items-center mb-2">
-                <label className="text-xs font-mono font-bold uppercase text-slate-800 dark:text-slate-200 font-display">
+                <label className="text-xs font-bold uppercase text-slate-800 dark:text-slate-200">
                   3. Số tính năng chính
                 </label>
-                <span className="font-mono text-xs font-bold text-brand-primary bg-brand-primary/10 px-2.5 py-0.5 rounded-full border border-brand-primary/20">
+                <span className="text-xs font-bold text-brand-primary bg-brand-primary/10 px-2.5 py-0.5 rounded-full border border-brand-primary/20">
                   {featuresCount} Tính năng
                 </span>
               </div>
@@ -146,7 +142,7 @@ export const CostEstimator = ({ onOpenRequestModal }) => {
 
             {/* Step 4: SLA */}
             <div>
-              <label className="block text-xs font-mono font-bold uppercase tracking-wider mb-2.5 text-slate-800 dark:text-slate-200 font-display">
+              <label className="block text-xs font-bold uppercase tracking-wider mb-2.5 text-slate-800 dark:text-slate-200">
                 4. Gói bảo trì sau bàn giao
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
@@ -155,10 +151,10 @@ export const CostEstimator = ({ onOpenRequestModal }) => {
                     key={t}
                     type="button"
                     onClick={() => setSlaTier(t)}
-                    className={`p-2.5 rounded-xl border text-xs font-mono text-center transition-all ${
+                    className={`p-2.5 rounded-xl border text-xs text-center transition-all ${
                       slaTier === t
                         ? 'bg-brand-primary/15 border-brand-primary text-brand-primary font-bold'
-                        : 'border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-300'
+                        : 'border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-300 font-medium'
                     }`}
                   >
                     {slaAddons[t].label}
@@ -173,15 +169,15 @@ export const CostEstimator = ({ onOpenRequestModal }) => {
           <div className="lg:col-span-5 studio-card p-6 sm:p-7 rounded-2xl space-y-5 sticky top-24 border border-brand-primary/30 shadow-md reveal reveal-delay-2">
             
             <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
-              <span className="text-xs font-mono font-bold text-slate-500 uppercase tracking-wider">
+              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
                 Thời gian dự kiến
               </span>
-              <p className="text-3xl font-extrabold font-mono mt-1 text-slate-900 dark:text-white font-display">
+              <p className="text-3xl font-extrabold mt-1 text-slate-900 dark:text-white">
                 {Math.round(3 + featuresCount * 0.3)} <span className="text-sm font-normal text-slate-500 font-sans">Tuần</span>
               </p>
             </div>
 
-            <div className="space-y-2.5 text-xs font-mono">
+            <div className="space-y-2.5 text-xs font-medium">
               <div className="flex justify-between py-1.5 border-b border-slate-100 dark:border-slate-800/60 text-slate-600 dark:text-slate-400">
                 <span>Khung giá cơ bản:</span>
                 <span className="text-slate-900 dark:text-slate-200 font-bold">{formatVND(baseRate)}</span>
@@ -202,8 +198,8 @@ export const CostEstimator = ({ onOpenRequestModal }) => {
 
             {/* Total Highlight */}
             <div className="p-4 rounded-xl bg-brand-primary/10 border border-brand-primary/20 text-center space-y-1">
-              <span className="text-xs font-mono font-bold text-brand-primary uppercase">Dự Toán Chi Phí</span>
-              <p className="text-3xl font-extrabold font-mono tracking-tight text-brand-primary font-display">
+              <span className="text-xs font-bold text-brand-primary uppercase">Dự Toán Chi Phí</span>
+              <p className="text-3xl font-extrabold tracking-tight text-brand-primary">
                 {formatMillionVND(totalEstimatedVND)}
               </p>
             </div>
@@ -211,7 +207,7 @@ export const CostEstimator = ({ onOpenRequestModal }) => {
             {/* CTA */}
             <button
               onClick={() => onOpenRequestModal(`Web App ${appTypeRates[appType].name} (${featuresCount} tính năng)`)}
-              className="btn-primary w-full py-3.5 text-sm font-bold font-display"
+              className="btn-primary w-full py-3.5 text-sm font-bold"
             >
               <span>Nhận Báo Giá Chi Tiết</span>
               <ArrowRight size={16} />
