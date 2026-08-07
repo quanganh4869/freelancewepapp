@@ -14,6 +14,8 @@ import { Agentation } from 'agentation';
 
 // Freelancer Personal Homepage Sections
 import { HeroSection } from './components/home/HeroSection';
+import { PersonalCraftSection } from './components/home/PersonalCraftSection';
+import { InteractiveEstimator } from './components/home/InteractiveEstimator';
 import { ServicesSection } from './components/home/ServicesSection';
 import { PricingSection } from './components/home/PricingSection';
 import { ProcessSection } from './components/home/ProcessSection';
@@ -89,6 +91,8 @@ const MainAppContent = () => {
           <>
             {/* Streamlined Personal Freelancer Sections */}
             <HeroSection onOpenRequestModal={() => handleOpenRequestModal()} />
+            <PersonalCraftSection />
+            <InteractiveEstimator onOpenRequestModal={(scope) => handleOpenRequestModal(scope)} />
             <ServicesSection onSelectService={(service) => handleOpenRequestModal(service)} />
             <PricingSection onOpenRequestModal={(tierName) => handleOpenRequestModal(tierName)} />
             <ProcessSection onOpenRequestModal={() => handleOpenRequestModal()} />
