@@ -8,7 +8,7 @@ const translations = {
     hotline: 'Hotline tư vấn: +84 (0) 908 123 456',
     email: 'Email: hello@nexusstudio.dev',
     workingHours: 'Giờ làm việc: 8:00 - 18:00 (T2 - T7)',
-    login: 'Đăng Nhập',
+    login: 'Quản Trị Admin',
     logout: 'Đăng Xuất',
     myProjects: 'Dự Án Của Tôi',
     adminDashboard: 'Trang Quản Trị Admin',
@@ -23,7 +23,7 @@ const translations = {
     whyUsNav: 'Vì Sao Chọn Nexus',
 
     // Hero Section
-    heroStatus: 'NEXUS DIGITAL PRODUCT STUDIO',
+    heroStatus: 'QUANG ANH STUDIO',
     heroBooking: 'Đang Nhận Dự Án Mới',
     heroTitlePart1: 'Biến ý tưởng kinh doanh thành',
     heroTitlePart2: 'Web App chạy thực tế.',
@@ -84,23 +84,23 @@ const translations = {
 
     // About Section
     aboutTag: 'TRIẾT LÝ LÀM VIỆC',
-    aboutTitle: 'Về Nexus Studio • Định Hướng Tận Tâm',
+    aboutTitle: 'Về Quang Anh Studio • Định Hướng Tận Tâm',
     aboutDesc: 'Chúng tôi tạo ra những sản phẩm phần mềm thực sự mang lại hiệu quả kinh doanh, giúp doanh nghiệp tiết kiệm chi phí và quản lý dễ dàng hơn.',
     aboutSlaTitle: 'Cam Kết Chất Lượng & Hỗ Trợ Dài Hạn',
 
     // Why Us Section
-    whyUsTag: 'VÌ SAO CHỌN NEXUS',
-    whyUsTitle: 'Lý Do Khách Hàng Tin Tưởng Nexus Studio',
+    whyUsTag: 'VÌ SAO CHỌN QUANG ANH',
+    whyUsTitle: 'Lý Do Khách Hàng Tin Tưởng Quang Anh Studio',
     whyUsDesc: 'Chúng tôi luôn đặt sự dễ dùng, tính ổn định và sự hài lòng của khách hàng lên hàng đầu.',
 
     // CTA Section
     ctaTag: 'BẮT ĐẦU DỰ ÁN NGAY',
     ctaTitle: 'Bạn đang có ý tưởng cần xây dựng thành phần mềm?',
-    ctaDesc: 'Hãy chia sẻ với chúng tôi về mong muốn của bạn. Đội ngũ Nexus sẽ tư vấn giải pháp phù hợp nhất và gửi báo giá chi tiết trong 24 giờ.',
+    ctaDesc: 'Hãy chia sẻ với chúng tôi về mong muốn của bạn. Đội ngũ Quang Anh sẽ tư vấn giải pháp phù hợp nhất và gửi báo giá chi tiết trong 24 giờ.',
     ctaEmailBtn: 'Gửi Email Trực Tiếp',
 
     // Footer
-    footerDesc: 'Nexus Studio chuyên thiết kế & lập trình Web App dễ sử dụng cho doanh nghiệp và các thương hiệu bán hàng. Giúp bạn quản lý hiệu quả và tăng trưởng doanh thu.',
+    footerDesc: 'Quang Anh Studio chuyên thiết kế & lập trình Web App dễ sử dụng cho doanh nghiệp và các thương hiệu bán hàng. Giúp bạn quản lý hiệu quả và tăng trưởng doanh thu.',
     copyright: 'Tất cả quyền được bảo lưu.'
   },
   en: {
@@ -108,7 +108,7 @@ const translations = {
     hotline: 'Hotline: +84 (0) 908 123 456',
     email: 'Email: hello@nexusstudio.dev',
     workingHours: 'Working Hours: 8:00 AM - 6:00 PM (Mon - Sat)',
-    login: 'Log In',
+    login: 'Admin Login',
     logout: 'Log Out',
     myProjects: 'My Projects',
     adminDashboard: 'Admin Control',
@@ -123,7 +123,7 @@ const translations = {
     whyUsNav: 'Why Choose Us',
 
     // Hero Section
-    heroStatus: 'NEXUS DIGITAL PRODUCT STUDIO',
+    heroStatus: 'QUANG ANH STUDIO',
     heroBooking: 'Now Accepting New Projects',
     heroTitlePart1: 'Turn your business ideas into',
     heroTitlePart2: 'working Web Apps.',
@@ -184,13 +184,13 @@ const translations = {
 
     // About Section
     aboutTag: 'OUR PHILOSOPHY',
-    aboutTitle: 'About Nexus Studio • Dedicated & Caring',
+    aboutTitle: 'About Quang Anh Studio • Dedicated & Caring',
     aboutDesc: 'We build web software that delivers real business results, helping you save costs and manage operations easily.',
     aboutSlaTitle: 'Quality Assurance & Long-Term Support',
 
     // Why Us Section
-    whyUsTag: 'WHY CHOOSE NEXUS',
-    whyUsTitle: 'Why Clients Trust Nexus Studio',
+    whyUsTag: 'WHY CHOOSE QUANG ANH',
+    whyUsTitle: 'Why Clients Trust Quang Anh Studio',
     whyUsDesc: 'We always prioritize ease of use, stability, and customer satisfaction.',
 
     // CTA Section
@@ -200,7 +200,7 @@ const translations = {
     ctaEmailBtn: 'Send Direct Email',
 
     // Footer
-    footerDesc: 'Nexus Studio specializes in building easy-to-use Web Apps for businesses and merchants. Helping you manage efficiently and boost revenue.',
+    footerDesc: 'Quang Anh Studio specializes in building easy-to-use Web Apps for businesses and merchants. Helping you manage efficiently and boost revenue.',
     copyright: 'All rights reserved.'
   }
 };
