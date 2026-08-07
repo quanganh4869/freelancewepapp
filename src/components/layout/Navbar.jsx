@@ -26,12 +26,12 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate, curren
           
           {/* Authentic Personal Identity - QUANG ANH FREELANCER */}
           <button onClick={() => onNavigate('home')} className="flex items-center gap-3 group text-left">
-            <div className="w-9 h-9 rounded-lg bg-brand-primary text-white flex items-center justify-center font-mono font-bold text-sm shadow-sm transition-transform group-hover:scale-105">
+            <div className="w-9 h-9 rounded-lg bg-brand-primary text-white flex items-center justify-center font-bold text-sm shadow-sm transition-transform group-hover:scale-105">
               <span>QA</span>
             </div>
             <div className="flex flex-col leading-none">
-              <span className="font-extrabold text-base tracking-tight font-display text-slate-900 dark:text-white">
-                QUANG ANH <span className="text-brand-primary font-mono text-[10px] font-bold tracking-wider ml-1 uppercase">FREELANCER</span>
+              <span className="font-extrabold text-base tracking-tight text-slate-900 dark:text-white">
+                QUANG ANH <span className="text-brand-primary font-bold text-[10px] tracking-wider ml-1 uppercase">FREELANCER</span>
               </span>
             </div>
           </button>
@@ -52,8 +52,8 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate, curren
                     }, 100);
                   }
                 }}
-                className={`text-xs font-mono font-bold uppercase tracking-wider transition-colors hover:text-brand-primary ${
-                  isDark ? 'text-slate-300' : 'text-slate-700'
+                className={`text-xs font-bold uppercase tracking-wider transition-colors hover:text-brand-primary ${
+                  isDark ? 'text-slate-200' : 'text-slate-800'
                 }`}
               >
                 {item.label}
@@ -63,7 +63,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate, curren
             {/* Dedicated Page Estimator Navigation Button */}
             <button
               onClick={() => onNavigate('estimator')}
-              className={`text-xs font-mono font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 px-3 py-1.5 rounded-lg border ${
+              className={`text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 px-3 py-1.5 rounded-lg border ${
                 currentView === 'estimator'
                   ? 'bg-brand-primary text-white border-brand-primary shadow-sm'
                   : 'bg-brand-primary/10 border-brand-primary/30 text-brand-primary hover:bg-brand-primary/20'
@@ -80,10 +80,10 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate, curren
             {/* Language Switcher */}
             <button
               onClick={toggleLanguage}
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border font-mono font-semibold transition-colors ${
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border font-semibold transition-colors ${
                 isDark
-                  ? 'bg-studio-900 border-slate-800 text-slate-300 hover:border-slate-700'
-                  : 'bg-slate-100 border-slate-200 text-slate-700 hover:border-slate-300'
+                  ? 'bg-studio-900 border-slate-800 text-slate-200 hover:border-slate-700'
+                  : 'bg-slate-100 border-slate-200 text-slate-800 hover:border-slate-300'
               }`}
               title="Switch Language"
             >
@@ -108,8 +108,8 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate, curren
             {activeRole === 'GUEST' ? (
               <button
                 onClick={onOpenAuthModal}
-                className={`flex items-center px-3 py-1.5 rounded-lg transition-colors font-mono text-[11px] font-semibold border ${
-                  isDark ? 'border-slate-800 text-slate-400 hover:text-white hover:border-brand-primary' : 'border-slate-200 text-slate-600 hover:text-slate-900 hover:border-brand-primary'
+                className={`flex items-center px-3 py-1.5 rounded-lg transition-colors text-[11px] font-bold border ${
+                  isDark ? 'border-slate-800 text-slate-300 hover:text-white hover:border-brand-primary' : 'border-slate-200 text-slate-700 hover:text-slate-900 hover:border-brand-primary'
                 }`}
                 title="Quản Trị Admin"
               >
@@ -120,7 +120,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate, curren
                 {activeRole === 'ADMIN' && (
                   <button
                     onClick={() => onNavigate('admin-dashboard')}
-                    className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-500 font-bold font-display text-[11px]"
+                    className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-500 font-bold text-[11px]"
                   >
                     <Shield size={13} />
                     <span>Admin</span>
@@ -175,7 +175,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate, curren
                 setMobileMenuOpen(false);
                 onNavigate('estimator');
               }}
-              className="text-sm font-bold font-display text-brand-primary flex items-center gap-2 py-1"
+              className="text-sm font-bold text-brand-primary flex items-center gap-2 py-1"
             >
               <Calculator size={16} />
               <span>Tính Chi Phí Làm Web</span>
@@ -189,7 +189,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate, curren
                   setMobileMenuOpen(false);
                   onNavigate('home');
                 }}
-                className={`text-sm font-bold font-display transition-colors py-1 ${
+                className={`text-sm font-bold transition-colors py-1 ${
                   isDark ? 'text-slate-200 hover:text-brand-primary' : 'text-slate-800 hover:text-brand-primary'
                 }`}
               >
@@ -201,7 +201,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate, curren
           <div className="pt-4 border-t border-slate-800 flex items-center justify-between">
             <button
               onClick={toggleLanguage}
-              className="text-xs font-mono font-semibold text-brand-primary"
+              className="text-xs font-semibold text-brand-primary"
             >
               {language === 'vi' ? 'EN - English' : 'VI - Tiếng Việt'}
             </button>
@@ -212,7 +212,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate, curren
                   setMobileMenuOpen(false);
                   onOpenAuthModal();
                 }}
-                className="text-xs font-mono text-slate-400 hover:text-white"
+                className="text-xs text-slate-300 hover:text-white"
               >
                 Admin Login
               </button>
