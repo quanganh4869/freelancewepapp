@@ -1,10 +1,9 @@
-// Vercel Serverless Function: Gửi email thông báo cho Quang Anh khi có khách hàng gửi yêu cầu
+// Vercel Serverless Function: Gửi email thông báo cho Quang Anh khi có khách hàng gửi yêu cầu làm web
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export default async function handler(req, res) {
-  // Chỉ chấp nhận method POST
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -15,65 +14,70 @@ export default async function handler(req, res) {
       clientEmail,
       clientPhone,
       clientCompany,
-      businessSector,
-      companyScale,
       projectName,
       projectType,
-      projectStage,
       projectDescription,
-      targetUsers,
-      selectedFeatures,
-      preferredTechnologies,
       budget,
       timeline,
-      slaTier,
-      needNda
+      designLink,
+      attachedFileName,
+      attachedFileData, // base64 string if file uploaded
+      additionalNotes
     } = req.body;
 
-    const featuresText = Array.isArray(selectedFeatures) ? selectedFeatures.join(', ') : 'Chưa chọn';
+    const attachments = [];
+    if (attachedFileName && attachedFileData) {
+      // Clean base64 content
+      const base64Content = attachedFileData.includes(',')
+        ? attachedFileData.split(',')[1]
+        : attachedFileData;
+      attachments.push({
+        filename: attachedFileName,
+        content: base64Content
+      });
+    }
 
     const emailResponse = await resend.emails.send({
-      from: 'Quang Anh Studio <onboarding@resend.dev>', // Email gửi mặc định của Resend (hoặc Email tên miền cá nhân)
-      to: ['quanganhqb04@gmail.com'], // Email của bạn nhận thông báo
-      subject: `🚀 [YÊU CẦU DỰ ÁN MỚI] ${clientName} - ${projectName}`,
+      from: 'Quang Anh Freelancer <onboarding@resend.dev>',
+      to: ['quanganhqb04@gmail.com'],
+      subject: `🚀 [ĐƠN ĐẶT LÀM WEB] ${clientName} - ${projectType}`,
+      attachments: attachments.length > 0 ? attachments : undefined,
       html: `
-        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px;">
-          <h2 style="color: #2848d8; border-bottom: 2px solid #2848d8; padding-bottom: 8px;">🚀 CÓ YÊU CẦU DỰ ÁN MỚI TỪ WEBSITE!</h2>
+        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #1e293b; max-width: 620px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; background-color: #ffffff;">
+          <h2 style="color: #ea580c; border-bottom: 2px solid #ea580c; padding-bottom: 10px; margin-top: 0;">🚀 YÊU CẦU LÀM WEBSITE MỚI</h2>
           
-          <h3 style="color: #1e293b;">1. THÔNG TIN KHÁCH HÀNG:</h3>
-          <ul>
+          <h3 style="color: #0f172a; margin-top: 20px;">1. THÔNG TIN NGƯỜI ĐẠI DIỆN:</h3>
+          <ul style="padding-left: 20px;">
             <li><strong>Họ và Tên:</strong> ${clientName || 'N/A'}</li>
-            <li><strong>Email:</strong> <a href="mailto:${clientEmail}">${clientEmail}</a></li>
-            <li><strong>Số điện thoại / Zalo:</strong> ${clientPhone || 'Chưa cung cấp'}</li>
-            <li><strong>Công ty / Tổ chức:</strong> ${clientCompany || 'Cá nhân'} (${businessSector || 'Chưa chọn'})</li>
-            <li><strong>Quy mô nhân sự:</strong> ${companyScale || 'N/A'}</li>
+            <li><strong>SĐT / Zalo:</strong> <span style="color: #ea580c; font-weight: bold;">${clientPhone || 'Chưa cung cấp'}</span></li>
+            <li><strong>Email:</strong> <a href="mailto:${clientEmail}">${clientEmail || 'Chưa cung cấp'}</a></li>
+            <li><strong>Đơn vị / Công ty:</strong> ${clientCompany || 'Cá nhân'}</li>
           </ul>
 
-          <h3 style="color: #1e293b;">2. THÔNG TIN DỰ ÁN WEB APP:</h3>
-          <ul>
-            <li><strong>Tên dự án:</strong> <span style="color: #2848d8; font-weight: bold;">${projectName}</span></li>
-            <li><strong>Loại hình phần mềm:</strong> ${projectType}</li>
-            <li><strong>Giai đoạn chuẩn bị:</strong> ${projectStage || 'N/A'}</li>
-            <li><strong>Mô tả bài toán:</strong> <em>${projectDescription}</em></li>
-            <li><strong>Đối tượng sử dụng:</strong> ${targetUsers || 'N/A'}</li>
+          <h3 style="color: #0f172a; margin-top: 20px;">2. CHI TIẾT YÊU CẦU LÀM WEB:</h3>
+          <ul style="padding-left: 20px;">
+            <li><strong>Loại website:</strong> <span style="color: #ea580c; font-weight: bold;">${projectType}</span></li>
+            <li><strong>Tên dự án / Mục tiêu:</strong> ${projectName || 'Website theo yêu cầu'}</li>
+            <li><strong>Ngân sách dự kiến:</strong> <span style="color: #10b981; font-weight: bold;">${budget}</span></li>
+            <li><strong>Thời gian mong muốn:</strong> ${timeline}</li>
+            <li><strong>Mô tả chi tiết:</strong> <br/><blockquote style="background: #f8fafc; border-left: 4px solid #ea580c; margin: 8px 0; padding: 10px 14px; font-style: italic;">${projectDescription}</blockquote></li>
           </ul>
 
-          <h3 style="color: #1e293b;">3. TÍNH NĂNG & CÔNG NGHỆ:</h3>
-          <ul>
-            <li><strong>Tính năng cốt lõi đã chọn:</strong> ${featuresText}</li>
-            <li><strong>Công nghệ ưu tiên:</strong> ${preferredTechnologies || 'Để Studio tư vấn'}</li>
+          ${designLink || attachedFileName ? `
+          <h3 style="color: #0f172a; margin-top: 20px;">3. FILE THIẾT KẾ / TÀI LIỆU KÈM THEO:</h3>
+          <ul style="padding-left: 20px;">
+            ${designLink ? `<li><strong>Link thiết kế (Figma/Drive/Drive):</strong> <a href="${designLink}" target="_blank" style="color: #2563eb; font-weight: bold;">${designLink}</a></li>` : ''}
+            ${attachedFileName ? `<li><strong>File đính kèm:</strong> ${attachedFileName} (Đã đính kèm trong Email)</li>` : ''}
           </ul>
+          ` : ''}
 
-          <h3 style="color: #1e293b;">4. NGÂN SÁCH, KỲ HẠN & BẢO TRÌ:</h3>
-          <ul>
-            <li><strong>Ngân sách dự kiến:</strong> <span style="color: #059669; font-weight: bold;">${budget}</span></li>
-            <li><strong>Thời gian bàn giao:</strong> ${timeline}</li>
-            <li><strong>Gói bảo trì SLA:</strong> ${slaTier || 'Mặc định'}</li>
-            <li><strong>Yêu cầu ký NDA:</strong> ${needNda || 'Không'}</li>
-          </ul>
+          ${additionalNotes ? `
+          <h3 style="color: #0f172a; margin-top: 20px;">4. GHI CHÚ BỔ SUNG:</h3>
+          <p style="background: #f1f5f9; padding: 10px; border-radius: 8px;">${additionalNotes}</p>
+          ` : ''}
 
-          <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 20px 0;" />
-          <p style="font-size: 12px; color: #64748b; text-align: center;">Thư thông báo tự động từ hệ thống Website Quang Anh Studio.</p>
+          <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 24px 0 16px 0;" />
+          <p style="font-size: 12px; color: #64748b; text-align: center;">Thư thông báo tự động từ hệ thống Website Quang Anh Freelancer.</p>
         </div>
       `
     });
