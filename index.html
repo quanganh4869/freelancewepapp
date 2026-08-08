@@ -422,23 +422,23 @@
                     <p class="text-lg text-text-muted">Gửi yêu cầu thiết kế và tôi sẽ phản hồi lại ngay.</p>
                 </div>
                 
-                <form class="space-y-8" onsubmit="event.preventDefault(); alert('Đã gửi yêu cầu!'); toggleContactModal();">
+                <form id="contactForm" class="space-y-8">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div class="space-y-3">
                             <label class="text-sm uppercase tracking-widest font-bold text-text-muted">Họ và tên *</label>
-                            <input type="text" required placeholder="Tên của bạn để tiện xưng hô..." class="w-full text-lg bg-surface border border-border-tone rounded-xl px-5 py-4 focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all">
+                            <input type="text" name="name" required placeholder="Tên của bạn để tiện xưng hô..." class="w-full text-lg bg-surface border border-border-tone rounded-xl px-5 py-4 focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all">
                         </div>
                         <div class="space-y-3">
                             <label class="text-sm uppercase tracking-widest font-bold text-text-muted">Email *</label>
-                            <input type="email" required placeholder="Nhập email để nhận báo giá..." class="w-full text-lg bg-surface border border-border-tone rounded-xl px-5 py-4 focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all">
+                            <input type="email" name="email" required placeholder="Nhập email để nhận báo giá..." class="w-full text-lg bg-surface border border-border-tone rounded-xl px-5 py-4 focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all">
                         </div>
                         <div class="space-y-3">
                             <label class="text-sm uppercase tracking-widest font-bold text-text-muted">Số điện thoại / Zalo</label>
-                            <input type="tel" placeholder="Để tôi gọi hoặc nhắn Zalo tư vấn nhanh hơn..." class="w-full text-lg bg-surface border border-border-tone rounded-xl px-5 py-4 focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all">
+                            <input type="tel" name="phone" placeholder="Để tôi gọi hoặc nhắn Zalo tư vấn nhanh hơn..." class="w-full text-lg bg-surface border border-border-tone rounded-xl px-5 py-4 focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all">
                         </div>
                         <div class="space-y-3">
                             <label class="text-sm uppercase tracking-widest font-bold text-text-muted">Ngân sách dự kiến *</label>
-                            <select required class="w-full text-lg bg-surface border border-border-tone rounded-xl px-5 py-4 focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all appearance-none cursor-pointer">
+                            <select name="budget" required class="w-full text-lg bg-surface border border-border-tone rounded-xl px-5 py-4 focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all appearance-none cursor-pointer">
                                 <option value="" disabled selected>Chọn khoản tiền bạn dự định đầu tư...</option>
                                 <option>Dưới 2 triệu (Mức cơ bản)</option>
                                 <option>Từ 2 triệu - 5 triệu (Phổ biến nhất)</option>
@@ -453,28 +453,28 @@
                         <label class="text-sm uppercase tracking-widest font-bold text-text-muted">Mục đích làm website của bạn là gì? *</label>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <label class="flex items-start gap-4 p-5 border border-border-tone rounded-xl cursor-pointer hover:border-brand transition-colors bg-surface">
-                                <input type="radio" name="type" required class="mt-1 text-brand focus:ring-brand w-5 h-5 shrink-0">
+                                <input type="radio" name="type" value="Landing Page" required class="mt-1 text-brand focus:ring-brand w-5 h-5 shrink-0">
                                 <div>
                                     <span class="text-base font-bold text-ink block mb-1">Chỉ 1 trang ngắn gọn (Landing Page)</span>
                                     <span class="text-sm text-text-muted leading-relaxed block">Dành để chạy quảng cáo, bán 1 sản phẩm cụ thể hoặc thu thập thông tin khách hàng.</span>
                                 </div>
                             </label>
                             <label class="flex items-start gap-4 p-5 border border-border-tone rounded-xl cursor-pointer hover:border-brand transition-colors bg-surface">
-                                <input type="radio" name="type" class="mt-1 text-brand focus:ring-brand w-5 h-5 shrink-0">
+                                <input type="radio" name="type" value="Giới thiệu Công ty" class="mt-1 text-brand focus:ring-brand w-5 h-5 shrink-0">
                                 <div>
                                     <span class="text-base font-bold text-ink block mb-1">Giới thiệu Công ty / Dịch vụ</span>
                                     <span class="text-sm text-text-muted leading-relaxed block">Web có nhiều trang (Trang chủ, Giới thiệu, Bảng giá...) để tăng uy tín thương hiệu.</span>
                                 </div>
                             </label>
                             <label class="flex items-start gap-4 p-5 border border-border-tone rounded-xl cursor-pointer hover:border-brand transition-colors bg-surface">
-                                <input type="radio" name="type" class="mt-1 text-brand focus:ring-brand w-5 h-5 shrink-0">
+                                <input type="radio" name="type" value="Cửa hàng Online" class="mt-1 text-brand focus:ring-brand w-5 h-5 shrink-0">
                                 <div>
                                     <span class="text-base font-bold text-ink block mb-1">Cửa hàng Online (Bán nhiều hàng)</span>
                                     <span class="text-sm text-text-muted leading-relaxed block">Có hệ thống giỏ hàng, phân loại sản phẩm, đặt hàng và thanh toán trực tuyến.</span>
                                 </div>
                             </label>
                             <label class="flex items-start gap-4 p-5 border border-border-tone rounded-xl cursor-pointer hover:border-brand transition-colors bg-surface">
-                                <input type="radio" name="type" class="mt-1 text-brand focus:ring-brand w-5 h-5 shrink-0">
+                                <input type="radio" name="type" value="Phần mềm / Đặt lịch" class="mt-1 text-brand focus:ring-brand w-5 h-5 shrink-0">
                                 <div>
                                     <span class="text-base font-bold text-ink block mb-1">Hệ thống Đặt lịch / Phần mềm web</span>
                                     <span class="text-sm text-text-muted leading-relaxed block">Các tính năng đặc biệt như cho khách đặt lịch hẹn, quản lý kho, hoặc app nội bộ.</span>
@@ -487,28 +487,28 @@
                         <label class="text-sm uppercase tracking-widest font-bold text-text-muted">Bạn có cần tôi lo luôn các phần này không?</label>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <label class="flex items-start gap-4 p-4 cursor-pointer group bg-surface/50 rounded-xl hover:bg-surface transition-colors">
-                                <input type="checkbox" class="mt-0.5 text-brand focus:ring-brand w-5 h-5 rounded border-border-tone shrink-0">
+                                <input type="checkbox" name="services" value="Mua tên miền & Hosting" class="mt-0.5 text-brand focus:ring-brand w-5 h-5 rounded border-border-tone shrink-0">
                                 <div>
                                     <span class="text-base font-bold text-ink group-hover:text-brand transition-colors block mb-1">Mua Tên miền & Nơi lưu trữ web</span>
                                     <span class="text-sm text-text-muted leading-relaxed block">Mua tên miền (ví dụ .com, .vn) và Hosting để web có chỗ hoạt động trên mạng.</span>
                                 </div>
                             </label>
                             <label class="flex items-start gap-4 p-4 cursor-pointer group bg-surface/50 rounded-xl hover:bg-surface transition-colors">
-                                <input type="checkbox" class="mt-0.5 text-brand focus:ring-brand w-5 h-5 rounded border-border-tone shrink-0">
+                                <input type="checkbox" name="services" value="Hỗ trợ SEO" class="mt-0.5 text-brand focus:ring-brand w-5 h-5 rounded border-border-tone shrink-0">
                                 <div>
                                     <span class="text-base font-bold text-ink group-hover:text-brand transition-colors block mb-1">Giúp web dễ tìm thấy trên Google (SEO)</span>
                                     <span class="text-sm text-text-muted leading-relaxed block">Tối ưu mã nguồn giúp khách hàng gõ từ khóa là thấy bạn trên trang nhất.</span>
                                 </div>
                             </label>
                             <label class="flex items-start gap-4 p-4 cursor-pointer group bg-surface/50 rounded-xl hover:bg-surface transition-colors">
-                                <input type="checkbox" class="mt-0.5 text-brand focus:ring-brand w-5 h-5 rounded border-border-tone shrink-0">
+                                <input type="checkbox" name="services" value="Thiết kế Logo" class="mt-0.5 text-brand focus:ring-brand w-5 h-5 rounded border-border-tone shrink-0">
                                 <div>
                                     <span class="text-base font-bold text-ink group-hover:text-brand transition-colors block mb-1">Thiết kế Logo thương hiệu</span>
                                     <span class="text-sm text-text-muted leading-relaxed block">Bạn chưa có Logo và muốn tôi thiết kế một logo đẹp đồng bộ với website.</span>
                                 </div>
                             </label>
                             <label class="flex items-start gap-4 p-4 cursor-pointer group bg-surface/50 rounded-xl hover:bg-surface transition-colors">
-                                <input type="checkbox" class="mt-0.5 text-brand focus:ring-brand w-5 h-5 rounded border-border-tone shrink-0">
+                                <input type="checkbox" name="services" value="Cập nhật nội dung & Bảo trì" class="mt-0.5 text-brand focus:ring-brand w-5 h-5 rounded border-border-tone shrink-0">
                                 <div>
                                     <span class="text-base font-bold text-ink group-hover:text-brand transition-colors block mb-1">Cập nhật nội dung & Bảo trì hàng tháng</span>
                                     <span class="text-sm text-text-muted leading-relaxed block">Bạn không có thời gian, muốn giao phó cho tôi sửa ảnh, đăng bài viết định kỳ.</span>
@@ -520,16 +520,17 @@
                     <div class="space-y-3 pt-4">
                         <label class="text-sm uppercase tracking-widest font-bold text-text-muted">Bạn có bản nháp, hình ảnh hay tài liệu nào không?</label>
                         <div class="border-2 border-dashed border-border-tone rounded-xl p-8 text-center hover:border-brand transition-colors cursor-pointer bg-surface relative">
-                            <input type="file" multiple class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                            <input type="file" id="fileInput" multiple class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
                             <i class="fa-solid fa-cloud-arrow-up text-4xl text-text-muted mb-4"></i>
                             <p class="text-base font-semibold text-ink">Bấm vào đây (hoặc kéo thả) để tải file lên</p>
                             <p class="text-sm text-text-muted mt-2">Ví dụ: File Word yêu cầu, Ảnh sản phẩm, Bảng báo giá... (Tối đa 20MB)</p>
                         </div>
+                        <div id="fileList" class="text-sm text-brand font-medium hidden mt-2"></div>
                     </div>
 
                     <div class="space-y-3">
                         <label class="text-sm uppercase tracking-widest font-bold text-text-muted">Kể thêm cho tôi nghe về ý tưởng của bạn *</label>
-                        <textarea required rows="5" placeholder="Ví dụ: Tôi muốn làm 1 web bán quần áo nữ. Tôi đã có vài tấm ảnh chụp tự nhiên rất đẹp. Tôi muốn web đơn giản, gọn gàng, và thích phong cách giống trang Zara.com..." class="w-full text-lg bg-surface border border-border-tone rounded-xl px-5 py-4 focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all resize-none"></textarea>
+                        <textarea name="message" required rows="5" placeholder="Ví dụ: Tôi muốn làm 1 web bán quần áo nữ. Tôi đã có vài tấm ảnh chụp tự nhiên rất đẹp. Tôi muốn web đơn giản, gọn gàng, và thích phong cách giống trang Zara.com..." class="w-full text-lg bg-surface border border-border-tone rounded-xl px-5 py-4 focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all resize-none"></textarea>
                     </div>
                     
                     <button type="submit" class="w-full py-5 rounded-xl bg-brand text-white text-lg uppercase tracking-[0.2em] font-bold hover:bg-ink transition-all shadow-lg shadow-brand/20">
@@ -548,7 +549,6 @@
             if (modal.classList.contains('hidden')) {
                 modal.classList.remove('hidden');
                 modal.classList.add('flex');
-                // Allow display:flex to apply before setting opacity
                 setTimeout(() => {
                     modal.classList.replace('opacity-0', 'opacity-100');
                     content.classList.replace('scale-95', 'scale-100');
@@ -564,6 +564,79 @@
                 }, 300);
             }
         }
+
+        // Handle File Input UI
+        const fileInput = document.getElementById('fileInput');
+        const fileList = document.getElementById('fileList');
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                fileList.classList.remove('hidden');
+                fileList.textContent = `Đã đính kèm ${e.target.files.length} file.`;
+            } else {
+                fileList.classList.add('hidden');
+            }
+        });
+
+        // Handle Form Submit
+        const form = document.getElementById('contactForm');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+            
+            submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Đang gửi...';
+            submitBtn.disabled = true;
+            
+            try {
+                const formData = new FormData(form);
+                const data = {
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                    budget: formData.get('budget'),
+                    type: formData.get('type'),
+                    services: formData.getAll('services'),
+                    message: formData.get('message'),
+                    files: []
+                };
+                
+                // Convert files to Base64
+                if (fileInput.files.length > 0) {
+                    const filePromises = Array.from(fileInput.files).map(file => {
+                        return new Promise((resolve, reject) => {
+                            const reader = new FileReader();
+                            reader.onload = () => resolve({ name: file.name, content: reader.result });
+                            reader.onerror = reject;
+                            reader.readAsDataURL(file);
+                        });
+                    });
+                    data.files = await Promise.all(filePromises);
+                }
+                
+                const response = await fetch('/api/send', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    alert('Gửi yêu cầu thành công! Tôi sẽ liên hệ lại với bạn sớm nhất.');
+                    toggleContactModal();
+                    form.reset();
+                    fileList.classList.add('hidden');
+                } else {
+                    alert('Có lỗi xảy ra: ' + (result.error?.message || result.error || 'Vui lòng thử lại sau.'));
+                }
+            } catch (err) {
+                alert('Lỗi kết nối. Vui lòng kiểm tra mạng và thử lại.');
+                console.error(err);
+            } finally {
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        });
     </script>
 
     <!-- React and Agentation Mount Point -->
