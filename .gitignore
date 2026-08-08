@@ -49,3 +49,7 @@ Thumbs.db
 .parcel-cache/
 .temp/
 .tmp/
+
+# Antigravity/Agentation System Files
+.gemini/
+impeccable/
