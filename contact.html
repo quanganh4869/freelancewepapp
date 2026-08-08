@@ -137,19 +137,19 @@
                         <div>
                             <label class="block text-sm font-bold mb-2">Tên của bạn *</label>
                             <p class="text-xs text-text-muted mb-2">Để tôi tiện xưng hô khi trò chuyện.</p>
-                            <input type="text" name="name" id="name" placeholder="Ví dụ: Quang Anh" class="w-full bg-white border border-border-tone rounded-xl px-5 py-4 focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all">
+                            <input type="text" name="name" id="name" placeholder="Ví dụ: Quang Anh" class="w-full bg-white border border-border-tone rounded-xl px-5 py-4 focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all text-lg">
                             <p class="text-red-500 text-xs mt-2 hidden" id="err-name">Vui lòng nhập tên của bạn.</p>
                         </div>
                         <div>
                             <label class="block text-sm font-bold mb-2">Email *</label>
                             <p class="text-xs text-text-muted mb-2">Tôi sẽ gửi bảng tóm tắt và báo giá qua đây.</p>
-                            <input type="email" name="email" id="email" placeholder="Ví dụ: hello@email.com" class="w-full bg-white border border-border-tone rounded-xl px-5 py-4 focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all">
+                            <input type="email" name="email" id="email" placeholder="Ví dụ: hello@email.com" class="w-full bg-white border border-border-tone rounded-xl px-5 py-4 focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all text-lg">
                             <p class="text-red-500 text-xs mt-2 hidden" id="err-email">Vui lòng nhập email hợp lệ.</p>
                         </div>
                         <div>
                             <label class="block text-sm font-bold mb-2">Số điện thoại / Zalo</label>
                             <p class="text-xs text-text-muted mb-2">Nếu bạn muốn trao đổi nhanh qua tin nhắn hoặc cuộc gọi.</p>
-                            <input type="tel" name="phone" id="phone" placeholder="Ví dụ: 0912 345 678" class="w-full bg-white border border-border-tone rounded-xl px-5 py-4 focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all">
+                            <input type="tel" name="phone" id="phone" placeholder="Ví dụ: 0912 345 678" class="w-full bg-white border border-border-tone rounded-xl px-5 py-4 focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all text-lg">
                         </div>
                     </div>
                 </div>
@@ -729,7 +729,7 @@
             if (step === 1) {
                 const name = document.getElementById('name').value.trim();
                 const email = document.getElementById('email').value.trim();
-                const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 
                 setError('err-name', name === '');
                 setError('err-email', !emailRegex.test(email));
