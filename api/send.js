@@ -31,7 +31,8 @@ export default async function handler(req, res) {
       html: `
         <h2>Yêu cầu dự án mới từ form Liên hệ</h2>
         <p><strong>Họ và tên:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p><p><strong>S? di?n tho?i:</strong> ${phone || 'Kh�ng c�'}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Số điện thoại:</strong> ${phone || 'Không có'}</p>
         <p><strong>Ngân sách dự kiến:</strong> ${budget || 'Không chỉ định'}</p>
         <p><strong>Loại website:</strong> ${type || 'Không chỉ định'}</p>
         <p><strong>Dịch vụ bổ sung:</strong> ${servicesList}</p>

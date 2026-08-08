@@ -523,7 +523,7 @@
                             <input type="file" id="fileInput" multiple class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
                             <i class="fa-solid fa-cloud-arrow-up text-4xl text-text-muted mb-4"></i>
                             <p class="text-base font-semibold text-ink">Bấm vào đây (hoặc kéo thả) để tải file lên</p>
-                            <p class="text-sm text-text-muted mt-2">Ví dụ: File Word yêu cầu, Ảnh sản phẩm, Bảng báo giá... (Tối đa 20MB)</p>
+                            <p class="text-sm text-text-muted mt-2">Ví dụ: File Word yêu cầu, Ảnh sản phẩm, Bảng báo giá... (Tối đa 4.5MB)</p>
                         </div>
                         <div id="fileList" class="text-sm text-brand font-medium hidden mt-2"></div>
                     </div>
@@ -600,8 +600,20 @@
                     files: []
                 };
                 
-                // Convert files to Base64
+                // Convert files to Base64 and validate total size
                 if (fileInput.files.length > 0) {
+                    let totalSize = 0;
+                    for (let i = 0; i < fileInput.files.length; i++) {
+                        totalSize += fileInput.files[i].size;
+                    }
+                    // Vercel Serverless free tier has 4.5MB payload limit
+                    if (totalSize > 4.5 * 1024 * 1024) {
+                        alert('Tổng dung lượng các file đính kèm vượt quá 4.5MB. Vui lòng chọn file nhẹ hơn hoặc gửi link Google Drive trong phần mô tả.');
+                        submitBtn.innerHTML = originalBtnText;
+                        submitBtn.disabled = false;
+                        return;
+                    }
+
                     const filePromises = Array.from(fileInput.files).map(file => {
                         return new Promise((resolve, reject) => {
                             const reader = new FileReader();
