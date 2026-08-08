@@ -350,7 +350,7 @@
                                 <label class="option-card"><input type="checkbox" name="typeDetailsCb" value="Dự án" class="absolute opacity-0"><div class="border border-border-tone rounded-full px-5 py-2.5 bg-white font-bold text-lg flex items-center gap-2"><div class="w-3 h-3 border border-border-tone rounded-sm flex items-center justify-center check-box"><i class="fa-solid fa-check text-[8px] text-white opacity-0"></i></div> Dự án</div></label>
                                 <label class="option-card"><input type="checkbox" name="typeDetailsCb" value="Kinh nghiệm" class="absolute opacity-0"><div class="border border-border-tone rounded-full px-5 py-2.5 bg-white font-bold text-lg flex items-center gap-2"><div class="w-3 h-3 border border-border-tone rounded-sm flex items-center justify-center check-box"><i class="fa-solid fa-check text-[8px] text-white opacity-0"></i></div> Kinh nghiệm</div></label>
                                 <label class="option-card"><input type="checkbox" name="typeDetailsCb" value="CV" class="absolute opacity-0"><div class="border border-border-tone rounded-full px-5 py-2.5 bg-white font-bold text-lg flex items-center gap-2"><div class="w-3 h-3 border border-border-tone rounded-sm flex items-center justify-center check-box"><i class="fa-solid fa-check text-[8px] text-white opacity-0"></i></div> CV</div></label>
-                                <label class="option-card"><input type="checkbox" name="typeDetailsCb" value="Liên hệ" class="absolute opacity-0"><div class="border border-border-tone rounded-full px-5 py-2.5 bg-white font-bold text-lg flex items-center gap-2"><div class="w-3 h-3 border border-border-tone rounded-sm flex items-center justify-center check-box"><i class="fa-solid fa-check text-[8px] text-white opacity-0"></i></div> Liên hệ</div></label>
+                                
                                 <label class="option-card"><input type="checkbox" name="typeDetailsCb" value="Khác" class="absolute opacity-0"><div class="border border-border-tone rounded-full px-5 py-2.5 bg-white font-bold text-lg flex items-center gap-2"><div class="w-3 h-3 border border-border-tone rounded-sm flex items-center justify-center check-box"><i class="fa-solid fa-check text-[8px] text-white opacity-0"></i></div> Khác</div></label>
                             </div>
                         </div>
@@ -368,99 +368,99 @@
 
                     <div class="space-y-8">
                         <div>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                                <label class="option-card">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" id="features-grid">
+                                <label class="option-card" data-types="Website cá nhân / Portfolio,Website giới thiệu,Landing page,Website bán hàng,Website đặt lịch / đặt dịch vụ,Website blog / tin tức,Web quản lý nhỏ">
                                     <input type="checkbox" name="features" value="Form liên hệ" class="absolute opacity-0">
                                     <div class="border border-border-tone rounded-xl p-4 bg-white flex gap-3 h-full">
                                         <div class="mt-0.5 w-4 h-4 border border-border-tone rounded flex-shrink-0 flex items-center justify-center check-box"><i class="fa-solid fa-check text-[10px] text-white opacity-0"></i></div>
                                         <div><p class="font-bold text-lg">Form liên hệ</p><p class="text-sm text-text-muted mt-1">Khách gửi tin nhắn cho bạn.</p></div>
                                     </div>
                                 </label>
-                                <label class="option-card">
+                                <label class="option-card" data-types="Website cá nhân / Portfolio,Website giới thiệu,Landing page,Website bán hàng,Website đặt lịch / đặt dịch vụ">
                                     <input type="checkbox" name="features" value="Nút gọi điện / Zalo" class="absolute opacity-0">
                                     <div class="border border-border-tone rounded-xl p-4 bg-white flex gap-3 h-full">
                                         <div class="mt-0.5 w-4 h-4 border border-border-tone rounded flex-shrink-0 flex items-center justify-center check-box"><i class="fa-solid fa-check text-[10px] text-white opacity-0"></i></div>
                                         <div><p class="font-bold text-lg">Nút gọi / Zalo / FB</p><p class="text-sm text-text-muted mt-1">Giúp khách liên hệ nhanh.</p></div>
                                     </div>
                                 </label>
-                                <label class="option-card">
+                                <label class="option-card" data-types="Website đặt lịch / đặt dịch vụ">
                                     <input type="checkbox" name="features" value="Đặt lịch" class="absolute opacity-0">
                                     <div class="border border-border-tone rounded-xl p-4 bg-white flex gap-3 h-full">
                                         <div class="mt-0.5 w-4 h-4 border border-border-tone rounded flex-shrink-0 flex items-center justify-center check-box"><i class="fa-solid fa-check text-[10px] text-white opacity-0"></i></div>
                                         <div><p class="font-bold text-lg">Đặt lịch</p><p class="text-sm text-text-muted mt-1">Khách chọn ngày giờ gửi hẹn.</p></div>
                                     </div>
                                 </label>
-                                <label class="option-card">
+                                <label class="option-card" data-types="Website bán hàng,Website blog / tin tức,Web quản lý nhỏ">
                                     <input type="checkbox" name="features" value="Đăng ký / đăng nhập" class="absolute opacity-0">
                                     <div class="border border-border-tone rounded-xl p-4 bg-white flex gap-3 h-full">
                                         <div class="mt-0.5 w-4 h-4 border border-border-tone rounded flex-shrink-0 flex items-center justify-center check-box"><i class="fa-solid fa-check text-[10px] text-white opacity-0"></i></div>
                                         <div><p class="font-bold text-lg">Đăng ký / Đăng nhập</p><p class="text-sm text-text-muted mt-1">Khách có tài khoản riêng.</p></div>
                                     </div>
                                 </label>
-                                <label class="option-card">
+                                <label class="option-card" data-types="Website bán hàng">
                                     <input type="checkbox" name="features" value="Bán hàng" class="absolute opacity-0">
                                     <div class="border border-border-tone rounded-xl p-4 bg-white flex gap-3 h-full">
                                         <div class="mt-0.5 w-4 h-4 border border-border-tone rounded flex-shrink-0 flex items-center justify-center check-box"><i class="fa-solid fa-check text-[10px] text-white opacity-0"></i></div>
                                         <div><p class="font-bold text-lg">Bán hàng</p><p class="text-sm text-text-muted mt-1">Sản phẩm, giỏ hàng, đặt hàng.</p></div>
                                     </div>
                                 </label>
-                                <label class="option-card">
+                                <label class="option-card" data-types="Website bán hàng,Website đặt lịch / đặt dịch vụ">
                                     <input type="checkbox" name="features" value="Thanh toán online" class="absolute opacity-0">
                                     <div class="border border-border-tone rounded-xl p-4 bg-white flex gap-3 h-full">
                                         <div class="mt-0.5 w-4 h-4 border border-border-tone rounded flex-shrink-0 flex items-center justify-center check-box"><i class="fa-solid fa-check text-[10px] text-white opacity-0"></i></div>
                                         <div><p class="font-bold text-lg">Thanh toán online</p><p class="text-sm text-text-muted mt-1">Khách tự thanh toán trên web.</p></div>
                                     </div>
                                 </label>
-                                <label class="option-card">
+                                <label class="option-card" data-types="Website giới thiệu,Website bán hàng,Website blog / tin tức,Web quản lý nhỏ">
                                     <input type="checkbox" name="features" value="Tìm kiếm" class="absolute opacity-0">
                                     <div class="border border-border-tone rounded-xl p-4 bg-white flex gap-3 h-full">
                                         <div class="mt-0.5 w-4 h-4 border border-border-tone rounded flex-shrink-0 flex items-center justify-center check-box"><i class="fa-solid fa-check text-[10px] text-white opacity-0"></i></div>
                                         <div><p class="font-bold text-lg">Tìm kiếm</p><p class="text-sm text-text-muted mt-1">Tìm sản phẩm hoặc nội dung.</p></div>
                                     </div>
                                 </label>
-                                <label class="option-card">
+                                <label class="option-card" data-types="Website cá nhân / Portfolio,Website blog / tin tức">
                                     <input type="checkbox" name="features" value="Blog / bài viết" class="absolute opacity-0">
                                     <div class="border border-border-tone rounded-xl p-4 bg-white flex gap-3 h-full">
                                         <div class="mt-0.5 w-4 h-4 border border-border-tone rounded flex-shrink-0 flex items-center justify-center check-box"><i class="fa-solid fa-check text-[10px] text-white opacity-0"></i></div>
                                         <div><p class="font-bold text-lg">Blog / bài viết</p><p class="text-sm text-text-muted mt-1">Đăng và quản lý bài viết.</p></div>
                                     </div>
                                 </label>
-                                <label class="option-card">
+                                <label class="option-card" data-types="Web quản lý nhỏ">
                                     <input type="checkbox" name="features" value="Trang quản lý" class="absolute opacity-0">
                                     <div class="border border-border-tone rounded-xl p-4 bg-white flex gap-3 h-full">
                                         <div class="mt-0.5 w-4 h-4 border border-border-tone rounded flex-shrink-0 flex items-center justify-center check-box"><i class="fa-solid fa-check text-[10px] text-white opacity-0"></i></div>
                                         <div><p class="font-bold text-lg">Trang quản lý (Admin)</p><p class="text-sm text-text-muted mt-1">Nơi riêng để bạn tự sửa dữ liệu.</p></div>
                                     </div>
                                 </label>
-                                <label class="option-card">
+                                <label class="option-card" data-types="Website giới thiệu,Website bán hàng">
                                     <input type="checkbox" name="features" value="Bản đồ" class="absolute opacity-0">
                                     <div class="border border-border-tone rounded-xl p-4 bg-white flex gap-3 h-full">
                                         <div class="mt-0.5 w-4 h-4 border border-border-tone rounded flex-shrink-0 flex items-center justify-center check-box"><i class="fa-solid fa-check text-[10px] text-white opacity-0"></i></div>
                                         <div><p class="font-bold text-lg">Bản đồ / Địa chỉ</p><p class="text-sm text-text-muted mt-1">Tích hợp Google Maps.</p></div>
                                     </div>
                                 </label>
-                                <label class="option-card">
+                                <label class="option-card" data-types="Website cá nhân / Portfolio,Website giới thiệu,Website blog / tin tức">
                                     <input type="checkbox" name="features" value="Thư viện ảnh" class="absolute opacity-0">
                                     <div class="border border-border-tone rounded-xl p-4 bg-white flex gap-3 h-full">
                                         <div class="mt-0.5 w-4 h-4 border border-border-tone rounded flex-shrink-0 flex items-center justify-center check-box"><i class="fa-solid fa-check text-[10px] text-white opacity-0"></i></div>
                                         <div><p class="font-bold text-lg">Thư viện ảnh / video</p><p class="text-sm text-text-muted mt-1">Show Gallery dự án đẹp mắt.</p></div>
                                     </div>
                                 </label>
-                                <label class="option-card">
+                                <label class="option-card" data-types="Website giới thiệu,Landing page,Website bán hàng,Website đặt lịch / đặt dịch vụ">
                                     <input type="checkbox" name="features" value="Chat" class="absolute opacity-0">
                                     <div class="border border-border-tone rounded-xl p-4 bg-white flex gap-3 h-full">
                                         <div class="mt-0.5 w-4 h-4 border border-border-tone rounded flex-shrink-0 flex items-center justify-center check-box"><i class="fa-solid fa-check text-[10px] text-white opacity-0"></i></div>
                                         <div><p class="font-bold text-lg">Chat hỗ trợ</p><p class="text-sm text-text-muted mt-1">Khung chat live với khách.</p></div>
                                     </div>
                                 </label>
-                                <label class="option-card">
+                                <label class="option-card" data-types="Website cá nhân / Portfolio,Website giới thiệu,Landing page,Website bán hàng,Website đặt lịch / đặt dịch vụ,Website blog / tin tức,Web quản lý nhỏ">
                                     <input type="checkbox" name="features" value="Khác" class="absolute opacity-0">
                                     <div class="border border-border-tone rounded-xl p-4 bg-white flex gap-3 h-full">
                                         <div class="mt-0.5 w-4 h-4 border border-border-tone rounded flex-shrink-0 flex items-center justify-center check-box"><i class="fa-solid fa-check text-[10px] text-white opacity-0"></i></div>
                                         <div><p class="font-bold text-lg">Khác</p></div>
                                     </div>
                                 </label>
-                                <label class="option-card lg:col-span-2">
+                                <label class="option-card lg:col-span-2" data-types="Website cá nhân / Portfolio,Website giới thiệu,Landing page,Website bán hàng,Website đặt lịch / đặt dịch vụ,Website blog / tin tức,Web quản lý nhỏ">
                                     <input type="checkbox" name="features" id="unsure-features" value="Tôi chưa biết" class="absolute opacity-0">
                                     <div class="border border-border-tone rounded-xl p-4 bg-surface flex gap-3 h-full">
                                         <div class="mt-0.5 w-4 h-4 border border-border-tone rounded flex-shrink-0 flex items-center justify-center check-box"><i class="fa-solid fa-check text-[10px] text-white opacity-0"></i></div>
@@ -503,7 +503,7 @@
                                 <label class="option-card"><input type="checkbox" name="materials" value="Hình ảnh" class="absolute opacity-0"><div class="border border-border-tone rounded-full px-5 py-2.5 bg-white font-bold text-lg flex items-center gap-2"><div class="w-3 h-3 border border-border-tone rounded-sm flex items-center justify-center check-box"><i class="fa-solid fa-check text-[8px] text-white opacity-0"></i></div> Hình ảnh</div></label>
                                 <label class="option-card"><input type="checkbox" name="materials" value="Nội dung / bài viết" class="absolute opacity-0"><div class="border border-border-tone rounded-full px-5 py-2.5 bg-white font-bold text-lg flex items-center gap-2"><div class="w-3 h-3 border border-border-tone rounded-sm flex items-center justify-center check-box"><i class="fa-solid fa-check text-[8px] text-white opacity-0"></i></div> Nội dung / Bài viết</div></label>
                                 <label class="option-card"><input type="checkbox" name="materials" value="Thông tin sản phẩm" class="absolute opacity-0"><div class="border border-border-tone rounded-full px-5 py-2.5 bg-white font-bold text-lg flex items-center gap-2"><div class="w-3 h-3 border border-border-tone rounded-sm flex items-center justify-center check-box"><i class="fa-solid fa-check text-[8px] text-white opacity-0"></i></div> Thông tin sản phẩm</div></label>
-                                <label class="option-card"><input type="checkbox" name="materials" value="Thông tin liên hệ" class="absolute opacity-0"><div class="border border-border-tone rounded-full px-5 py-2.5 bg-white font-bold text-lg flex items-center gap-2"><div class="w-3 h-3 border border-border-tone rounded-sm flex items-center justify-center check-box"><i class="fa-solid fa-check text-[8px] text-white opacity-0"></i></div> Thông tin liên hệ</div></label>
+                                <label class="option-card"><input type="checkbox" name="materials" value="Địa chỉ / SĐT cửa hàng" class="absolute opacity-0"><div class="border border-border-tone rounded-full px-5 py-2.5 bg-white font-bold text-lg flex items-center gap-2"><div class="w-3 h-3 border border-border-tone rounded-sm flex items-center justify-center check-box"><i class="fa-solid fa-check text-[8px] text-white opacity-0"></i></div> Địa chỉ / SĐT cửa hàng</div></label>
                                 <label class="option-card"><input type="checkbox" name="materials" value="Màu sắc thương hiệu" class="absolute opacity-0"><div class="border border-border-tone rounded-full px-5 py-2.5 bg-white font-bold text-lg flex items-center gap-2"><div class="w-3 h-3 border border-border-tone rounded-sm flex items-center justify-center check-box"><i class="fa-solid fa-check text-[8px] text-white opacity-0"></i></div> Màu sắc thương hiệu</div></label>
                                 <label class="option-card"><input type="checkbox" name="materials" value="Website cũ" class="absolute opacity-0"><div class="border border-border-tone rounded-full px-5 py-2.5 bg-white font-bold text-lg flex items-center gap-2"><div class="w-3 h-3 border border-border-tone rounded-sm flex items-center justify-center check-box"><i class="fa-solid fa-check text-[8px] text-white opacity-0"></i></div> Website cũ</div></label>
                                 <label class="option-card"><input type="checkbox" name="materials" value="Chưa chuẩn bị gì" class="absolute opacity-0" id="unsure-materials"><div class="border border-border-tone rounded-full px-5 py-2.5 bg-surface font-bold text-lg flex items-center gap-2"><div class="w-3 h-3 border border-border-tone rounded-sm flex items-center justify-center check-box"><i class="fa-solid fa-check text-[8px] text-white opacity-0"></i></div> Chưa chuẩn bị gì</div></label>
@@ -732,6 +732,7 @@
             "Ngân sách & Thời gian"
         ];
 
+        
         // Conditional Logic Listeners
         document.querySelectorAll('input[name="type"]').forEach(radio => {
             radio.addEventListener('change', (e) => {
@@ -749,6 +750,30 @@
                     document.getElementById('sub-portfolio').classList.remove('hidden');
                 } else {
                     document.getElementById('sub-questions').classList.add('hidden');
+                }
+
+                // FEATURE FILTERING LOGIC
+                const featuresGrid = document.getElementById('features-grid');
+                if (!featuresGrid) return;
+
+                if (val === 'Tôi chưa chắc, cần tư vấn' || val === 'Khác') {
+                    // Hide checkboxes, uncheck everything
+                    featuresGrid.classList.add('hidden');
+                    document.querySelectorAll('input[name="features"]').forEach(cb => cb.checked = false);
+                } else {
+                    featuresGrid.classList.remove('hidden');
+                    // Show only features relevant to the selected type
+                    document.querySelectorAll('label[data-types]').forEach(label => {
+                        const typesAttr = label.getAttribute('data-types');
+                        if (typesAttr && typesAttr.includes(val)) {
+                            label.classList.remove('hidden');
+                        } else {
+                            label.classList.add('hidden');
+                            // uncheck if hidden
+                            const cb = label.querySelector('input');
+                            if (cb) cb.checked = false;
+                        }
+                    });
                 }
             });
         });
