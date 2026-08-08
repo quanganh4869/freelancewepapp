@@ -419,11 +419,11 @@
                 <div>
                     <span class="text-sm uppercase tracking-[0.4em] font-bold text-brand block mb-4">Liên hệ</span>
                     <h2 class="font-sans font-bold text-5xl tracking-tighter mb-4">Bắt đầu dự án.</h2>
-                    <p class="text-lg text-text-muted">Gửi yêu cầu thiết kế và tôi sẽ phản hồi lại ngay.</p>
+                    <p class="text-lg text-text-muted mb-6">Đừng lo nếu bạn không rành về kỹ thuật. Hãy trả lời các câu hỏi dưới đây theo cách hiểu của bạn, Quang Anh sẽ tư vấn và lo phần còn lại!</p>
                 </div>
                 
                 <form id="contactForm" class="space-y-8">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <div class="space-y-3">
                             <label class="text-sm uppercase tracking-widest font-bold text-text-muted">Họ và tên *</label>
                             <input type="text" name="name" required placeholder="Tên của bạn để tiện xưng hô..." class="w-full text-lg bg-surface border border-border-tone rounded-xl px-5 py-4 focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all">
@@ -434,18 +434,41 @@
                         </div>
                         <div class="space-y-3">
                             <label class="text-sm uppercase tracking-widest font-bold text-text-muted">Số điện thoại / Zalo</label>
-                            <input type="tel" name="phone" placeholder="Để tôi gọi hoặc nhắn Zalo tư vấn nhanh hơn..." class="w-full text-lg bg-surface border border-border-tone rounded-xl px-5 py-4 focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all">
+                            <input type="tel" name="phone" placeholder="Để gọi hoặc nhắn Zalo nhanh hơn..." class="w-full text-lg bg-surface border border-border-tone rounded-xl px-5 py-4 focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all">
                         </div>
-                        <div class="space-y-3">
-                            <label class="text-sm uppercase tracking-widest font-bold text-text-muted">Ngân sách dự kiến *</label>
-                            <select name="budget" required class="w-full text-lg bg-surface border border-border-tone rounded-xl px-5 py-4 focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all appearance-none cursor-pointer">
-                                <option value="" disabled selected>Chọn khoản tiền bạn dự định đầu tư...</option>
-                                <option>Dưới 2 triệu (Mức cơ bản)</option>
-                                <option>Từ 2 triệu - 5 triệu (Phổ biến nhất)</option>
-                                <option>Từ 5 triệu - 10 triệu (Web chuyên nghiệp)</option>
-                                <option>Trên 10 triệu (Hệ thống phức tạp)</option>
-                                <option>Tôi chưa rõ, cần bạn tư vấn định giá</option>
-                            </select>
+                    </div>
+                    
+                    <div class="space-y-4 pt-4">
+                        <label class="text-sm uppercase tracking-widest font-bold text-text-muted">Ngân sách dự kiến của bạn? *</label>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <label class="flex items-start gap-4 p-5 border border-border-tone rounded-xl cursor-pointer hover:border-brand transition-colors bg-surface">
+                                <input type="radio" name="budget" value="Dưới 2 triệu" required class="mt-1 text-brand focus:ring-brand w-5 h-5 shrink-0">
+                                <div>
+                                    <span class="text-base font-bold text-ink block mb-1">Dưới 2 triệu (Mức cơ bản)</span>
+                                    <span class="text-sm text-text-muted leading-relaxed block">Phù hợp làm trang web thông tin đơn giản, dựa trên các giao diện có sẵn.</span>
+                                </div>
+                            </label>
+                            <label class="flex items-start gap-4 p-5 border border-border-tone rounded-xl cursor-pointer hover:border-brand transition-colors bg-surface">
+                                <input type="radio" name="budget" value="2 triệu - 5 triệu" class="mt-1 text-brand focus:ring-brand w-5 h-5 shrink-0">
+                                <div>
+                                    <span class="text-base font-bold text-ink block mb-1">Từ 2 triệu - 5 triệu (Phổ biến)</span>
+                                    <span class="text-sm text-text-muted leading-relaxed block">Giao diện thiết kế riêng độc đáo, tốc độ mượt mà, đầy đủ tính năng tiêu chuẩn.</span>
+                                </div>
+                            </label>
+                            <label class="flex items-start gap-4 p-5 border border-border-tone rounded-xl cursor-pointer hover:border-brand transition-colors bg-surface">
+                                <input type="radio" name="budget" value="5 triệu - 10 triệu" class="mt-1 text-brand focus:ring-brand w-5 h-5 shrink-0">
+                                <div>
+                                    <span class="text-base font-bold text-ink block mb-1">Từ 5 triệu - 10 triệu (Cao cấp)</span>
+                                    <span class="text-sm text-text-muted leading-relaxed block">Website chuyên nghiệp cao, có trang quản trị riêng phức tạp, bảo mật cực tốt.</span>
+                                </div>
+                            </label>
+                            <label class="flex items-start gap-4 p-5 border border-border-tone rounded-xl cursor-pointer hover:border-brand transition-colors bg-surface">
+                                <input type="radio" name="budget" value="Chưa rõ" class="mt-1 text-brand focus:ring-brand w-5 h-5 shrink-0">
+                                <div>
+                                    <span class="text-base font-bold text-ink block mb-1">Tôi chưa rõ, cần tư vấn</span>
+                                    <span class="text-sm text-text-muted leading-relaxed block">Cứ kể cho tôi nghe ý tưởng của bạn, tôi sẽ giúp bạn định mức giá chính xác.</span>
+                                </div>
+                            </label>
                         </div>
                     </div>
                     
@@ -478,6 +501,60 @@
                                 <div>
                                     <span class="text-base font-bold text-ink block mb-1">Hệ thống Đặt lịch / Phần mềm web</span>
                                     <span class="text-sm text-text-muted leading-relaxed block">Các tính năng đặc biệt như cho khách đặt lịch hẹn, quản lý kho, hoặc app nội bộ.</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 pt-4">
+                        <label class="text-sm uppercase tracking-widest font-bold text-text-muted">Bạn thích phong cách thiết kế nào?</label>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <label class="flex items-start gap-4 p-5 border border-border-tone rounded-xl cursor-pointer hover:border-brand transition-colors bg-surface">
+                                <input type="radio" name="style" value="Tối giản, Hiện đại" class="mt-1 text-brand focus:ring-brand w-5 h-5 shrink-0">
+                                <div>
+                                    <span class="text-base font-bold text-ink block mb-1">Tối giản, Hiện đại</span>
+                                    <span class="text-sm text-text-muted leading-relaxed block">Gọn gàng, khoảng trắng nhiều, ít màu mè (giống Apple).</span>
+                                </div>
+                            </label>
+                            <label class="flex items-start gap-4 p-5 border border-border-tone rounded-xl cursor-pointer hover:border-brand transition-colors bg-surface">
+                                <input type="radio" name="style" value="Sang trọng, Cao cấp" class="mt-1 text-brand focus:ring-brand w-5 h-5 shrink-0">
+                                <div>
+                                    <span class="text-base font-bold text-ink block mb-1">Sang trọng, Cao cấp</span>
+                                    <span class="text-sm text-text-muted leading-relaxed block">Màu tối, thanh lịch, phù hợp cho Spa, Trang sức, Nhà hàng.</span>
+                                </div>
+                            </label>
+                            <label class="flex items-start gap-4 p-5 border border-border-tone rounded-xl cursor-pointer hover:border-brand transition-colors bg-surface">
+                                <input type="radio" name="style" value="Năng động, Bắt mắt" class="mt-1 text-brand focus:ring-brand w-5 h-5 shrink-0">
+                                <div>
+                                    <span class="text-base font-bold text-ink block mb-1">Năng động, Bắt mắt</span>
+                                    <span class="text-sm text-text-muted leading-relaxed block">Nhiều hiệu ứng chuyển động, màu sắc tươi sáng, trẻ trung.</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 pt-4">
+                        <label class="text-sm uppercase tracking-widest font-bold text-text-muted">Bạn cần hoàn thành trong bao lâu?</label>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <label class="flex items-start gap-4 p-5 border border-border-tone rounded-xl cursor-pointer hover:border-brand transition-colors bg-surface">
+                                <input type="radio" name="timeline" value="Thong thả" class="mt-1 text-brand focus:ring-brand w-5 h-5 shrink-0">
+                                <div>
+                                    <span class="text-base font-bold text-ink block mb-1">Không vội (3-4 tuần)</span>
+                                    <span class="text-sm text-text-muted leading-relaxed block">Cứ làm thong thả, tôi muốn chăm chút web thật tỉ mỉ.</span>
+                                </div>
+                            </label>
+                            <label class="flex items-start gap-4 p-5 border border-border-tone rounded-xl cursor-pointer hover:border-brand transition-colors bg-surface">
+                                <input type="radio" name="timeline" value="Bình thường" class="mt-1 text-brand focus:ring-brand w-5 h-5 shrink-0">
+                                <div>
+                                    <span class="text-base font-bold text-ink block mb-1">Bình thường (2-3 tuần)</span>
+                                    <span class="text-sm text-text-muted leading-relaxed block">Tốc độ làm việc tiêu chuẩn, đủ để hoàn thiện mọi thứ.</span>
+                                </div>
+                            </label>
+                            <label class="flex items-start gap-4 p-5 border border-border-tone rounded-xl cursor-pointer hover:border-brand transition-colors bg-surface">
+                                <input type="radio" name="timeline" value="Rất gấp" class="mt-1 text-brand focus:ring-brand w-5 h-5 shrink-0">
+                                <div>
+                                    <span class="text-base font-bold text-ink block mb-1">Rất gấp (1-2 tuần)</span>
+                                    <span class="text-sm text-text-muted leading-relaxed block">Cần làm xong càng sớm càng tốt để tôi kịp đưa vào sử dụng.</span>
                                 </div>
                             </label>
                         </div>
@@ -595,6 +672,8 @@
                     phone: formData.get('phone'),
                     budget: formData.get('budget'),
                     type: formData.get('type'),
+                    style: formData.get('style'),
+                    timeline: formData.get('timeline'),
                     services: formData.getAll('services'),
                     message: formData.get('message'),
                     files: []

@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { name, email, phone, budget, type, services, files, message } = req.body;
+    const { name, email, phone, budget, type, style, timeline, services, files, message } = req.body;
 
     if (!name || !email) {
       return res.status(400).json({ error: 'Name and email are required' });
@@ -29,17 +29,26 @@ export default async function handler(req, res) {
       replyTo: email,
       subject: `[Yêu cầu dự án] Từ ${name}`,
       html: `
-        <h2>Yêu cầu dự án mới từ form Liên hệ</h2>
-        <p><strong>Họ và tên:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Số điện thoại:</strong> ${phone || 'Không có'}</p>
-        <p><strong>Ngân sách dự kiến:</strong> ${budget || 'Không chỉ định'}</p>
-        <p><strong>Loại website:</strong> ${type || 'Không chỉ định'}</p>
-        <p><strong>Dịch vụ bổ sung:</strong> ${servicesList}</p>
-        <p><strong>Chi tiết ý tưởng:</strong></p>
-        <blockquote style="border-left: 4px solid #ccc; padding-left: 10px;">
-          ${message ? message.replace(/\n/g, '<br>') : ''}
-        </blockquote>
+        <div style="font-family: sans-serif; line-height: 1.6; color: #333; max-width: 600px;">
+            <h2 style="color: #111; border-bottom: 2px solid #eee; padding-bottom: 10px;">Yêu cầu dự án mới từ form Liên hệ</h2>
+            
+            <h3 style="color: #666; margin-top: 20px;">Thông tin khách hàng:</h3>
+            <p style="margin: 5px 0;"><strong>Họ và tên:</strong> ${name}</p>
+            <p style="margin: 5px 0;"><strong>Email:</strong> ${email}</p>
+            <p style="margin: 5px 0;"><strong>Số điện thoại / Zalo:</strong> ${phone || 'Không có'}</p>
+            
+            <h3 style="color: #666; margin-top: 20px;">Yêu cầu thiết kế chi tiết:</h3>
+            <p style="margin: 5px 0;"><strong>Ngân sách dự kiến:</strong> ${budget || 'Không chỉ định'}</p>
+            <p style="margin: 5px 0;"><strong>Loại website:</strong> ${type || 'Không chỉ định'}</p>
+            <p style="margin: 5px 0;"><strong>Phong cách thiết kế:</strong> ${style || 'Không chỉ định'}</p>
+            <p style="margin: 5px 0;"><strong>Tiến độ hoàn thành:</strong> ${timeline || 'Không chỉ định'}</p>
+            <p style="margin: 5px 0;"><strong>Dịch vụ hỗ trợ thêm:</strong> ${servicesList}</p>
+            
+            <h3 style="color: #666; margin-top: 20px;">Thông điệp từ khách hàng:</h3>
+            <blockquote style="border-left: 4px solid #000; padding-left: 15px; margin-left: 0; background: #f9f9f9; padding: 15px; font-style: italic;">
+            ${message ? message.replace(/\n/g, '<br>') : 'Không có lời nhắn'}
+            </blockquote>
+        </div>
       `,
       attachments: attachments
     });
