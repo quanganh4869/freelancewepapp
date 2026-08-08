@@ -53,3 +53,5 @@ Thumbs.db
 # Antigravity/Agentation System Files
 .gemini/
 impeccable/
+.vercel
+.env*

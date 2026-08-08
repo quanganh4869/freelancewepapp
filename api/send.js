@@ -35,7 +35,7 @@ export default async function handler(req, res) {
     // Send email
     const { data, error } = await resend.emails.send({
       from: 'Quang Anh Studio <onboarding@resend.dev>', // keep this until domain is verified
-      to: ['quanganhqb04@gmail.com'],
+      to: ['anhnq.22itb@vku.udn.vn'],
       replyTo: email,
       subject: `🔥 [DỰ ÁN MỚI] Yêu cầu từ ${name}`,
       html: `
