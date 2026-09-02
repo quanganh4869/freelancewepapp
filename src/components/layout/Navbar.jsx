@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
-import { Menu, X, Shield, LogOut, Sun, Moon, Calculator } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
+import { Menu, X, Shield, LogOut, Sun, Moon, Calculator, Globe } from 'lucide-react';
 
 export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate, currentView = 'home' }) => {
   const { activeRole, logout } = useAuth();
+  const { language, toggleLanguage, t } = useLanguage();
   const { isDark, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -74,10 +76,22 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate, curren
               <span>Đặt làm website</span>
             </button>
 
+            {/* Language Switcher */}
+            <button
+              onClick={toggleLanguage}
+              className="p-1.5 flex items-center justify-center rounded-lg border border-brand-border bg-brand-paper text-brand-primary dark:text-white hover:border-brand-primary hover:bg-brand-primary/5 transition-all duration-300 active:scale-90"
+              title="Change Language"
+            >
+              <div className="flex items-center gap-1 font-bold text-[10px]">
+                <Globe size={13} className="animate-pulse-slow" />
+                <span>{language === 'vi' ? 'VN' : 'EN'}</span>
+              </div>
+            </button>
+
             {/* Dark/Light Switcher */}
             <button
               onClick={toggleTheme}
-              className="p-1.5 rounded-lg border border-brand-border bg-brand-paper text-brand-primary dark:text-white hover:border-brand-muted transition-colors"
+              className="p-1.5 flex items-center justify-center rounded-lg border border-brand-border bg-brand-paper text-brand-primary dark:text-white hover:border-amber-500 hover:text-amber-500 hover:bg-amber-500/10 transition-all duration-300 active:rotate-180"
               title="Toggle Theme Mode"
             >
               {isDark ? <Sun size={14} /> : <Moon size={14} />}
@@ -87,10 +101,10 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate, curren
             {activeRole === 'GUEST' ? (
               <button
                 onClick={onOpenAuthModal}
-                className="text-[11px] font-medium text-brand-muted hover:text-brand-primary dark:hover:text-white px-2 py-1"
-                title="Quản Trị Admin"
+                className="text-[11px] font-bold text-brand-muted hover:text-brand-primary dark:hover:text-white px-3 py-1.5 rounded-full border border-transparent hover:border-brand-border bg-transparent hover:bg-brand-paper transition-all"
+                title="Đăng Nhập"
               >
-                <span>Admin</span>
+                <span>Đăng nhập</span>
               </button>
             ) : (
               <div className="flex items-center gap-2">
@@ -125,8 +139,18 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate, curren
             </button>
 
             <button
+              onClick={toggleLanguage}
+              className="p-1.5 flex items-center justify-center rounded-lg border border-brand-border bg-brand-paper text-brand-primary dark:text-white hover:border-brand-primary hover:bg-brand-primary/5 transition-all duration-300 active:scale-90"
+            >
+              <div className="flex items-center gap-1 font-bold text-[11px]">
+                <Globe size={14} />
+                <span>{language === 'vi' ? 'VN' : 'EN'}</span>
+              </div>
+            </button>
+
+            <button
               onClick={toggleTheme}
-              className="p-1.5 rounded-lg border border-brand-border bg-brand-paper text-brand-primary dark:text-white"
+              className="p-1.5 flex items-center justify-center rounded-lg border border-brand-border bg-brand-paper text-brand-primary dark:text-white hover:border-amber-500 hover:text-amber-500 hover:bg-amber-500/10 transition-all duration-300 active:rotate-180"
             >
               {isDark ? <Sun size={15} /> : <Moon size={15} />}
             </button>
@@ -180,7 +204,7 @@ export const Navbar = ({ onOpenRequestModal, onOpenAuthModal, onNavigate, curren
                 }}
                 className="text-xs text-brand-muted"
               >
-                Admin Login
+                Đăng nhập
               </button>
             </div>
           )}
