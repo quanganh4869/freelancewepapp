@@ -4,7 +4,7 @@ import { INITIAL_USERS } from '../../data/seedData';
 import { formatStatusBadge, formatDate } from '../../utils/formatters';
 import { AdminRequestDetailModal } from './AdminRequestDetailModal';
 import { DeleteConfirmModal } from './DeleteConfirmModal';
-import { Search, Filter, Shield, Eye, Trash2, CheckCircle2, Clock, AlertCircle, RefreshCw, ChevronDown, Users, FileText, UserCheck } from 'lucide-react';
+import { Search, Filter, Shield, Eye, Trash2, CheckCircle2, Clock, AlertCircle, RefreshCw, ChevronDown, Users, FileText, UserCheck, BookOpen } from 'lucide-react';
 
 export const AdminDashboard = () => {
   const { requests, updateStatus, deleteRequest } = useRequests();
@@ -104,6 +104,19 @@ export const AdminDashboard = () => {
               <Users size={14} />
               <span>Users ({INITIAL_USERS.length})</span>
             </button>
+
+            <button
+              onClick={() => setActiveTab('stories')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
+                activeTab === 'stories'
+                  ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30 shadow-sm'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <BookOpen size={14} />
+              <span>Stories Studio</span>
+            </button>
+
           </div>
         </div>
 
@@ -274,6 +287,20 @@ export const AdminDashboard = () => {
               )}
             </div>
           </>
+        
+        ) : activeTab === 'stories' ? (
+          <div className="rounded-2xl bg-studio-900 border border-slate-800 p-8 text-center space-y-4 shadow-xl">
+            <BookOpen size={48} className="mx-auto text-amber-500/50" />
+            <h2 className="text-xl font-bold text-white">Animation Story Studio</h2>
+            <p className="text-slate-400 text-sm max-w-md mx-auto">Tạo và quản lý các trang truyện tranh tương tác với hiệu ứng chuyển động, âm thanh.</p>
+            <button
+              onClick={() => window.location.href = '/admin/stories/new/chapters/1/editor'}
+              className="mt-4 px-6 py-3 rounded-xl bg-brand-primary text-white font-bold shadow-glow-primary hover:bg-brand-hover transition-all"
+            >
+              Tạo Story Mới
+            </button>
+          </div>
+
         ) : (
           /* Users Tab */
           <div className="rounded-2xl bg-studio-900 border border-slate-800 overflow-hidden shadow-xl font-medium">

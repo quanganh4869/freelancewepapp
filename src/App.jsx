@@ -28,12 +28,17 @@ import { ProjectRequestModal } from './components/request/ProjectRequestModal';
 import { AuthModal } from './components/auth/AuthModal';
 import { ClientDashboard } from './components/client/ClientDashboard';
 import { AdminDashboard } from './components/admin/AdminDashboard';
+import { AnimationStoryStudio } from './components/admin/story-studio/AnimationStoryStudio';
+
 
 const MainAppContent = () => {
   const { activeRole, currentUser } = useAuth();
   const { isDark } = useTheme();
 
-  const [activeView, setActiveView] = useState('home'); // 'home' | 'estimator' | 'admin-dashboard'
+  const [activeView, setActiveView] = useState(() => {
+    if (window.location.pathname.startsWith('/admin/stories/')) return 'story-studio';
+    return 'home';
+  }); // 'home' | 'estimator' | 'admin-dashboard'
   const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [initialServiceForForm, setInitialServiceForForm] = useState('');
@@ -64,6 +69,7 @@ const MainAppContent = () => {
     }`}>
       
       {/* Main Navbar */}
+      {activeView !== "story-studio" && (
       <Navbar
         currentView={activeView}
         onOpenRequestModal={() => handleOpenRequestModal()}
@@ -95,7 +101,14 @@ const MainAppContent = () => {
           )
         ) : activeRole === 'USER' ? (
           <ClientDashboard onOpenRequestModal={() => handleOpenRequestModal()} />
+        
+        ) : activeView === 'story-studio' ? (
+          <AnimationStoryStudio 
+            storyId={window.location.pathname.split('/')[3] || 'new'} 
+            chapterId={window.location.pathname.split('/')[5] || 'new'} 
+          />
         ) : activeView === 'estimator' ? (
+
           /* Standalone Estimator Page */
           <EstimatorPage
             onOpenRequestModal={(scope) => handleOpenRequestModal(scope)}
@@ -117,7 +130,7 @@ const MainAppContent = () => {
       </main>
 
       {/* Main Footer */}
-      {!isAuthorizedAdmin && (
+      {!isAuthorizedAdmin && activeView !== 'story-studio' && (
         <Footer onOpenRequestModal={() => handleOpenRequestModal()} />
       )}
 
