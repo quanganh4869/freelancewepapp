@@ -44,9 +44,6 @@ export const SiteHeader = () => {
             <span className="font-disp font-bold text-[16px] sm:text-[17px] tracking-tight leading-none text-[#f3f2fb]">
               Quang Anh Studio
             </span>
-            <span className="text-[10px] font-mono text-[#a7a6c4] tracking-wider uppercase mt-1">
-              Personal Web Developer
-            </span>
           </div>
         </Link>
 

@@ -10,7 +10,6 @@ export const SelectedWorkSection = () => {
         {/* Section Head (BYLDR Style) */}
         <div className="sec-head">
           <div>
-            <span className="idx">{'{ 01 } — Selected work'}</span>
             <h2>
               Things I've <span className="grad">built</span>
             </h2>

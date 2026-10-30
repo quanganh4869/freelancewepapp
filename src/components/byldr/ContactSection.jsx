@@ -58,9 +58,6 @@ export const ContactSection = () => {
           {/* Left Column (5 Cols): Pitch, 3D Character & Direct Contacts */}
           <div className="lg:col-span-5 space-y-6">
             <div className="space-y-4">
-              <span className="text-[12px] font-mono text-[#a7a6c4] uppercase tracking-widest block">
-                {'{ 06 } — Contact'}
-              </span>
               <h2 className="font-disp text-[40px] sm:text-[54px] lg:text-[62px] font-bold text-[#f3f2fb] leading-[0.98] tracking-tight">
                 Let's <span className="grad">build</span>
               </h2>

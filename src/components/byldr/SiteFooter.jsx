@@ -96,15 +96,6 @@ export const SiteFooter = () => {
                     <span className="text-[11px] font-bold">↗</span>
                   </a>
                 </li>
-                <li>
-                  <Link
-                    to="/start-project"
-                    className="text-[#00e7ff] font-semibold hover:underline inline-flex items-center gap-1"
-                  >
-                    <span>Yêu cầu dự án</span>
-                    <span className="text-[11px] font-bold">↗</span>
-                  </Link>
-                </li>
               </ul>
             </div>
 
@@ -117,16 +108,6 @@ export const SiteFooter = () => {
           <div>
             © {new Date().getFullYear()} Nguyễn Quang Anh · Quang Anh Studio. Built with clean code &amp; craft.
           </div>
-
-          <button
-            onClick={scrollToTop}
-            type="button"
-            className="hover:text-[#f3f2fb] inline-flex items-center gap-1.5 transition-colors focus:outline-none"
-            aria-label="Cuộn lên đầu trang"
-          >
-            <span>Lên đầu trang</span>
-            <ArrowUp size={13} />
-          </button>
         </div>
 
       </div>

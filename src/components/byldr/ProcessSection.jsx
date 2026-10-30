@@ -39,14 +39,10 @@ export const ProcessSection = () => {
         {/* Section Head */}
         <div className="sec-head">
           <div>
-            <span className="idx">{'{ 04 } — How it runs'}</span>
             <h2>
               Brief to <span className="grad">live</span>
             </h2>
           </div>
-          <p>
-            Bốn bước minh bạch, không tầng trung gian cồng kềnh. Bạn làm việc trực tiếp với người thiết kế, viết code và triển khai.
-          </p>
         </div>
 
         {/* 4-Step Process Grid */}

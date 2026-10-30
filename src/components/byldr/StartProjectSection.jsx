@@ -10,14 +10,10 @@ export const StartProjectSection = () => {
         {/* Section Head */}
         <div className="sec-head">
           <div>
-            <span className="idx">{'{ 05 } — Start your project'}</span>
             <h2>
               Let's build <span className="grad">yours</span>
             </h2>
           </div>
-          <p>
-            Hai hướng tiếp cận rõ ràng. Bắt đầu từ trang trắng hoặc nâng cấp website bạn đang có — chọn làn đường phù hợp để nhận tư vấn chính xác nhất.
-          </p>
         </div>
 
         {/* 2 Lane Cards Grid */}

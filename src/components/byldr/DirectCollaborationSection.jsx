@@ -9,7 +9,6 @@ export const DirectCollaborationSection = () => {
         {/* Section Head */}
         <div className="sec-head">
           <div>
-            <span className="idx">{'{ 02 } — Direct collaboration'}</span>
             <h2>
               Làm việc trực tiếp với <span className="grad">người xây dựng</span>
             </h2>

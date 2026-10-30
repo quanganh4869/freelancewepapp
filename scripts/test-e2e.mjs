@@ -112,10 +112,7 @@ async function run() {
       const js = bundleRes.data;
       const checks = [
         { label: 'Studio Identity: Quang Anh Studio', pattern: 'Quang Anh Studio' },
-        { label: 'Role: Personal Web Developer', pattern: 'Personal Web Developer' },
-        { label: 'Experience: PICON TECHNOLOGY', pattern: 'PICON TECHNOLOGY' },
         { label: 'Education: Việt - Hàn (VKU)', pattern: 'Việt - Hàn' },
-        { label: 'Featured Project: Interview AI', pattern: 'Interview AI' },
         { label: 'Hero 3D Developer Image: /assets/hero-developer.png', pattern: '/assets/hero-developer.png' },
         { label: 'About 3D Developer Image: /assets/about-developer.png', pattern: '/assets/about-developer.png' },
         { label: 'Contact 3D Developer Image: /assets/contact-developer.png', pattern: '/assets/contact-developer.png' },

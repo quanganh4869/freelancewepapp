@@ -26,14 +26,10 @@ export const AboutProfileSection = () => {
         {/* Section Head (BYLDR Style) */}
         <div className="sec-head">
           <div>
-            <span className="idx">{'{ 01.5 } — Profile & Background'}</span>
             <h2>
               Về <span className="grad">Quang Anh</span>
             </h2>
           </div>
-          <p>
-            Software Engineer tốt nghiệp Đại học CNTT & Truyền thông Việt - Hàn (VKU), từng làm Backend Developer tại PICON Technology. Làm việc độc lập, trực tiếp 1-1 với khách hàng từ ý tưởng đến mã nguồn chạy thực tế.
-          </p>
         </div>
 
         {/* Profile Card & Bio Spread (Grid Layout) */}
@@ -53,15 +49,6 @@ export const AboutProfileSection = () => {
                   />
                 </div>
               </div>
-            </div>
-
-            {/* Status Badge PLACED OUTSIDE PHOTO */}
-            <div className="flex items-center justify-between p-3 rounded-xl bg-[#0a0b14] border border-[rgba(180,170,255,0.14)] text-[12px] font-mono">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#00e7ff] animate-ping" />
-                <span className="text-[#f3f2fb] font-semibold">Available for Projects</span>
-              </div>
-              <span className="text-[#a7a6c4] text-[11px]">Đà Nẵng, VN</span>
             </div>
 
             {/* Quick Contact & Verified Identity Box */}
@@ -90,11 +77,6 @@ export const AboutProfileSection = () => {
                 <a href={ABOUT_DATA.github} target="_blank" rel="noopener noreferrer" className="text-[#f3f2fb] hover:text-[#00e7ff] transition-colors truncate">
                   github.com/quanganh4869
                 </a>
-              </div>
-
-              <div className="pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-[#a7a6c4]">
-                <span>Ngoại ngữ:</span>
-                <span className="text-[#00e7ff] font-semibold">{ABOUT_DATA.skillsCategorized?.language || 'English (B1)'}</span>
               </div>
             </div>
 
@@ -144,91 +126,6 @@ export const AboutProfileSection = () => {
 
             {/* Experience & Education Timeline */}
             <div className="space-y-5 pt-2">
-              <span className="text-[12px] font-mono uppercase tracking-widest text-[#00e7ff] block">
-                KINH NGHIỆM LÀM VIỆC &amp; HỌC VẤN (TỪ CV CHÍNH THỨC)
-              </span>
-
-              {/* 1. Work Experience: PICON Technology */}
-              <div className="p-6 rounded-2xl bg-[#0a0b14] border border-[rgba(180,170,255,0.14)] space-y-4">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-white/10 pb-3">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-[#2a6bff]/15 text-[#2a6bff] flex items-center justify-center">
-                      <Briefcase size={16} />
-                    </div>
-                    <div>
-                      <h4 className="font-disp font-bold text-[16px] text-[#f3f2fb]">
-                        PICON TECHNOLOGY CO., LTD.
-                      </h4>
-                      <span className="text-[12px] font-mono text-[#00e7ff]">
-                        Backend Developer
-                      </span>
-                    </div>
-                  </div>
-                  <span className="text-[12px] font-mono text-[#a7a6c4]">
-                    Năm 2026
-                  </span>
-                </div>
-
-                <p className="text-[14px] text-[#a7a6c4] leading-relaxed">
-                  Tham gia phát triển các ứng dụng web backend mở rộng, hiệu năng cao trong môi trường Agile/Scrum. Xây dựng RESTful API với Python &amp; FastAPI, tối ưu hóa truy vấn PostgreSQL ORM và thực thi bảo mật JWT &amp; Role-Based Access Control (RBAC).
-                </p>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[12px] font-mono text-[#f3f2fb]/90 pt-1">
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-[#00e7ff]">✦</span>
-                    <span>RESTful APIs with Python &amp; FastAPI</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-[#00e7ff]">✦</span>
-                    <span>PostgreSQL &amp; SQLAlchemy ORM</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-[#00e7ff]">✦</span>
-                    <span>JWT Auth &amp; Role-Based Access Control</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-[#00e7ff]">✦</span>
-                    <span>Git/GitHub &amp; Code Review</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* 2. Featured Project: Interview AI */}
-              <div className="p-6 rounded-2xl bg-[#0a0b14] border border-[rgba(180,170,255,0.14)] space-y-3">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-white/10 pb-3">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-[#ff00e7]/15 text-[#ff00e7] flex items-center justify-center">
-                      <Sparkles size={16} />
-                    </div>
-                    <div>
-                      <h4 className="font-disp font-bold text-[16px] text-[#f3f2fb]">
-                        Interview AI (Personal Project)
-                      </h4>
-                      <span className="text-[12px] font-mono text-[#ff00e7]">
-                        Full-Stack AI-Powered Mock Interview Platform
-                      </span>
-                    </div>
-                  </div>
-                  <a
-                    href="https://github.com/quanganh4869/InterviewAI"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[12px] font-mono text-[#00e7ff] hover:underline inline-flex items-center gap-1"
-                  >
-                    <span>GitHub</span>
-                    <ArrowRight size={12} />
-                  </a>
-                </div>
-
-                <p className="text-[14px] text-[#a7a6c4] leading-relaxed">
-                  Nền tảng phỏng vấn thử nghiệm bằng AI: Phân tích CV và JD bằng OCR &amp; semantic similarity, tự động sinh bộ câu hỏi cá nhân hóa, phỏng vấn thời gian thực bằng giọng nói (Whisper STT) và xuất báo cáo đánh giá tự động.
-                </p>
-
-                <div className="text-[11px] font-mono text-[#7c7ba0]">
-                  Tech stack: ReactJS, Vite, Tailwind, Framer Motion, FastAPI, SQLAlchemy, PostgreSQL, Gemini API, Whisper, Cloudflare R2, Docker.
-                </div>
-              </div>
-
               {/* 3. Education: Vietnam - Korea University VKU */}
               <div className="p-6 rounded-2xl bg-[#0a0b14] border border-[rgba(180,170,255,0.14)] space-y-2">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
@@ -245,9 +142,6 @@ export const AboutProfileSection = () => {
                       </span>
                     </div>
                   </div>
-                  <span className="text-[12px] font-mono text-[#27c93f] font-semibold">
-                    2022 – 2026 · Khá / Giỏi
-                  </span>
                 </div>
               </div>
 
@@ -262,22 +156,18 @@ export const AboutProfileSection = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-[13px] font-mono">
                 <div className="p-4 rounded-xl bg-white/[0.02] border border-white/10 space-y-1.5">
                   <span className="text-[#00e7ff] font-semibold block text-[11px] uppercase">Backend Development</span>
-                  <p className="text-[#f3f2fb]">Python (FastAPI), Java (Spring Boot), Kotlin, SQLAlchemy ORM, Alembic</p>
                 </div>
 
                 <div className="p-4 rounded-xl bg-white/[0.02] border border-white/10 space-y-1.5">
                   <span className="text-[#2a6bff] font-semibold block text-[11px] uppercase">Frontend &amp; UI/UX</span>
-                  <p className="text-[#f3f2fb]">ReactJS, TypeScript, Vite, Tailwind CSS, Framer Motion, Flutter</p>
                 </div>
 
                 <div className="p-4 rounded-xl bg-white/[0.02] border border-white/10 space-y-1.5">
                   <span className="text-[#8b3bff] font-semibold block text-[11px] uppercase">Database &amp; Storage</span>
-                  <p className="text-[#f3f2fb]">PostgreSQL 16, MySQL, Supabase, Cloudflare R2, Redis</p>
                 </div>
 
                 <div className="p-4 rounded-xl bg-white/[0.02] border border-white/10 space-y-1.5">
                   <span className="text-[#ff00e7] font-semibold block text-[11px] uppercase">DevOps, Cloud &amp; AI</span>
-                  <p className="text-[#f3f2fb]">Docker, Git, Railway, Cloudflare, AWS, Gemini API, Whisper, OCR</p>
                 </div>
               </div>
             </div>

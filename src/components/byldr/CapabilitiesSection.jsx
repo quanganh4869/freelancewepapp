@@ -61,14 +61,10 @@ export const CapabilitiesSection = () => {
         {/* Section Head */}
         <div className="sec-head">
           <div>
-            <span className="idx">{'{ 03 } — Capabilities'}</span>
             <h2>
               My <span className="grad">toolkit</span>
             </h2>
           </div>
-          <p>
-            Một người, full-stack — thiết kế giao diện, xử lý nghiệp vụ backend, cấu trúc dữ liệu và tối ưu tốc độ triển khai.
-          </p>
         </div>
 
         {/* 4 Category Tabs & Interactive Preview Grid */}
