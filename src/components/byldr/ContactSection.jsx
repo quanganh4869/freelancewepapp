@@ -55,8 +55,8 @@ export const ContactSection = () => {
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
-          {/* Left Column (5 Cols): Pitch & Direct Contacts */}
-          <div className="lg:col-span-5 space-y-8">
+          {/* Left Column (5 Cols): Pitch, 3D Character & Direct Contacts */}
+          <div className="lg:col-span-5 space-y-6">
             <div className="space-y-4">
               <span className="text-[12px] font-mono text-[#a7a6c4] uppercase tracking-widest block">
                 {'{ 06 } — Contact'}
@@ -67,6 +67,21 @@ export const ContactSection = () => {
               <p className="text-[15px] sm:text-[16px] text-[#a7a6c4] leading-relaxed max-w-[440px]">
                 Chia sẻ sơ bộ về nhu cầu website của bạn. Tôi trực tiếp đọc mọi tin nhắn và phản hồi chu đáo — thường trong vòng 2–4 giờ làm việc.
               </p>
+            </div>
+
+            {/* 3D Developer Character Holding Laptop (Contact Point) */}
+            <div className="character-card py-2 flex items-center justify-start">
+              <div className="w-full max-w-[280px] sm:max-w-[320px]">
+                <img
+                  src="/assets/contact-developer.png"
+                  alt="Minh họa nhân vật 3D lập trình viên cầm laptop sẵn sàng hợp tác dự án"
+                  width={896}
+                  height={1200}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-auto object-contain select-none pointer-events-none drop-shadow-[0_20px_35px_rgba(0,0,0,0.65)]"
+                />
+              </div>
             </div>
 
             {/* Direct Contact Cards */}

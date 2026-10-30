@@ -98,6 +98,21 @@ export const AboutProfileSection = () => {
               </div>
             </div>
 
+            {/* 3D Developer Coding Illustration (Integrated in Profile Column) */}
+            <div className="character-card pt-2 flex flex-col items-center">
+              <div className="w-full max-w-[340px] sm:max-w-[380px]">
+                <img
+                  src="/assets/about-developer.png"
+                  alt="Minh họa nhân vật 3D lập trình viên đang phát triển phần mềm hiện đại"
+                  width={1200}
+                  height={896}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-auto object-contain select-none pointer-events-none drop-shadow-[0_20px_30px_rgba(0,0,0,0.6)]"
+                />
+              </div>
+            </div>
+
           </div>
 
           {/* Right Column (7 Cols): Detailed Narrative, Experience & Education */}

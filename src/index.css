@@ -352,3 +352,36 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ==========================================================================
+   3D Character Float & Glow Animation
+   ========================================================================== */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 5s ease-in-out infinite;
+}
+
+.character-card {
+  position: relative;
+  isolation: isolate;
+}
+
+.character-card::before {
+  content: '';
+  position: absolute;
+  inset: -15%;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 231, 255, 0.12), rgba(42, 107, 255, 0.06) 40%, transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: -1;
+  border-radius: 50%;
+}
+

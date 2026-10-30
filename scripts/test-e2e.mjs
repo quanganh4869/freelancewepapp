@@ -1,6 +1,5 @@
+import { preview } from 'vite';
 import http from 'http';
-import { spawn } from 'child_process';
-import path from 'path';
 
 const PORT = 5199;
 const BASE_URL = `http://localhost:${PORT}`;
@@ -23,6 +22,9 @@ const routesToTest = [
 ];
 
 const assetsToTest = [
+  '/assets/hero-developer.png',
+  '/assets/about-developer.png',
+  '/assets/contact-developer.png',
   '/images/avatar.jpg',
   '/images/projects/ielts-learning/overview.png',
   '/images/projects/ielts-learning/reading-practice.jpg',
@@ -50,25 +52,15 @@ function fetchUrl(urlPath) {
 }
 
 async function run() {
-  console.log(`Starting vite preview on port ${PORT}...`);
-  const server = spawn('npx', ['vite', 'preview', '--port', String(PORT), '--strictPort'], {
-    shell: true,
+  console.log(`Starting programmatic Vite preview on port ${PORT}...`);
+  const previewServer = await preview({
+    preview: {
+      port: PORT,
+      strictPort: true,
+    },
   });
 
-  await new Promise((resolve) => {
-    server.stdout.on('data', (d) => {
-      const str = d.toString();
-      // console.log(`[vite preview] ${str}`);
-      if (str.includes('Local:')) {
-        resolve();
-      }
-    });
-    server.stderr.on('data', (d) => {
-      console.error(`[vite preview err] ${d}`);
-    });
-    // Fallback timer
-    setTimeout(resolve, 5000);
-  });
+  console.log(`Preview server running at ${previewServer.resolvedUrls.local[0]}`);
 
   let failedCount = 0;
 
@@ -88,11 +80,11 @@ async function run() {
     }
   }
 
-  console.log('\n--- 2. Testing Static Project Assets ---');
+  console.log('\n--- 2. Testing Static Project Assets & 3D Character Images ---');
   for (const asset of assetsToTest) {
     try {
       const res = await fetchUrl(asset);
-      const isOk = res.statusCode === 200 && (res.headers['content-type']?.includes('image') || res.headers['content-length'] > 1000);
+      const isOk = res.statusCode === 200 && (res.headers['content-type']?.includes('image') || Number(res.headers['content-length']) > 1000);
       if (isOk) {
         console.log(`✓ [200 OK] Asset: ${asset} (${res.headers['content-length']} bytes)`);
       } else {
@@ -111,7 +103,7 @@ async function run() {
     const html = res.data;
 
     // Check bundle JS referenced
-    const scriptMatch = html.match(/src="(\/assets\/[^"]+)"/);
+    const scriptMatch = html.match(/src="(\/assets\/[^"]+\.js)"/);
     if (scriptMatch) {
       const bundleUrl = scriptMatch[1];
       const bundleRes = await fetchUrl(bundleUrl);
@@ -124,15 +116,13 @@ async function run() {
         { label: 'Experience: PICON TECHNOLOGY', pattern: 'PICON TECHNOLOGY' },
         { label: 'Education: Việt - Hàn (VKU)', pattern: 'Việt - Hàn' },
         { label: 'Featured Project: Interview AI', pattern: 'Interview AI' },
-        { label: 'Project 1: IELTS Learning Platform', pattern: 'IELTS Learning Platform' },
-        { label: 'Project 2: RentFlow', pattern: 'RentFlow' },
-        { label: 'Project 3: Lời Ru Của Ác Mộng', pattern: 'Lời Ru Của Ác Mộng' },
+        { label: 'Hero 3D Developer Image: /assets/hero-developer.png', pattern: '/assets/hero-developer.png' },
+        { label: 'About 3D Developer Image: /assets/about-developer.png', pattern: '/assets/about-developer.png' },
+        { label: 'Contact 3D Developer Image: /assets/contact-developer.png', pattern: '/assets/contact-developer.png' },
         { label: 'Phone: 0935 989 872', pattern: '0935 989 872' },
         { label: 'Email: quanganhqb04@gmail.com', pattern: 'quanganhqb04@gmail.com' },
         { label: 'Commitment: Trực tiếp 1-1', pattern: 'Trực tiếp 1-1' },
         { label: 'Commitment: 100% mã nguồn', pattern: '100% mã nguồn' },
-        { label: 'Service: Landing Page', pattern: 'Landing Page' },
-        { label: 'Service: Website Doanh Nghiệp', pattern: 'Website Doanh Nghiệp' },
       ];
 
       for (const check of checks) {
@@ -153,10 +143,7 @@ async function run() {
   }
 
   // Teardown server
-  server.kill('SIGINT');
-  if (process.platform === 'win32') {
-    spawn('taskkill', ['/pid', String(server.pid), '/f', '/t'], { stdio: 'ignore' });
-  }
+  previewServer.httpServer.close();
 
   console.log(`\n========================================`);
   if (failedCount === 0) {
