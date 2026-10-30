@@ -531,17 +531,23 @@ html.light .character-card::before {
 }
 
 html.light .hero-stats {
-  background: rgba(255, 255, 255, 0.85);
-  border-color: var(--line);
+  background: var(--line) !important;
+  border-color: var(--line) !important;
 }
 
 html.light .hero-stats .stat {
-  border-color: var(--line);
+  background: #ffffff !important;
+  border-color: var(--line) !important;
+}
+
+html.light .hero-stats .stat:hover {
+  background: #f1f5f9 !important;
 }
 
 html.light .hero-stats .lbl {
-  color: var(--muted);
+  color: var(--muted) !important;
 }
+
 
 
 
