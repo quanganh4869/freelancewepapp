@@ -20,7 +20,7 @@ export const StartProjectSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
           
           {/* Lane 1: Start From Scratch */}
-          <div className="group relative p-8 sm:p-10 rounded-2xl bg-[#0a0b14] border border-[rgba(180,170,255,0.18)] hover:border-[#00e7ff]/50 transition-all duration-300 flex flex-col justify-between space-y-8">
+          <div className="group relative p-8 sm:p-10 rounded-2xl bg-[#0a0b14] border border-[rgba(180,170,255,0.18)] hover:border-[#00e7ff]/50 transition-all duration-300 flex flex-col justify-between space-y-8 shadow-sm hover:shadow-xl">
             <div className="space-y-4">
               <div className="w-12 h-12 rounded-xl bg-[#00e7ff]/10 border border-[#00e7ff]/30 text-[#00e7ff] flex items-center justify-center">
                 <Sparkles size={22} />
@@ -38,7 +38,7 @@ export const StartProjectSection = () => {
                 Dành cho bạn khi chưa có website và muốn xây dựng một sản phẩm hoàn chỉnh: từ định hình cấu trúc, thiết kế giao diện chuẩn thương hiệu đến lập trình chức năng và xuất bản tên miền.
               </p>
 
-              <ul className="space-y-2 text-[13px] font-mono text-[#f3f2fb]/80 pt-2">
+              <ul className="space-y-2 text-[13px] font-mono text-[#f3f2fb] pt-2">
                 <li className="flex items-center gap-2">
                   <span className="text-[#00e7ff]">✦</span>
                   <span>Chưa có website hoặc mới khởi nghiệp</span>
@@ -66,7 +66,7 @@ export const StartProjectSection = () => {
           </div>
 
           {/* Lane 2: Upgrade Existing Site */}
-          <div className="group relative p-8 sm:p-10 rounded-2xl bg-[#0a0b14] border border-[rgba(180,170,255,0.18)] hover:border-[#ff00e7]/50 transition-all duration-300 flex flex-col justify-between space-y-8">
+          <div className="group relative p-8 sm:p-10 rounded-2xl bg-[#0a0b14] border border-[rgba(180,170,255,0.18)] hover:border-[#ff00e7]/50 transition-all duration-300 flex flex-col justify-between space-y-8 shadow-sm hover:shadow-xl">
             <div className="space-y-4">
               <div className="w-12 h-12 rounded-xl bg-[#ff00e7]/10 border border-[#ff00e7]/30 text-[#ff00e7] flex items-center justify-center">
                 <RefreshCw size={22} />
@@ -84,7 +84,7 @@ export const StartProjectSection = () => {
                 Dành cho bạn khi đã có website nhưng giao diện đã lỗi thời, tốc độ tải chậm, hiển thị kém trên điện thoại hoặc cần thêm các tính năng nghiệp vụ mới phục vụ kinh doanh.
               </p>
 
-              <ul className="space-y-2 text-[13px] font-mono text-[#f3f2fb]/80 pt-2">
+              <ul className="space-y-2 text-[13px] font-mono text-[#f3f2fb] pt-2">
                 <li className="flex items-center gap-2">
                   <span className="text-[#ff00e7]">✦</span>
                   <span>Tái thiết kế giao diện hiện đại & cao cấp</span>

@@ -444,7 +444,9 @@ html.light .bg-\[\#0c0e18\] {
   background-color: var(--bg-2) !important;
 }
 
-html.light .text-\[\#f3f2fb\] {
+html.light .text-\[\#f3f2fb\],
+html.light .text-\[\#f3f2fb\]\/80,
+html.light .text-\[\#f3f2fb\]\/90 {
   color: var(--text) !important;
 }
 
