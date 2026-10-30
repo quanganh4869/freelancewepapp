@@ -11,7 +11,7 @@ import { ContactSection } from '../components/byldr/ContactSection';
 
 export const HomePage = () => {
   return (
-    <div className="w-full font-sans bg-[#05060c] text-[#f3f2fb] animate-page-in overflow-hidden">
+    <div className="w-full font-sans bg-[var(--bg)] text-[var(--text)] animate-page-in overflow-hidden transition-colors duration-300">
       {/* 00. HERO — High-impact Typography, Positioning, Stats Band & Project Ticker */}
       <HeroSection />
 

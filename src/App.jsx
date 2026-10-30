@@ -75,7 +75,7 @@ function AdminRouteWrapper({ onOpenAuthModal }) {
 // Public Layout Container
 function PublicLayout({ children, isWide = false, fullWidth = false }) {
   return (
-    <div className="min-h-screen flex flex-col font-sans bg-[#05060c] text-[#f3f2fb] transition-colors duration-200">
+    <div className="min-h-screen flex flex-col font-sans bg-[var(--bg)] text-[var(--text)] transition-colors duration-200">
       <Navbar />
       <main
         className={`flex-grow w-full ${

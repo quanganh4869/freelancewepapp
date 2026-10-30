@@ -53,22 +53,22 @@ export const ContactSection = () => {
     <section className="contact py-20 sm:py-28 border-b border-[rgba(180,170,255,0.14)]" id="contact">
       <div className="max-w-[1320px] mx-auto px-5 sm:px-8">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           
-          {/* Left Column (5 Cols): Pitch, 3D Character & Direct Contacts */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="space-y-4">
-              <h2 className="font-disp text-[40px] sm:text-[54px] lg:text-[62px] font-bold text-[#f3f2fb] leading-[0.98] tracking-tight">
+          {/* Left Column (6 Cols): Pitch, 3D Character & Direct Contacts */}
+          <div className="lg:col-span-6 space-y-5">
+            <div className="space-y-3">
+              <h2 className="font-disp text-[36px] sm:text-[48px] lg:text-[54px] font-bold text-[#f3f2fb] leading-[1.02] tracking-tight">
                 Let's <span className="grad">build</span>
               </h2>
-              <p className="text-[15px] sm:text-[16px] text-[#a7a6c4] leading-relaxed max-w-[440px]">
+              <p className="text-[14px] sm:text-[15px] text-[#a7a6c4] leading-relaxed max-w-[460px]">
                 Chia sẻ sơ bộ về nhu cầu website của bạn. Tôi trực tiếp đọc mọi tin nhắn và phản hồi chu đáo — thường trong vòng 2–4 giờ làm việc.
               </p>
             </div>
 
             {/* 3D Developer Character Holding Laptop (Contact Point) */}
-            <div className="character-card py-2 flex items-center justify-start">
-              <div className="w-full max-w-[280px] sm:max-w-[320px]">
+            <div className="character-card py-1 flex items-center justify-start">
+              <div className="w-full max-w-[200px] sm:max-w-[240px]">
                 <img
                   src="/assets/contact-developer.png"
                   alt="Minh họa nhân vật 3D lập trình viên cầm laptop sẵn sàng hợp tác dự án"
@@ -76,23 +76,23 @@ export const ContactSection = () => {
                   height={1200}
                   loading="lazy"
                   decoding="async"
-                  className="w-full h-auto object-contain select-none pointer-events-none drop-shadow-[0_20px_35px_rgba(0,0,0,0.65)]"
+                  className="w-full h-auto object-contain select-none pointer-events-none drop-shadow-[0_15px_25px_rgba(0,0,0,0.65)]"
                 />
               </div>
             </div>
 
             {/* Direct Contact Cards */}
-            <div className="space-y-3 pt-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
               <a
                 href={`tel:${(ABOUT_DATA.contactDirect?.phone || ABOUT_DATA.phone || '0935 989 872').replace(/\s+/g, '')}`}
-                className="flex items-center gap-4 p-4 rounded-xl bg-[#0a0b14] border border-[rgba(180,170,255,0.14)] hover:border-[#00e7ff]/40 transition-colors"
+                className="flex items-center gap-3 p-3.5 rounded-xl bg-[#0a0b14] border border-[rgba(180,170,255,0.14)] hover:border-[#00e7ff]/40 transition-colors"
               >
-                <div className="w-10 h-10 rounded-lg bg-[#00e7ff]/10 text-[#00e7ff] flex items-center justify-center shrink-0">
-                  <Phone size={18} />
+                <div className="w-9 h-9 rounded-lg bg-[#00e7ff]/10 text-[#00e7ff] flex items-center justify-center shrink-0">
+                  <Phone size={16} />
                 </div>
-                <div>
-                  <span className="text-[11px] font-mono text-[#a7a6c4] uppercase block">Hotline / Zalo trực tiếp</span>
-                  <span className="font-mono font-bold text-[15px] text-[#f3f2fb]">
+                <div className="min-w-0">
+                  <span className="text-[10px] font-mono text-[#a7a6c4] uppercase block">Hotline / Zalo</span>
+                  <span className="font-mono font-bold text-[13px] text-[#f3f2fb] truncate block">
                     {ABOUT_DATA.contactDirect?.phone || ABOUT_DATA.phone || '0935 989 872'}
                   </span>
                 </div>
@@ -100,14 +100,14 @@ export const ContactSection = () => {
 
               <a
                 href={`mailto:${ABOUT_DATA.contactDirect?.email || ABOUT_DATA.email || 'quanganhqb04@gmail.com'}`}
-                className="flex items-center gap-4 p-4 rounded-xl bg-[#0a0b14] border border-[rgba(180,170,255,0.14)] hover:border-[#ff00e7]/40 transition-colors"
+                className="flex items-center gap-3 p-3.5 rounded-xl bg-[#0a0b14] border border-[rgba(180,170,255,0.14)] hover:border-[#ff00e7]/40 transition-colors"
               >
-                <div className="w-10 h-10 rounded-lg bg-[#ff00e7]/10 text-[#ff00e7] flex items-center justify-center shrink-0">
-                  <Mail size={18} />
+                <div className="w-9 h-9 rounded-lg bg-[#ff00e7]/10 text-[#ff00e7] flex items-center justify-center shrink-0">
+                  <Mail size={16} />
                 </div>
-                <div>
-                  <span className="text-[11px] font-mono text-[#a7a6c4] uppercase block">Email trao đổi</span>
-                  <span className="font-mono font-bold text-[15px] text-[#f3f2fb]">
+                <div className="min-w-0">
+                  <span className="text-[10px] font-mono text-[#a7a6c4] uppercase block">Email trao đổi</span>
+                  <span className="font-mono font-bold text-[13px] text-[#f3f2fb] truncate block">
                     {ABOUT_DATA.contactDirect?.email || ABOUT_DATA.email || 'quanganhqb04@gmail.com'}
                   </span>
                 </div>
@@ -115,10 +115,10 @@ export const ContactSection = () => {
             </div>
 
             {/* Link to Detailed Wizard */}
-            <div className="pt-2">
+            <div className="pt-1">
               <Link
                 to="/start-project"
-                className="inline-flex items-center gap-2 text-[14px] font-mono text-[#00e7ff] hover:underline"
+                className="inline-flex items-center gap-2 text-[13px] font-mono text-[#00e7ff] hover:underline"
               >
                 <span>Dự án phức tạp? Mở form khảo sát chi tiết</span>
                 <span className="font-bold">↗</span>
@@ -126,9 +126,9 @@ export const ContactSection = () => {
             </div>
           </div>
 
-          {/* Right Column (7 Cols): Quick Contact Form */}
-          <div className="lg:col-span-7">
-            <div className="p-7 sm:p-9 rounded-2xl bg-[#0a0b14] border border-[rgba(180,170,255,0.18)] shadow-2xl">
+          {/* Right Column (6 Cols): Quick Contact Form */}
+          <div className="lg:col-span-6">
+            <div className="p-6 sm:p-8 rounded-2xl bg-[#0a0b14] border border-[rgba(180,170,255,0.18)] shadow-2xl">
               
               {status === 'success' ? (
                 <div className="py-12 text-center space-y-4">

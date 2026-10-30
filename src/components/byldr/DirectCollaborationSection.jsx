@@ -13,9 +13,6 @@ export const DirectCollaborationSection = () => {
               Làm việc trực tiếp với <span className="grad">người xây dựng</span>
             </h2>
           </div>
-          <p>
-            Bạn trao đổi thẳng với người trực tiếp thiết kế và lập trình website. Không qua nhiều cấp nhân viên kinh doanh hay quản lý trung gian, giúp thông tin luôn chính xác và phản hồi tức thì.
-          </p>
         </div>
 
         {/* 2-Column Split: Editorial Commitments & Interactive Terminal */}
@@ -46,16 +43,6 @@ export const DirectCollaborationSection = () => {
                   </div>
                   <p className="text-[13px] text-[#a7a6c4] leading-relaxed pl-6">
                     Bàn giao đầy đủ source code sạch, khách hàng tự đứng tên tài khoản máy chủ và tên miền.
-                  </p>
-                </div>
-
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2 text-[15px] font-bold text-[#f3f2fb]">
-                    <Zap size={16} className="text-[#00e7ff]" />
-                    <span>Giới hạn tối đa 2 dự án đồng thời</span>
-                  </div>
-                  <p className="text-[13px] text-[#a7a6c4] leading-relaxed pl-6">
-                    Dành trọn tâm huyết, kiểm thử kỹ lưỡng trên mọi kích thước màn hình và bàn giao đúng hẹn.
                   </p>
                 </div>
               </div>

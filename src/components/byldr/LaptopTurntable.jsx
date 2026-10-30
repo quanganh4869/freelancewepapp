@@ -308,18 +308,6 @@ export const LaptopTurntable = ({ projects = [] }) => {
               <ExternalLink size={13} />
             </a>
           )}
-
-          {activeProject.sourceUrl && (
-            <a
-              href={activeProject.sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-secondary"
-            >
-              <Github size={13} />
-              <span>Mã nguồn</span>
-            </a>
-          )}
         </div>
       </div>
 

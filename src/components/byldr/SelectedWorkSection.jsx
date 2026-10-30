@@ -14,9 +14,6 @@ export const SelectedWorkSection = () => {
               Things I've <span className="grad">built</span>
             </h2>
           </div>
-          <p>
-            Toàn bộ sản phẩm trên một turntable tương tác. Sử dụng mũi tên hoặc kéo để đưa laptop ra trước, sau đó cuộn màn hình thiết bị để khám phá toàn bộ website.
-          </p>
         </div>
 
         {/* 3D Turntable Component with 3 Laptops */}

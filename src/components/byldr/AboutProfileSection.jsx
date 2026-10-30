@@ -35,17 +35,21 @@ export const AboutProfileSection = () => {
         {/* Profile Card & Bio Spread (Grid Layout) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start pt-2">
           
-          {/* Left Column (5 Cols): Real Photo Avatar & Quick Meta Card */}
+          {/* Left Column (5 Cols): 3D Coding Developer Card & Quick Meta Card */}
           <div className="lg:col-span-5 space-y-6">
             
-            {/* Real Portrait Avatar Frame with BYLDR Prism Border - CLEAN, NO OVERLAY TEXT */}
+            {/* 3D Developer Coding Avatar Frame with BYLDR Prism Border */}
             <div className="relative group p-[2px] rounded-3xl bg-gradient-to-tr from-[#00e7ff] via-[#2a6bff] to-[#ff00e7] shadow-[0_20px_50px_-15px_rgba(0,231,255,0.25)]">
-              <div className="relative rounded-[22px] overflow-hidden bg-[#0a0b14] p-3">
-                <div className="aspect-square w-full rounded-2xl overflow-hidden bg-[#05060c] relative">
+              <div className="relative rounded-[22px] overflow-hidden bg-[#0a0b14] p-3 flex items-center justify-center">
+                <div className="aspect-square w-full rounded-2xl overflow-hidden bg-[#05060c] relative flex items-center justify-center p-2">
                   <img
-                    src={ABOUT_DATA.avatar || '/images/avatar.jpg'}
-                    alt={ABOUT_DATA.name}
-                    className="w-full h-full object-cover object-top filter brightness-[1.02] contrast-[1.03] transition-transform duration-500 group-hover:scale-[1.02]"
+                    src="/assets/about-developer.png"
+                    alt="Minh họa nhân vật 3D lập trình viên đang phát triển phần mềm hiện đại"
+                    width={1200}
+                    height={896}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-contain filter brightness-[1.02] contrast-[1.03] transition-transform duration-500 group-hover:scale-[1.02] drop-shadow-[0_15px_25px_rgba(0,0,0,0.6)]"
                   />
                 </div>
               </div>
@@ -80,21 +84,6 @@ export const AboutProfileSection = () => {
               </div>
             </div>
 
-            {/* 3D Developer Coding Illustration (Integrated in Profile Column) */}
-            <div className="character-card pt-2 flex flex-col items-center">
-              <div className="w-full max-w-[340px] sm:max-w-[380px]">
-                <img
-                  src="/assets/about-developer.png"
-                  alt="Minh họa nhân vật 3D lập trình viên đang phát triển phần mềm hiện đại"
-                  width={1200}
-                  height={896}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-auto object-contain select-none pointer-events-none drop-shadow-[0_20px_30px_rgba(0,0,0,0.6)]"
-                />
-              </div>
-            </div>
-
           </div>
 
           {/* Right Column (7 Cols): Detailed Narrative, Experience & Education */}
@@ -104,7 +93,7 @@ export const AboutProfileSection = () => {
             <div className="space-y-4 text-[16px] text-[#a7a6c4] leading-[1.75]">
               <div className="space-y-1">
                 <span className="text-[12px] font-mono uppercase tracking-widest text-[#00e7ff]">
-                  SOFTWARE ENGINEER · FREELANCE DEVELOPER
+                  SOFTWARE ENGINEER
                 </span>
                 <h3 className="font-disp font-bold text-[28px] sm:text-[34px] text-[#f3f2fb] leading-tight">
                   Nguyễn Quang Anh

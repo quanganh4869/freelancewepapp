@@ -19,8 +19,7 @@ export const HeroSection = () => {
           <div className="lg:col-span-7 space-y-6">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-[rgba(180,170,255,0.18)] text-[12px] font-mono text-[#a7a6c4]">
               <span className="w-2 h-2 rounded-full bg-[#00e7ff] animate-pulse" />
-              <span className="text-[#f3f2fb] font-semibold">Quang Anh Studio</span>
-              <span>· Personal Web Developer</span>
+              <span className="text-[#f3f2fb] font-semibold">Tôi là Nguyễn Quang Anh</span>
             </div>
 
             <h1 className="font-disp text-[40px] sm:text-[60px] md:text-[76px] lg:text-[84px] font-[800] tracking-[-0.035em] leading-[1.02] text-[#f3f2fb]">

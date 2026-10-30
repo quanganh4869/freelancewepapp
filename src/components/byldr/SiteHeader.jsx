@@ -140,7 +140,6 @@ export const SiteHeader = () => {
             className="btn-prism hidden sm:inline-flex"
           >
             <span>Yêu cầu làm website</span>
-            <span className="font-bold">↗</span>
           </Link>
 
           {/* Mobile Menu Toggle Button */}
