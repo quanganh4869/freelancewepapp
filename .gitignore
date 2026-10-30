@@ -4,12 +4,10 @@ node_modules/
 jspm_packages/
 web_modules/
 
-# Environment Variables (Bảo mật chìa khóa API)
+# Environment Variables & Secrets (Tuyệt đối không push)
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
+!.env.example
 
 # Production Build Output
 dist/
@@ -18,7 +16,7 @@ build/
 .next/
 .nuxt/
 
-# Logs
+# Logs & Temporary Debug Files
 logs/
 *.log
 npm-debug.log*
@@ -44,14 +42,18 @@ pnpm-debug.log*
 ehthumbs.db
 Thumbs.db
 
-# Temporary & Scratch Files
+# Cache & Temporary System Folders
 .cache/
 .parcel-cache/
 .temp/
 .tmp/
 
-# Antigravity/Agentation System Files
+# AI Agents, Tools & Automation System Files (Tuyệt đối không lộ ra repo)
+.agents/
+.claude/
 .gemini/
+.impeccable/
 impeccable/
-.vercel
-.env*
+agentation/
+agentation
+.vercel/
