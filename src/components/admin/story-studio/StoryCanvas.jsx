@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState, useEffect } from 'react';
+﻿import React, { useMemo, useRef, useState, useEffect } from 'react';
 import { useStoryEditor } from '../../../store/useStoryEditor';
 import { BoundingBox } from './BoundingBox';
 import { AnimationEngine } from '../../../engine/AnimationEngine';
@@ -87,7 +87,7 @@ export const StoryCanvas = () => {
         const parallaxY = bgYPercent * (depth - 1);
         
         // Combine AnimationEngine transforms with parallax
-        const combinedTransform = \`\${layerAnimStyles.transform !== 'none' ? layerAnimStyles.transform : ''} translate(\${parallaxX}%, \${parallaxY}%)\`;
+        const combinedTransform = `\${layerAnimStyles.transform !== 'none' ? layerAnimStyles.transform : ''} translate(\${parallaxX}%, \${parallaxY}%)`;
 
         return (
           <BoundingBox 

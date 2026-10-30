@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+﻿import React, { useRef, useState } from 'react';
 import { UploadCloud, AlertCircle, Loader2, RefreshCw } from 'lucide-react';
 import { useStoryEditor } from '../../../store/useStoryEditor';
 import { processPdfToImages } from '../../../utils/pdfProcessor';
@@ -97,9 +97,9 @@ export const StoryUploader = () => {
         onDragOver={!isWorking ? onDragOver : undefined}
         onDragLeave={!isWorking ? onDragLeave : undefined}
         onDrop={!isWorking ? onDrop : undefined}
-        className={\`border-2 border-dashed rounded-2xl p-12 transition-all \${
+        className={`border-2 border-dashed rounded-2xl p-12 transition-all \${
           isDragging ? 'border-amber-500 bg-amber-500/10' : 'border-slate-700 bg-studio-900 hover:border-slate-500'
-        }\`}
+        }`}
       >
         {isWorking ? (
           <div className="flex flex-col items-center space-y-4">
@@ -108,7 +108,7 @@ export const StoryUploader = () => {
             <div className="w-full max-w-md bg-studio-950 rounded-full h-2 mt-4 overflow-hidden border border-slate-800">
               <div 
                 className="bg-amber-500 h-2 transition-all duration-300"
-                style={{ width: \`\${jobProgress}%\` }}
+                style={{ width: `\${jobProgress}%` }}
               ></div>
             </div>
             <p className="text-slate-400 text-sm mt-2">{jobProgress}% hoàn thành</p>

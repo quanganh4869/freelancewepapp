@@ -34,11 +34,11 @@ export const SceneList = () => {
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         onClick={() => selectScene(scene.id)}
-                        className={\`relative flex items-center gap-2 p-2 rounded-xl border transition-all cursor-pointer \${
+                        className={`relative flex items-center gap-2 p-2 rounded-xl border transition-all cursor-pointer ${
                           selectedSceneId === scene.id 
                             ? 'bg-brand-primary/10 border-brand-primary' 
                             : 'bg-studio-950 border-slate-800 hover:border-slate-600'
-                        } \${snapshot.isDragging ? 'shadow-2xl ring-2 ring-brand-primary' : ''}\`}
+                        } ${snapshot.isDragging ? 'shadow-2xl ring-2 ring-brand-primary' : ''}`}
                       >
                         <div 
                           {...provided.dragHandleProps}
@@ -50,7 +50,7 @@ export const SceneList = () => {
                         <div className="w-16 h-24 bg-black rounded-lg overflow-hidden shrink-0 border border-slate-800 relative">
                           <img 
                             src={scene.background.url} 
-                            alt={\`Scene \${index + 1}\`}
+                            alt={`Scene ${index + 1}`}
                             className="w-full h-full object-cover"
                           />
                           <div className="absolute bottom-1 right-1 bg-black/60 backdrop-blur-md px-1.5 rounded text-[10px] text-white font-bold">

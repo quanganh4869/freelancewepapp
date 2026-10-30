@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useStoryEditor } from '../../../store/useStoryEditor';
 import { Settings2, Clock, Image as ImageIcon, Type, Play, Square } from 'lucide-react';
 
@@ -29,9 +29,9 @@ export const PropertiesPanel = () => {
         </h2>
         <button 
           onClick={() => setPlaying(!isPlaying)}
-          className={\`p-1.5 rounded-lg flex items-center gap-1 font-bold \${
+          className={`p-1.5 rounded-lg flex items-center gap-1 font-bold \${
             isPlaying ? 'bg-rose-500/10 text-rose-400' : 'bg-brand-primary/10 text-brand-primary'
-          }\`}
+          }`}
         >
           {isPlaying ? <Square size={14} fill="currentColor"/> : <Play size={14} fill="currentColor"/>}
           {isPlaying ? 'Stop' : 'Play Scene'}

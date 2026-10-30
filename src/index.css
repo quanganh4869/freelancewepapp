@@ -4,144 +4,351 @@
 
 @layer base {
   :root {
-    --background: #F7F5EE;
-    --foreground: #25231F;
-    --paper: #FCFAF6;
-    --card: #FCFAF6;
-    --card-foreground: #25231F;
-    --primary: #25231F;
-    --primary-foreground: #FCFAF6;
-    --secondary: #EFECE5;
-    --secondary-foreground: #25231F;
-    --muted: #EFECE5;
-    --muted-foreground: #78736A;
-    --accent: #D05021;
-    --border: #E4DFD3;
-    --border-strong: #C6BFB1;
-    --radius: 0.5rem;
-  }
+    color-scheme: dark;
+    --nav-h: 76px;
+    --bg: #05060c;
+    --bg-1: #0a0b14;
+    --bg-2: #0f1120;
+    --panel: rgba(255, 255, 255, 0.04);
+    --panel-2: rgba(255, 255, 255, 0.06);
+    --line: rgba(180, 170, 255, 0.14);
+    --line-2: rgba(180, 170, 255, 0.26);
 
-  .dark {
-    --background: #1A1916;
-    --foreground: #FCFAF6;
-    --paper: #24221E;
-    --card: #24221E;
-    --card-foreground: #FCFAF6;
-    --primary: #FCFAF6;
-    --primary-foreground: #25231F;
-    --secondary: #2E2B26;
-    --secondary-foreground: #FCFAF6;
-    --muted: #2E2B26;
-    --muted-foreground: #B8B2A6;
-    --accent: #D05021;
-    --border: #3D3A34;
-    --border-strong: #545048;
+    --text: #f3f2fb;
+    --muted: #a7a6c4;
+    --muted-2: #7c7ba0;
+
+    --cyan: #00e7ff;
+    --magenta: #ff00e7;
+    --violet: #4f33bc;
+    --blue: #2a6bff;
+    --prism: linear-gradient(100deg, #00e7ff 0%, #2a6bff 26%, #8b3bff 50%, #ff00e7 74%, #ff6ec4 100%);
+    --prism-conic: conic-gradient(from 180deg at 50% 50%, #00e7ff, #2a6bff, #8b3bff, #ff00e7, #ff6ec4, #ffd481, #4dff9c, #00e7ff);
+
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-disp: 'Space Grotesk', 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+    --maxw: 1320px;
+    --pad: clamp(20px, 5vw, 72px);
+    --ease: cubic-bezier(.22, .61, .36, 1);
+
+    --background: #05060c;
+    --foreground: #f3f2fb;
   }
 
   html {
-    font-family: 'Be Vietnam Pro', ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     scroll-behavior: smooth;
+    background-color: var(--bg);
+    color: var(--text);
   }
-  
+
   body {
-    background-color: var(--background);
-    color: var(--foreground);
-    font-family: 'Be Vietnam Pro', system-ui, sans-serif;
-    transition: background-color 0.2s ease, color 0.2s ease;
-    line-height: 1.6;
-    letter-spacing: -0.01em;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    line-height: 1.65;
+    letter-spacing: -0.011em;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Bricolage Grotesque', 'Be Vietnam Pro', system-ui, sans-serif;
+    font-family: var(--font-disp);
+    color: var(--text);
     letter-spacing: -0.025em;
-    color: var(--foreground);
   }
 }
 
-/* Custom Scrollbars */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--background);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--border-strong);
-  border-radius: 4px;
+/* ==========================================================================
+   BYLDR Prism Gradient Text & Keyframe Animation
+   ========================================================================== */
+.grad {
+  background: var(--prism);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: hue 8s linear infinite;
 }
 
-/* Reference Lovable Exact Buttons & Cards */
-.btn-primary {
-  background-color: var(--primary);
-  color: var(--primary-foreground) !important;
-  font-family: 'Be Vietnam Pro', sans-serif;
-  font-weight: 600;
-  font-size: 0.875rem;
-  padding: 0.65rem 1.35rem;
-  border-radius: 0.5rem;
-  transition: all 0.15s ease-in-out;
+@keyframes hue {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* ==========================================================================
+   BYLDR Buttons (.btn, .btn-prism, .btn-secondary)
+   ========================================================================== */
+.btn-prism {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.4rem;
-  border: 1px solid var(--primary);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  gap: 0.55em;
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  font-weight: 600;
+  padding: 13px 26px;
+  border-radius: 100px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  color: #04040a !important;
+  background: var(--prism);
+  background-size: 200% auto;
+  transition: transform 0.25s var(--ease), box-shadow 0.3s ease;
+  text-decoration: none;
 }
-.btn-primary:hover {
-  opacity: 0.92;
-  transform: translateY(-1px);
+
+.btn-prism:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 231, 255, 0.4);
 }
 
 .btn-secondary {
-  background-color: var(--card);
-  color: var(--foreground) !important;
-  font-family: 'Be Vietnam Pro', sans-serif;
-  font-weight: 600;
-  font-size: 0.875rem;
-  padding: 0.65rem 1.35rem;
-  border-radius: 0.5rem;
-  border: 1px solid var(--border);
-  transition: all 0.15s ease-in-out;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.4rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  gap: 0.55em;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+  padding: 13px 24px;
+  border-radius: 100px;
+  border: 1px solid var(--line-2);
+  background: var(--panel);
+  color: var(--text);
+  transition: transform 0.2s var(--ease), border-color 0.2s ease, background 0.2s ease;
+  text-decoration: none;
 }
+
 .btn-secondary:hover {
-  border-color: var(--border-strong);
-  background-color: var(--secondary);
+  background: var(--panel-2);
+  border-color: rgba(180, 170, 255, 0.5);
   transform: translateY(-1px);
 }
 
-/* Lovable Minimalist Card Style */
-.studio-card {
-  background-color: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 0.75rem;
-  transition: all 0.15s ease-in-out;
-}
-.studio-card:hover {
-  border-color: var(--border-strong);
+/* Backward compatibility aliases */
+.btn-primary {
+  @apply btn-prism;
 }
 
-/* Scroll Reveal Animations */
-.reveal {
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+/* ==========================================================================
+   Section Headers ({ 01 } — Index, Display H2, Subtitle P)
+   ========================================================================== */
+.sec-head {
+  margin-bottom: 44px;
 }
 
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
+.sec-head .idx {
+  display: block;
+  margin-bottom: 14px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
-.reveal-delay-1 { transition-delay: 0.08s; }
-.reveal-delay-2 { transition-delay: 0.16s; }
-.reveal-delay-3 { transition-delay: 0.24s; }
+.sec-head h2 {
+  font-family: var(--font-disp);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  font-size: clamp(38px, 7vw, 92px);
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.sec-head p {
+  color: var(--muted);
+  max-width: 48ch;
+  font-size: 15px;
+  line-height: 1.65;
+  margin-top: 18px;
+}
+
+@media (min-width: 768px) {
+  .sec-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px;
+  }
+  .sec-head p {
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
+}
+
+/* ==========================================================================
+   Stats Band & Proof Grid
+   ========================================================================== */
+.stats-band {
+  padding: clamp(20px, 4vh, 48px) 0;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--line);
+  backdrop-filter: blur(8px);
+}
+
+.hero-stats .stat {
+  background: rgba(10, 11, 20, 0.75);
+  padding: 28px 20px;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+.hero-stats .stat:hover {
+  background: rgba(18, 20, 38, 0.9);
+}
+
+.hero-stats .num {
+  font-family: var(--font-disp);
+  font-size: clamp(30px, 4vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.hero-stats .lbl {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+@media (max-width: 640px) {
+  .hero-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   Horizontal Ticker
+   ========================================================================== */
+@keyframes tickerSlide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-ticker {
+  display: flex;
+  width: max-content;
+  animation: tickerSlide 25s linear infinite;
+}
+
+.animate-ticker:hover {
+  animation-play-state: paused;
+}
+
+/* ==========================================================================
+   BYLDR 3D Turntable Styles
+   ========================================================================== */
+.disc-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: clamp(480px, 58vh, 600px);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+  overflow: visible;
+}
+
+/* Elliptical floor glow under turntable */
+.disc-glow {
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  transform: translate(-50%, -50%);
+  width: min(1200px, 94vw);
+  height: min(480px, 55vh);
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(55% 55% at 50% 50%, rgba(42, 107, 255, 0.16) 0%, rgba(255, 0, 231, 0.05) 45%, transparent 75%);
+  filter: blur(40px);
+}
+
+/* Arrow controls */
+.disc-arrow {
+  position: absolute;
+  top: 48%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--line-2);
+  background: rgba(10, 11, 20, 0.85);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 50;
+  transition: all 0.25s var(--ease);
+  backdrop-filter: blur(8px);
+}
+
+.disc-arrow:hover {
+  border-color: rgba(0, 231, 255, 0.6);
+  background: rgba(18, 20, 38, 0.95);
+  box-shadow: 0 0 15px rgba(0, 231, 255, 0.3);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.disc-arrow.prev {
+  left: clamp(10px, 3vw, 36px);
+}
+
+.disc-arrow.next {
+  right: clamp(10px, 3vw, 36px);
+}
+
+/* ==========================================================================
+   Page Entrance & Motion Optimization
+   ========================================================================== */
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-page-in {
+  animation: pageFadeIn 0.3s var(--ease) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

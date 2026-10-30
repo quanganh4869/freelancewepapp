@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import { X, Play, Pause, Maximize, Minimize, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useStoryEditor } from '../../../store/useStoryEditor';
 
@@ -47,13 +47,13 @@ export const PreviewPlayer = ({ onClose }) => {
   if (!currentScene) return null;
 
   const bgAnim = currentScene.background.animation;
-  const animDuration = \`\${currentScene.duration}s\`;
+  const animDuration = `\${currentScene.duration}s`;
   
   let bgTransform = 'scale(1) translate(0%, 0%)';
   if (isPlaying && bgAnim) {
-    bgTransform = \`scale(\${bgAnim.scaleTo || 1}) translate(\${bgAnim.xTo || 0}%, \${bgAnim.yTo || 0}%)\`;
+    bgTransform = `scale(\${bgAnim.scaleTo || 1}) translate(\${bgAnim.xTo || 0}%, \${bgAnim.yTo || 0}%)`;
   } else if (bgAnim) {
-    bgTransform = \`scale(\${bgAnim.scaleFrom || 1}) translate(\${bgAnim.xFrom || 0}%, \${bgAnim.yFrom || 0}%)\`;
+    bgTransform = `scale(\${bgAnim.scaleFrom || 1}) translate(\${bgAnim.xFrom || 0}%, \${bgAnim.yFrom || 0}%)`;
   }
 
   return (
@@ -86,9 +86,9 @@ export const PreviewPlayer = ({ onClose }) => {
       {/* Reader Container (Simulates Mobile Phone Ratio by default, expands in Fullscreen) */}
       <div 
         ref={containerRef}
-        className={\`relative bg-black shadow-2xl overflow-hidden flex items-center justify-center \${
+        className={`relative bg-black shadow-2xl overflow-hidden flex items-center justify-center \${
           isFullscreen ? 'w-full h-full' : 'w-full max-w-[400px] aspect-[9/16] rounded-2xl ring-4 ring-white/10'
-        }\`}
+        }`}
       >
         {/* Preload Cache (Invisible) */}
         <div className="hidden">
@@ -105,7 +105,7 @@ export const PreviewPlayer = ({ onClose }) => {
                 className="h-full bg-white transition-all ease-linear"
                 style={{ 
                   width: idx < currentIndex ? '100%' : (idx === currentIndex && isPlaying ? '100%' : '0%'),
-                  transitionDuration: idx === currentIndex && isPlaying ? \`\${s.duration}s\` : '0s'
+                  transitionDuration: idx === currentIndex && isPlaying ? `\${s.duration}s` : '0s'
                 }}
               />
             </div>
@@ -121,7 +121,7 @@ export const PreviewPlayer = ({ onClose }) => {
             className="absolute inset-0 w-full h-full object-cover origin-center"
             style={{
               transform: bgTransform,
-              transition: isPlaying ? \`transform \${animDuration} \${bgAnim?.easing || 'linear'}\` : 'none'
+              transition: isPlaying ? `transform \${animDuration} \${bgAnim?.easing || 'linear'}` : 'none'
             }}
           />
         )}

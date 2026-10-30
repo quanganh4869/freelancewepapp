@@ -1,158 +1,219 @@
 import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
 import { AuthProvider, useAuth, ADMIN_EMAIL } from './context/AuthContext';
 import { RequestProvider } from './context/RequestContext';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
-import { LanguageProvider, useLanguage } from './context/LanguageContext';
+import { LanguageProvider } from './context/LanguageContext';
 import { ErrorBoundary } from './components/layout/ErrorBoundary';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
-import { Shield } from 'lucide-react';
-import { useScrollReveal } from './hooks/useScrollReveal';
+import { ScrollToTop } from './components/layout/ScrollToTop';
 
-// Agentation visual feedback tool for dev mode
-import { Agentation } from 'agentation';
+// Dedicated New Pages
+import HomePage from './pages/HomePage';
+import ProjectsPage from './pages/ProjectsPage';
+import ProjectDetailPage from './pages/ProjectDetailPage';
+import ServicesPage from './pages/ServicesPage';
+import ServiceDetailPage from './pages/ServiceDetailPage';
+import PricingPage from './pages/PricingPage';
+import AboutPage from './pages/AboutPage';
+import StartProjectPage from './pages/StartProjectPage';
+import ContactPage from './pages/ContactPage';
+import NotFoundPage from './pages/NotFoundPage';
 
-// Freelancer Personal Homepage Sections (matching reference layout https://freelance-crafted-webs.lovable.app)
-import { HeroSection } from './components/home/HeroSection';
-import { ServicesSection } from './components/home/ServicesSection';
-import { PortfolioSection } from './components/home/PortfolioSection';
-import { PricingSection } from './components/home/PricingSection';
-import { ProcessSection } from './components/home/ProcessSection';
-import { AboutSection } from './components/home/AboutSection';
-import { FaqSection } from './components/home/FaqSection';
-import { ContactCTASection } from './components/home/ContactCTASection';
-
-// Standalone Pages & Dashboards & Auth
-import { EstimatorPage } from './components/pages/EstimatorPage';
-import { ProjectRequestModal } from './components/request/ProjectRequestModal';
-import { AuthModal } from './components/auth/AuthModal';
-import { ClientDashboard } from './components/client/ClientDashboard';
+// Admin and Story Studio routes
 import { AdminDashboard } from './components/admin/AdminDashboard';
 import { AnimationStoryStudio } from './components/admin/story-studio/AnimationStoryStudio';
+import { AuthModal } from './components/auth/AuthModal';
+import { Shield } from 'lucide-react';
 
+// Wrapper for Story Studio to pass route params
+function StoryStudioWrapper() {
+  const { storyId, chapterId } = useParams();
+  return (
+    <AnimationStoryStudio
+      storyId={storyId || 'new'}
+      chapterId={chapterId || 'new'}
+    />
+  );
+}
 
-const MainAppContent = () => {
+// Admin route guard
+function AdminRouteWrapper({ onOpenAuthModal }) {
   const { activeRole, currentUser } = useAuth();
-  const { isDark } = useTheme();
+  const isAuthorizedAdmin =
+    activeRole === 'ADMIN' && currentUser?.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase();
 
-  const [activeView, setActiveView] = useState(() => {
-    if (window.location.pathname.startsWith('/admin/stories/')) return 'story-studio';
-    return 'home';
-  }); // 'home' | 'estimator' | 'admin-dashboard'
-  const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
+  if (!isAuthorizedAdmin) {
+    return (
+      <div className="py-24 text-center space-y-4 max-w-md mx-auto">
+        <div className="w-12 h-12 mx-auto bg-neutral-100 border border-neutral-300 text-neutral-900 flex items-center justify-center">
+          <Shield size={24} />
+        </div>
+        <h2 className="text-xl font-bold text-neutral-900">Quyền truy cập bị từ chối</h2>
+        <p className="text-sm text-neutral-600 leading-relaxed">
+          Chỉ tài khoản quản trị <span className="font-mono text-neutral-900 font-semibold">{ADMIN_EMAIL}</span> mới có quyền truy cập bảng quản trị.
+        </p>
+        <div>
+          <button
+            onClick={onOpenAuthModal}
+            className="px-5 py-2.5 bg-neutral-900 text-white text-sm font-medium hover:bg-neutral-800 transition-colors"
+          >
+            Đăng nhập quản trị viên
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return <AdminDashboard />;
+}
+
+// Public Layout Container
+function PublicLayout({ children, isWide = false, fullWidth = false }) {
+  return (
+    <div className="min-h-screen flex flex-col font-sans bg-[#05060c] text-[#f3f2fb] transition-colors duration-200">
+      <Navbar />
+      <main
+        className={`flex-grow w-full ${
+          fullWidth
+            ? 'w-full'
+            : isWide
+            ? 'max-w-[1320px] mx-auto px-5 sm:px-8'
+            : 'max-w-[1320px] mx-auto px-5 sm:px-8'
+        }`}
+      >
+        {children}
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
+function MainAppContent() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [initialServiceForForm, setInitialServiceForForm] = useState('');
-
-  // Enable scroll reveal animations keyed to activeView
-  useScrollReveal(activeView);
-
-  const handleNavigate = (view) => {
-    setActiveView(view);
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  };
-
-  const handleOpenRequestModal = (serviceTitle = '') => {
-    setInitialServiceForForm(serviceTitle);
-    setIsRequestModalOpen(true);
-  };
-
-  const handleCloseRequestModal = () => {
-    setIsRequestModalOpen(false);
-    setInitialServiceForForm('');
-  };
-
-  const isAuthorizedAdmin = activeRole === 'ADMIN' && currentUser?.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase();
 
   return (
-    <div id="top" className={`min-h-screen flex flex-col font-sans selection:bg-brand-primary selection:text-white transition-colors duration-300 ${
-      isDark ? 'bg-studio-950 text-slate-200' : 'bg-slate-50 text-slate-800'
-    }`}>
-      
-      {/* Main Navbar */}
-      {activeView !== "story-studio" && (
-      <Navbar
-        currentView={activeView}
-        onOpenRequestModal={() => handleOpenRequestModal()}
-        onOpenAuthModal={() => setIsAuthModalOpen(true)}
-        onNavigate={handleNavigate}
-      />
+    <BrowserRouter>
+      <ScrollToTop />
+      <Routes>
+        {/* Story Studio standalone route (no standard header/footer) */}
+        <Route
+          path="/admin/stories/:storyId/chapters/:chapterId"
+          element={<StoryStudioWrapper />}
+        />
+        <Route
+          path="/admin/stories/:storyId"
+          element={<StoryStudioWrapper />}
+        />
+        <Route
+          path="/admin/stories"
+          element={<StoryStudioWrapper />}
+        />
 
-      {/* Main View Router */}
-      <main className="flex-grow font-sans">
-        {activeRole === 'ADMIN' ? (
-          isAuthorizedAdmin ? (
-            <AdminDashboard />
-          ) : (
-            <div className="min-h-[60vh] flex flex-col items-center justify-center p-6 text-center space-y-4 font-sans">
-              <div className="w-16 h-16 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-400 flex items-center justify-center shadow-2xl">
-                <Shield size={32} />
-              </div>
-              <h2 className="text-xl font-bold text-white">Quyền truy cập bị từ chối!</h2>
-              <p className="text-xs text-slate-400 max-w-md leading-relaxed font-medium">
-                Chỉ duy nhất tài khoản email <span className="text-amber-400 font-bold">{ADMIN_EMAIL}</span> mới có quyền truy cập vào Admin Control Center.
-              </p>
-              <button
-                onClick={() => setIsAuthModalOpen(true)}
-                className="px-5 py-2.5 rounded-xl bg-brand-primary text-white text-xs font-bold shadow-glow-primary hover:bg-brand-hover transition-all"
-              >
-                Đăng nhập với {ADMIN_EMAIL}
-              </button>
-            </div>
-          )
-        ) : activeRole === 'USER' ? (
-          <ClientDashboard onOpenRequestModal={() => handleOpenRequestModal()} />
-        
-        ) : activeView === 'story-studio' ? (
-          <AnimationStoryStudio 
-            storyId={window.location.pathname.split('/')[3] || 'new'} 
-            chapterId={window.location.pathname.split('/')[5] || 'new'} 
-          />
-        ) : activeView === 'estimator' ? (
+        {/* Admin Dashboard */}
+        <Route
+          path="/admin"
+          element={
+            <PublicLayout>
+              <AdminRouteWrapper onOpenAuthModal={() => setIsAuthModalOpen(true)} />
+            </PublicLayout>
+          }
+        />
 
-          /* Standalone Estimator Page */
-          <EstimatorPage
-            onOpenRequestModal={(scope) => handleOpenRequestModal(scope)}
-            onBackHome={() => handleNavigate('home')}
-          />
-        ) : (
-          <>
-            {/* Structured Personal Freelancer Homepage Sections (Matching https://freelance-crafted-webs.lovable.app) */}
-            <HeroSection onOpenRequestModal={() => handleOpenRequestModal()} />
-            <ServicesSection onSelectService={(service) => handleOpenRequestModal(service)} />
-            <PortfolioSection onOpenRequestModal={(initial) => handleOpenRequestModal(initial)} />
-            <PricingSection onOpenRequestModal={(tierName) => handleOpenRequestModal(tierName)} />
-            <ProcessSection onOpenRequestModal={() => handleOpenRequestModal()} />
-            <AboutSection onOpenRequestModal={() => handleOpenRequestModal()} />
-            <FaqSection />
-            <ContactCTASection onOpenRequestModal={() => handleOpenRequestModal()} />
-          </>
-        )}
-      </main>
+        {/* Public Pages */}
+        <Route
+          path="/"
+          element={
+            <PublicLayout fullWidth>
+              <HomePage />
+            </PublicLayout>
+          }
+        />
+        <Route
+          path="/projects"
+          element={
+            <PublicLayout isWide>
+              <ProjectsPage />
+            </PublicLayout>
+          }
+        />
+        <Route
+          path="/projects/:slug"
+          element={
+            <PublicLayout isWide>
+              <ProjectDetailPage />
+            </PublicLayout>
+          }
+        />
+        <Route
+          path="/services"
+          element={
+            <PublicLayout>
+              <ServicesPage />
+            </PublicLayout>
+          }
+        />
+        <Route
+          path="/services/:slug"
+          element={
+            <PublicLayout>
+              <ServiceDetailPage />
+            </PublicLayout>
+          }
+        />
+        <Route
+          path="/pricing"
+          element={
+            <PublicLayout>
+              <PricingPage />
+            </PublicLayout>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <PublicLayout>
+              <AboutPage />
+            </PublicLayout>
+          }
+        />
+        <Route
+          path="/start-project"
+          element={
+            <PublicLayout>
+              <StartProjectPage />
+            </PublicLayout>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <PublicLayout>
+              <ContactPage />
+            </PublicLayout>
+          }
+        />
 
-      {/* Main Footer */}
-      {!isAuthorizedAdmin && activeView !== 'story-studio' && (
-        <Footer onOpenRequestModal={() => handleOpenRequestModal()} />
-      )}
+        {/* 404 Catch-All */}
+        <Route
+          path="*"
+          element={
+            <PublicLayout>
+              <NotFoundPage />
+            </PublicLayout>
+          }
+        />
+      </Routes>
 
-      {/* Project Request Wizard Modal */}
-      <ProjectRequestModal
-        isOpen={isRequestModalOpen}
-        onClose={handleCloseRequestModal}
-        initialService={initialServiceForForm}
-      />
-
-      {/* Authentication Modal */}
+      {/* Auth Modal for Admin access */}
       <AuthModal
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
       />
-
-      {/* Render Agentation toolbar in Dev mode */}
-      {import.meta.env.DEV && <Agentation />}
-
-    </div>
+    </BrowserRouter>
   );
-};
+}
 
 export function App() {
   return (

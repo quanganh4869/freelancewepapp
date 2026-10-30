@@ -1,4 +1,4 @@
-export class AnimationEngine {
+﻿export class AnimationEngine {
   static getTransform(preset, scaleFrom, scaleTo, progress) {
     // progress is 0 to 1
     
@@ -35,7 +35,7 @@ export class AnimationEngine {
         break;
     }
 
-    return \`scale(\${scale}) translate(\${x}%, \${y}%)\`;
+    return `scale(\${scale}) translate(\${x}%, \${y}%)`;
   }
 
   static getLayerStyles(animationConfig, currentTime) {
@@ -59,9 +59,9 @@ export class AnimationEngine {
       case 'fade':
         return { opacity: ease, transform: 'none' };
       case 'fadeUp':
-        return { opacity: ease, transform: \`translateY(\${20 - 20 * ease}px)\` };
+        return { opacity: ease, transform: `translateY(\${20 - 20 * ease}px)` };
       case 'fadeDown':
-        return { opacity: ease, transform: \`translateY(\${-20 + 20 * ease}px)\` };
+        return { opacity: ease, transform: `translateY(\${-20 + 20 * ease}px)` };
       default:
         return { opacity: 1, transform: 'none' };
     }

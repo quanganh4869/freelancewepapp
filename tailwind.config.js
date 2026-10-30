@@ -8,39 +8,54 @@ export default {
   theme: {
     extend: {
       colors: {
-        brand: {
-          primary: '#24221E',     // Lovable Primary Charcoal
-          background: '#F7F5EE',  // Lovable Light Background Warm Paper
-          paper: '#FCFAF6',       // Lovable Card Off-White
-          border: '#E4DFD3',      // Lovable Subtle Border
-          accent: '#D05021',      // Lovable Warm Terracotta Rust Accent
-          muted: '#78736A',       // Lovable Muted Text Gray
-          hover: '#3D3A34',
+        // BYLDR Studio Master Palette
+        byldr: {
+          bg: '#05060c',
+          bg1: '#0a0b14',
+          bg2: '#0f1120',
+          panel: 'rgba(255,255,255,0.04)',
+          panel2: 'rgba(255,255,255,0.06)',
+          line: 'rgba(180,170,255,0.14)',
+          line2: 'rgba(180,170,255,0.26)',
+          text: '#f3f2fb',
+          muted: '#a7a6c4',
+          muted2: '#7c7ba0',
+          cyan: '#00e7ff',
+          magenta: '#ff00e7',
+          violet: '#4f33bc',
+          blue: '#2a6bff',
         },
-        studio: {
-          950: '#1A1916',
-          900: '#24221E',
-          850: '#2E2B26',
-          800: '#3D3A34',
-          700: '#545048',
-          600: '#78736A',
-          500: '#999388',
-          400: '#B8B2A6',
-          300: '#D4CEBF',
-          200: '#E4DFD3',
-          100: '#EFECE5',
-          50: '#F7F5EE'
+        paper: {
+          bg: '#05060c',
+          surface: '#0a0b14',
+          white: '#FFFFFF',
+          dark: '#05060c',
+          'dark-surface': '#0a0b14',
+        },
+        ink: {
+          primary: '#f3f2fb',
+          muted: '#a7a6c4',
+          subtle: '#7c7ba0',
+          border: 'rgba(180,170,255,0.14)',
+          'border-dark': 'rgba(180,170,255,0.26)',
+          terracotta: '#00e7ff',
+          'terracotta-dark': '#ff00e7',
+          dark: '#f3f2fb',
+        },
+        brand: {
+          primary: '#f3f2fb',
+          accent: '#2a6bff',
+          background: '#05060c',
+          surface: '#0a0b14',
+          border: 'rgba(180,170,255,0.14)',
+          muted: '#a7a6c4',
+          subtle: '#7c7ba0',
         }
       },
       fontFamily: {
-        sans: ['"Be Vietnam Pro"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        display: ['"Bricolage Grotesque"', '"Be Vietnam Pro"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace']
-      },
-      borderRadius: {
-        'xl': '0.5rem',
-        '2xl': '0.75rem',
-        '3xl': '1rem'
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'],
+        disp: ['"Space Grotesk"', 'Inter', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'SF Mono', 'Menlo', 'monospace'],
       }
     },
   },

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { ArrowLeft, Save, Send, CheckCircle2, MonitorPlay } from 'lucide-react';
 import { useStoryEditor } from '../../../store/useStoryEditor';
 import { PreviewPlayer } from './PreviewPlayer';
@@ -29,7 +29,7 @@ export const StudioHeader = () => {
     }
     const invalidScene = scenes.find(s => !s.background?.url);
     if (invalidScene) {
-      setErrorMsg(\`Scene \${invalidScene.order} bị lỗi hình ảnh.\`);
+      setErrorMsg(`Scene \${invalidScene.order} bị lỗi hình ảnh.`);
       setTimeout(() => setErrorMsg(''), 3000);
       return;
     }
@@ -55,9 +55,9 @@ export const StudioHeader = () => {
           <div>
             <h1 className="text-sm font-bold text-white flex items-center gap-2">
               Animation Story Studio
-              <span className={\`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase \${
+              <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase \${
                 status === 'published' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
-              }\`}>
+              }`}>
                 {status}
               </span>
             </h1>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+﻿import React, { useEffect, useRef, useState } from 'react';
 import { useStoryEditor } from '../../../store/useStoryEditor';
 import { Layers } from 'lucide-react';
 
@@ -103,9 +103,9 @@ export const Timeline = () => {
               key={scene.id}
               onClick={(e) => { e.stopPropagation(); selectScene(scene.id); }}
               style={{ width: scene.duration * pixelsPerSecond }}
-              className={\`h-16 rounded-md cursor-pointer transition-colors border overflow-hidden relative pointer-events-auto \${
+              className={`h-16 rounded-md cursor-pointer transition-colors border overflow-hidden relative pointer-events-auto \${
                 selectedSceneId === scene.id ? 'bg-brand-primary/20 border-brand-primary' : 'bg-studio-800 border-slate-700 hover:border-slate-500'
-              }\`}
+              }`}
             >
               <img src={scene.background.url} className="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none" alt="" />
               <div className="absolute inset-x-0 bottom-0 p-1 bg-black/60 text-[9px] font-bold text-white pointer-events-none">

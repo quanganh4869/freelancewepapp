@@ -1,4 +1,4 @@
-// Mock API Abstraction for Animation Story Studio
+﻿// Mock API Abstraction for Animation Story Studio
 // Sẵn sàng để kết nối với FastAPI / Supabase sau này.
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -16,7 +16,7 @@ export const storyApi = {
   
   saveDraft: async (storyId, chapterId, scenes) => {
     await delay(1000);
-    console.log(\`Saved \${scenes.length} scenes to draft for \${storyId}/\${chapterId}\`);
+    console.log(`Saved \${scenes.length} scenes to draft for \${storyId}/\${chapterId}`);
     return { success: true };
   },
 
@@ -25,9 +25,9 @@ export const storyApi = {
     // Simple mock backend validation
     const invalidScene = scenes.find(s => !s.background?.url);
     if (invalidScene) {
-      throw new Error(\`Scene \${invalidScene.order} thiếu background image.\`);
+      throw new Error(`Scene \${invalidScene.order} thiếu background image.`);
     }
-    console.log(\`Published \${scenes.length} scenes for \${storyId}/\${chapterId}\`);
+    console.log(`Published \${scenes.length} scenes for \${storyId}/\${chapterId}`);
     return { success: true, status: 'published' };
   }
 };

@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+﻿import React, { useRef, useState, useEffect } from 'react';
 import { useStoryEditor } from '../../../store/useStoryEditor';
 
 export const BoundingBox = ({ layer, isSelected, children, canvasRef, sceneId }) => {
@@ -59,11 +59,11 @@ export const BoundingBox = ({ layer, isSelected, children, canvasRef, sceneId })
     <div
       ref={boxRef}
       onMouseDown={handleMouseDown}
-      className={\`absolute \${isSelected ? 'ring-2 ring-brand-primary cursor-move' : 'cursor-pointer hover:ring-1 ring-white/30'} \${layer.locked ? 'pointer-events-none' : ''}\`}
+      className={`absolute \${isSelected ? 'ring-2 ring-brand-primary cursor-move' : 'cursor-pointer hover:ring-1 ring-white/30'} \${layer.locked ? 'pointer-events-none' : ''}`}
       style={{
-        left: \`\${layer.x || 0}%\`,
-        top: \`\${layer.y || 0}%\`,
-        transform: \`translate(-50%, -50%) scale(\${layer.scale || 1}) rotate(\${layer.rotation || 0}deg)\`,
+        left: `\${layer.x || 0}%`,
+        top: `\${layer.y || 0}%`,
+        transform: `translate(-50%, -50%) scale(\${layer.scale || 1}) rotate(\${layer.rotation || 0}deg)`,
         opacity: layer.opacity !== undefined ? layer.opacity : 1,
         zIndex: layer.zIndex || 10,
         display: layer.visible === false ? 'none' : 'block'
