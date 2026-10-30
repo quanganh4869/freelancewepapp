@@ -27,6 +27,9 @@ import { AnimationStoryStudio } from './components/admin/story-studio/AnimationS
 import { AuthModal } from './components/auth/AuthModal';
 import { Shield } from 'lucide-react';
 
+// Agentation visual feedback tool for dev mode
+import { Agentation } from 'agentation';
+
 // Wrapper for Story Studio to pass route params
 function StoryStudioWrapper() {
   const { storyId, chapterId } = useParams();
@@ -211,6 +214,9 @@ function MainAppContent() {
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
       />
+
+      {/* Render Agentation toolbar in Dev mode */}
+      {import.meta.env.DEV && <Agentation />}
     </BrowserRouter>
   );
 }
