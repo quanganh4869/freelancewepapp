@@ -548,6 +548,85 @@ html.light .hero-stats .lbl {
   color: var(--muted) !important;
 }
 
+/* High contrast accent colors for Light Theme (Text & SVG Icons) */
+html.light .text-\[\#00e7ff\] {
+  color: #0284c7 !important; /* Sky 600 - High contrast deep azure */
+}
+
+html.light svg.text-\[\#00e7ff\],
+html.light .text-\[\#00e7ff\] svg {
+  color: #0284c7 !important;
+  stroke: #0284c7 !important;
+}
+
+html.light .text-\[\#ff00e7\] {
+  color: #c026d3 !important; /* Fuchsia 600 - Deep crisp magenta */
+}
+
+html.light svg.text-\[\#ff00e7\],
+html.light .text-\[\#ff00e7\] svg {
+  color: #c026d3 !important;
+  stroke: #c026d3 !important;
+}
+
+html.light .text-\[\#2a6bff\] {
+  color: #1d4ed8 !important; /* Blue 700 - Deep cobalt blue */
+}
+
+html.light svg.text-\[\#2a6bff\],
+html.light .text-\[\#2a6bff\] svg {
+  color: #1d4ed8 !important;
+  stroke: #1d4ed8 !important;
+}
+
+html.light .text-\[\#8b3bff\] {
+  color: #6d28d9 !important; /* Purple 700 - Deep violet */
+}
+
+html.light svg.text-\[\#8b3bff\],
+html.light .text-\[\#8b3bff\] svg {
+  color: #6d28d9 !important;
+  stroke: #6d28d9 !important;
+}
+
+html.light .text-\[\#27c93f\] {
+  color: #15803d !important; /* Green 700 - Deep emerald */
+}
+
+/* Light theme accent badges and icon containers */
+html.light .bg-\[\#00e7ff\]\/10,
+html.light .bg-\[\#00e7ff\]\/15,
+html.light .bg-\[\#00e7ff\]\/20 {
+  background-color: rgba(2, 132, 199, 0.12) !important;
+}
+
+html.light .bg-\[\#ff00e7\]\/10,
+html.light .bg-\[\#ff00e7\]\/15,
+html.light .bg-\[\#ff00e7\]\/20 {
+  background-color: rgba(192, 38, 211, 0.12) !important;
+}
+
+html.light .bg-\[\#2a6bff\]\/10,
+html.light .bg-\[\#2a6bff\]\/15,
+html.light .bg-\[\#2a6bff\]\/20 {
+  background-color: rgba(29, 78, 216, 0.12) !important;
+}
+
+html.light .border-\[\#00e7ff\]\/30,
+html.light .border-\[\#00e7ff\]\/40 {
+  border-color: rgba(2, 132, 199, 0.35) !important;
+}
+
+html.light .border-\[\#ff00e7\]\/30,
+html.light .border-\[\#ff00e7\]\/40 {
+  border-color: rgba(192, 38, 211, 0.35) !important;
+}
+
+html.light .hover\:text-\[\#00e7ff\]:hover {
+  color: #0284c7 !important;
+}
+
+
 
 
 
