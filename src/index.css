@@ -26,8 +26,8 @@
     --prism-conic: conic-gradient(from 180deg at 50% 50%, #00e7ff, #2a6bff, #8b3bff, #ff00e7, #ff6ec4, #ffd481, #4dff9c, #00e7ff);
 
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-disp: 'Space Grotesk', 'Inter', sans-serif;
-    --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+    --font-disp: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
     --maxw: 1320px;
     --pad: clamp(20px, 5vw, 72px);
