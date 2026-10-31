@@ -47,6 +47,7 @@ Thumbs.db
 .parcel-cache/
 .temp/
 .tmp/
+test-screenshots/
 
 # AI Agents, Tools & Automation System Files (Tuyệt đối không lộ ra repo)
 .agents/
