@@ -206,8 +206,9 @@ export default function Step8ContactReview({
             </div>
             <button
               type="button"
+              data-edit-step="1"
               onClick={() => onJumpToStep(1)}
-              className="text-xs text-[#0284c7] hover:underline font-semibold"
+              className="text-xs text-[#0284c7] hover:underline font-semibold px-2 py-1 rounded hover:bg-[#e0f2fe]/50"
             >
               Chỉnh sửa
             </button>

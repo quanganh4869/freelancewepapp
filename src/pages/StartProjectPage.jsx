@@ -114,6 +114,7 @@ export default function StartProjectPage() {
 
   // Step state
   const [currentStep, setCurrentStep] = useState(1);
+  const [maxStepReached, setMaxStepReached] = useState(1);
   const [confirmed, setConfirmed] = useState(false);
   const [errors, setErrors] = useState({});
 
@@ -201,8 +202,27 @@ export default function StartProjectPage() {
     }
   };
 
-  // Immediate save on user trigger
+  // Handle selecting / switching project type safely
+  const handleSelectType = (newType) => {
+    if (formData.requestType && formData.requestType !== newType) {
+      // Khi đổi loại dự án: bảo toàn dữ liệu chung (lĩnh vực, mục tiêu, ngân sách, liên hệ)
+      // nhưng xóa sạch các tính năng đặc thù của loại cũ để không bị rò rỉ dữ liệu sang loại mới
+      setFormData((prev) => ({
+        ...prev,
+        requestType: newType,
+        features: [],
+        customFeatures: ''
+      }));
+    } else {
+      handleChangeField('requestType', newType);
+    }
+  };
+
+  // Immediate save on user trigger or step transition
   const handleSaveDraftNow = () => {
+    if (saveTimeoutRef.current) {
+      clearTimeout(saveTimeoutRef.current);
+    }
     setDraftStatus('saving');
     const res = requestDraftService.saveDraft(formData);
     if (res.success) {
@@ -225,17 +245,23 @@ export default function StartProjectPage() {
 
     if (stepNumber === 8) {
       const contact = formData.contactInformation || {};
-      if (!contact.fullName?.trim()) {
+      const trimmedName = (contact.fullName || '').trim();
+      const trimmedEmail = (contact.email || '').trim();
+      const trimmedPhone = (contact.phone || '').trim();
+
+      if (!trimmedName) {
         newErrors.fullName = 'Vui lòng nhập họ và tên của bạn.';
+      } else if (trimmedName.length > 120) {
+        newErrors.fullName = 'Họ và tên quá dài (tối đa 120 ký tự).';
       }
 
-      if (!contact.email?.trim()) {
+      if (!trimmedEmail) {
         newErrors.email = 'Vui lòng nhập địa chỉ email.';
-      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact.email.trim())) {
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
         newErrors.email = 'Email chưa đúng định dạng (Ví dụ: ban@example.com).';
       }
 
-      if (!contact.phone?.trim()) {
+      if (!trimmedPhone) {
         newErrors.phone = 'Vui lòng nhập số điện thoại hoặc Zalo để tôi liên hệ.';
       }
 
@@ -248,17 +274,23 @@ export default function StartProjectPage() {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Navigation handlers
+  // Navigation handlers (đồng bộ dữ liệu ngay lập tức trước khi chuyển bước)
   const handleNext = () => {
     if (validateStep(currentStep)) {
+      handleSaveDraftNow();
       if (currentStep < STEP_NAMES.length) {
-        setCurrentStep((prev) => prev + 1);
+        const nextStep = currentStep + 1;
+        setCurrentStep(nextStep);
+        if (nextStep > maxStepReached) {
+          setMaxStepReached(nextStep);
+        }
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     }
   };
 
   const handlePrev = () => {
+    handleSaveDraftNow();
     if (currentStep > 1) {
       setCurrentStep((prev) => prev - 1);
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -267,6 +299,7 @@ export default function StartProjectPage() {
 
   const handleJumpToStep = (stepNumber) => {
     if (stepNumber <= currentStep || validateStep(currentStep)) {
+      handleSaveDraftNow();
       setCurrentStep(stepNumber);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -289,6 +322,8 @@ export default function StartProjectPage() {
 
   // Form Submission
   const handleSubmit = async () => {
+    if (isSubmitting) return;
+
     if (!validateStep(8)) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
@@ -297,23 +332,38 @@ export default function StartProjectPage() {
     setIsSubmitting(true);
     setErrors({});
 
+    // Làm sạch dữ liệu liên hệ trước khi gửi
+    const contact = formData.contactInformation || {};
+    const sanitizedContact = {
+      ...contact,
+      fullName: (contact.fullName || '').trim(),
+      email: (contact.email || '').trim().toLowerCase(),
+      phone: (contact.phone || '').trim(),
+      company: (contact.company || '').trim()
+    };
+
+    const cleanFormData = {
+      ...formData,
+      contactInformation: sanitizedContact
+    };
+
     try {
       // 1. Lưu vào RequestContext
-      const createdRequest = submitProjectRequest(formData);
+      const createdRequest = submitProjectRequest(cleanFormData);
       const generatedId = createdRequest.id;
 
       // 2. Gửi về API backend
       const payloadToSend = {
-        ...formData,
+        ...cleanFormData,
         id: generatedId,
-        clientName: formData.contactInformation?.fullName,
-        clientEmail: formData.contactInformation?.email,
-        clientPhone: formData.contactInformation?.phone,
-        clientCompany: formData.contactInformation?.company,
-        projectType: formData.requestType,
-        budget: formData.budgetRange,
-        timeline: formData.desiredTimeline?.startTimeline,
-        notes: formData.additionalNotes
+        clientName: sanitizedContact.fullName,
+        clientEmail: sanitizedContact.email,
+        clientPhone: sanitizedContact.phone,
+        clientCompany: sanitizedContact.company,
+        projectType: cleanFormData.requestType,
+        budget: cleanFormData.budgetRange,
+        timeline: cleanFormData.desiredTimeline?.startTimeline,
+        notes: cleanFormData.additionalNotes
       };
 
       const res = await fetch('/api/send-request', {
@@ -330,7 +380,7 @@ export default function StartProjectPage() {
 
       setSubmittedResult({
         requestId: finalId,
-        formData
+        formData: cleanFormData
       });
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
@@ -340,7 +390,7 @@ export default function StartProjectPage() {
       requestDraftService.clearDraft();
       setSubmittedResult({
         requestId: fallbackId,
-        formData
+        formData: cleanFormData
       });
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } finally {
@@ -376,6 +426,7 @@ export default function StartProjectPage() {
         {/* 8-Step Progress Bar */}
         <ProjectProgress
           currentStep={currentStep}
+          maxStepReached={maxStepReached}
           onStepClick={handleJumpToStep}
         />
 
@@ -388,7 +439,7 @@ export default function StartProjectPage() {
               {currentStep === 1 && (
                 <Step1ProjectType
                   selectedType={formData.requestType}
-                  onSelectType={(typeId) => handleChangeField('requestType', typeId)}
+                  onSelectType={(typeId) => handleSelectType(typeId)}
                 />
               )}
 

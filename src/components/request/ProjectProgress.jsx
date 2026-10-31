@@ -14,9 +14,10 @@ export const STEP_NAMES = [
 /**
  * ProjectProgress — Thanh tiến trình ngang 8 bước
  */
-export default function ProjectProgress({ currentStep = 1, onStepClick }) {
+export default function ProjectProgress({ currentStep = 1, maxStepReached = 1, onStepClick }) {
   const totalSteps = STEP_NAMES.length;
-  const progressPercent = Math.round(((currentStep - 1) / (totalSteps - 1)) * 100);
+  const effectiveMax = Math.max(currentStep, maxStepReached);
+  const progressPercent = Math.round(((effectiveMax - 1) / (totalSteps - 1)) * 100);
 
   return (
     <div className="mb-8 space-y-3">
@@ -49,8 +50,9 @@ export default function ProjectProgress({ currentStep = 1, onStepClick }) {
           {STEP_NAMES.map((name, index) => {
             const stepNum = index + 1;
             const isCurrent = currentStep === stepNum;
-            const isCompleted = currentStep > stepNum;
-            const isClickable = isCompleted && onStepClick;
+            const isReached = stepNum <= effectiveMax;
+            const isCompleted = stepNum < currentStep || (stepNum <= effectiveMax && !isCurrent);
+            const isClickable = isReached && !isCurrent && onStepClick;
 
             return (
               <button
@@ -68,7 +70,7 @@ export default function ProjectProgress({ currentStep = 1, onStepClick }) {
                       : 'text-[#94a3b8] dark:text-[#64748b] cursor-not-allowed opacity-60'
                   }
                 `}
-                title={isCompleted ? `Quay lại: ${name}` : name}
+                title={isCompleted ? `Chuyển tới: ${name}` : name}
               >
                 <span
                   className={`w-4 h-4 rounded-full text-[10px] flex items-center justify-center font-bold ${
