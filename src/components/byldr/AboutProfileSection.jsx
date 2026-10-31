@@ -38,20 +38,18 @@ export const AboutProfileSection = () => {
           {/* Left Column (5 Cols): 3D Coding Developer Card & Quick Meta Card */}
           <div className="lg:col-span-5 space-y-6">
             
-            {/* 3D Developer Coding Avatar Frame with BYLDR Prism Border */}
-            <div className="relative group p-[2px] rounded-3xl bg-gradient-to-tr from-[#00e7ff] via-[#2a6bff] to-[#ff00e7] shadow-[0_20px_50px_-15px_rgba(0,231,255,0.25)]">
-              <div className="relative rounded-[22px] overflow-hidden bg-[#0a0b14] p-3 flex items-center justify-center">
-                <div className="aspect-square w-full rounded-2xl overflow-hidden bg-[#05060c] relative flex items-center justify-center p-2">
-                  <img
-                    src="/assets/about-developer.png"
-                    alt="Minh họa nhân vật 3D lập trình viên đang phát triển phần mềm hiện đại"
-                    width={1200}
-                    height={896}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-contain filter brightness-[1.02] contrast-[1.03] transition-transform duration-500 group-hover:scale-[1.02] drop-shadow-[0_15px_25px_rgba(0,0,0,0.6)]"
-                  />
-                </div>
+            {/* 3D Developer Coding Avatar Frame without border gradient */}
+            <div className="relative group rounded-3xl overflow-hidden bg-[#0a0b14] p-3 flex items-center justify-center">
+              <div className="aspect-square w-full rounded-2xl overflow-hidden bg-[#05060c] relative flex items-center justify-center p-2">
+                <img
+                  src="/assets/about-developer.png"
+                  alt="Minh họa nhân vật 3D lập trình viên đang phát triển phần mềm hiện đại"
+                  width={1200}
+                  height={896}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-contain filter brightness-[1.02] contrast-[1.03] transition-transform duration-500 group-hover:scale-[1.02] drop-shadow-[0_15px_25px_rgba(0,0,0,0.6)]"
+                />
               </div>
             </div>
 
@@ -139,7 +137,7 @@ export const AboutProfileSection = () => {
             {/* Categorized Technical Skills Chips */}
             <div className="space-y-4 pt-4">
               <span className="text-[12px] font-mono uppercase tracking-widest text-[#00e7ff] block">
-                MA TRẬN KỸ NĂNG KỸ THUẬT
+                KĨ NĂNG
               </span>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-[13px] font-mono">

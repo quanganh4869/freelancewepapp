@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Sparkles, RefreshCw, ArrowRight } from 'lucide-react';
 
 export const StartProjectSection = () => {
   return (
@@ -11,7 +10,7 @@ export const StartProjectSection = () => {
         <div className="sec-head">
           <div>
             <h2>
-              Let's build <span className="grad">yours</span>
+              Let's build <span className="grad">yours product</span>
             </h2>
           </div>
         </div>
@@ -22,10 +21,6 @@ export const StartProjectSection = () => {
           {/* Lane 1: Start From Scratch */}
           <div className="group relative p-8 sm:p-10 rounded-2xl bg-[#0a0b14] border border-[rgba(180,170,255,0.18)] hover:border-[#00e7ff]/50 transition-all duration-300 flex flex-col justify-between space-y-8 shadow-sm hover:shadow-xl">
             <div className="space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-[#00e7ff]/10 border border-[#00e7ff]/30 text-[#00e7ff] flex items-center justify-center">
-                <Sparkles size={22} />
-              </div>
-
               <span className="text-[11px] font-mono uppercase tracking-widest text-[#00e7ff] block">
                 LỰA CHỌN 01 · TỪ Ý TƯỞNG ĐẾN SẢN PHẨM
               </span>
@@ -68,10 +63,6 @@ export const StartProjectSection = () => {
           {/* Lane 2: Upgrade Existing Site */}
           <div className="group relative p-8 sm:p-10 rounded-2xl bg-[#0a0b14] border border-[rgba(180,170,255,0.18)] hover:border-[#ff00e7]/50 transition-all duration-300 flex flex-col justify-between space-y-8 shadow-sm hover:shadow-xl">
             <div className="space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-[#ff00e7]/10 border border-[#ff00e7]/30 text-[#ff00e7] flex items-center justify-center">
-                <RefreshCw size={22} />
-              </div>
-
               <span className="text-[11px] font-mono uppercase tracking-widest text-[#ff00e7] block">
                 LỰA CHỌN 02 · TỐI ƯU & HIỆN ĐẠI HÓA
               </span>

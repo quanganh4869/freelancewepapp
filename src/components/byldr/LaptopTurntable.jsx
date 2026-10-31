@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { ExternalLink, ArrowRight, Github } from 'lucide-react';
+import { ExternalLink, ArrowRight, Github, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export const LaptopTurntable = ({ projects = [] }) => {
   const containerRef = useRef(null);
@@ -14,6 +14,47 @@ export const LaptopTurntable = ({ projects = [] }) => {
   const N = projects.length || 3;
   const rawIdx = ((Math.round(rot) % N) + N) % N;
   const activeProject = projects[rawIdx] || projects[0];
+
+  // Screen gallery index per project: { [projectId]: currentScreenIndex }
+  const [screenIndices, setScreenIndices] = useState({});
+
+  // Helper to get all available images for a project
+  const getProjectScreens = useCallback((p) => {
+    if (!p) return [];
+    const screens = [];
+    if (p.primaryImage) screens.push(p.primaryImage);
+    else if (p.thumbnail) screens.push(p.thumbnail);
+
+    if (p.secondaryImages && Array.isArray(p.secondaryImages)) {
+      p.secondaryImages.forEach((imgObj) => {
+        const url = typeof imgObj === 'string' ? imgObj : imgObj?.image;
+        if (url && !screens.includes(url)) {
+          screens.push(url);
+        }
+      });
+    }
+    // Fallback default
+    if (screens.length === 0 && p.thumbnail) screens.push(p.thumbnail);
+    return screens;
+  }, []);
+
+  const handlePrevScreen = (e, projectId, totalScreens) => {
+    e.stopPropagation();
+    setScreenIndices((prev) => {
+      const current = prev[projectId] || 0;
+      const nextIdx = (current - 1 + totalScreens) % totalScreens;
+      return { ...prev, [projectId]: nextIdx };
+    });
+  };
+
+  const handleNextScreen = (e, projectId, totalScreens) => {
+    e.stopPropagation();
+    setScreenIndices((prev) => {
+      const current = prev[projectId] || 0;
+      const nextIdx = (current + 1) % totalScreens;
+      return { ...prev, [projectId]: nextIdx };
+    });
+  };
 
   // Drag interaction state
   const isDragging = useRef(false);
@@ -197,27 +238,65 @@ export const LaptopTurntable = ({ projects = [] }) => {
                     <span className="w-1.5 h-1.5 rounded-full bg-[#05060c] border border-white/20" />
                   </div>
 
-                  {/* 16:10 Laptop Screen (Scrollable on Hero) */}
-                  <div
-                    className={`laptop-inner-screen relative w-full aspect-[16/10] overflow-hidden rounded-[4px] bg-[#05060c] ${
-                      isHero ? 'overflow-y-auto cursor-ns-resize' : 'overflow-hidden pointer-events-none'
-                    }`}
-                    onWheel={(e) => {
-                      if (isHero) {
-                        e.stopPropagation(); // Allow inner scroll without rotating stage
-                      }
-                    }}
-                  >
-                    <img
-                      src={project.primaryImage || project.thumbnail}
-                      alt={project.title}
-                      className="w-full h-auto object-cover object-top transition-transform duration-300"
-                      loading="eager"
-                    />
+                  {/* 16:10 Laptop Screen (Scrollable on Hero with Next/Prev Screen Buttons) */}
+                  {(() => {
+                    const screens = getProjectScreens(project);
+                    const currentScreenIdx = (screenIndices[project.id || i] || 0) % (screens.length || 1);
+                    const activeScreenUrl = screens[currentScreenIdx] || project.primaryImage || project.thumbnail;
 
-                    {/* Glare Sheen Highlight */}
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.07]" />
-                  </div>
+                    return (
+                      <div
+                        className={`laptop-inner-screen relative w-full aspect-[16/10] overflow-hidden rounded-[4px] bg-[#05060c] ${
+                          isHero ? 'overflow-y-auto cursor-ns-resize group/screen' : 'overflow-hidden pointer-events-none'
+                        }`}
+                        onWheel={(e) => {
+                          if (isHero) {
+                            e.stopPropagation(); // Allow inner scroll without rotating stage
+                          }
+                        }}
+                      >
+                        <img
+                          src={activeScreenUrl}
+                          alt={`${project.title} - Màn hình ${currentScreenIdx + 1}`}
+                          className="w-full h-auto object-cover object-top transition-all duration-300"
+                          loading="eager"
+                        />
+
+                        {/* Glare Sheen Highlight */}
+                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.07]" />
+
+                        {/* In-Screen Navigation Controls (Only on Hero laptop when project has > 1 screen) */}
+                        {isHero && screens.length > 1 && (
+                          <div className="pointer-events-auto absolute bottom-2.5 inset-x-2.5 flex items-center justify-between z-20">
+                            {/* Screen Counter Badge */}
+                            <div className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-black/75 backdrop-blur-md text-[#f3f2fb] border border-white/20 shadow-md">
+                              {currentScreenIdx + 1} / {screens.length}
+                            </div>
+
+                            {/* Prev / Next Screen Buttons */}
+                            <div className="flex items-center gap-1.5">
+                              <button
+                                type="button"
+                                aria-label="Giao diện trước"
+                                onClick={(e) => handlePrevScreen(e, project.id || i, screens.length)}
+                                className="w-6 h-6 rounded-full bg-black/80 hover:bg-[#00e7ff] text-white hover:text-black border border-white/20 transition-all flex items-center justify-center shadow-lg active:scale-95"
+                              >
+                                <ChevronLeft size={14} />
+                              </button>
+                              <button
+                                type="button"
+                                aria-label="Giao diện tiếp theo"
+                                onClick={(e) => handleNextScreen(e, project.id || i, screens.length)}
+                                className="w-6 h-6 rounded-full bg-black/80 hover:bg-[#00e7ff] text-white hover:text-black border border-white/20 transition-all flex items-center justify-center shadow-lg active:scale-95"
+                              >
+                                <ChevronRight size={14} />
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })()}
                 </div>
 
                 {/* Laptop Lower Deck Profile & Hinge */}

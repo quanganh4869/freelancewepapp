@@ -1,0 +1,2786 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Khởi Động Dự Án — Bản Yêu Cầu Chi Tiết</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+       HỆ THỐNG BIẾN THIẾT KẾ & CHỦ ĐỀ SÁNG / TỐI (DESIGN TOKENS)
+       ========================================================================== */
+    :root {
+      --primary: #2563EB;
+      --primary-hover: #1D4ED8;
+      --primary-light: #EFF6FF;
+      --primary-border: #93C5FD;
+      --accent: #F59E0B;
+      --success: #10B981;
+      --danger: #EF4444;
+      --danger-bg: #FEF2F2;
+      
+      --bg-page: #F8FAFC;
+      --bg-card: #FFFFFF;
+      --bg-card-subtle: #F1F5F9;
+      --border-color: #E2E8F0;
+      --border-focus: #3B82F6;
+      
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --text-subtle: #94A3B8;
+      
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+      
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.03);
+      
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary: #3B82F6;
+        --primary-hover: #60A5FA;
+        --primary-light: rgba(59, 130, 246, 0.15);
+        --primary-border: #1E3A8A;
+        
+        --bg-page: #0B0F19;
+        --bg-card: #131A2B;
+        --bg-card-subtle: #1E293B;
+        --border-color: #243048;
+        --border-focus: #60A5FA;
+        
+        --text-main: #F8FAFC;
+        --text-muted: #94A3B8;
+        --text-subtle: #64748B;
+        --danger-bg: rgba(239, 68, 68, 0.15);
+      }
+    }
+
+    /* ==========================================================================
+       RESET & BASE TYPOGRAPHY
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-main);
+      background-color: var(--bg-page);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 60px;
+    }
+
+    /* ==========================================================================
+       THANH TIẾN ĐỘ CỐ ĐỊNH (FIXED TOP PROGRESS BAR)
+       ========================================================================== */
+    .top-progress-wrapper {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(10px);
+    }
+
+    .top-progress-container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background-color: var(--border-color);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), #38BDF8);
+      border-radius: var(--radius-full);
+      transition: width 0.4s ease;
+    }
+
+    /* ==========================================================================
+       KHUNG BỐ CỤC CHÍNH (CONTAINER & STEP WRAPPER)
+       ========================================================================== */
+    .app-container {
+      width: 100%;
+      max-width: 860px;
+      margin: 24px auto 0;
+      padding: 0 16px;
+      flex: 1;
+    }
+
+    .step-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 640px) {
+      .step-card {
+        padding: 24px 18px;
+      }
+    }
+
+    .step-header {
+      margin-bottom: 28px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 20px;
+    }
+
+    .step-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .step-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .step-lead {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
+       CÁC TRƯỜNG NHẬP LIỆU & FORMS (ACCESSIBLE INPUTS)
+       ========================================================================== */
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .form-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    .required-star {
+      color: var(--danger);
+      font-weight: bold;
+    }
+
+    .form-helper {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .form-control {
+      width: 100%;
+      min-height: 48px;
+      padding: 10px 16px;
+      font-size: 16px;
+      font-family: inherit;
+      color: var(--text-main);
+      background-color: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px var(--primary-light);
+    }
+
+    textarea.form-control {
+      min-height: 110px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    .field-error {
+      color: var(--danger);
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 6px;
+      display: none;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .field-error.active {
+      display: flex;
+    }
+
+    .input-counter {
+      display: flex;
+      justify-content: flex-end;
+      font-size: 12px;
+      color: var(--text-subtle);
+      margin-top: 4px;
+    }
+
+    /* ==========================================================================
+       THẺ LỰA CHỌN TRỰC QUAN (OPTION CARDS & GRIDS)
+       ========================================================================== */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 14px;
+    }
+
+    @media (max-width: 520px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .option-card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      cursor: pointer;
+      user-select: none;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .option-card:hover {
+      border-color: var(--primary-border);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .option-card.selected {
+      border-color: var(--primary);
+      background-color: var(--primary-light);
+      box-shadow: 0 0 0 1px var(--primary);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .card-icon-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-icon {
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .card-check {
+      width: 20px;
+      height: 20px;
+      border-radius: var(--radius-full);
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+      transition: var(--transition);
+    }
+
+    .option-card.selected .card-check {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .card-example {
+      font-size: 12px;
+      color: var(--text-subtle);
+      font-style: italic;
+      border-top: 1px dashed var(--border-color);
+      padding-top: 6px;
+      margin-top: 4px;
+    }
+
+    .card-meta-tag {
+      align-self: flex-start;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      background: var(--bg-card-subtle);
+      color: var(--text-muted);
+    }
+
+    /* Module groups accordion */
+    .module-group {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      margin-bottom: 14px;
+      overflow: hidden;
+      background: var(--bg-card);
+    }
+
+    .module-group-header {
+      padding: 14px 18px;
+      background: var(--bg-card-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .module-group-body {
+      padding: 16px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 12px;
+    }
+
+    /* Style previews (Step 7) */
+    .style-preview-box {
+      height: 60px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ==========================================================================
+       TOOLTIP / HELPER MODAL BẬT TIA NẮNG GIẢI THÍCH (TECH ANALOGY)
+       ========================================================================== */
+    .help-tooltip-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: var(--radius-full);
+      background-color: var(--bg-card-subtle);
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      vertical-align: middle;
+      transition: var(--transition);
+    }
+
+    .help-tooltip-btn:hover {
+      background-color: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* ==========================================================================
+       THANH ĐIỀU HƯỚNG NÚT BẤM (NAVIGATION BAR)
+       ========================================================================== */
+    .step-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 12px 24px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: inherit;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1.5px solid transparent;
+      text-decoration: none;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.35);
+    }
+
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text-main);
+      border-color: var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-card-subtle);
+    }
+
+    .btn-sm {
+      min-height: 36px;
+      padding: 6px 14px;
+      font-size: 13px;
+    }
+
+    /* Modal / Alert confirmation */
+    .custom-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .custom-modal {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      max-width: 440px;
+      width: 100%;
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* ==========================================================================
+       ANIMATIONS
+       ========================================================================== */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-step {
+      animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .animate-step, .progress-fill, .btn, .option-card {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+
+    /* Utilites */
+    .hidden { display: none !important; }
+    .text-center { text-align: center; }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       CẤU HÌNH BIỂU MẪU & CÔNG THỨC ƯỚC TÍNH (CONFIG OBJECT)
+       ========================================================================== -->
+  <script>
+    window.STUDIO_CONFIG = {
+      // 1. Thông tin thương hiệu
+      brand: {
+        name: "Quang Anh Studio",
+        slogan: "Xây dựng Web App & Chuyển đổi số tinh gọn cho người kinh doanh",
+        authorRole: "Senior UX Designer & Full-stack Web Developer",
+        contactEmail: "quanganhqb04@gmail.com",
+        contactPhone: "0968 994 869",
+        zaloUrl: "https://zalo.me/0968994869",
+        supportHours: "Phản hồi trong vòng 24 giờ làm việc"
+      },
+
+      // 2. Tích hợp Webhook nhận Brief (Formspree / n8n / Google Apps Script)
+      // THAY THẾ URL WEBHOOK CỦA BẠN VÀO ĐÂY:
+      webhookUrl: "https://formspree.io/f/mqkenwre", // [WEBHOOK_URL]
+
+      // 3. Công thức tính điểm công & Ước tính sơ bộ (VNĐ)
+      pricing: {
+        baseCost: 2500000,          // Mức sàn tối thiểu cho hạ tầng & cài đặt
+        costPerPoint: 280000,       // Đơn giá cho 1 điểm module chức năng
+        complexityMultiplier: {
+          simple: 1.0,              // Độ khó: Đơn giản
+          medium: 1.25,             // Độ khó: Vừa
+          complex: 1.6              // Độ khó: Phức tạp
+        },
+        rushMultiplier: 1.35,       // Hệ số làm gấp
+        multiLangMultiplier: 1.25   // Hệ số đa ngôn ngữ
+      }
+    };
+  </script>
+
+  <!-- ==========================================================================
+       THANH TIẾN ĐỘ CỐ ĐỊNH PHÍA TRÊN
+       ========================================================================== -->
+  <header class="top-progress-wrapper" id="topProgressWrapper">
+    <div class="top-progress-container">
+      <div class="progress-meta">
+        <span id="progressStepText">Bước 0/12</span>
+        <span id="progressTimeEstimate">⏱️ Còn khoảng 10 phút</span>
+      </div>
+      <div class="progress-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-fill" id="progressFillBar"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       NỘI DUNG 12 BƯỚC CỦA WIZARD
+       ========================================================================== -->
+  <main class="app-container" id="appRoot">
+
+    <!-- ==================== BƯỚC 0: MÀN HÌNH CHÀO ==================== -->
+    <section class="step-card animate-step" id="step-0">
+      <div class="step-header text-center" style="border-bottom: none; padding-bottom: 0;">
+        <span class="step-badge">✨ Bắt đầu dễ dàng</span>
+        <h1 class="step-title" style="font-size: 30px;">Kể cho mình nghe bạn muốn làm gì nhé 👋</h1>
+        <p class="step-lead" style="max-width: 580px; margin: 0 auto;">
+          Chỉ mất khoảng 10 phút. Bạn không cần biết gì về công nghệ, cứ chọn và kể bằng lời của bạn. Chỗ nào chưa chắc, chọn "Mình chưa chắc" là được, mình sẽ tư vấn thêm.
+        </p>
+      </div>
+
+      <!-- 3 Cam kết uy tín -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 32px 0;">
+        <div style="background: var(--bg-card-subtle); padding: 18px; border-radius: var(--radius-md); text-align: center;">
+          <div style="font-size: 26px; margin-bottom: 6px;">🔒</div>
+          <strong style="display: block; font-size: 15px;">Giữ kín tuyệt đối</strong>
+          <span style="font-size: 13px; color: var(--text-muted);">Ý tưởng và thông tin của bạn được cam kết bảo mật 100%.</span>
+        </div>
+        <div style="background: var(--bg-card-subtle); padding: 18px; border-radius: var(--radius-md); text-align: center;">
+          <div style="font-size: 26px; margin-bottom: 6px;">💸</div>
+          <strong style="display: block; font-size: 15px;">Hoàn toàn miễn phí</strong>
+          <span style="font-size: 13px; color: var(--text-muted);">Không ràng buộc, không ép mua dịch vụ. Nhận tư vấn trước.</span>
+        </div>
+        <div style="background: var(--bg-card-subtle); padding: 18px; border-radius: var(--radius-md); text-align: center;">
+          <div style="font-size: 26px; margin-bottom: 6px;">⏱️</div>
+          <strong style="display: block; font-size: 15px;">Báo giá trong 24 giờ</strong>
+          <span style="font-size: 13px; color: var(--text-muted);">Nhận lộ trình rõ ràng, ước tính ngân sách minh bạch.</span>
+        </div>
+      </div>
+
+      <div class="text-center" style="margin-top: 10px;">
+        <button type="button" class="btn btn-primary" onclick="goToStep(1)" style="font-size: 17px; padding: 14px 36px;">
+          Bắt đầu thôi →
+        </button>
+      </div>
+    </section>
+
+    <!-- ==================== BƯỚC 1: LÀM QUEN ==================== -->
+    <section class="step-card animate-step hidden" id="step-1">
+      <div class="step-header">
+        <span class="step-badge">Bước 01 / 12</span>
+        <h2 class="step-title">Làm quen với nhau nhé</h2>
+        <p class="step-lead">Trước tiên, cho mình biết nên gọi bạn là gì và liên hệ với bạn bằng cách nào nhé.</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="inp-fullName">
+          Họ và tên của bạn <span class="required-star">*</span>
+        </label>
+        <span class="form-helper">Để mình biết cách xưng hô lịch sự khi trao đổi.</span>
+        <input type="text" id="inp-fullName" class="form-control" placeholder="Ví dụ: Nguyễn Thu Hà" autocomplete="name">
+        <div class="field-error" id="err-fullName">⚠️ Bạn quên điền họ tên rồi, mình cần biết để tiện xưng hô nhé.</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="inp-email">
+          Địa chỉ Email của bạn <span class="required-star">*</span>
+        </label>
+        <span class="form-helper">Mình sẽ gửi bản tóm tắt và báo giá vào đây.</span>
+        <input type="email" id="inp-email" class="form-control" placeholder="Ví dụ: thuha@gmail.com" autocomplete="email">
+        <div class="field-error" id="err-email">⚠️ Bạn quên điền email hoặc email chưa đúng định dạng rồi, mình cần nó để gửi báo giá nhé.</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="inp-phone">
+          Số điện thoại / Zalo <span class="required-star">*</span>
+        </label>
+        <span class="form-helper">Để trao đổi nhanh khi cần giải thích hoặc xác nhận yêu cầu.</span>
+        <input type="tel" id="inp-phone" class="form-control" placeholder="Ví dụ: 0912 345 678" autocomplete="tel">
+        <div class="field-error" id="err-phone">⚠️ Vui lòng nhập số điện thoại Việt Nam hợp lệ (10 chữ số) để mình liên hệ nhé.</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Bạn thích được liên hệ qua kênh nào nhất?</label>
+        <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
+          <div class="option-card selected" onclick="selectRadio(this, 'preferredContact', 'Zalo')">
+            <span class="card-title">💬 Zalo</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'preferredContact', 'Gọi điện')">
+            <span class="card-title">📞 Gọi điện</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'preferredContact', 'Email')">
+            <span class="card-title">✉️ Email</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'preferredContact', 'Google Meet')">
+            <span class="card-title">💻 Google Meet</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Khung giờ thuận tiện nhất để trao đổi:</label>
+        <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
+          <div class="option-card" onclick="selectRadio(this, 'preferredTime', 'Sáng (8-12h)')">
+            <span class="card-title">🌅 Sáng (8-12h)</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'preferredTime', 'Chiều (13-17h)')">
+            <span class="card-title">☀️ Chiều (13-17h)</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'preferredTime', 'Tối (18-21h)')">
+            <span class="card-title">🌙 Tối (18-21h)</span>
+          </div>
+          <div class="option-card selected" onclick="selectRadio(this, 'preferredTime', 'Khi nào cũng được')">
+            <span class="card-title">⚡ Khi nào cũng được</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-actions">
+        <button type="button" class="btn btn-secondary" onclick="goToStep(0)">Quay lại</button>
+        <button type="button" class="btn btn-primary" onclick="validateStep1()">Tiếp tục →</button>
+      </div>
+    </section>
+
+    <!-- ==================== BƯỚC 2: BẠN LÀ AI? ==================== -->
+    <section class="step-card animate-step hidden" id="step-2">
+      <div class="step-header">
+        <span class="step-badge">Bước 02 / 12</span>
+        <h2 class="step-title">Bạn đang đại diện cho mô hình nào?</h2>
+        <p class="step-lead">Biết bạn là ai giúp mình gợi ý đúng giải pháp và mức chi phí vừa vặn nhất.</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">1. Bạn đang đại diện cho: (chọn 1)</label>
+        <div class="cards-grid">
+          <div class="option-card selected" onclick="selectRadio(this, 'clientType', 'Cá nhân / freelancer')">
+            <div class="card-top">
+              <span class="card-title">🧑 Cá nhân / Freelancer</span>
+              <div class="card-check">✓</div>
+            </div>
+            <p class="card-desc">Mình làm cho bản thân hoặc xây thương hiệu cá nhân.</p>
+          </div>
+
+          <div class="option-card" onclick="selectRadio(this, 'clientType', 'Cửa hàng / kinh doanh nhỏ')">
+            <div class="card-top">
+              <span class="card-title">🏪 Cửa hàng / Shop nhỏ</span>
+              <div class="card-check">✓</div>
+            </div>
+            <p class="card-desc">Quy mô từ 1 đến 10 người cùng làm việc.</p>
+          </div>
+
+          <div class="option-card" onclick="selectRadio(this, 'clientType', 'Doanh nghiệp vừa/lớn')">
+            <div class="card-top">
+              <span class="card-title">🏢 Doanh nghiệp vừa / lớn</span>
+              <div class="card-check">✓</div>
+            </div>
+            <p class="card-desc">Có nhiều phòng ban, quy trình duyệt việc chặt chẽ.</p>
+          </div>
+
+          <div class="option-card" onclick="selectRadio(this, 'clientType', 'Startup')">
+            <div class="card-top">
+              <span class="card-title">🚀 Startup công nghệ / mới</span>
+              <div class="card-check">✓</div>
+            </div>
+            <p class="card-desc">Đang xây sản phẩm mới, cần ra thị trường thật nhanh.</p>
+          </div>
+
+          <div class="option-card" onclick="selectRadio(this, 'clientType', 'Trường học / Tổ chức')">
+            <div class="card-top">
+              <span class="card-title">🏫 Trường học / Phi lợi nhuận</span>
+              <div class="card-check">✓</div>
+            </div>
+            <p class="card-desc">Tổ chức giáo dục, câu lạc bộ, thiện nguyện.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="inp-companyName">2. Tên thương hiệu / cửa hàng / công ty</label>
+        <span class="form-helper">Không bắt buộc nếu bạn chưa đặt tên chính thức.</span>
+        <input type="text" id="inp-companyName" class="form-control" placeholder="Ví dụ: Tiệm Bánh Mẹ Làm, Nha Khoa Nụ Cười...">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="sel-industry">3. Bạn đang hoạt động trong lĩnh vực nào?</label>
+        <select id="sel-industry" class="form-control" onchange="toggleCustomIndustry(this.value)">
+          <option value="Thương mại - bán lẻ">Thương mại - bán lẻ / Cửa hàng</option>
+          <option value="Ăn uống - nhà hàng">Ăn uống - quán cà phê - nhà hàng</option>
+          <option value="Giáo dục - đào tạo">Giáo dục - đào tạo - dạy học</option>
+          <option value="Y tế - sức khỏe">Y tế - phòng khám - dược phẩm</option>
+          <option value="Bất động sản">Bất động sản - cho thuê phòng trọ</option>
+          <option value="Du lịch - lưu trú">Du lịch - khách sạn - homestay</option>
+          <option value="Làm đẹp - spa">Làm đẹp - spa - salon tóc</option>
+          <option value="Dịch vụ chuyên nghiệp">Dịch vụ tư vấn - kế toán - luật</option>
+          <option value="Công nghệ">Công nghệ - phần mềm</option>
+          <option value="Logistics - vận chuyển">Logistics - giao nhận hàng</option>
+          <option value="Khác">Lĩnh vực khác (bấm để tự ghi)</option>
+        </select>
+        <input type="text" id="inp-customIndustry" class="form-control hidden" style="margin-top: 8px;" placeholder="Ghi cụ thể ngành nghề của bạn vào đây...">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">4. Bạn đã có website hoặc ứng dụng chưa?</label>
+        <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+          <div class="option-card selected" onclick="selectWebStatus(this, 'Chưa có, làm mới hoàn toàn')">
+            <span class="card-title">🌱 Chưa có</span>
+            <span class="card-desc">Làm mới hoàn toàn từ đầu</span>
+          </div>
+          <div class="option-card" onclick="selectWebStatus(this, 'Có rồi, muốn làm lại')">
+            <span class="card-title">🔄 Có rồi</span>
+            <span class="card-desc">Muốn đập đi làm lại đẹp hơn</span>
+          </div>
+          <div class="option-card" onclick="selectWebStatus(this, 'Có rồi, muốn thêm chức năng')">
+            <span class="card-title">➕ Có rồi</span>
+            <span class="card-desc">Muốn lắp thêm chức năng mới</span>
+          </div>
+          <div class="option-card" onclick="selectWebStatus(this, 'Có rồi, bị lỗi cần sửa')">
+            <span class="card-title">🔧 Có rồi</span>
+            <span class="card-desc">Bị lỗi, cần sửa và tối ưu</span>
+          </div>
+        </div>
+        <div id="wrapper-existingUrl" class="hidden" style="margin-top: 12px;">
+          <input type="url" id="inp-existingUrl" class="form-control" placeholder="Dán đường link website hiện tại của bạn: https://...">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">5. Hoạt động kinh doanh của bạn đã chạy được bao lâu?</label>
+        <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
+          <div class="option-card" onclick="selectRadio(this, 'businessAge', 'Chưa bắt đầu')">
+            <span class="card-title">Mới bắt đầu</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'businessAge', 'Dưới 1 năm')">
+            <span class="card-title">Dưới 1 năm</span>
+          </div>
+          <div class="option-card selected" onclick="selectRadio(this, 'businessAge', '1-3 năm')">
+            <span class="card-title">1 – 3 năm</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'businessAge', 'Trên 3 năm')">
+            <span class="card-title">Trên 3 năm</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-actions">
+        <button type="button" class="btn btn-secondary" onclick="goToStep(1)">Quay lại</button>
+        <button type="button" class="btn btn-primary" onclick="goToStep(3)">Tiếp tục →</button>
+      </div>
+    </section>
+
+    <!-- ==================== BƯỚC 3: LOẠI SẢN PHẨM ==================== -->
+    <section class="step-card animate-step hidden" id="step-3">
+      <div class="step-header">
+        <span class="step-badge">Bước 03 / 12</span>
+        <h2 class="step-title">Bạn muốn làm loại sản phẩm nào?</h2>
+        <p class="step-lead">Hãy chọn loại gần giống nhất với ý tưởng của bạn. Không cần chính xác 100%, mình sẽ cùng bạn tinh chỉnh sau.</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Chọn các loại bạn đang nghĩ tới: (có thể chọn nhiều)</label>
+        <div class="cards-grid">
+          <div class="option-card" data-prod="landing_page" onclick="toggleMultiCard(this, 'productTypes', 'Landing page')">
+            <div class="card-top">
+              <span class="card-title">✨ Landing page</span>
+              <div class="card-check">✓</div>
+            </div>
+            <p class="card-desc">Một trang duy nhất để quảng cáo một sản phẩm, khóa học hoặc sự kiện.</p>
+            <span class="card-example">Ví dụ: Trang giới thiệu sữa rửa mặt, đăng ký hội thảo.</span>
+          </div>
+
+          <div class="option-card" data-prod="business_web" onclick="toggleMultiCard(this, 'productTypes', 'Website giới thiệu')">
+            <div class="card-top">
+              <span class="card-title">📄 Website giới thiệu</span>
+              <div class="card-check">✓</div>
+            </div>
+            <p class="card-desc">Như tấm danh thiếp online: trang chủ, về chúng tôi, dịch vụ, liên hệ.</p>
+            <span class="card-example">Ví dụ: Web công ty luật, phòng khám, studio ảnh.</span>
+          </div>
+
+          <div class="option-card" data-prod="ecommerce" onclick="toggleMultiCard(this, 'productTypes', 'Web bán hàng')">
+            <div class="card-top">
+              <span class="card-title">🛒 Web bán hàng</span>
+              <div class="card-check">✓</div>
+            </div>
+            <p class="card-desc">Như cửa hàng online: xem mẫu, giỏ hàng, đặt đơn và thanh toán.</p>
+            <span class="card-example">Ví dụ: Shop quần áo, mỹ phẩm, đồ gia dụng.</span>
+          </div>
+
+          <div class="option-card" data-prod="booking" onclick="toggleMultiCard(this, 'productTypes', 'Web đặt lịch')">
+            <div class="card-top">
+              <span class="card-title">📅 Web đặt lịch / hẹn chỗ</span>
+              <div class="card-check">✓</div>
+            </div>
+            <p class="card-desc">Khách tự chọn ngày giờ còn trống, bạn khỏi nhắn tin hỏi qua lại.</p>
+            <span class="card-example">Ví dụ: Đặt lịch spa, khám bệnh, sân bóng đá.</span>
+          </div>
+
+          <div class="option-card" data-prod="internal_app" onclick="toggleMultiCard(this, 'productTypes', 'Hệ thống quản lý nội bộ')">
+            <div class="card-top">
+              <span class="card-title">🗂️ Hệ thống quản lý nội bộ</span>
+              <div class="card-check">✓</div>
+            </div>
+            <p class="card-desc">Phần mềm cho nhân viên làm việc: quản lý đơn, phòng, khách, giao việc.</p>
+            <span class="card-example">Ví dụ: Quản lý nhà trọ, theo dõi tiến độ công việc.</span>
+          </div>
+
+          <div class="option-card" data-prod="marketplace" onclick="toggleMultiCard(this, 'productTypes', 'Sàn / nền tảng kết nối')">
+            <div class="card-top">
+              <span class="card-title">🏬 Sàn kết nối (Marketplace)</span>
+              <div class="card-check">✓</div>
+            </div>
+            <p class="card-desc">Nhiều người bán và nhiều người mua cùng vào giao dịch.</p>
+            <span class="card-example">Ví dụ: Tìm gia sư, kết nối thợ sửa nhà.</span>
+          </div>
+
+          <div class="option-card" data-prod="elearning" onclick="toggleMultiCard(this, 'productTypes', 'Web học online')">
+            <div class="card-top">
+              <span class="card-title">🎓 Web học online</span>
+              <div class="card-check">✓</div>
+            </div>
+            <p class="card-desc">Bán khóa học, xem video, làm bài kiểm tra và cấp chứng chỉ.</p>
+            <span class="card-example">Ví dụ: Khóa học tiếng Anh, làm bánh.</span>
+          </div>
+
+          <div class="option-card" data-prod="dashboard" onclick="toggleMultiCard(this, 'productTypes', 'Bảng báo cáo số liệu')">
+            <div class="card-top">
+              <span class="card-title">📊 Bảng báo cáo (Dashboard)</span>
+              <div class="card-check">✓</div>
+            </div>
+            <p class="card-desc">Gom tất cả số liệu về một màn hình có biểu đồ trực quan, dễ hiểu.</p>
+            <span class="card-example">Ví dụ: Báo cáo doanh thu, chi phí theo tháng.</span>
+          </div>
+
+          <div class="option-card" data-prod="automation" onclick="toggleMultiCard(this, 'productTypes', 'Công cụ tự động hóa')">
+            <div class="card-top">
+              <span class="card-title">🤖 Tự động hóa công việc</span>
+              <div class="card-check">✓</div>
+            </div>
+            <p class="card-desc">Thay con người làm việc lặp đi lặp lại: tự gửi email, gửi hóa đơn.</p>
+          </div>
+
+          <div class="option-card" data-prod="fix_web" onclick="toggleMultiCard(this, 'productTypes', 'Sửa / nâng cấp web cũ')">
+            <div class="card-top">
+              <span class="card-title">🔧 Sửa / nâng cấp web cũ</span>
+              <div class="card-check">✓</div>
+            </div>
+            <p class="card-desc">Sửa lỗi đang gặp, làm giao diện nhanh hơn hoặc hiện đại hơn.</p>
+          </div>
+
+          <div class="option-card" data-prod="not_sure" onclick="toggleMultiCard(this, 'productTypes', 'Mình chưa biết, cần tư vấn')">
+            <div class="card-top">
+              <span class="card-title">❓ Mình chưa biết, cần tư vấn</span>
+              <div class="card-check">✓</div>
+            </div>
+            <p class="card-desc">Cứ để trống, chúng ta sẽ làm rõ sau khi nghe câu chuyện của bạn.</p>
+          </div>
+        </div>
+        <div class="field-error" id="err-productTypes">⚠️ Bạn hãy chọn ít nhất một loại sản phẩm gần nhất nhé.</div>
+      </div>
+
+      <div class="form-group" id="wrapper-primaryProduct">
+        <label class="form-label" for="sel-primaryProduct">Trong số các loại đã chọn, cái nào là QUAN TRỌNG NHẤT?</label>
+        <span class="form-helper">Giúp mình ưu tiên làm thật tốt phần cốt lõi trước.</span>
+        <select id="sel-primaryProduct" class="form-control">
+          <option value="">-- Vui lòng chọn loại chính --</option>
+        </select>
+      </div>
+
+      <div class="step-actions">
+        <button type="button" class="btn btn-secondary" onclick="goToStep(2)">Quay lại</button>
+        <button type="button" class="btn btn-primary" onclick="validateStep3()">Tiếp tục →</button>
+      </div>
+    </section>
+
+    <!-- ==================== BƯỚC 4: KỂ CHUYỆN Ý TƯỞNG ==================== -->
+    <section class="step-card animate-step hidden" id="step-4">
+      <div class="step-header">
+        <span class="step-badge">Bước 04 / 12</span>
+        <h2 class="step-title">Kể chuyện ý tưởng của bạn</h2>
+        <p class="step-lead">Đây là phần quan trọng nhất. Bạn cứ viết như đang kể cho một người bạn nghe, không cần văn hoa hay thuật ngữ.</p>
+      </div>
+
+      <div class="form-group">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+          <label class="form-label" for="inp-problem" style="margin-bottom: 0;">
+            1. Bạn đang gặp khó khăn gì, hoặc muốn đạt được điều gì? <span class="required-star">*</span>
+          </label>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="suggestStoryPrompt()">💡 Gợi ý câu mẫu</button>
+        </div>
+        <span class="form-helper">Mô tả công việc hiện tại đang tốn thời gian ra sao hoặc mục tiêu cụ thể bạn muốn giải quyết.</span>
+        <textarea id="inp-problem" class="form-control" rows="4" placeholder="Ví dụ: Hiện tại mình đang nhận đơn đặt bánh qua tin nhắn Zalo và Facebook. Mỗi tối phải mất 2 tiếng chép tay vào sổ, rất hay bị nhầm ngày giao và sót tiền cọc. Mình muốn khách tự vào xem mẫu bánh, tự chọn ngày giờ giao và chuyển khoản đặt cọc luôn..." oninput="updateCharCount(this, 'count-problem')"></textarea>
+        <div class="input-counter"><span id="count-problem">0</span>/30 ký tự tối thiểu</div>
+        <div class="field-error" id="err-problem">⚠️ Hãy chia sẻ kỹ hơn một chút nhé (tối thiểu 30 ký tự) để mình hiểu đúng vấn đề của bạn.</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="inp-targetAudience">2. Ai sẽ dùng sản phẩm này?</label>
+        <span class="form-helper">Khách hàng của bạn là ai? Nhân viên của bạn có độ tuổi ra sao?</span>
+        <input type="text" id="inp-targetAudience" class="form-control" placeholder="Ví dụ: Khách hàng nữ 25-40 tuổi thích đồ ăn sạch và 3 bạn nhân viên đóng hàng của mình.">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="inp-benchmarks">3. Bạn thấy ai làm tốt chuyện tương tự?</label>
+        <span class="form-helper">Dán đường link 1-3 trang web hoặc ứng dụng tham khảo, và kể bạn thích điểm gì ở đó.</span>
+        <textarea id="inp-benchmarks" class="form-control" rows="3" placeholder="Ví dụ: Mình rất thích trang thecoffeehouse.com vì đặt nước cực nhanh, hình ảnh rõ ràng và thanh toán MoMo rất tiện."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="inp-successVision">4. Sau 3 tháng ra mắt, bạn thấy thành công trông như thế nào?</label>
+        <span class="form-helper">Điều gì xảy ra làm bạn cảm thấy số tiền bỏ ra là hoàn toàn xứng đáng?</span>
+        <input type="text" id="inp-successVision" class="form-control" placeholder="Ví dụ: Tiết kiệm được một nửa thời gian chốt đơn, không còn bị sót đơn nào và nhận thêm 30 đơn mới mỗi tuần.">
+      </div>
+
+      <div class="step-actions">
+        <button type="button" class="btn btn-secondary" onclick="goToStep(3)">Quay lại</button>
+        <button type="button" class="btn btn-primary" onclick="validateStep4()">Tiếp tục →</button>
+      </div>
+    </section>
+
+    <!-- ==================== BƯỚC 5: NGƯỜI DÙNG & QUY MÔ ==================== -->
+    <section class="step-card animate-step hidden" id="step-5">
+      <div class="step-header">
+        <span class="step-badge">Bước 05 / 12</span>
+        <h2 class="step-title">Ai sẽ dùng, và dùng đông không?</h2>
+        <p class="step-lead">Mỗi nhóm người dùng sẽ thấy và làm được những việc khác nhau trên hệ thống.</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">1. Chọn các nhóm người sẽ vào hệ thống: (chọn nhiều)</label>
+        <div class="cards-grid">
+          <div class="option-card selected" onclick="toggleMultiCard(this, 'userRoles', 'Khách vãng lai')">
+            <div class="card-top">
+              <span class="card-title">👀 Khách vãng lai</span>
+              <div class="card-check">✓</div>
+            </div>
+            <p class="card-desc">Vào xem thông tin sản phẩm, bài viết, không cần đăng nhập tài khoản.</p>
+          </div>
+
+          <div class="option-card selected" onclick="toggleMultiCard(this, 'userRoles', 'Thành viên / Khách mua')">
+            <div class="card-top">
+              <span class="card-title">👤 Thành viên / Khách hàng</span>
+              <div class="card-check">✓</div>
+            </div>
+            <p class="card-desc">Có tài khoản riêng, lưu lịch sử mua sắm, tích điểm, xem đơn đặt.</p>
+          </div>
+
+          <div class="option-card" onclick="toggleMultiCard(this, 'userRoles', 'Nhân viên')">
+            <div class="card-top">
+              <span class="card-title">💼 Nhân viên xử lý</span>
+              <div class="card-check">✓</div>
+            </div>
+            <p class="card-desc">Làm việc hằng ngày: xác nhận đơn, trực chat, giao hàng, cập nhật việc.</p>
+          </div>
+
+          <div class="option-card" onclick="toggleMultiCard(this, 'userRoles', 'Người quản lý')">
+            <div class="card-top">
+              <span class="card-title">👔 Quản lý cửa hàng / Quản lý</span>
+              <div class="card-check">✓</div>
+            </div>
+            <p class="card-desc">Xem báo cáo doanh thu, duyệt chi, phân chia ca làm việc cho nhân viên.</p>
+          </div>
+
+          <div class="option-card selected" onclick="toggleMultiCard(this, 'userRoles', 'Chủ / Quản trị viên')">
+            <div class="card-top">
+              <span class="card-title">👑 Chủ hệ thống / Admin</span>
+              <div class="card-check">✓</div>
+            </div>
+            <p class="card-desc">Toàn quyền cao nhất: đổi giá, thêm bớt nhân viên, cấu hình mọi thứ.</p>
+          </div>
+
+          <div class="option-card" onclick="toggleMultiCard(this, 'userRoles', 'Đối tác / Nhà cung cấp')">
+            <div class="card-top">
+              <span class="card-title">🤝 Đối tác / Nhà cung cấp</span>
+              <div class="card-check">✓</div>
+            </div>
+            <p class="card-desc">Đăng sản phẩm bán ké hoặc kiểm tra hàng tồn của họ.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">
+          2. Số lượng người dùng dự kiến trong năm đầu tiên:
+          <button type="button" class="help-tooltip-btn" onclick="showHelpModal('Số người dùng dự kiến', 'Con số này giúp mình chọn gói máy chủ (server) vừa túi tiền, không bị thừa gây lãng phí mà cũng không bị sập mạng khi có đông khách.')">?</button>
+        </label>
+        <span class="form-helper">Ước tính khoảng chừng, không cần tuyệt đối.</span>
+        <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
+          <div class="option-card" onclick="selectRadio(this, 'userScale', 'Dưới 100 người')">
+            <span class="card-title">Dưới 100 người</span>
+          </div>
+          <div class="option-card selected" onclick="selectRadio(this, 'userScale', '100 – 1.000 người')">
+            <span class="card-title">100 – 1.000 người</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'userScale', '1.000 – 10.000 người')">
+            <span class="card-title">1.000 – 10.000</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'userScale', 'Trên 10.000 người')">
+            <span class="card-title">Trên 10.000 người</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'userScale', 'Mình chưa chắc, cần tư vấn')">
+            <span class="card-title">❓ Chưa chắc</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">3. Mọi người chủ yếu sẽ dùng sản phẩm trên thiết bị nào?</label>
+        <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));">
+          <div class="option-card" onclick="selectRadio(this, 'primaryDevice', 'Điện thoại di động')">
+            <span class="card-title">📱 Điện thoại là chính</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'primaryDevice', 'Máy tính để bàn / Laptop')">
+            <span class="card-title">💻 Máy tính là chính</span>
+          </div>
+          <div class="option-card selected" onclick="selectRadio(this, 'primaryDevice', 'Cả hai như nhau')">
+            <span class="card-title">📱💻 Cả hai như nhau</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'primaryDevice', 'Máy tính bảng tại quầy thu ngân')">
+            <span class="card-title">📟 Tablet tại quầy</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-actions">
+        <button type="button" class="btn btn-secondary" onclick="goToStep(4)">Quay lại</button>
+        <button type="button" class="btn btn-primary" onclick="goToStep(6)">Tiếp tục →</button>
+      </div>
+    </section>
+
+    <!-- ==================== BƯỚC 6: CHỌN CHỨC NĂNG (MODULE) ==================== -->
+    <section class="step-card animate-step hidden" id="step-6">
+      <div class="step-header">
+        <span class="step-badge">Bước 06 / 12</span>
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <h2 class="step-title">Chọn những chức năng bạn cần</h2>
+            <p class="step-lead">Cứ tích vào những gì bạn muốn có. Mình sẽ cùng bạn lọc lại cho gọn gàng và tiết kiệm nhất.</p>
+          </div>
+          <div style="background: var(--primary-light); color: var(--primary); font-weight: 700; padding: 6px 14px; border-radius: var(--radius-full); font-size: 14px;">
+            Đã chọn: <span id="moduleCountBadge">0</span> chức năng
+          </div>
+        </div>
+      </div>
+
+      <!-- Container render tự động các nhóm A, B, C, D, E, F, G -->
+      <div id="modulesContainer"></div>
+
+      <!-- Khung phân loại mức ưu tiên (Phải có / Nên có / Có thì tốt) -->
+      <div style="margin-top: 32px; padding: 20px; background: var(--bg-card-subtle); border-radius: var(--radius-md); border: 1px dashed var(--primary-border);">
+        <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 4px;">🎯 Phân loại ưu tiên cho chức năng đã chọn</h4>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+          Chia mức ưu tiên giúp mình đề xuất làm trước phần quan trọng nhất để ra mắt sớm, tiết kiệm chi phí ban đầu.
+        </p>
+        <div id="priorityCategorizerArea" style="display: flex; flex-direction: column; gap: 8px;">
+          <!-- Render danh sách module đã tick kèm 3 nút radio: Phải có / Nên có / Có thì tốt -->
+        </div>
+      </div>
+
+      <div class="step-actions">
+        <button type="button" class="btn btn-secondary" onclick="goToStep(5)">Quay lại</button>
+        <button type="button" class="btn btn-primary" onclick="goToStep(7)">Tiếp tục →</button>
+      </div>
+    </section>
+
+    <!-- ==================== BƯỚC 7: GIAO DIỆN & CẢM GIÁC ==================== -->
+    <section class="step-card animate-step hidden" id="step-7">
+      <div class="step-header">
+        <span class="step-badge">Bước 07 / 12</span>
+        <h2 class="step-title">Giao diện và cảm giác khi nhìn vào</h2>
+        <p class="step-lead">Giao diện là thứ khách của bạn nhìn thấy đầu tiên. Hãy chọn phong cách bạn thấy hợp với thương hiệu của mình.</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">1. Bạn đã có sẵn bản thiết kế chưa?</label>
+        <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+          <div class="option-card" onclick="selectRadio(this, 'designReadiness', 'Đã có bản thiết kế Figma / ảnh vẽ')">
+            <span class="card-title">🎨 Đã có thiết kế sẵn</span>
+            <span class="card-desc">Có file Figma hoặc ảnh vẽ tay</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'designReadiness', 'Đã có logo và màu thương hiệu')">
+            <span class="card-title">🏷️ Có logo & màu sắc</span>
+            <span class="card-desc">Cần dựng giao diện theo màu đó</span>
+          </div>
+          <div class="option-card selected" onclick="selectRadio(this, 'designReadiness', 'Chưa có gì, nhờ bạn thiết kế từ đầu')">
+            <span class="card-title">✨ Chưa có gì</span>
+            <span class="card-desc">Nhờ bạn thiết kế trọn gói từ đầu</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">2. Phong cách mong muốn (chọn tối đa 3 phong cách):</label>
+        <div class="cards-grid">
+          <div class="option-card selected" onclick="toggleStyleCard(this, 'Tối giản, hiện đại')">
+            <div class="style-preview-box" style="background: #F8FAFC; color: #0F172A; border: 1px solid #CBD5E1;">
+              MINIMAL WHITE
+            </div>
+            <span class="card-title">Tối giản, hiện đại</span>
+            <span class="card-desc">Gọn gàng, nhiều khoảng trắng, chữ dễ đọc, mở trang cực nhanh.</span>
+          </div>
+
+          <div class="option-card" onclick="toggleStyleCard(this, 'Sang trọng, cao cấp')">
+            <div class="style-preview-box" style="background: #0F172A; color: #D4AF37;">
+              LUXURY GOLD & BLACK
+            </div>
+            <span class="card-title">Sang trọng, cao cấp</span>
+            <span class="card-desc">Tông màu đen, vàng đồng, font chữ thanh mảnh, tạo cảm giác đắt giá.</span>
+          </div>
+
+          <div class="option-card" onclick="toggleStyleCard(this, 'Trẻ trung, năng động')">
+            <div class="style-preview-box" style="background: linear-gradient(135deg, #EC4899, #8B5CF6); color: white;">
+              COLORFUL VIBES
+            </div>
+            <span class="card-title">Trẻ trung, năng động</span>
+            <span class="card-desc">Màu sắc tươi tắn, nhiều năng lượng, phù hợp giới trẻ, đồ ăn vặt.</span>
+          </div>
+
+          <div class="option-card" onclick="toggleStyleCard(this, 'Ấm áp, thân thiện')">
+            <div class="style-preview-box" style="background: #FEF3C7; color: #92400E;">
+              WARM & COZY
+            </div>
+            <span class="card-title">Ấm áp, thân thiện</span>
+            <span class="card-desc">Gam màu gỗ, be, tạo cảm giác an tâm, gần gũi như gia đình.</span>
+          </div>
+
+          <div class="option-card" onclick="toggleStyleCard(this, 'Chuyên nghiệp, tin cậy')">
+            <div class="style-preview-box" style="background: #1E3A8A; color: white;">
+              CORPORATE BLUE
+            </div>
+            <span class="card-title">Chuyên nghiệp, nghiêm túc</span>
+            <span class="card-desc">Tông màu xanh dương vững chãi, tạo sự tin cậy cho tài chính, luật.</span>
+          </div>
+
+          <div class="option-card" onclick="toggleStyleCard(this, 'Công nghệ hiện đại')">
+            <div class="style-preview-box" style="background: #030712; color: #38BDF8; border: 1px solid #0284C7;">
+              TECH DARK MODE
+            </div>
+            <span class="card-title">Công nghệ hiện đại</span>
+            <span class="card-desc">Hiệu ứng bóng mờ (glassmorphism), viền sáng neon, chất công nghệ.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="inp-brandColor">3. Màu sắc yêu thích của thương hiệu:</label>
+        <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+          <input type="color" id="inp-brandColor" value="#2563EB" style="width: 48px; height: 48px; border: none; border-radius: var(--radius-sm); cursor: pointer;">
+          <input type="text" id="inp-colorHex" class="form-control" style="width: 140px;" value="#2563EB" placeholder="#2563EB">
+          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px;">
+            <input type="checkbox" id="chk-autoColor" onchange="toggleAutoColor(this.checked)">
+            Để bạn chọn màu hợp phong thủy / ngành nghề giúp mình
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="inp-designLinks">4. Dán đường link 1-3 giao diện bạn thích và nói rõ bạn thích chỗ nào:</label>
+        <textarea id="inp-designLinks" class="form-control" rows="2" placeholder="Ví dụ: Mình thích cách phối màu trang apple.com và menu dễ tìm của shopee.vn"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">5. Bạn có cần chế độ nền tối (Dark mode) không?</label>
+        <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
+          <div class="option-card" onclick="selectRadio(this, 'darkModeNeed', 'Có, rất cần')">
+            <span class="card-title">🌙 Có, rất cần</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'darkModeNeed', 'Không cần')">
+            <span class="card-title">☀️ Chỉ cần nền sáng</span>
+          </div>
+          <div class="option-card selected" onclick="selectRadio(this, 'darkModeNeed', 'Tùy bạn tư vấn')">
+            <span class="card-title">🤷 Không quan trọng</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">6. Bạn có cần mình hỗ trợ thiết kế logo hoặc banner không?</label>
+        <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+          <div class="option-card" onclick="selectRadio(this, 'graphicSupport', 'Cần thiết kế cả logo và bộ nhận diện')">
+            <span class="card-title">🎨 Thiết kế cả Logo</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'graphicSupport', 'Chỉ cần banner và hình ảnh web')">
+            <span class="card-title">🖼️ Chỉ cần Banner web</span>
+          </div>
+          <div class="option-card selected" onclick="selectRadio(this, 'graphicSupport', 'Không cần, mình đã có sẵn')">
+            <span class="card-title">👌 Đã có sẵn, không cần</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-actions">
+        <button type="button" class="btn btn-secondary" onclick="goToStep(6)">Quay lại</button>
+        <button type="button" class="btn btn-primary" onclick="goToStep(8)">Tiếp tục →</button>
+      </div>
+    </section>
+
+    <!-- ==================== BƯỚC 8: NỘI DUNG & DỮ LIỆU ==================== -->
+    <section class="step-card animate-step hidden" id="step-8">
+      <div class="step-header">
+        <span class="step-badge">Bước 08 / 12</span>
+        <h2 class="step-title">Nội dung chữ, hình ảnh & dữ liệu cũ</h2>
+        <p class="step-lead">Một website đẹp mà thiếu nội dung thì chưa thể ra mắt được. Mình cần biết ai sẽ phụ trách phần này.</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">1. Ai sẽ viết nội dung chữ và chụp hình ảnh?</label>
+        <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+          <div class="option-card selected" onclick="selectRadio(this, 'contentResponsibility', 'Mình tự lo nội dung và hình ảnh')">
+            <span class="card-title">✍️ Mình tự lo</span>
+            <span class="card-desc">Bạn chỉ cần để khung, mình sẽ tự điền chữ và ảnh.</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'contentResponsibility', 'Cần bạn hỗ trợ viết bài')">
+            <span class="card-title">📝 Cần viết bài giúp</span>
+            <span class="card-desc">Mình có ảnh nhưng nhờ bạn trau chuốt câu từ.</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'contentResponsibility', 'Cần hỗ trợ trọn gói cả ảnh và bài')">
+            <span class="card-title">📸 Trọn gói chữ & ảnh</span>
+            <span class="card-desc">Nhờ bạn tìm ảnh đẹp và viết nội dung luôn.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">2. Bạn có dữ liệu cũ cần chuyển sang hệ thống mới không?</label>
+        <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));">
+          <div class="option-card selected" onclick="selectDataMigration(this, 'Không có')">
+            <span class="card-title">❌ Không có</span>
+            <span class="card-desc">Bắt đầu mới hoàn toàn</span>
+          </div>
+          <div class="option-card" onclick="selectDataMigration(this, 'Có, trong file Excel/Google Sheets')">
+            <span class="card-title">📊 Có trong file Excel</span>
+            <span class="card-desc">Có danh sách khách hoặc hàng hóa</span>
+          </div>
+          <div class="option-card" onclick="selectDataMigration(this, 'Có, trong phần mềm cũ')">
+            <span class="card-title">💾 Trong phần mềm cũ</span>
+            <span class="card-desc">Cần xuất ra và nạp vào web mới</span>
+          </div>
+        </div>
+        <div id="wrapper-migrationRowCount" class="hidden" style="margin-top: 12px;">
+          <label class="form-label" style="font-size: 14px;">Ước lượng có khoảng bao nhiêu dòng dữ liệu?</label>
+          <select id="sel-migrationRows" class="form-control">
+            <option value="Dưới 100 dòng">Dưới 100 dòng (danh sách nhỏ)</option>
+            <option value="100 – 1.000 dòng">100 – 1.000 dòng</option>
+            <option value="Trên 1.000 dòng">Trên 1.000 dòng (dữ liệu lớn)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="inp-estimatedItems">3. Ước tính số lượng sản phẩm / bài viết / trang ban đầu:</label>
+        <input type="text" id="inp-estimatedItems" class="form-control" placeholder="Ví dụ: Khoảng 20 sản phẩm bánh, 5 bài viết giới thiệu và 4 trang cơ bản.">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">4. Bạn có cần hỗ trợ nhiều ngôn ngữ không?</label>
+        <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));">
+          <div class="option-card selected" onclick="selectRadio(this, 'multiLang', 'Chỉ tiếng Việt')">
+            <span class="card-title">🇻🇳 Chỉ Tiếng Việt</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'multiLang', 'Tiếng Việt và Tiếng Anh')">
+            <span class="card-title">🇻🇳 🇬🇧 Việt & Anh</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'multiLang', 'Nhiều hơn 2 ngôn ngữ')">
+            <span class="card-title">🌍 Trên 2 ngôn ngữ</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-actions">
+        <button type="button" class="btn btn-secondary" onclick="goToStep(7)">Quay lại</button>
+        <button type="button" class="btn btn-primary" onclick="goToStep(9)">Tiếp tục →</button>
+      </div>
+    </section>
+
+    <!-- ==================== BƯỚC 9: TÊN MIỀN, MÁY CHỦ & HẬU MÃI ==================== -->
+    <section class="step-card animate-step hidden" id="step-9">
+      <div class="step-header">
+        <span class="step-badge">Bước 09 / 12</span>
+        <h2 class="step-title">Tên miền, máy chủ và sau khi bàn giao</h2>
+        <p class="step-lead">Phần này nghe hơi kỹ thuật nhưng rất đơn giản thôi. Nếu chưa rõ chỗ nào, cứ chọn "Chưa biết" mình sẽ lo giúp bạn.</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">
+          1. Tên miền
+          <button type="button" class="help-tooltip-btn" onclick="showHelpModal('Tên miền là gì?', 'Tên miền giống như địa chỉ nhà của bạn trên mạng (ví dụ: google.com, cuahangcuaban.vn). Khách hàng sẽ gõ chữ này vào trình duyệt để tìm thấy bạn.')">?</button>
+        </label>
+        <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+          <div class="option-card" onclick="selectDomainStatus(this, 'Đã mua rồi')">
+            <span class="card-title">🌐 Đã mua rồi</span>
+            <span class="card-desc">Mình đã đứng tên sở hữu tên miền</span>
+          </div>
+          <div class="option-card selected" onclick="selectDomainStatus(this, 'Chưa có, cần bạn mua giúp')">
+            <span class="card-title">🛒 Chưa có, nhờ bạn mua giúp</span>
+            <span class="card-desc">Nhờ bạn tư vấn chọn đuôi .vn hoặc .com</span>
+          </div>
+          <div class="option-card" onclick="selectDomainStatus(this, 'Chưa biết, cần tư vấn')">
+            <span class="card-title">❓ Chưa biết</span>
+            <span class="card-desc">Cần bạn giải thích thêm</span>
+          </div>
+        </div>
+        <div id="wrapper-domainInput" class="hidden" style="margin-top: 12px;">
+          <input type="text" id="inp-domainName" class="form-control" placeholder="Nhập tên miền bạn đã có: ví dụ tiembepme.vn">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">
+          2. Máy chủ lưu trữ (Hosting / Server)
+          <button type="button" class="help-tooltip-btn" onclick="showHelpModal('Máy chủ (Server) là gì?', 'Nếu tên miền là địa chỉ nhà, thì máy chủ chính là mảnh đất xây nhà. Đây là nơi chứa toàn bộ hình ảnh, chữ viết và dữ liệu để trang web hoạt động 24/7.')">?</button>
+        </label>
+        <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+          <div class="option-card" onclick="selectRadio(this, 'hostingNeed', 'Đã có máy chủ riêng')">
+            <span class="card-title">🏢 Đã có máy chủ riêng</span>
+          </div>
+          <div class="option-card selected" onclick="selectRadio(this, 'hostingNeed', 'Nhờ bạn thuê và cài đặt giúp')">
+            <span class="card-title">☁️ Nhờ bạn thuê & cài giúp</span>
+            <span class="card-desc">Chọn gói tối ưu chi phí</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'hostingNeed', 'Chưa biết, cần tư vấn')">
+            <span class="card-title">❓ Chưa biết, cần tư vấn</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">3. Sau khi bàn giao xong, bạn muốn vận hành như thế nào?</label>
+        <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+          <div class="option-card selected" onclick="selectRadio(this, 'postLaunchCare', 'Tự quản lý, cần hướng dẫn')">
+            <span class="card-title">🧑‍💻 Tự quản lý</span>
+            <span class="card-desc">Cần bạn hướng dẫn dễ hiểu, mình tự thay chữ đổi ảnh.</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'postLaunchCare', 'Nhờ bạn bảo trì chăm sóc hằng tháng')">
+            <span class="card-title">🤝 Thuê bảo trì hằng tháng</span>
+            <span class="card-desc">Để bạn lo cập nhật, sao lưu, mình chỉ lo bán hàng.</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'postLaunchCare', 'Chỉ cần bảo hành lỗi kỹ thuật')">
+            <span class="card-title">🛡️ Chỉ cần bảo hành</span>
+            <span class="card-desc">Có lỗi thì sửa miễn phí theo hợp đồng.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">4. Bạn muốn được hướng dẫn sử dụng bằng cách nào?</label>
+        <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));">
+          <div class="option-card selected" onclick="selectRadio(this, 'trainingFormat', 'Video quay sẵn')">
+            <span class="card-title">🎬 Video ngắn dễ xem lại</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'trainingFormat', 'Tài liệu hướng dẫn PDF')">
+            <span class="card-title">📄 Tài liệu PDF kèm ảnh</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'trainingFormat', 'Hướng dẫn trực tiếp 1-1 qua Google Meet')">
+            <span class="card-title">💻 Hướng dẫn trực tiếp 1-1</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">5. Bạn có yêu cầu pháp lý đặc biệt nào không?</label>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer;">
+            <input type="checkbox" id="chk-legalBCT" onchange="toggleLegalNotice(this.checked)">
+            Cần cấu hình chuẩn để thông báo Bộ Công Thương (dành cho web bán hàng)
+          </label>
+          <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer;">
+            <input type="checkbox" id="chk-legalPrivacy">
+            Cần soạn sẵn trang Chính sách bảo mật và Điều khoản sử dụng
+          </label>
+        </div>
+      </div>
+
+      <div class="step-actions">
+        <button type="button" class="btn btn-secondary" onclick="goToStep(8)">Quay lại</button>
+        <button type="button" class="btn btn-primary" onclick="goToStep(10)">Tiếp tục →</button>
+      </div>
+    </section>
+
+    <!-- ==================== BƯỚC 10: NGÂN SÁCH & THỜI GIAN ==================== -->
+    <section class="step-card animate-step hidden" id="step-10">
+      <div class="step-header">
+        <span class="step-badge">Bước 10 / 12</span>
+        <h2 class="step-title">Ngân sách và thời gian dự kiến</h2>
+        <p class="step-lead">Nói thẳng về ngân sách giúp mình đề xuất đúng phương án vừa vặn nhất, không vẽ vời tính năng thừa làm bạn khó xử.</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">1. Khoảng ngân sách bạn dự định đầu tư: (chọn 1)</label>
+        <div class="cards-grid">
+          <div class="option-card" onclick="selectRadio(this, 'budgetRange', 'Dưới 5 triệu')">
+            <span class="card-title">Dưới 5 triệu</span>
+            <span class="card-desc">Phù hợp Landing page đơn giản, làm nhanh.</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'budgetRange', '5 – 15 triệu')">
+            <span class="card-title">5 – 15 triệu</span>
+            <span class="card-desc">Website giới thiệu doanh nghiệp hoặc shop nhỏ.</span>
+          </div>
+          <div class="option-card selected" onclick="selectRadio(this, 'budgetRange', '15 – 30 triệu')">
+            <span class="card-title">15 – 30 triệu</span>
+            <span class="card-desc">Web bán hàng đầy đủ, app đặt lịch hẹn chuyên nghiệp.</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'budgetRange', '30 – 70 triệu')">
+            <span class="card-title">30 – 70 triệu</span>
+            <span class="card-desc">Hệ thống quản lý nội bộ, quy trình nhiều bước.</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'budgetRange', '70 – 150 triệu')">
+            <span class="card-title">70 – 150 triệu</span>
+            <span class="card-desc">Nền tảng kết nối lớn, ứng dụng SaaS, sàn giao dịch.</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'budgetRange', 'Chưa biết, hãy báo giá giúp mình')">
+            <span class="card-title">❓ Chưa biết</span>
+            <span class="card-desc">Cần bạn xem xong brief rồi báo giá giúp mình.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="inp-deadline">2. Bạn muốn sản phẩm chạy được trước ngày nào?</label>
+        <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+          <input type="date" id="inp-deadline" class="form-control" style="width: 220px;" onchange="checkDeadlineUrgency(this.value)">
+          <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer;">
+            <input type="checkbox" id="chk-noRush" onchange="toggleNoRush(this.checked)">
+            Không gấp, ưu tiên hoàn thiện kỹ lưỡng
+          </label>
+        </div>
+        <div id="msg-rushWarning" class="field-error" style="color: var(--accent); background: var(--bg-card-subtle); padding: 8px 12px; border-radius: var(--radius-sm); margin-top: 8px;">
+          ⚡ Thời hạn này khá gấp (dưới 10 ngày). Chúng mình vẫn làm được nhưng có thể phát sinh phụ phí làm thêm giờ nhé.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">3. Nếu phải đánh đổi, thứ tự ưu tiên của bạn là gì?</label>
+        <span class="form-helper">Bấm chọn ưu tiên số 1 của bạn:</span>
+        <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+          <div class="option-card selected" onclick="selectRadio(this, 'tradeoffPriority', 'Chi phí tiết kiệm, vừa túi tiền')">
+            <span class="card-title">💰 Tiết kiệm chi phí nhất</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'tradeoffPriority', 'Thời gian hoàn thành nhanh nhất')">
+            <span class="card-title">⚡ Làm nhanh nhất để ra mắt</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'tradeoffPriority', 'Chất lượng cao nhất và mở rộng lâu dài')">
+            <span class="card-title">⭐ Chất lượng cao & mở rộng</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">4. Bạn muốn làm xong một lần hay chia giai đoạn?</label>
+        <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+          <div class="option-card" onclick="selectRadio(this, 'phasePreference', 'Làm xong tất cả trong 1 lần')">
+            <span class="card-title">📦 Làm trọn gói 1 lần</span>
+            <span class="card-desc">Đầy đủ mọi thứ rồi mới ra mắt.</span>
+          </div>
+          <div class="option-card selected" onclick="selectRadio(this, 'phasePreference', 'Chia giai đoạn (Làm bản gọn trước)')">
+            <span class="card-title">🚀 Chia 2 giai đoạn (Khuyên dùng)</span>
+            <span class="card-desc">Làm bản đầu gọn gàng để bán hàng sớm, sau đó thêm chức năng.</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'phasePreference', 'Cần bạn tư vấn')">
+            <span class="card-title">❓ Cần bạn tư vấn</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">5. Cách thanh toán mong muốn:</label>
+        <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));">
+          <div class="option-card selected" onclick="selectRadio(this, 'paymentTerms', 'Chia 2 đợt (Cọc 50% - Nghiệm thu 50%)')">
+            <span class="card-title">Chia 2 đợt (50% – 50%)</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'paymentTerms', 'Chia theo 3 mốc hoàn thành (40% - 30% - 30%)')">
+            <span class="card-title">Chia 3 mốc (40 – 30 – 30)</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'paymentTerms', 'Trả hết một lần (chiết khấu)')">
+            <span class="card-title">Trả hết 1 lần</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-actions">
+        <button type="button" class="btn btn-secondary" onclick="goToStep(9)">Quay lại</button>
+        <button type="button" class="btn btn-primary" onclick="goToStep(11)">Tiếp tục →</button>
+      </div>
+    </section>
+
+    <!-- ==================== BƯỚC 11: TÀI LIỆU ĐÍNH KÈM ==================== -->
+    <section class="step-card animate-step hidden" id="step-11">
+      <div class="step-header">
+        <span class="step-badge">Bước 11 / 12</span>
+        <h2 class="step-title">Tài liệu đính kèm và lời nhắn thêm</h2>
+        <p class="step-lead">Ảnh chụp màn hình, bản vẽ tay ra giấy, hoặc file Excel mô tả quy trình đều rất hữu ích để mình hiểu chính xác ý bạn.</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">1. Đính kèm tệp tin (tối đa 5 tệp: ảnh, PDF, Word, Excel, tối đa 10MB/tệp):</label>
+        <input type="file" id="inp-files" class="form-control" multiple accept="image/*,.pdf,.doc,.docx,.xls,.xlsx" onchange="handleFileSelection(this)">
+        <div id="fileUploadList" style="margin-top: 8px; font-size: 13px; color: var(--text-muted);"></div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="inp-cloudLinks">Hoặc dán đường link tài liệu online (Google Drive, Figma, Canva):</label>
+        <input type="url" id="inp-cloudLinks" class="form-control" placeholder="https://drive.google.com/drive/folders/...">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="inp-additionalNote">2. Còn điều gì bạn muốn nhắn nhủ thêm không?</label>
+        <textarea id="inp-additionalNote" class="form-control" rows="3" placeholder="Ví dụ: Mình rất quan tâm đến việc giao diện phải thật dễ dùng cho người lớn tuổi, hoặc có thể phát sinh thêm tính năng sau này..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">3. Bạn biết tới mình qua đâu?</label>
+        <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
+          <div class="option-card" onclick="selectRadio(this, 'referralSource', 'Facebook')">
+            <span class="card-title">Facebook</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'referralSource', 'Google tìm kiếm')">
+            <span class="card-title">Google</span>
+          </div>
+          <div class="option-card selected" onclick="selectRadio(this, 'referralSource', 'Bạn bè giới thiệu')">
+            <span class="card-title">Bạn bè giới thiệu</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'referralSource', 'Zalo')">
+            <span class="card-title">Zalo</span>
+          </div>
+          <div class="option-card" onclick="selectRadio(this, 'referralSource', 'Khác')">
+            <span class="card-title">Nguồn khác</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-actions">
+        <button type="button" class="btn btn-secondary" onclick="goToStep(10)">Quay lại</button>
+        <button type="button" class="btn btn-primary" onclick="goToStep(12)">Xem lại & Gửi →</button>
+      </div>
+    </section>
+
+    <!-- ==================== BƯỚC 12: XEM LẠI & GỬI ==================== -->
+    <section class="step-card animate-step hidden" id="step-12">
+      <div class="step-header">
+        <span class="step-badge">Bước 12 / 12 — Hoàn tất</span>
+        <h2 class="step-title">Kiểm tra lại bản tóm tắt yêu cầu</h2>
+        <p class="step-lead">Xem lại thông tin bên dưới để chắc chắn mình đã hiểu đúng ý bạn trước khi gửi nhé.</p>
+      </div>
+
+      <!-- Khung ước tính chi phí & thời gian tham khảo -->
+      <div style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(56, 189, 248, 0.08)); border: 1.5px solid var(--primary-border); border-radius: var(--radius-md); padding: 22px; margin-bottom: 28px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 8px;">
+          <div>
+            <span style="font-size: 13px; font-weight: 700; text-transform: uppercase; color: var(--primary); letter-spacing: 0.05em;">Ước tính sơ bộ tham khảo</span>
+            <h3 id="estimatePriceText" style="font-size: 26px; font-weight: 800; color: var(--text-main); margin-top: 2px;">15 – 25 triệu VNĐ</h3>
+          </div>
+          <div style="text-align: right;">
+            <span style="font-size: 13px; color: var(--text-muted); display: block;">Thời gian dự kiến:</span>
+            <strong id="estimateDurationText" style="font-size: 18px; color: var(--text-main);">3 – 4 tuần làm việc</strong>
+          </div>
+        </div>
+        <p style="font-size: 12px; color: var(--text-muted); line-height: 1.45; border-top: 1px dashed var(--border-color); padding-top: 8px;">
+          💡 <em>Lưu ý:</em> Con số trên được tính tự động từ số lượng và độ phức tạp của các chức năng bạn đã chọn. Báo giá chính thức và lộ trình chuẩn xác sẽ được mình gửi chi tiết sau khi trao đổi trực tiếp với bạn.
+        </p>
+      </div>
+
+      <!-- Lời khuyên nếu chọn quá nhiều chức năng phức tạp mà ngân sách thấp -->
+      <div id="budgetMismatchAdvice" class="hidden" style="background: #FEF3C7; border: 1px solid #FCD34D; color: #92400E; padding: 14px 18px; border-radius: var(--radius-md); margin-bottom: 24px; font-size: 14px; line-height: 1.5;">
+        🤝 <strong>Gợi ý thân thiện:</strong> Bạn đã chọn khá nhiều chức năng nâng cao trong khi mức ngân sách chọn là vừa phải. Đừng lo lắng! Chúng mình đề xuất làm trước bản đầu tiên gồm các chức năng cốt lõi (Phải có) để kịp ra mắt và có doanh thu trước, sau đó sẽ nâng cấp dần nhé.
+      </div>
+
+      <!-- Danh sách tóm tắt từng phần kèm nút "Sửa" -->
+      <div id="reviewSummaryList" style="display: flex; flex-direction: column; gap: 14px;">
+        <!-- Javascript sẽ đổ dữ liệu tổng kết vào đây -->
+      </div>
+
+      <!-- Checkbox cam kết bảo mật & gửi -->
+      <div style="margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--border-color);">
+        <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; font-size: 14px;">
+          <input type="checkbox" id="chk-consentPolicy" style="margin-top: 3px; width: 18px; height: 18px;">
+          <span>Mình đồng ý để <strong id="consentBrandName">[TÊN]</strong> lưu trữ và sử dụng thông tin này để liên hệ tư vấn và gửi báo giá cho dự án của mình.</span>
+        </label>
+        <div class="field-error" id="err-consent">⚠️ Bạn cần tích đồng ý để mình có thể nhận thông tin và gửi báo giá nhé.</div>
+      </div>
+
+      <div class="step-actions">
+        <button type="button" class="btn btn-secondary" onclick="goToStep(11)">Quay lại</button>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button type="button" class="btn btn-secondary btn-sm" onclick="downloadBriefTextFile()">📥 Tải bản brief (.txt)</button>
+          <button type="button" class="btn btn-primary" id="btn-submitBrief" onclick="submitProjectBrief()" style="min-width: 200px;">
+            Gửi yêu cầu cho mình 🚀
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== MÀN HÌNH CẢM ƠN ==================== -->
+    <section class="step-card animate-step hidden text-center" id="step-thankyou" style="padding: 48px 24px;">
+      <div style="font-size: 54px; margin-bottom: 12px;">🎉</div>
+      <h2 class="step-title" style="font-size: 30px; margin-bottom: 12px;">Đã nhận được rồi, cảm ơn bạn!</h2>
+      <p class="step-lead" style="max-width: 560px; margin: 0 auto 36px;">
+        Yêu cầu của bạn đã được chuyển thẳng tới hộp thư của mình. Dưới đây là những việc tiếp theo sẽ diễn ra:
+      </p>
+
+      <!-- Timeline 3 bước tiếp theo -->
+      <div style="max-width: 540px; margin: 0 auto 36px; text-align: left; display: flex; flex-direction: column; gap: 18px;">
+        <div style="display: flex; gap: 16px;">
+          <div style="width: 36px; height: 36px; border-radius: var(--radius-full); background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">1</div>
+          <div>
+            <strong style="font-size: 15px; display: block;">Trong vòng 24 giờ tới</strong>
+            <span style="font-size: 14px; color: var(--text-muted);">Mình sẽ đọc kỹ toàn bộ câu chuyện và danh sách chức năng của bạn.</span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 16px;">
+          <div style="width: 36px; height: 36px; border-radius: var(--radius-full); background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">2</div>
+          <div>
+            <strong style="font-size: 15px; display: block;">Liên hệ làm rõ</strong>
+            <span style="font-size: 14px; color: var(--text-muted);">Mình sẽ nhắn qua kênh bạn đã chọn (Zalo/Gọi điện) để xác nhận 1-2 điểm mấu chốt.</span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 16px;">
+          <div style="width: 36px; height: 36px; border-radius: var(--radius-full); background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">3</div>
+          <div>
+            <strong style="font-size: 15px; display: block;">Báo giá & Lộ trình chi tiết</strong>
+            <span style="font-size: 14px; color: var(--text-muted);">Bạn sẽ nhận được bản kế hoạch rõ ràng từng tuần, cam kết không phát sinh phụ phí.</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+        <button type="button" class="btn btn-secondary" onclick="downloadBriefTextFile()">📥 Tải lại bản tóm tắt (.txt)</button>
+        <a id="btn-directZalo" href="https://zalo.me/0968994869" target="_blank" class="btn btn-primary">
+          💬 Nhắn Zalo cho mình ngay
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       MODAL GIẢI THÍCH THUẬT NGỮ & MODAL HỎI BẢN NHÁP
+       ========================================================================== -->
+  <div class="custom-modal-backdrop hidden" id="modalHelpBackdrop">
+    <div class="custom-modal">
+      <h3 id="modalHelpTitle" style="font-size: 18px; font-weight: 800; margin-bottom: 8px;">Thuật ngữ</h3>
+      <p id="modalHelpBody" style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">Nội dung giải thích đời thường...</p>
+      <div style="text-align: right;">
+        <button type="button" class="btn btn-primary btn-sm" onclick="closeHelpModal()">Đã hiểu 👌</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="custom-modal-backdrop hidden" id="modalDraftBackdrop">
+    <div class="custom-modal">
+      <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 8px;">Bạn có một bản nháp chưa gửi! 📝</h3>
+      <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
+        Hệ thống nhận thấy bạn đã từng điền dở bản brief này. Bạn muốn tiếp tục phần việc đang làm hay bắt đầu lại từ đầu?
+      </p>
+      <div style="display: flex; justify-content: flex-end; gap: 10px;">
+        <button type="button" class="btn btn-secondary btn-sm" onclick="discardDraftAndStartFresh()">Bắt đầu lại</button>
+        <button type="button" class="btn btn-primary btn-sm" onclick="restoreSavedDraft()">Tiếp tục làm tiếp</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       JAVASCRIPT LOGIC ĐIỀU KHIỂN HOÀN CHỈNH
+       ========================================================================== -->
+  <script>
+    // --- 1. DỮ LIỆU ĐẦY ĐỦ CÁC MODULE CHỨC NĂNG (BƯỚC 6) ---
+    const MODULE_CATALOG = [
+      {
+        groupId: "A",
+        groupTitle: "Nhóm A. Tài khoản & Bảo mật",
+        modules: [
+          { id: "A1", name: "Đăng ký / đăng nhập bằng email", desc: "Tạo tài khoản bằng mật khẩu cá nhân.", example: "Như đăng ký Facebook, Shopee.", level: "Đơn giản", points: 10 },
+          { id: "A2", name: "Đăng nhập nhanh Google / Facebook / Zalo", desc: "Bấm 1 nút là vào ngay, không cần nhớ mật khẩu.", example: "Tiện cho khách lười điền form.", level: "Vừa", points: 15 },
+          { id: "A3", name: "Phân quyền người dùng", desc: "Nhân viên chỉ thấy việc của mình, quản lý thấy toàn bộ.", example: "Thu ngân không xem được bảng lương.", level: "Vừa", points: 20, parentId: "A1" },
+          { id: "A4", name: "Xác thực 2 lớp bằng mã OTP (SMS/Email)", desc: "Nhập mã gửi về máy điện thoại trước khi vào tài khoản.", example: "Bảo mật như app ngân hàng.", level: "Vừa", points: 22 },
+          { id: "A5", name: "Quên mật khẩu qua email", desc: "Bấm nút để nhận link đặt lại mật khẩu mới.", example: "Tự động gửi email 24/7.", level: "Đơn giản", points: 8 },
+          { id: "A6", name: "Trang hồ sơ cá nhân", desc: "Nơi người dùng tự sửa họ tên, số điện thoại, đổi avatar.", example: "Xem thông tin tài khoản cá nhân.", level: "Đơn giản", points: 10 }
+        ]
+      },
+      {
+        groupId: "B",
+        groupTitle: "Nhóm B. Nội dung & Hiển thị",
+        modules: [
+          { id: "B1", name: "Trang giới thiệu, thông tin liên hệ", desc: "Trang tĩnh trình bày lịch sử, sứ mệnh và hotline.", example: "Như brochure giới thiệu công ty.", level: "Đơn giản", points: 8 },
+          { id: "B2", name: "Blog / Tin tức tự đăng bài", desc: "Tự viết bài chia sẻ kinh nghiệm, cập nhật khuyến mãi.", example: "Có phân mục tin tức, bài viết mới.", level: "Vừa", points: 16 },
+          { id: "B3", name: "Thư viện ảnh / video", desc: "Trưng bày bộ sưu tập hình ảnh hoặc clip hoạt động.", example: "Album ảnh công trình, album mẫu móng spa.", level: "Đơn giản", points: 10 },
+          { id: "B4", name: "Bảng giá / gói dịch vụ so sánh", desc: "Bảng cột so sánh chi tiết tính năng giữa các gói.", example: "Gói Cơ bản vs Gói Nâng cao.", level: "Đơn giản", points: 9 },
+          { id: "B5", name: "Tìm kiếm và bộ lọc thông minh", desc: "Tìm theo từ khóa, lọc theo giá, màu sắc, danh mục.", example: "Lọc áo khoác màu đen, size L dưới 500k.", level: "Vừa", points: 18 },
+          { id: "B6", name: "Hỗ trợ đa ngôn ngữ", desc: "Khách bấm cờ để đổi sang tiếng Anh, Nhật...", example: "Website phục vụ khách nước ngoài.", level: "Vừa", points: 20 },
+          { id: "B7", name: "Bản đồ và chỉ đường Google Maps", desc: "Nhúng bản đồ chỉ đường đến tận cửa tiệm.", example: "Khách bấm vào là mở Google Maps dẫn đường.", level: "Đơn giản", points: 8 },
+          { id: "B8", name: "Đánh giá, nhận xét của khách hàng", desc: "Khách chấm sao và để lại lời bình phẩm thực tế.", example: "Đánh giá 5 sao kèm ảnh chụp feedback.", level: "Vừa", points: 15 },
+          { id: "B9", name: "Câu hỏi thường gặp (FAQ)", desc: "Dạng bấm vào xổ xuống giải đáp các thắc mắc hay gặp.", example: "Cách đổi trả hàng, chính sách giao hàng.", level: "Đơn giản", points: 7 }
+        ]
+      },
+      {
+        groupId: "C",
+        groupTitle: "Nhóm C. Bán hàng & Thanh toán",
+        modules: [
+          { id: "C1", name: "Danh sách sản phẩm & trang chi tiết", desc: "Hiển thị ảnh, giá, mô tả, nút mua hàng.", example: "Gian trưng bày hàng hóa online.", level: "Vừa", points: 15 },
+          { id: "C2", name: "Giỏ hàng và đặt đơn", desc: "Chọn nhiều món vào giỏ rồi điền địa chỉ giao hàng.", example: "Đặt mua như trên Shopee/Lazada.", level: "Vừa", points: 20 },
+          { id: "C3", name: "Thanh toán online (VNPay, MoMo, VietQR)", desc: "Quét mã QR chuyển khoản tự động xác nhận đơn.", example: "Khách quét mã xong web báo đã thanh toán.", level: "Phức tạp", points: 30, parentId: "C2" },
+          { id: "C4", name: "Thanh toán thẻ quốc tế (Stripe/PayPal)", desc: "Nhận tiền bằng thẻ Visa/Mastercard từ nước ngoài.", example: "Bán sản phẩm cho khách du lịch/quốc tế.", level: "Phức tạp", points: 32, parentId: "C2" },
+          { id: "C5", name: "Mã giảm giá, khuyến mãi (Voucher)", desc: "Nhập mã để trừ 10% hoặc miễn phí vận chuyển.", example: "Nhập mã TRIAN để giảm 50.000đ.", level: "Vừa", points: 18, parentId: "C2" },
+          { id: "C6", name: "Quản lý kho hàng & cảnh báo hết", desc: "Hệ thống tự trừ số lượng tồn khi có người mua.", example: "Kho còn 0 cái thì web hiện Hết Hàng.", level: "Phức tạp", points: 28 },
+          { id: "C7", name: "Kết nối đơn vị vận chuyển (GHTK, GHN)", desc: "Tự tính phí ship và bấm nút đẩy đơn sang bưu tá.", example: "Bưu tá tự qua lấy hàng không cần tạo app riêng.", level: "Phức tạp", points: 35, parentId: "C2" },
+          { id: "C8", name: "Xuất hóa đơn / phiếu giao hàng PDF", desc: "In hóa đơn bán lẻ hoặc phiếu gửi hàng đính kèm gói.", example: "Bấm in phiếu gửi khổ A6 dán lên bọc hàng.", level: "Vừa", points: 16 },
+          { id: "C9", name: "Gói đăng ký trả phí định kỳ hằng tháng", desc: "Hệ thống tự động trừ tiền hằng tháng để gia hạn.", example: "Như thuê bao Netflix, tập gym hằng tháng.", level: "Phức tạp", points: 35 }
+        ]
+      },
+      {
+        groupId: "D",
+        groupTitle: "Nhóm D. Đặt lịch & Vận hành",
+        modules: [
+          { id: "D1", name: "Đặt lịch hẹn theo khung giờ trống", desc: "Khách chọn ngày, chọn giờ còn trống để đặt hẹn.", example: "Đặt giờ cắt tóc, giờ khám bệnh.", level: "Vừa", points: 22 },
+          { id: "D2", name: "Lịch làm việc của nhân viên / phòng", desc: "Quản lý ca trực, phân phòng mổ/sân bóng.", example: "Xem thợ nào đang bận, thợ nào rảnh.", level: "Vừa", points: 20 },
+          { id: "D3", name: "Nhắc lịch hẹn tự động (Zalo/SMS/Email)", desc: "Tự động gửi tin nhắc trước 2 tiếng tránh khách quên.", example: "Tin nhắn: Bạn có hẹn lúc 15h chiều nay nhé.", level: "Vừa", points: 24, parentId: "D1" },
+          { id: "D4", name: "Quản lý khách hàng (CRM đơn giản)", desc: "Lưu lịch sử mua hàng, sở thích, ngày sinh nhật khách.", example: "Ghi chú: Khách thích ngồi bàn gần cửa sổ.", level: "Vừa", points: 22 },
+          { id: "D5", name: "Quản lý công việc & tiến độ nội bộ", desc: "Giao việc cho nhân viên, đổi trạng thái Đang làm -> Xong.", example: "Như bảng Trello theo dõi tiến độ.", level: "Vừa", points: 24 },
+          { id: "D6", name: "Chấm công / tính lương cơ bản", desc: "Nhân viên bấm điểm danh, cuối tháng tính ngày công.", example: "Tính tổng ca làm việc trong tháng.", level: "Phức tạp", points: 30 }
+        ]
+      },
+      {
+        groupId: "E",
+        groupTitle: "Nhóm E. Giao tiếp & Tương tác",
+        modules: [
+          { id: "E1", name: "Form liên hệ gửi thông tin về email", desc: "Khách để lại lời nhắn, hệ thống báo về hòm thư bạn.", example: "Nhận yêu cầu tư vấn báo giá.", level: "Đơn giản", points: 8 },
+          { id: "E2", name: "Khung chat trực tiếp trên web", desc: "Nhắn tin qua lại ngay trên web với khách hàng.", example: "Khách hỏi giá, nhân viên trả lời ngay.", level: "Phức tạp", points: 26 },
+          { id: "E3", name: "Chatbot AI trả lời tự động", desc: "AI tự đọc thông tin cửa hàng để trả lời khách 24/7.", example: "Hỏi: Shop mở cửa mấy giờ? -> AI trả lời ngay.", level: "Phức tạp", points: 34 },
+          { id: "E4", name: "Thông báo chuông / email cập nhật", desc: "Báo có đơn mới, báo việc mới cho nhân viên.", example: "Ting ting khi có khách vừa đặt đơn.", level: "Vừa", points: 18 },
+          { id: "E5", name: "Gửi email hàng loạt chăm sóc khách", desc: "Gửi 1 email thông báo tới 500 khách hàng cũ.", example: "Gửi thư chúc mừng sinh nhật kèm mã giảm giá.", level: "Vừa", points: 22 }
+        ]
+      },
+      {
+        groupId: "F",
+        groupTitle: "Nhóm F. Quản trị & Báo cáo",
+        modules: [
+          { id: "F1", name: "Trang quản trị nội dung dễ dùng", desc: "Tự đổi ảnh, sửa chữ, đăng bài mà không cần biết code.", example: "Có tài khoản admin tiếng Việt dễ dùng.", level: "Vừa", points: 20 },
+          { id: "F2", name: "Báo cáo doanh thu & biểu đồ số liệu", desc: "Biểu đồ cột xem ngày nào bán nhiều tiền nhất.", example: "Biểu đồ trực quan doanh thu theo tháng.", level: "Vừa", points: 24 },
+          { id: "F3", name: "Xuất dữ liệu ra file Excel / PDF", desc: "Bấm 1 nút tải danh sách khách hoặc đơn hàng về máy.", example: "Tải file Excel báo cáo cuối tháng.", level: "Đơn giản", points: 10 },
+          { id: "F4", name: "Nhập dữ liệu từ file Excel vào web", desc: "Nạp 500 sản phẩm từ file Excel lên web trong 5 giây.", example: "Không phải ngồi gõ tay từng sản phẩm.", level: "Vừa", points: 18 },
+          { id: "F5", name: "Nhật ký hoạt động (Audit log)", desc: "Ghi lại nhân viên nào đã xóa đơn hoặc sửa giá lúc mấy giờ.", example: "Minh bạch chống nhân viên gian lận.", level: "Vừa", points: 18 },
+          { id: "F6", name: "Sao lưu dữ liệu tự động hằng ngày", desc: "Tự lưu một bản sao phòng trường hợp bất trắc.", example: "An tâm không bao giờ sợ mất dữ liệu.", level: "Vừa", points: 16 }
+        ]
+      },
+      {
+        groupId: "G",
+        groupTitle: "Nhóm G. Tích hợp & Nâng cao",
+        modules: [
+          { id: "G1", name: "Kết nối phần mềm khác (Google Sheets, Zalo OA)", desc: "Dữ liệu trên web tự chạy sang file Google Sheet của bạn.", example: "Khách điền web -> Sheet tự nhảy 1 dòng mới.", level: "Phức tạp", points: 28 },
+          { id: "G2", name: "Tính năng trí tuệ nhân tạo AI", desc: "AI tóm tắt nội dung, tự viết mô tả sản phẩm, đọc ảnh.", example: "Tải ảnh hóa đơn lên -> AI tự đọc số tiền.", level: "Phức tạp", points: 38 },
+          { id: "G3", name: "Cài đặt như app trên điện thoại (PWA)", desc: "Khách có thể bấm Cài đặt ra màn hình chính như app.", level: "Vừa", points: 18 },
+          { id: "G4", name: "Tối ưu tìm kiếm Google (SEO chuẩn)", desc: "Cấu hình chuẩn để khi gõ tên bạn trên Google sẽ thấy web.", level: "Vừa", points: 16 },
+          { id: "G5", name: "Gắn mã theo dõi quảng cáo (Facebook Pixel/GA4)", desc: "Đo xem có bao nhiêu người vào web từ quảng cáo.", level: "Đơn giản", points: 10 },
+          { id: "G6", name: "Cung cấp tài liệu API cho bên thứ ba", desc: "Cho phép các công ty đối tác viết code kết nối vào web.", level: "Phức tạp", points: 30 }
+        ]
+      }
+    ];
+
+    // --- 2. STATE TOÀN CỤC CỦA BẢN BRIEF ---
+    let currentStep = 0;
+    const totalSteps = 12;
+    const DRAFT_KEY = "quanganh_studio_wizard_draft_v1";
+
+    let briefData = {
+      fullName: "",
+      email: "",
+      phone: "",
+      preferredContact: "Zalo",
+      preferredTime: "Khi nào cũng được",
+      clientType: "Cá nhân / freelancer",
+      companyName: "",
+      industry: "Thương mại - bán lẻ",
+      customIndustry: "",
+      webStatus: "Chưa có, làm mới hoàn toàn",
+      existingUrl: "",
+      businessAge: "1-3 năm",
+      productTypes: [],
+      primaryProduct: "",
+      problemStory: "",
+      targetAudience: "",
+      benchmarks: "",
+      successVision: "",
+      userRoles: ["Khách vãng lai", "Thành viên / Khách mua", "Chủ / Quản trị viên"],
+      userScale: "100 – 1.000 người",
+      primaryDevice: "Cả hai như nhau",
+      selectedModules: [],      // Mảng mã module ['A1', 'C1', ...]
+      modulePriorities: {},     // Object { 'A1': 'Phải có', 'C1': 'Nên có' }
+      customModulesByGroup: {},
+      designReadiness: "Chưa có gì, nhờ bạn thiết kế từ đầu",
+      designStyles: ["Tối giản, hiện đại"],
+      brandColor: "#2563EB",
+      autoColor: false,
+      designLinks: "",
+      darkModeNeed: "Tùy bạn tư vấn",
+      graphicSupport: "Không cần, mình đã có sẵn",
+      contentResponsibility: "Mình tự lo nội dung và hình ảnh",
+      dataMigration: "Không có",
+      migrationRows: "Dưới 100 dòng",
+      estimatedItems: "",
+      multiLang: "Chỉ tiếng Việt",
+      domainStatus: "Chưa có, cần bạn mua giúp",
+      domainName: "",
+      hostingNeed: "Nhờ bạn thuê và cài đặt giúp",
+      postLaunchCare: "Tự quản lý, cần hướng dẫn",
+      trainingFormat: "Video quay sẵn",
+      legalNeeds: [],
+      budgetRange: "15 – 30 triệu",
+      targetDeadline: "",
+      noRush: false,
+      tradeoffPriority: "Chi phí tiết kiệm, vừa túi tiền",
+      phasePreference: "Chia giai đoạn (Làm bản gọn trước)",
+      paymentTerms: "Chia 2 đợt (Cọc 50% - Nghiệm thu 50%)",
+      attachedFilesInfo: [],
+      cloudLinks: "",
+      additionalNotes: "",
+      referralSource: "Bạn bè giới thiệu"
+    };
+
+    // --- 3. KHỞI TẠO VÀ RENDER KHI TRANG TẢI XONG ---
+    document.addEventListener("DOMContentLoaded", () => {
+      // 3.1 Cập nhật tên thương hiệu từ config
+      const brandElements = document.querySelectorAll("#consentBrandName");
+      brandElements.forEach(el => el.innerText = window.STUDIO_CONFIG.brand.name);
+      
+      const zaloBtn = document.getElementById("btn-directZalo");
+      if (zaloBtn) zaloBtn.href = window.STUDIO_CONFIG.brand.zaloUrl;
+
+      // 3.2 Render các module ở Bước 6
+      renderModuleGroups();
+
+      // 3.3 Chặn phím Enter tự gửi biểu mẫu
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && e.target.tagName !== "TEXTAREA") {
+          e.preventDefault();
+        }
+      });
+
+      // 3.4 Kiểm tra bản nháp cũ trong localStorage
+      checkExistingDraft();
+      
+      // 3.5 Cập nhật thanh tiến độ
+      updateProgressDisplay();
+    });
+
+    // --- 4. RENDER GIAO DIỆN BƯỚC 6 (MODULES) ---
+    function renderModuleGroups() {
+      const container = document.getElementById("modulesContainer");
+      if (!container) return;
+
+      container.innerHTML = MODULE_CATALOG.map(group => `
+        <div class="module-group">
+          <div class="module-group-header" onclick="toggleAccordionGroup('${group.groupId}')">
+            <span>${group.groupTitle}</span>
+            <span id="chevron-${group.groupId}">▼</span>
+          </div>
+          <div class="module-group-body" id="group-body-${group.groupId}">
+            ${group.modules.map(mod => `
+              <div class="option-card" id="card-mod-${mod.id}" onclick="handleModuleClick('${mod.id}')">
+                <div class="card-top">
+                  <span class="card-title">${mod.name}</span>
+                  <div class="card-check">✓</div>
+                </div>
+                <p class="card-desc">${mod.desc}</p>
+                <span class="card-example">💡 ${mod.example}</span>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px;">
+                  <span class="card-meta-tag">Mức: ${mod.level}</span>
+                  <span style="font-size: 11px; color: var(--text-subtle);">Điểm: ${mod.points}</span>
+                </div>
+              </div>
+            `).join('')}
+            <div style="grid-column: 1 / -1; margin-top: 8px;">
+              <input type="text" class="form-control" style="font-size: 14px;" 
+                placeholder="Chức năng khác bạn cần trong nhóm này mà chưa thấy ở trên? (Ghi tự do)"
+                oninput="handleCustomGroupModule('${group.groupId}', this.value)">
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function toggleAccordionGroup(groupId) {
+      const body = document.getElementById(`group-body-${groupId}`);
+      const chevron = document.getElementById(`chevron-${groupId}`);
+      if (body) {
+        body.classList.toggle("hidden");
+        chevron.innerText = body.classList.contains("hidden") ? "▶" : "▼";
+      }
+    }
+
+    // --- 5. LOGIC CHỌN MODULE & TỰ ĐỘNG PHỤ THUỘC (DEPENDENCIES) ---
+    function handleModuleClick(moduleId) {
+      const card = document.getElementById(`card-mod-${moduleId}`);
+      const index = briefData.selectedModules.indexOf(moduleId);
+
+      // Tìm thông tin module
+      let targetMod = null;
+      MODULE_CATALOG.forEach(g => {
+        const found = g.modules.find(m => m.id === moduleId);
+        if (found) targetMod = found;
+      });
+
+      if (index === -1) {
+        // Chọn module
+        briefData.selectedModules.push(moduleId);
+        card?.classList.add("selected");
+        if (!briefData.modulePriorities[moduleId]) {
+          briefData.modulePriorities[moduleId] = "Phải có";
+        }
+
+        // Kiểm tra module cha phụ thuộc (Ví dụ C3 cần C2, A3 cần A1)
+        if (targetMod && targetMod.parentId) {
+          const parentId = targetMod.parentId;
+          if (!briefData.selectedModules.includes(parentId)) {
+            briefData.selectedModules.push(parentId);
+            const parentCard = document.getElementById(`card-mod-${parentId}`);
+            parentCard?.classList.add("selected");
+            briefData.modulePriorities[parentId] = "Phải có";
+            showToastNotice(`Đã tự động chọn thêm chức năng cơ bản (${parentId}) để hỗ trợ tính năng bạn vừa chọn 👌`);
+          }
+        }
+      } else {
+        // Bỏ chọn module
+        briefData.selectedModules.splice(index, 1);
+        card?.classList.remove("selected");
+        delete briefData.modulePriorities[moduleId];
+      }
+
+      document.getElementById("moduleCountBadge").innerText = briefData.selectedModules.length;
+      renderPriorityCategorizer();
+      saveDraftDebounced();
+    }
+
+    function handleCustomGroupModule(groupId, value) {
+      briefData.customModulesByGroup[groupId] = value;
+      saveDraftDebounced();
+    }
+
+    // Render khu vực gán mức ưu tiên cho từng chức năng đã chọn
+    function renderPriorityCategorizer() {
+      const area = document.getElementById("priorityCategorizerArea");
+      if (!area) return;
+
+      if (briefData.selectedModules.length === 0) {
+        area.innerHTML = `<span style="font-size: 13px; color: var(--text-subtle); italic">Bạn chưa chọn chức năng nào ở trên.</span>`;
+        return;
+      }
+
+      // Tìm tên các module đã chọn
+      const allMods = [];
+      MODULE_CATALOG.forEach(g => g.modules.forEach(m => allMods.push(m)));
+
+      area.innerHTML = briefData.selectedModules.map(mId => {
+        const mod = allMods.find(m => m.id === mId);
+        if (!mod) return '';
+        const currentPrio = briefData.modulePriorities[mId] || "Phải có";
+
+        return `
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-size: 13px; gap: 8px; flex-wrap: wrap;">
+            <strong style="flex: 1; min-width: 180px;">[${mod.id}] ${mod.name}</strong>
+            <div style="display: flex; gap: 12px;">
+              <label style="cursor: pointer; display: flex; align-items: center; gap: 4px;">
+                <input type="radio" name="prio-${mId}" value="Phải có" ${currentPrio === 'Phải có' ? 'checked' : ''} onchange="setModulePriority('${mId}', 'Phải có')">
+                <span style="color: var(--danger); font-weight: 600;">Phải có</span>
+              </label>
+              <label style="cursor: pointer; display: flex; align-items: center; gap: 4px;">
+                <input type="radio" name="prio-${mId}" value="Nên có" ${currentPrio === 'Nên có' ? 'checked' : ''} onchange="setModulePriority('${mId}', 'Nên có')">
+                <span style="color: var(--primary); font-weight: 600;">Nên có</span>
+              </label>
+              <label style="cursor: pointer; display: flex; align-items: center; gap: 4px;">
+                <input type="radio" name="prio-${mId}" value="Có thì tốt" ${currentPrio === 'Có thì tốt' ? 'checked' : ''} onchange="setModulePriority('${mId}', 'Có thì tốt')">
+                <span style="color: var(--text-muted);">Có thì tốt</span>
+              </label>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function setModulePriority(mId, prio) {
+      briefData.modulePriorities[mId] = prio;
+      saveDraftDebounced();
+    }
+
+    // --- 6. ĐIỀU HƯỚNG CHUYỂN BƯỚC (NAVIGATION & PROGRESS) ---
+    function goToStep(stepIndex) {
+      // Ẩn tất cả các bước
+      for (let i = 0; i <= totalSteps; i++) {
+        const stepEl = document.getElementById(`step-${i}`);
+        if (stepEl) stepEl.classList.add("hidden");
+      }
+      const thankyouEl = document.getElementById("step-thankyou");
+      if (thankyouEl) thankyouEl.classList.add("hidden");
+
+      // Hiện bước đích
+      currentStep = stepIndex;
+      const targetStepEl = document.getElementById(`step-${stepIndex}`);
+      if (targetStepEl) {
+        targetStepEl.classList.remove("hidden");
+        targetStepEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      // Xử lý các logic khi vào từng bước đặc biệt
+      if (stepIndex === 6) {
+        applySmartModuleRecommendations();
+      } else if (stepIndex === 12) {
+        renderReviewSummary();
+        calculateEstimations();
+      }
+
+      updateProgressDisplay();
+      saveDraftDebounced();
+    }
+
+    function updateProgressDisplay() {
+      const wrapper = document.getElementById("topProgressWrapper");
+      const stepText = document.getElementById("progressStepText");
+      const timeText = document.getElementById("progressTimeEstimate");
+      const fillBar = document.getElementById("progressFillBar");
+
+      if (currentStep === 0) {
+        wrapper.style.display = "none";
+      } else if (currentStep > totalSteps) {
+        wrapper.style.display = "none";
+      } else {
+        wrapper.style.display = "block";
+        const percent = Math.round((currentStep / totalSteps) * 100);
+        stepText.innerText = `Bước ${currentStep} / ${totalSteps}`;
+        fillBar.style.width = `${percent}%`;
+
+        // Ước tính số phút còn lại
+        const minutesLeft = Math.max(1, Math.round((12 - currentStep) * 0.8));
+        timeText.innerText = `⏱️ Còn khoảng ${minutesLeft} phút`;
+      }
+    }
+
+    // --- 7. TỰ ĐỘNG GỢI Ý CHỨC NĂNG THÔNG MINH (LOGIC ĐIỀU KIỆN BƯỚC 6) ---
+    function applySmartModuleRecommendations() {
+      // Nếu đã chọn sản phẩm ở Bước 3 thì gợi ý tự động:
+      const prods = briefData.productTypes;
+      const toRecommend = [];
+
+      if (prods.includes("Web bán hàng")) {
+        toRecommend.push("C1", "C2", "C3");
+      }
+      if (prods.includes("Web đặt lịch")) {
+        toRecommend.push("D1", "D2", "D3");
+      }
+      if (prods.includes("Hệ thống quản lý nội bộ")) {
+        toRecommend.push("A3", "D4", "D5", "F2", "F5");
+      }
+
+      toRecommend.forEach(mId => {
+        if (!briefData.selectedModules.includes(mId)) {
+          briefData.selectedModules.push(mId);
+          const card = document.getElementById(`card-mod-${mId}`);
+          card?.classList.add("selected");
+          briefData.modulePriorities[mId] = "Phải có";
+        }
+      });
+
+      document.getElementById("moduleCountBadge").innerText = briefData.selectedModules.length;
+      renderPriorityCategorizer();
+    }
+
+    // --- 8. VALIDATION TỪNG BƯỚC THÂN THIỆN ---
+    function validateStep1() {
+      let isValid = true;
+      const name = document.getElementById("inp-fullName").value.trim();
+      const email = document.getElementById("inp-email").value.trim();
+      const phone = document.getElementById("inp-phone").value.trim();
+
+      // Kiểm tra tên
+      if (!name) {
+        showError("err-fullName");
+        isValid = false;
+      } else {
+        hideError("err-fullName");
+        briefData.fullName = name;
+      }
+
+      // Kiểm tra email
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailPattern.test(email)) {
+        showError("err-email");
+        isValid = false;
+      } else {
+        hideError("err-email");
+        briefData.email = email;
+      }
+
+      // Kiểm tra số điện thoại (Việt Nam 10 số)
+      const phoneDigits = phone.replace(/\D/g, '');
+      if (phoneDigits.length < 10 || phoneDigits.length > 11) {
+        showError("err-phone");
+        isValid = false;
+      } else {
+        hideError("err-phone");
+        briefData.phone = phone;
+      }
+
+      if (isValid) goToStep(2);
+    }
+
+    function validateStep3() {
+      if (briefData.productTypes.length === 0) {
+        showError("err-productTypes");
+        return;
+      }
+      hideError("err-productTypes");
+      goToStep(4);
+    }
+
+    function validateStep4() {
+      const problem = document.getElementById("inp-problem").value.trim();
+      if (problem.length < 30) {
+        showError("err-problem");
+        return;
+      }
+      hideError("err-problem");
+      briefData.problemStory = problem;
+      briefData.targetAudience = document.getElementById("inp-targetAudience").value.trim();
+      briefData.benchmarks = document.getElementById("inp-benchmarks").value.trim();
+      briefData.successVision = document.getElementById("inp-successVision").value.trim();
+      goToStep(5);
+    }
+
+    function showError(elementId) {
+      const el = document.getElementById(elementId);
+      if (el) el.classList.add("active");
+    }
+
+    function hideError(elementId) {
+      const el = document.getElementById(elementId);
+      if (el) el.classList.remove("active");
+    }
+
+    // --- 9. CÁC HÀM XỬ LÝ LỰA CHỌN TƯƠNG TÁC (HELPERS) ---
+    function selectRadio(element, dataKey, value) {
+      briefData[dataKey] = value;
+      // Bỏ selected ở các card anh em
+      const parent = element.parentElement;
+      Array.from(parent.children).forEach(child => child.classList.remove("selected"));
+      element.classList.add("selected");
+      saveDraftDebounced();
+    }
+
+    function toggleMultiCard(element, dataKey, value) {
+      const arr = briefData[dataKey];
+      const index = arr.indexOf(value);
+      if (index === -1) {
+        arr.push(value);
+        element.classList.add("selected");
+      } else {
+        arr.splice(index, 1);
+        element.classList.remove("selected");
+      }
+
+      // Nếu là chọn loại sản phẩm ở Bước 3 -> cập nhật dropdown loại chính
+      if (dataKey === "productTypes") {
+        updatePrimaryProductSelect();
+      }
+
+      saveDraftDebounced();
+    }
+
+    function updatePrimaryProductSelect() {
+      const sel = document.getElementById("sel-primaryProduct");
+      if (!sel) return;
+      sel.innerHTML = `<option value="">-- Vui lòng chọn loại quan trọng nhất --</option>` +
+        briefData.productTypes.map(p => `<option value="${p}">${p}</option>`).join('');
+      sel.onchange = (e) => {
+        briefData.primaryProduct = e.target.value;
+        saveDraftDebounced();
+      };
+    }
+
+    function toggleStyleCard(element, styleName) {
+      const arr = briefData.designStyles;
+      const index = arr.indexOf(styleName);
+      if (index === -1) {
+        if (arr.length >= 3) {
+          showToastNotice("Bạn chỉ nên chọn tối đa 3 phong cách để thiết kế không bị rối nhé!");
+          return;
+        }
+        arr.push(styleName);
+        element.classList.add("selected");
+      } else {
+        arr.splice(index, 1);
+        element.classList.remove("selected");
+      }
+      saveDraftDebounced();
+    }
+
+    function toggleCustomIndustry(val) {
+      briefData.industry = val;
+      const customInp = document.getElementById("inp-customIndustry");
+      if (val === "Khác") {
+        customInp.classList.remove("hidden");
+      } else {
+        customInp.classList.add("hidden");
+      }
+      saveDraftDebounced();
+    }
+
+    function selectWebStatus(el, val) {
+      briefData.webStatus = val;
+      const parent = el.parentElement;
+      Array.from(parent.children).forEach(c => c.classList.remove("selected"));
+      el.classList.add("selected");
+
+      const urlWrapper = document.getElementById("wrapper-existingUrl");
+      if (val !== "Chưa có, làm mới hoàn toàn") {
+        urlWrapper.classList.remove("hidden");
+      } else {
+        urlWrapper.classList.add("hidden");
+      }
+      saveDraftDebounced();
+    }
+
+    function selectDomainStatus(el, val) {
+      selectRadio(el, 'domainStatus', val);
+      const domWrapper = document.getElementById("wrapper-domainInput");
+      if (val === "Đã mua rồi") {
+        domWrapper.classList.remove("hidden");
+      } else {
+        domWrapper.classList.add("hidden");
+      }
+    }
+
+    function selectDataMigration(el, val) {
+      selectRadio(el, 'dataMigration', val);
+      const rowWrapper = document.getElementById("wrapper-migrationRowCount");
+      if (val !== "Không có") {
+        rowWrapper.classList.remove("hidden");
+      } else {
+        rowWrapper.classList.add("hidden");
+      }
+    }
+
+    function toggleNoRush(checked) {
+      briefData.noRush = checked;
+      const deadlineInp = document.getElementById("inp-deadline");
+      const rushMsg = document.getElementById("msg-rushWarning");
+      if (checked) {
+        deadlineInp.value = "";
+        deadlineInp.disabled = true;
+        rushMsg.style.display = "none";
+      } else {
+        deadlineInp.disabled = false;
+      }
+      saveDraftDebounced();
+    }
+
+    function checkDeadlineUrgency(dateStr) {
+      briefData.targetDeadline = dateStr;
+      const rushMsg = document.getElementById("msg-rushWarning");
+      if (!dateStr) {
+        rushMsg.style.display = "none";
+        return;
+      }
+      const target = new Date(dateStr);
+      const today = new Date();
+      const diffDays = Math.ceil((target - today) / (1000 * 60 * 60 * 24));
+
+      if (diffDays <= 12 && diffDays > 0) {
+        rushMsg.style.display = "flex";
+      } else {
+        rushMsg.style.display = "none";
+      }
+      saveDraftDebounced();
+    }
+
+    function updateCharCount(el, targetId) {
+      const counter = document.getElementById(targetId);
+      if (counter) counter.innerText = el.value.length;
+    }
+
+    function suggestStoryPrompt() {
+      const txt = document.getElementById("inp-problem");
+      txt.value = "Hiện tại mình đang quản lý đơn hàng và khách bằng sổ tay và file Excel. Khách nhắn qua nhiều nơi (Zalo, Facebook) nên nhân viên rất hay bị sót tin nhắn và nhầm lịch hẹn. Mình muốn có một hệ thống giúp khách tự đặt lịch, xem giá rõ ràng và nhân viên có bảng theo dõi tiện lợi tại một nơi.";
+      updateCharCount(txt, "count-problem");
+      hideError("err-problem");
+    }
+
+    function handleFileSelection(input) {
+      const listEl = document.getElementById("fileUploadList");
+      if (!input.files || input.files.length === 0) {
+        listEl.innerHTML = "";
+        briefData.attachedFilesInfo = [];
+        return;
+      }
+      if (input.files.length > 5) {
+        alert("Bạn vui lòng chọn tối đa 5 tệp thôi nhé.");
+        input.value = "";
+        return;
+      }
+      briefData.attachedFilesInfo = Array.from(input.files).map(f => `${f.name} (${Math.round(f.size/1024)} KB)`);
+      listEl.innerHTML = "Đã chọn: " + briefData.attachedFilesInfo.join(", ");
+    }
+
+    // --- 10. TÍNH TOÁN KHOẢNG GIÁ & THỜI GIAN DỰ KIẾN (BƯỚC 12) ---
+    function calculateEstimations() {
+      const cfg = window.STUDIO_CONFIG.pricing;
+      let totalPoints = 0;
+
+      // Tính tổng điểm từ các module được chọn
+      MODULE_CATALOG.forEach(g => {
+        g.modules.forEach(m => {
+          if (briefData.selectedModules.includes(m.id)) {
+            let mult = cfg.complexityMultiplier.simple;
+            if (m.level === "Vừa") mult = cfg.complexityMultiplier.medium;
+            if (m.level === "Phức tạp") mult = cfg.complexityMultiplier.complex;
+            totalPoints += (m.points * mult);
+          }
+        });
+      });
+
+      // Hệ số đa ngôn ngữ
+      let finalMultiplier = 1.0;
+      if (briefData.multiLang !== "Chỉ tiếng Việt") {
+        finalMultiplier *= cfg.multiLangMultiplier;
+      }
+
+      // Hệ số làm gấp
+      if (!briefData.noRush && briefData.targetDeadline) {
+        const diffDays = Math.ceil((new Date(briefData.targetDeadline) - new Date()) / (1000 * 60 * 60 * 24));
+        if (diffDays <= 12 && diffDays > 0) finalMultiplier *= cfg.rushMultiplier;
+      }
+
+      // Ước lượng ngân sách (VNĐ)
+      let minCost = Math.round((cfg.baseCost + (totalPoints * cfg.costPerPoint * 0.85)) * finalMultiplier);
+      let maxCost = Math.round((cfg.baseCost + (totalPoints * cfg.costPerPoint * 1.25)) * finalMultiplier);
+
+      // Làm tròn đến hàng triệu
+      minCost = Math.max(3000000, Math.round(minCost / 1000000) * 1000000);
+      maxCost = Math.max(minCost + 3000000, Math.round(maxCost / 1000000) * 1000000);
+
+      const minMil = (minCost / 1000000).toFixed(0);
+      const maxMil = (maxCost / 1000000).toFixed(0);
+
+      document.getElementById("estimatePriceText").innerText = `${minMil} – ${maxMil} triệu VNĐ`;
+
+      // Ước lượng tuần làm việc
+      let weeks = Math.max(2, Math.round(totalPoints / 25));
+      document.getElementById("estimateDurationText").innerText = `${weeks} – ${weeks + 2} tuần làm việc`;
+
+      // Hiển thị lời khuyên nếu chọn quá nhiều module phức tạp mà ngân sách chọn quá thấp
+      const mismatchBox = document.getElementById("budgetMismatchAdvice");
+      if ((briefData.budgetRange === "Dưới 5 triệu" || briefData.budgetRange === "5 – 15 triệu") && minCost > 20000000) {
+        mismatchBox.classList.remove("hidden");
+      } else {
+        mismatchBox.classList.add("hidden");
+      }
+    }
+
+    // --- 11. RENDER BẢNG XEM LẠI YÊU CẦU (BƯỚC 12) ---
+    function renderReviewSummary() {
+      const summaryList = document.getElementById("reviewSummaryList");
+      if (!summaryList) return;
+
+      const items = [
+        {
+          step: 1,
+          title: "1. Thông tin liên hệ",
+          desc: `${briefData.fullName || 'Chưa điền'} · Email: ${briefData.email || 'Chưa điền'} · SĐT/Zalo: ${briefData.phone || 'Chưa điền'} (Ưu tiên kênh: ${briefData.preferredContact})`
+        },
+        {
+          step: 2,
+          title: "2. Mô hình & Lĩnh vực",
+          desc: `${briefData.clientType} · ${briefData.companyName ? `Tên: ${briefData.companyName} · ` : ''}Ngành: ${briefData.industry} (Website hiện tại: ${briefData.webStatus})`
+        },
+        {
+          step: 3,
+          title: "3. Loại sản phẩm muốn làm",
+          desc: `Các loại quan tâm: ${briefData.productTypes.join(", ") || "Chưa chọn"} ${briefData.primaryProduct ? `(Ưu tiên chính: ${briefData.primaryProduct})` : ""}`
+        },
+        {
+          step: 4,
+          title: "4. Vấn đề cốt lõi cần giải quyết",
+          desc: briefData.problemStory || "Chưa mô tả"
+        },
+        {
+          step: 5,
+          title: "5. Người dùng & Quy mô",
+          desc: `Nhóm người dùng: ${briefData.userRoles.join(", ")} · Quy mô: ${briefData.userScale} · Thiết bị: ${briefData.primaryDevice}`
+        },
+        {
+          step: 6,
+          title: "6. Chức năng đã chọn",
+          desc: `${briefData.selectedModules.length} module: ${briefData.selectedModules.join(", ")}`
+        },
+        {
+          step: 7,
+          title: "7. Giao diện & Cảm nhận",
+          desc: `Phong cách: ${briefData.designStyles.join(", ")} · Màu sắc: ${briefData.brandColor} · Chế độ Dark mode: ${briefData.darkModeNeed}`
+        },
+        {
+          step: 8,
+          title: "8. Nội dung & Dữ liệu",
+          desc: `Nội dung: ${briefData.contentResponsibility} · Dữ liệu cũ: ${briefData.dataMigration} · Ngôn ngữ: ${briefData.multiLang}`
+        },
+        {
+          step: 9,
+          title: "9. Hạ tầng & Sau bàn giao",
+          desc: `Tên miền: ${briefData.domainStatus} · Máy chủ: ${briefData.hostingNeed} · Vận hành: ${briefData.postLaunchCare}`
+        },
+        {
+          step: 10,
+          title: "10. Ngân sách & Tiến độ",
+          desc: `Ngân sách dự kiến: ${briefData.budgetRange} · Hạn bàn giao: ${briefData.noRush ? "Không gấp" : (briefData.targetDeadline || "Thỏa thuận")} · Ưu tiên: ${briefData.tradeoffPriority}`
+        }
+      ];
+
+      summaryList.innerHTML = items.map(item => `
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 14px 18px; display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;">
+          <div>
+            <strong style="font-size: 14px; color: var(--text-main); display: block;">${item.title}</strong>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 2px; line-height: 1.5;">${item.desc}</p>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="goToStep(${item.step})" style="flex-shrink: 0;">Sửa</button>
+        </div>
+      `).join('');
+    }
+
+    // --- 12. GỬI BRIEF LÊN SERVER (SUBMIT) ---
+    async function submitProjectBrief() {
+      const consent = document.getElementById("chk-consentPolicy").checked;
+      if (!consent) {
+        showError("err-consent");
+        return;
+      }
+      hideError("err-consent");
+
+      const submitBtn = document.getElementById("btn-submitBrief");
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `⏳ Đang gửi yêu cầu...`;
+
+      // Tạo payload hoàn chỉnh
+      const payload = {
+        meta: {
+          submittedAt: new Date().toISOString(),
+          brand: window.STUDIO_CONFIG.brand.name,
+          platform: "Standalone Project Request Wizard"
+        },
+        brief: briefData,
+        estimation: {
+          priceRangeText: document.getElementById("estimatePriceText").innerText,
+          durationText: document.getElementById("estimateDurationText").innerText
+        }
+      };
+
+      try {
+        const webhookUrl = window.STUDIO_CONFIG.webhookUrl;
+        
+        // Gọi webhook nếu có URL hợp lệ
+        if (webhookUrl && webhookUrl !== "[WEBHOOK_URL]") {
+          await fetch(webhookUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+        } else {
+          // Giả lập độ trễ mạng nếu chưa cắm URL webhook thật
+          await new Promise(r => setTimeout(r, 900));
+        }
+
+        // Xóa bản nháp đã nộp thành công
+        localStorage.removeItem(DRAFT_KEY);
+
+        // Chuyển tới màn hình cảm ơn
+        goToStep("thankyou");
+      } catch (error) {
+        console.error("Lỗi gửi dữ liệu:", error);
+        alert("Đã có sự cố kết nối nhẹ khi gửi. Bản brief của bạn vẫn được lưu nguyên vẹn trên máy. Bạn có thể bấm Thử lại hoặc bấm 'Tải bản brief (.txt)' để gửi trực tiếp qua Zalo cho mình nhé!");
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `Thử gửi lại 🔄`;
+      }
+    }
+
+    // --- 13. XUẤT BẢN BRIEF DẠNG VĂN BẢN THUẦN (.TXT) ---
+    function generateFormattedBriefText() {
+      const d = briefData;
+      return `===============================================================
+BẢN YÊU CẦU DỰ ÁN (PROJECT BRIEF) — ${window.STUDIO_CONFIG.brand.name}
+Thời gian tạo: ${new Date().toLocaleString('vi-VN')}
+===============================================================
+
+1. THÔNG TIN KHÁCH HÀNG:
+- Họ và tên: ${d.fullName || 'N/A'}
+- Địa chỉ Email: ${d.email || 'N/A'}
+- Số điện thoại / Zalo: ${d.phone || 'N/A'}
+- Kênh liên hệ ưu tiên: ${d.preferredContact}
+- Khung giờ thuận tiện: ${d.preferredTime}
+
+2. HỒ SƠ DOANH NGHIỆP:
+- Đại diện cho: ${d.clientType}
+- Tên công ty/thương hiệu: ${d.companyName || 'Chưa đặt tên'}
+- Lĩnh vực hoạt động: ${d.industry} ${d.customIndustry ? `(${d.customIndustry})` : ''}
+- Hiện trạng website: ${d.webStatus} ${d.existingUrl ? `(${d.existingUrl})` : ''}
+- Thời gian hoạt động: ${d.businessAge}
+
+3. LOẠI SẢN PHẨM & MỤC TIÊU:
+- Các loại quan tâm: ${d.productTypes.join(", ")}
+- Loại trọng tâm chính: ${d.primaryProduct || 'Chưa chọn'}
+- Vấn đề gặp phải / Mục tiêu:
+"${d.problemStory}"
+- Đối tượng sử dụng: ${d.targetAudience || 'Chưa ghi rõ'}
+- Tham khảo tương tự: ${d.benchmarks || 'Chưa có'}
+- Định nghĩa thành công sau 3 tháng: ${d.successVision || 'Chưa ghi rõ'}
+
+4. NGƯỜI DÙNG & QUY MÔ:
+- Nhóm người dùng: ${d.userRoles.join(", ")}
+- Dự kiến quy mô năm 1: ${d.userScale}
+- Thiết bị chính: ${d.primaryDevice}
+
+5. DANH SÁCH CHỨC NĂNG (MODULES ĐÃ CHỌN):
+${d.selectedModules.length > 0 ? d.selectedModules.map(mId => `- [${mId}] Mức ưu tiên: ${d.modulePriorities[mId] || 'Phải có'}`).join("\n") : "Chưa chọn module cụ thể"}
+${Object.keys(d.customModulesByGroup).length > 0 ? `\n* Chức năng tự điền thêm:\n` + JSON.stringify(d.customModulesByGroup, null, 2) : ''}
+
+6. PHONG CÁCH GIAO DIỆN:
+- Tình trạng thiết kế: ${d.designReadiness}
+- Phong cách mong muốn: ${d.designStyles.join(", ")}
+- Màu sắc chủ đạo: ${d.autoColor ? 'Nhờ tư vấn chọn giúp' : d.brandColor}
+- Nhu cầu Dark mode: ${d.darkModeNeed}
+- Thiết kế đồ họa phụ trợ: ${d.graphicSupport}
+- Giao diện tham khảo: ${d.designLinks || 'Không có'}
+
+7. NỘI DUNG, DỮ LIỆU & HẠ TẦNG:
+- Trách nhiệm nội dung: ${d.contentResponsibility}
+- Dữ liệu cũ chuyển sang: ${d.dataMigration} ${d.dataMigration !== 'Không có' ? `(${d.migrationRows})` : ''}
+- Ước tính số lượng mục ban đầu: ${d.estimatedItems || 'Chưa ước lượng'}
+- Ngôn ngữ: ${d.multiLang}
+- Tên miền: ${d.domainStatus} ${d.domainName ? `(${d.domainName})` : ''}
+- Máy chủ (Hosting): ${d.hostingNeed}
+- Vận hành sau bàn giao: ${d.postLaunchCare}
+- Đào tạo hướng dẫn: ${d.trainingFormat}
+
+8. NGÂN SÁCH & TIẾN ĐỘ DỰ KIẾN:
+- Ngân sách ước tính của khách: ${d.budgetRange}
+- Ngày hoàn thành mong muốn: ${d.noRush ? "Không gấp, ưu tiên chất lượng" : (d.targetDeadline || "Thỏa thuận")}
+- Yếu tố ưu tiên hàng đầu: ${d.tradeoffPriority}
+- Kế hoạch triển khai: ${d.phasePreference}
+- Phương thức thanh toán: ${d.paymentTerms}
+
+9. TÀI LIỆU & GHI CHÚ BỔ SUNG:
+- Tệp đính kèm: ${d.attachedFilesInfo.length > 0 ? d.attachedFilesInfo.join(", ") : 'Không có'}
+- Link đám mây (Drive/Figma): ${d.cloudLinks || 'Không có'}
+- Lời nhắn thêm: ${d.additionalNotes || 'Không có'}
+- Biết đến qua: ${d.referralSource}
+
+10. ƯỚC TÍNH SƠ BỘ TỪ HỆ THỐNG:
+- Khoảng giá tham khảo: ${document.getElementById("estimatePriceText")?.innerText || 'N/A'}
+- Thời gian dự kiến: ${document.getElementById("estimateDurationText")?.innerText || 'N/A'}
+===============================================================`;
+    }
+
+    function downloadBriefTextFile() {
+      const text = generateFormattedBriefText();
+      const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `Project_Brief_${(briefData.fullName || 'KhachHang').replace(/\s+/g, '_')}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    // --- 14. LƯU BẢN NHÁP TỰ ĐỘNG VÀO LOCALSTORAGE (AUTOSAVE) ---
+    let saveTimeout = null;
+    function saveDraftDebounced() {
+      if (saveTimeout) clearTimeout(saveTimeout);
+      saveTimeout = setTimeout(() => {
+        try {
+          // Đồng bộ các trường input text hiện tại
+          const nameEl = document.getElementById("inp-fullName");
+          if (nameEl) briefData.fullName = nameEl.value.trim();
+          const emailEl = document.getElementById("inp-email");
+          if (emailEl) briefData.email = emailEl.value.trim();
+          const phoneEl = document.getElementById("inp-phone");
+          if (phoneEl) briefData.phone = phoneEl.value.trim();
+
+          const payload = {
+            savedAt: new Date().toISOString(),
+            currentStep,
+            data: briefData
+          };
+          localStorage.setItem(DRAFT_KEY, JSON.stringify(payload));
+        } catch (e) {
+          console.warn("Không thể lưu localStorage:", e);
+        }
+      }, 500);
+    }
+
+    function checkExistingDraft() {
+      try {
+        const raw = localStorage.getItem(DRAFT_KEY);
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+        if (parsed && parsed.data && (parsed.data.fullName || parsed.data.productTypes?.length > 0)) {
+          // Hiện modal hỏi người dùng
+          document.getElementById("modalDraftBackdrop").classList.remove("hidden");
+        }
+      } catch (e) {}
+    }
+
+    function restoreSavedDraft() {
+      try {
+        const raw = localStorage.getItem(DRAFT_KEY);
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+        if (parsed && parsed.data) {
+          briefData = parsed.data;
+          
+          // Điền lại các ô input
+          if (briefData.fullName) document.getElementById("inp-fullName").value = briefData.fullName;
+          if (briefData.email) document.getElementById("inp-email").value = briefData.email;
+          if (briefData.phone) document.getElementById("inp-phone").value = briefData.phone;
+          if (briefData.companyName) document.getElementById("inp-companyName").value = briefData.companyName;
+          if (briefData.problemStory) document.getElementById("inp-problem").value = briefData.problemStory;
+          
+          // Khôi phục các thẻ module đã chọn
+          if (briefData.selectedModules) {
+            briefData.selectedModules.forEach(mId => {
+              const card = document.getElementById(`card-mod-${mId}`);
+              card?.classList.add("selected");
+            });
+            document.getElementById("moduleCountBadge").innerText = briefData.selectedModules.length;
+          }
+
+          document.getElementById("modalDraftBackdrop").classList.add("hidden");
+          goToStep(parsed.currentStep || 1);
+        }
+      } catch (e) {
+        document.getElementById("modalDraftBackdrop").classList.add("hidden");
+      }
+    }
+
+    function discardDraftAndStartFresh() {
+      localStorage.removeItem(DRAFT_KEY);
+      document.getElementById("modalDraftBackdrop").classList.add("hidden");
+      goToStep(1);
+    }
+
+    // --- 15. MODAL HỖ TRỢ GIẢI THÍCH THUẬT NGỮ ĐỜI THƯỜNG ---
+    function showHelpModal(title, explanation) {
+      document.getElementById("modalHelpTitle").innerText = title;
+      document.getElementById("modalHelpBody").innerText = explanation;
+      document.getElementById("modalHelpBackdrop").classList.remove("hidden");
+    }
+
+    function closeHelpModal() {
+      document.getElementById("modalHelpBackdrop").classList.add("hidden");
+    }
+
+    // Hiển thị thông báo nhỏ dạng Toast
+    function showToastNotice(msg) {
+      const toast = document.createElement("div");
+      toast.innerText = msg;
+      toast.style.position = "fixed";
+      toast.style.bottom = "24px";
+      toast.style.left = "50%";
+      toast.style.transform = "translateX(-50%)";
+      toast.style.backgroundColor = "var(--bg-card)";
+      toast.style.color = "var(--text-main)";
+      toast.style.border = "1.5px solid var(--primary)";
+      toast.style.padding = "10px 20px";
+      toast.style.borderRadius = "var(--radius-full)";
+      toast.style.boxShadow = "var(--shadow-lg)";
+      toast.style.zIndex = "9999";
+      toast.style.fontSize = "14px";
+      toast.style.fontWeight = "600";
+      toast.style.animation = "fadeIn 0.25s ease";
+      document.body.appendChild(toast);
+      setTimeout(() => {
+        toast.remove();
+      }, 3500);
+    }
+  </script>
+</body>
+</html>

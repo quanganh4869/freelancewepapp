@@ -337,7 +337,12 @@ export const INITIAL_PROJECTS = [
     thumbnail: '/images/projects/loi-ru/overview.png',
     primaryImage: '/images/projects/loi-ru/overview.png',
     primaryCaption: 'Giao diện trang bìa nghệ thuật điện ảnh tông tối (Dark Cinema Theme) tại loiru.vercel.app',
-    secondaryImages: [],
+    secondaryImages: [
+      {
+        image: '/projects/loiru-real.png',
+        caption: 'Phân cảnh nghệ thuật tương tác với hiệu ứng chuyển cảnh điện ảnh'
+      }
+    ],
     shortDesc: 'Website truyện tương tác trực quan chuyển thể tác phẩm minh họa nghệ thuật của San Anh & Mr.Ngài ngay trên trình duyệt web. Độc giả có thể thưởng thức tác phẩm kỳ ảo với chuyển động phân cảnh đa lớp, hiệu ứng âm thanh điện ảnh và trải nghiệm tương tác mượt mà trên mọi thiết bị.',
     problemSolved: 'Truyện tranh và sách truyền thống trên định dạng giấy hoặc PDF tĩnh thiếu đi sự tương tác sống động; website mang đến phương thức kể chuyện kỹ thuật số (digital storytelling) hiện đại ngay trên trình duyệt.',
     targetUsers: 'Độc giả yêu thích truyện tranh nghệ thuật, tác phẩm kỳ ảo (fantasy) và văn học tương tác trực tuyến.',

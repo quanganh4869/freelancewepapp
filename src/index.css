@@ -598,6 +598,29 @@ html.light .text-\[\#27c93f\] {
   color: #15803d !important; /* Green 700 - Deep emerald */
 }
 
+/* Start Project Lane Cards Light Theme */
+html.light #audit .group.bg-\[\#0a0b14\] {
+  background-color: #ffffff !important;
+  border-color: rgba(30, 41, 59, 0.12) !important;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
+}
+
+html.light #audit .group.bg-\[\#0a0b14\]:hover {
+  box-shadow: 0 12px 30px -4px rgba(15, 23, 42, 0.12);
+}
+
+html.light #audit h3.text-\[\#f3f2fb\] {
+  color: #0b0f19 !important;
+}
+
+html.light #audit p.text-\[\#a7a6c4\] {
+  color: #4b5563 !important;
+}
+
+html.light #audit ul.text-\[\#f3f2fb\] {
+  color: #1e293b !important;
+}
+
 /* Light theme accent badges and icon containers */
 html.light .bg-\[\#00e7ff\]\/10,
 html.light .bg-\[\#00e7ff\]\/15,
